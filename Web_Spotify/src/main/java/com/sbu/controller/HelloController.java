@@ -121,10 +121,16 @@ public class HelloController {
 			response.setContentType("text/plain");
 			response.getWriter().write(greetings);
 		}
-		
-		
-		
     }
+	
+//	@RequestMapping(value="/getImage")
+//	@ResponseBody
+//	public String getImage(Model model, HttpServletRequest request, HttpServletResponse response){
+//		
+//		
+//		
+//
+//	}
 	
 	@RequestMapping(value = "/passwordController", method=RequestMethod.POST)
 	public String authenticate(Model model, HttpServletRequest request){

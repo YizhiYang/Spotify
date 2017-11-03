@@ -41,6 +41,10 @@
 <!--                <div id='loginScreenLogo'>Re</div>-->
                 <div id=loginSpace>
                     <div id=registerLogo>REGISTER</div>
+                    
+                    <button type="button" class="btn btn-primary btn-lg">Large button</button>
+                    <button type="button" class="btn btn-primary btn-lg">Small button</button>
+                    
                     <form id="signUpForm" method='POST'>
                       <input class="usernamePassword" type="text" name="email" placeholder="Email">
                       <input class="usernamePassword" id="signupUsername" type="text" name="username" placeholder="Username">
@@ -55,6 +59,14 @@
                       <div id="password-feedback" style="display:none; color:red">
                   		Password Repeat does not match!
                   		</div>
+                  		
+                  	  <input class="usernamePassword" id="cardNumber" type="hidden" name="cardNumber" placeholder="Card number">                      
+                      <input class="usernamePassword" id="cardName" type="hidden" name="cardHolderName" placeholder="Card holder name">
+                      <input class="usernamePassword" id="billingAddress" type="hidden" name="billingAddress" placeholder="Billing address">
+                      <input class="usernamePassword" id="expiredDate" type="hidden" name="expiredDate" placeholder="Expiration date">                      
+                      <input class="usernamePassword" id="cvv" type="hidden" name="cvv" placeholder="CVV">
+                      
+                  		
                       <input class="usernamePassword" type="text" name="location" placeholder="Location">
 					  <input type = "submit" id='loginButton' value="submit">
 
