@@ -30,7 +30,7 @@
         			<p>Congratz! You now have a spotify account. Go to sign in page to sign in</p>
       			</div>
       			<div class="modal-footer">
-        			<button type="button" class="btn btn-primary" ><a href="/Web_Spotify">Go to Sign in</a></button>
+        			<button type="button" class="btn btn-primary" ><a href="/Web_Spotify" style="color:#fff;">Go to Sign in</a></button>
       			</div>
     			</div>
   			</div>
@@ -55,7 +55,7 @@
                       <div id="password-feedback" style="display:none; color:red">
                   		Password Repeat does not match!
                   		</div>
-                      <input class="usernamePassword" type="password" name="location" placeholder="Location">
+                      <input class="usernamePassword" type="text" name="location" placeholder="Location">
 					  <input type = "submit" id='loginButton' value="submit">
 
                     </form>

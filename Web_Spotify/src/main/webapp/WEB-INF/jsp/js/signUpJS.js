@@ -69,6 +69,7 @@ $( document ).ready(function() {
 					displayErrorMessage();
 				}else{
 					$("#signupPopover").modal('show');
+					setTimeout(function(){window.location.href="/Web_Spotify";}, 3000);
 				}
 			}
 		});
