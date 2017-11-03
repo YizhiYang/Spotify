@@ -65,9 +65,12 @@ public class HelloController {
 		User user = (User)request.getSession().getAttribute("User");
 		if(user != null){
 			System.out.println(user.getUserName());
+			return "Homepage";
+		}else{
+			return "../../index";
 		}
 		
-		return "Homepage";
+		
 	}
 	
 	

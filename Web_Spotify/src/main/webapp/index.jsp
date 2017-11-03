@@ -29,7 +29,7 @@
                     <form id="signInForm" method="post">
                       <input class="usernamePassword" type="text" name="username" placeholder="Username or email"><br>
                       <input class="usernamePassword" type="password" name="password" placeholder="Password">
-                      <input type = "submit" value="submit">
+                      <input type = "submit" value="submit" id='loginButton'>
                     </form>
                   
                 </div>
