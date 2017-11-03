@@ -1,27 +1,27 @@
 $( document ).ready(function() {
-		$("#signInForm").submit(function(event) {
+		$("#signupUsername").blur(function(event) {
 
-			signInViaAjax();
+			checkUserNameViaAjax();
 			event.preventDefault();
 
 		});
 
 	});
 
-	function signInViaAjax() {
+	function checkUserNameViaAjax() {
 		
-		var data2 = $('#signInForm').serialize();
+		var data2 = $('#signupUsername').serialize();
 			
 		$.ajax({
-			type : "POST",
-			url : "testing.html",
+			type : "GET",
+			url : "validateUsername.html",
 			data : data2,
 			success : function(data) {
 				console.log("SUCCESS: ", data);
 				if(data === "false"){
 					displayErrorMessage();
 				}else{
-					window.location.href="goToHome.html";
+					displaySuccessMessage();
 				}
 			}
 		});
@@ -29,6 +29,9 @@ $( document ).ready(function() {
 	}
 	
 	function displayErrorMessage() {
-		
 		document.getElementById("feedback").style.display="inline"
+	}
+	
+	function displaySuccessMessage() {
+		document.getElementById("feedback-success").style.display="inline"
 	}

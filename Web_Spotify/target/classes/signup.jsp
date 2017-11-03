@@ -19,7 +19,13 @@
                     <div id=registerLogo>REGISTER</div>
                     <form action='signup.html' method='POST'>
                       <input class="usernamePassword" type="text" name="email" placeholder="Email">
-                      <input class="usernamePassword" type="text" name="username" placeholder="Username"><br>
+                      <input class="usernamePassword" id="signupUsername" type="text" name="username" placeholder="Username">
+                      <div id="feedback" style="display:none; color:red">
+                  		Username alraedy taken.
+                  		</div>
+                  		<div id="feedback-success" style="display:none; color:red">
+                  		Username is available.
+                  		</div>
                       <input class="usernamePassword" type="password" name="password" placeholder="Password">                      
                       <input class="usernamePassword" type="password" name="confirm-password" placeholder="Confirm Password">
                       <input class="usernamePassword" type="password" name="location" placeholder="Location">
