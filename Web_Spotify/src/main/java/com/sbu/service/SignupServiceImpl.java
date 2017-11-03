@@ -1,5 +1,7 @@
 package com.sbu.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +17,16 @@ public class SignupServiceImpl implements SignupService {
 	
 
 	public User signupUser(User user) {
-		// TODO Auto-generated method stub
+		
 		signupRepo.signup(user);
 		return null;
+	}
+	
+	public boolean validateUsername(String username){
+		
+		List result = signupRepo.validateUsername(username);
+		
+		return result.isEmpty();
 	}
 
 }

@@ -5,4 +5,6 @@ import com.sbu.model.User;
 public interface SignupService {
 
 		User signupUser(User user);
+		
+		public boolean validateUsername(String username);
 }

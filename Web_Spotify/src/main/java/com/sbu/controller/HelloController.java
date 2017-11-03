@@ -69,7 +69,25 @@ public class HelloController {
 		}else{
 			return "../../index";
 		}
+	}
+	
+	@RequestMapping(value="/validateUsername", method = RequestMethod.GET)
+	public void validateUsername(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
+		
+		String username = request.getParameter("username");
+		
+		
+		if(signupService.validateUsername(username)) {
+			String greetings = "true";
+			response.setContentType("text/plain");
+			response.getWriter().write(greetings);
+		}else {
+			String greetings = "false";
+			response.setContentType("text/plain");
+			response.getWriter().write(greetings);
+		}
+	 
 		
 	}
 	
@@ -87,7 +105,6 @@ public class HelloController {
 		user.setPassword(password);
 		user.setEmail(email);
 		user.setLocation(location);
-		
 		signupService.signupUser(user);
 		
 		return "hello";

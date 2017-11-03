@@ -1,5 +1,7 @@
 package com.sbu.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -21,6 +23,14 @@ public class SignupRepoImpl implements SignupRepo {
 		
 		
 		return user;
+	}
+
+	public List validateUsername(String username) {
+		
+		List results = em.createQuery("SELECT e FROM User e WHERE e.userName LIKE :uname").setParameter("uname", username).getResultList();
+		
+		return results;
+		
 	}
 
 }
