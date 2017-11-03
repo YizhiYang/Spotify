@@ -5,6 +5,10 @@ $( document ).ready(function() {
 			event.preventDefault();
 
 		});
+		
+		$("#signupUsername").focus(function(event) {
+			clearMessage();
+		});
 
 	});
 
@@ -28,10 +32,15 @@ $( document ).ready(function() {
 
 	}
 	
+	function clearMessage(){
+		document.getElementById("feedback").style.display="none";
+		document.getElementById("feedback-success").style.display="none";
+	}
+	
 	function displayErrorMessage() {
-		document.getElementById("feedback").style.display="inline"
+		document.getElementById("feedback").style.display="inline";
 	}
 	
 	function displaySuccessMessage() {
-		document.getElementById("feedback-success").style.display="inline"
+		document.getElementById("feedback-success").style.display="inline";
 	}

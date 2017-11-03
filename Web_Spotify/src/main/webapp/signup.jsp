@@ -7,8 +7,11 @@
         <style type="text/css"><%@ include file="WEB-INF/jsp/css/login/bodyStyle.css" %> </style>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
             <script src="js/jquery-1.7.2.min.js"></script>
-    <script src="jsp/js/jquery-ui-1.8.21.custom.min.js"></script>
-                        <script src="temp.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+                        <script type="application/javascript"><%@ include file="WEB-INF/jsp/js/signUpJS.js" %></script>
 
     </head>
     <body>
