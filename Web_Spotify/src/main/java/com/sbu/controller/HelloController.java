@@ -92,11 +92,13 @@ public class HelloController {
 	
 	
 	@RequestMapping(value = "/signup")
-	public String trySignup(Model model, HttpServletRequest request) {
+	public void signup(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+		
+		
         String email = request.getParameter("email");
         String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		//String confirmPassword = request.getParameter("confirm-password");
 		String location = request.getParameter("location");
 		
 		User user = new User();
@@ -104,9 +106,23 @@ public class HelloController {
 		user.setPassword(password);
 		user.setEmail(email);
 		user.setLocation(location);
-		signupService.signupUser(user);
 		
-		return "hello";
+		User returnedUser = signupService.signupUser(user);
+		boolean result = signupService.validateUsername(username);
+		
+		if(returnedUser == null && !result){
+			String greetings = "false";
+			response.setContentType("text/plain");
+			response.getWriter().write(greetings);
+		}
+		else{
+			String greetings = "true";
+			response.setContentType("text/plain");
+			response.getWriter().write(greetings);
+		}
+		
+		
+		
     }
 	
 	@RequestMapping(value = "/passwordController", method=RequestMethod.POST)
