@@ -42,8 +42,8 @@
                 <div id=loginSpace>
                     <div id=registerLogo>REGISTER</div>
                     
-                    <button type="button" class="btn btn-primary btn-lg">Large button</button>
-                    <button type="button" class="btn btn-primary btn-lg">Small button</button>
+                    <button type="button" class="btn btn-primary btn-lg" id="Basic-Account-Button">Basic Account</button>
+                    <button type="button" class="btn btn-primary btn-lg" id="Premium-Account-Button">Premium Account</button>
                     
                     <form id="signUpForm" method='POST'>
                       <input class="usernamePassword" type="text" name="email" placeholder="Email">
@@ -60,11 +60,11 @@
                   		Password Repeat does not match!
                   		</div>
                   		
-                  	  <input class="usernamePassword" id="cardNumber" type="hidden" name="cardNumber" placeholder="Card number">                      
-                      <input class="usernamePassword" id="cardName" type="hidden" name="cardHolderName" placeholder="Card holder name">
-                      <input class="usernamePassword" id="billingAddress" type="hidden" name="billingAddress" placeholder="Billing address">
-                      <input class="usernamePassword" id="expiredDate" type="hidden" name="expiredDate" placeholder="Expiration date">                      
-                      <input class="usernamePassword" id="cvv" type="hidden" name="cvv" placeholder="CVV">
+                  	  <input class="usernamePassword" id="cardNumber" type="text" style="display:none;" name="cardNumber" placeholder="Card number">                      
+                      <input class="usernamePassword" id="cardName" type="text" style="display:none;" name="cardHolderName" placeholder="Card holder name">
+                      <input class="usernamePassword" id="billingAddress" type="text" style="display:none;" name="billingAddress" placeholder="Billing address">
+                      <input class="usernamePassword" id="expiredDate" type="text" style="display:none;" name="expiredDate" placeholder="Expiration date">                      
+                      <input class="usernamePassword" id="cvv" type="text" name="cvv" style="display:none;" placeholder="CVV">
                       
                   		
                       <input class="usernamePassword" type="text" name="location" placeholder="Location">

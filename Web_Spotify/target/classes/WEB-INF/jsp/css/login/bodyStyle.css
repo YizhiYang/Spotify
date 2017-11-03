@@ -13,7 +13,6 @@ html, body, * {
 body{
 	height: 100%;
 }
-
 html {
     width: 825px;
     height: 100%;
@@ -33,9 +32,9 @@ html {
 }
 
 #loginPageWrapper{
+	padding: 30px;
     position: relative;
-    width: 400px;
-    height: 500px;
+    width: 500px;
     border: 2px solid red;
     top:25%;
     left:50%;
@@ -47,10 +46,9 @@ html {
 
 #loginSpace{
     position: relative;
-    top:40%;
+    top:50%;
 /*    border: 2px solid red;*/
-    width: 350px;
-    height: 130px;
+    width: 450px;
     transform: translateX(-50%);
     left:50%;
 }
@@ -58,7 +56,7 @@ html {
 .usernamePassword{
     margin-top: 10px;
     height: 30px;
-    width: 350px;
+    width: 450px;
     border: 1px solid red;
     background-color: #383333;
     border-radius: 10px;

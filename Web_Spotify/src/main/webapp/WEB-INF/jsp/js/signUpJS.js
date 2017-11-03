@@ -25,6 +25,30 @@ $( document ).ready(function() {
 		$("#signupPasswordRepeat").focus(function(event) {
 			ClearPasswordErrorMessage();
 		});
+		
+		$("#Premium-Account-Button").click(function(event) {
+			$("#cardNumber").show();
+			$("#cardName").show();
+			$("#billingAddress").show();
+			$("#expiredDate").show();
+			$("#cvv").show();
+			
+			$(this).css('background-color', 'red');
+			$("#Basic-Account-Button").css('background-color', '#337ab7');
+		});
+		
+		$("#Basic-Account-Button").click(function(event) {
+			$("#cardNumber").hide();
+			$("#cardName").hide();
+			$("#billingAddress").hide();
+			$("#expiredDate").hide();
+			$("#cvv").hide();
+			
+			$(this).css('background-color', 'red');
+			$("#Premium-Account-Button").css('background-color', '#337ab7');
+		});
+		
+		$("#Basic-Account-Button").css('background-color', 'red');
 
 	});
 
