@@ -5,7 +5,6 @@ $( document ).ready(function() {
 			event.preventDefault();
 
 		});
-
 	});
 
 	function signInViaAjax() {
