@@ -77,7 +77,6 @@ public class HelloController {
 		
 		String username = request.getParameter("username");
 		
-		
 		if(signupService.validateUsername(username)) {
 			String greetings = "true";
 			response.setContentType("text/plain");
