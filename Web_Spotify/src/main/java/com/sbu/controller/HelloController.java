@@ -92,7 +92,7 @@ public class HelloController {
 	
 	
 	@RequestMapping(value = "/signup")
-	public void signup(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
+	public void Signup(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
 		
 		
@@ -107,15 +107,16 @@ public class HelloController {
 		user.setEmail(email);
 		user.setLocation(location);
 		
-		User returnedUser = signupService.signupUser(user);
+		
 		boolean result = signupService.validateUsername(username);
 		
-		if(returnedUser == null && !result){
+		if(!result){
 			String greetings = "false";
 			response.setContentType("text/plain");
 			response.getWriter().write(greetings);
 		}
 		else{
+			User returnedUser = signupService.signupUser(user);
 			String greetings = "true";
 			response.setContentType("text/plain");
 			response.getWriter().write(greetings);
