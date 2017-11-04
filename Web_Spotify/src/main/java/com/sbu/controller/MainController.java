@@ -129,6 +129,7 @@ public class MainController {
 			response.getWriter().write(greetings);
 		}
 		else{
+			signupService.signupUser(user, request);
 			String greetings = "true";
 			response.setContentType("text/plain");
 			response.getWriter().write(greetings);
