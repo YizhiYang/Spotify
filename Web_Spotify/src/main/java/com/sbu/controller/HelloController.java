@@ -38,7 +38,6 @@ public class HelloController {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		
 		User user = new User();
 		user.setUserName(username);
 		user.setPassword(password);
@@ -52,10 +51,7 @@ public class HelloController {
 			String greetings = "false";
 			response.setContentType("text/plain");
 			response.getWriter().write(greetings);
-		}
-		
-//		return "forward:/passwordController.html";
-		
+		}		
 	}
 	
 	
@@ -74,9 +70,7 @@ public class HelloController {
 	@RequestMapping(value="/validateUsername", method = RequestMethod.GET)
 	public void validateUsername(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
-		
-		String username = request.getParameter("username");
-		
+		String username = request.getParameter("username");	
 		if(signupService.validateUsername(username)) {
 			String greetings = "true";
 			response.setContentType("text/plain");
@@ -85,16 +79,12 @@ public class HelloController {
 			String greetings = "false";
 			response.setContentType("text/plain");
 			response.getWriter().write(greetings);
-		}
-	 
-		
+		}		
 	}
 	
 	
 	@RequestMapping(value = "/signup")
 	public void Signup(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
-		
-		
 		
         String email = request.getParameter("email");
         String username = request.getParameter("username");
@@ -107,7 +97,6 @@ public class HelloController {
 		user.setEmail(email);
 		user.setLocation(location);
 		
-		
 		boolean result = signupService.validateUsername(username);
 		
 		if(!result){
@@ -116,21 +105,11 @@ public class HelloController {
 			response.getWriter().write(greetings);
 		}
 		else{
-			User returnedUser = signupService.signupUser(user);
 			String greetings = "true";
 			response.setContentType("text/plain");
 			response.getWriter().write(greetings);
 		}
     }
-	
-//	@RequestMapping(value="/getImage")
-//	@ResponseBody
-//	public String getImage(Model model, HttpServletRequest request, HttpServletResponse response){
-//		
-//		
-//		
-//
-//	}
 	
 	@RequestMapping(value = "/passwordController", method=RequestMethod.POST)
 	public String authenticate(Model model, HttpServletRequest request){

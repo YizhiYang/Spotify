@@ -27,10 +27,10 @@
         			</button>
       			</div>
       			<div class="modal-body">
-        			<p>Congratz! You now have a spotify account. Go to sign in page to sign in</p>
+        			<p>Congrats! You now have a Spotify account.</p>
       			</div>
       			<div class="modal-footer">
-        			<button type="button" class="btn btn-primary" ><a href="/Web_Spotify" style="color:#fff;">Go to Sign in</a></button>
+        			<button type="button" class="btn btn-primary" ><a href="/Web_Spotify" style="color:#fff;">Sign in</a></button>
       			</div>
     			</div>
   			</div>
@@ -40,7 +40,8 @@
             <div id="loginPageWrapper">
 <!--                <div id='loginScreenLogo'>Re</div>-->
                 <div id=loginSpace>
-                    <div id=registerLogo>REGISTER</div>
+                    <div id=registerLogo style="font-size:250%"; color="#ffcc00">REGISTER</div>
+                    <br/>
                     
                     <button type="button" class="btn btn-primary btn-lg" id="Basic-Account-Button">Basic Account</button>
                     <button type="button" class="btn btn-primary btn-lg" id="Premium-Account-Button">Premium Account</button>

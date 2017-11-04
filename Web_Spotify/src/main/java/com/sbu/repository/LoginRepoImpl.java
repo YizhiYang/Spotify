@@ -21,7 +21,6 @@ public class LoginRepoImpl implements LoginRepo {
 
 	
 	public List Login(User user) {	
-		//em.persist(user);
 		List results = em.createQuery("SELECT e FROM User e WHERE e.userName LIKE :uname AND e.password LIKE :upassword")
 				.setParameter("uname", user.getUserName())
 				.setParameter("upassword", user.getPassword())

@@ -11,7 +11,6 @@ $( document ).ready(function() {
 		$("#signUpForm").submit(function(event) {
 			signUpViaAjax();
 			event.preventDefault();
-
 		});
 		
 		$("#signupPasswordRepeat").blur(function(event){
@@ -79,10 +78,8 @@ $( document ).ready(function() {
 		if(!(password === passwordRepeat)){
 			displayPasswordErrorMessage();
 			return;
-		}
-		
-		var data2 = $('#signUpForm').serialize();
-			
+		}	
+		var data2 = $('#signUpForm').serialize();		
 		$.ajax({
 			type : "POST",
 			url : "signup.html",
@@ -97,8 +94,8 @@ $( document ).ready(function() {
 				}
 			}
 		});
-
 	}
+	
 	
 	function ClearPasswordErrorMessage() {
 		document.getElementById("password-feedback").style.display="none";

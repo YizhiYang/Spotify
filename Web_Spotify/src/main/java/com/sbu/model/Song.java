@@ -24,7 +24,6 @@ public class Song {
 	
 	private String song_name;
 	
-	
 	private int durationSecs;
 	
 	private URL file;

@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import com.sbu.model.User;
 import com.sbu.repository.LoginRepo;
 
-
-// put business here. not in the repository
 @Service("loginService")
 public class LoginServiceImpl implements LoginService {
 
@@ -17,8 +15,7 @@ public class LoginServiceImpl implements LoginService {
 	private LoginRepo loginRepo;
 	public boolean loginUser(User user) {
 		List result = loginRepo.Login(user);
-		return !result.isEmpty();
-		
+		return !result.isEmpty();	
 	}
 
 }

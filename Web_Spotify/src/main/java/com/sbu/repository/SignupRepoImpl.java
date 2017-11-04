@@ -18,10 +18,8 @@ public class SignupRepoImpl implements SignupRepo {
 	private EntityManager em;
 
 	public User signup(User user) {
-		// TODO Auto-generated method stub
+		
 		em.persist(user);
-		
-		
 		return user;
 	}
 
