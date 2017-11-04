@@ -50,15 +50,15 @@
                       <input class="usernamePassword" type="text" name="email" placeholder="Email">
                       <input class="usernamePassword" id="signupUsername" type="text" name="username" placeholder="Username">
                       <div id="feedback" style="display:none; color:red">
-                  		Username alraedy taken.
+                  		Username is alraedy taken.
                   		</div>
-                  		<div id="feedback-success" style="display:none; color:green">
+                  		<div id="feedback-success" style="display:none; color:#fff">
                   		Username is available.
                   		</div>
                       <input class="usernamePassword" id="signupPassword" type="password" name="password" placeholder="Password">                      
                       <input class="usernamePassword" id="signupPasswordRepeat" type="password" name="confirm-password" placeholder="Confirm Password">
                       <div id="password-feedback" style="display:none; color:red">
-                  		Password Repeat does not match!
+                  		Passwords do not match.
                   		</div>
                   		
                   	  <input class="usernamePassword" id="cardNumber" type="text" style="display:none;" name="cardNumber" placeholder="Card number">                      

@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 @Controller
-public class HelloController {
+public class MainController {
 	
 	@Autowired
 	private LoginService loginService;
