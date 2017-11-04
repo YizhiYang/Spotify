@@ -21,14 +21,17 @@ public class SignupServiceImpl implements SignupService {
 	public User signupUser(User user, HttpServletRequest request) {
 		signupRepo.signup(user);
 		
-		
 		//create folder under profileImage then copy user-default.png to that dir. 
+//		String path = request.getSession().getServletContext().getContextPath();
+		
 		String path = request.getContextPath();
 		System.out.println(path);
-		System.out.println("check");
-		File file = new File(path + "/directory");
-		System.out.println(file.mkdir());
 		
+		File file = new File(path);
+		if(!file.exists()){
+			System.out.println("false, make path");
+			System.out.println(file.mkdirs());
+		}
 		return null;
 	}
 	
