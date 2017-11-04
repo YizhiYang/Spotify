@@ -122,6 +122,23 @@ html {
 }
 */
 
+#Premium-Account-Button{
+	border:none;
+}
+
+#Basic-Account-Button{
+	border:none;
+}
+
+#Premium-Account-Button:focus{
+	outline: none;
+}
+
+#Basic-Account-Button:focus{
+	outline: none;
+}
+
+
 @media only screen and (min-width: 825px) {
     html{
         width: 100vw;
