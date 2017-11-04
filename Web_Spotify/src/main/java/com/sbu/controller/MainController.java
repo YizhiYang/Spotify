@@ -82,6 +82,13 @@ public class MainController {
 		}		
 	}
 	
+	@RequestMapping(value="/searchSongs", method = RequestMethod.GET)
+	public void searchSongs(HttpServletRequest request, HttpServletResponse response){
+		
+	}
+		
+	
+	
 	
 	@RequestMapping(value = "/signup")
 	public void Signup(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -110,6 +117,13 @@ public class MainController {
 			response.getWriter().write(greetings);
 		}
     }
+	
+	
+	public void sendImage(HttpServletRequest request, HttpServletResponse response){
+		
+		
+	}
+	
 	
 	@RequestMapping(value = "/passwordController", method=RequestMethod.POST)
 	public String authenticate(Model model, HttpServletRequest request){

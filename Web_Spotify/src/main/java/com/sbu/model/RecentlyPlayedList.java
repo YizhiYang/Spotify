@@ -30,4 +30,6 @@ public class RecentlyPlayedList {
 	public void setSongs(Collection<Song> songs) {
 		this.songs = songs;
 	}
+	
+	
 }
