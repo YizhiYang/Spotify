@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.sbu.model.User;
 import com.sbu.repository.SignupRepo;
+import com.sbu.controller.MainController;
 
 @Service("signupService")
 public class SignupServiceImpl implements SignupService {
@@ -24,14 +25,19 @@ public class SignupServiceImpl implements SignupService {
 		//create folder under profileImage then copy user-default.png to that dir. 
 //		String path = request.getSession().getServletContext().getContextPath();
 		
-		String path = request.getContextPath();
-		System.out.println(path);
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		File newDir = new File(classloader.getResource(MainController.PROFILE_IMAGE_PATH).getPath(), user.getUserName());
+		System.out.println(newDir.mkdir());
 		
-		File file = new File(path);
-		if(!file.exists()){
-			System.out.println("false, make path");
-			System.out.println(file.mkdirs());
-		}
+		
+//		String path = request.getContextPath();
+//		System.out.println(path);
+//		
+//		File file = new File(path);
+//		if(!file.exists()){
+//			System.out.println("false, make path");
+//			System.out.println(file.mkdirs());
+//		}
 		return null;
 	}
 	
