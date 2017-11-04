@@ -12,10 +12,12 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway | Asap | Work+Sans | Ubuntu | Oxygen | Archivo+Black | Rokkitt | Passion+One" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-    
-    <script src="jsp/js/jquery-1.7.2.min.js"></script>
-    <script src="jsp/js/jquery-ui-1.8.21.custom.min.js"></script>
-
+      <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  
+  <script type="application/javascript"><%@ include file="js/homepageJS.js" %></script>
 
 
     
@@ -26,9 +28,13 @@
             <div id="leftWrapper">
                 <div id=userInfoWrapper>
                     <div id="userInfoInnerWrapper">
-                        <div id=profilePic>
-                        	<img width="80" src="Profile-Image.html"></img>
-                        </div>
+                    	<div id=profilePic>
+    						<img width="60" height="60" src="Profile-Image.html"></img>
+    						<form id="uploadProfileImageForm" enctype="multipart/form-data">
+    							<input type="file" id="profile-image-chooser" name="fileUp" class="hidden" accept=".png,.jpg,.jpeg"
+    							style="position: absolute; top:0; width:60px;height:60px;opacity: 0;">
+    						</form>
+						</div>
                         <div id=userInfo>
                             <div id=username>Jay Bird</div>
                             <div id=usertype>Premium User</div>
