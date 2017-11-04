@@ -14,11 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sbu.model.User;
@@ -26,20 +28,26 @@ import com.sbu.service.LoginService;
 import com.sbu.service.SignupService;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.logging.Logger;
 
 @Controller
 public class MainController {
+	
+	public static final String PROFILE_IMAGE_PATH = "ProfileImages/";
+	public static final String PROFILE_IMAGE_NAME = "profile.png";
 	
 	@Autowired
 	private LoginService loginService;
@@ -136,11 +144,10 @@ public class MainController {
 		}
     }
 	
-	
-	public void sendImage(HttpServletRequest request, HttpServletResponse response){
-		
-		
-	}
+//	
+//	public void sendImage(HttpServletRequest request, HttpServletResponse response){
+//		
+//	}
 	
 	
 	@RequestMapping(value = "/passwordController", method=RequestMethod.POST)
@@ -151,9 +158,40 @@ public class MainController {
 		return "hello";
 	}
 	
+
 	
-	public static final String PROFILE_IMAGE_PATH = "ProfileImages/";
-	public static final String PROFILE_IMAGE_NAME = "profile.png";
+	// Handling file upload request
+	   @PostMapping(value = "/ProfileImageUpload")
+	   public ResponseEntity<Object> imageUpload(@RequestParam("fileUp") MultipartFile file, HttpServletRequest request)
+	         throws IOException {
+		   System.out.println("lalaalala");
+		   User user = (User)request.getSession().getAttribute("User");
+			if(user==null){
+				return null;
+			}
+			
+			String profileFolderName = user.getUserName();
+			System.out.println(profileFolderName);
+
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+			File fileToWriteTo = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName).getPath(),PROFILE_IMAGE_NAME);
+			
+			
+			BufferedOutputStream outputStream = new BufferedOutputStream(
+		               new FileOutputStream(fileToWriteTo));
+			
+		         outputStream.write(file.getBytes());
+		         outputStream.flush();
+		         outputStream.close();
+		         
+			System.out.println(file.getSize());
+
+			System.out.println(file.getBytes());
+			
+	      
+	      return new ResponseEntity<Object>("File Uploaded Successfully.",HttpStatus.OK);
+	   }
+	
 	
 	@RequestMapping(value="/Profile-Image", method = RequestMethod.GET)
     public void downloadFile(HttpServletResponse response, HttpServletRequest request) throws IOException {
