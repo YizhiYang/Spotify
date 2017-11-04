@@ -26,7 +26,9 @@
             <div id="leftWrapper">
                 <div id=userInfoWrapper>
                     <div id="userInfoInnerWrapper">
-                        <div id=profilePic></div>
+                        <div id=profilePic>
+                        	<img width="80" src="Profile-Image.html"></img>
+                        </div>
                         <div id=userInfo>
                             <div id=username>Jay Bird</div>
                             <div id=usertype>Premium User</div>

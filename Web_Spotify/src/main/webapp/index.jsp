@@ -37,6 +37,9 @@
                     <div class="loginExtras" onclick="location.href='signup.jsp'">Sign up</div>
                     <div class="loginExtras">Reset Password</div>
                 </div>
+                
+             
+               
             </div>
             
         </div>
