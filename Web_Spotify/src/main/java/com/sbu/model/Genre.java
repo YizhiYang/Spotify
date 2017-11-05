@@ -1,0 +1,5 @@
+package com.sbu.model;
+
+public enum Genre {
+	RnB, POP, KPOP, ROCK, ROMANCE, REGGAE, METAL, JAZZ, CHRISTIAN, ELECTRONIC, DANCE, CLASSIC, HIPHOP, LATIN, WORKOUT, FOCUS
+}
