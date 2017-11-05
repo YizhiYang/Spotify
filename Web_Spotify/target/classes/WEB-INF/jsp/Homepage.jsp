@@ -38,6 +38,7 @@
                         <div id=userInfo>
                             <div id=username>Jay Bird</div>
                             <div id=usertype>Premium User</div>
+                           	<div id=useredit><a href="goToProfile.html">Profile</a></div>
                         </div>
                     </div>
                 </div>
