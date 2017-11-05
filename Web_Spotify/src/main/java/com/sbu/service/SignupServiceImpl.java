@@ -36,6 +36,8 @@ public class SignupServiceImpl implements SignupService {
 		File source = new File(parent_root + MainController.PROFILE_IMAGE_NAME);
 		
 		FileUtils.copyFileToDirectory(source, newDir);
+		
+		
 		System.out.println(source.exists());
 
 		return null;
