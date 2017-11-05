@@ -3,6 +3,7 @@ package com.sbu.controller;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,20 +211,17 @@ public class MainController {
     public void downloadFile(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		
 		User user = (User)request.getSession().getAttribute("User");
+		
 		if(user==null){
 			System.out.println("Kicked out of Session");
 			return;
 		}
 		
 		String profileFolderName = user.getUserName();
-		
-     
         File file = null;
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        
-        file = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName+"/"+PROFILE_IMAGE_NAME).getFile());
-         
+        file = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName+"/"+PROFILE_IMAGE_NAME).getFile());        
         if(!file.exists()){
             String errorMessage = "Sorry. The file you are looking for does not exist";
             System.out.println(errorMessage);
