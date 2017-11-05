@@ -211,6 +211,7 @@ public class MainController {
 		
 		User user = (User)request.getSession().getAttribute("User");
 		if(user==null){
+			System.out.println("Kicked out of Session");
 			return;
 		}
 		

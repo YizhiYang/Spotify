@@ -29,7 +29,7 @@
                 <div id=userInfoWrapper>
                     <div id="userInfoInnerWrapper">
                     	<div id=profilePic>
-    						<img width="60" height="60" src="Profile-Image.html"></img>
+    						<img width="60" height="60" id ="profile-image-home" src="Profile-Image.html"></img>
     						<form id="uploadProfileImageForm" enctype="multipart/form-data">
     							<input type="file" id="profile-image-chooser" name="fileUp" class="hidden" accept=".png,.jpg,.jpeg"
     							style="position: absolute; top:0; width:60px;height:60px;opacity: 0;">

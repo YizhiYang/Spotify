@@ -17,6 +17,8 @@ function uploadProfileImage(){
 	    data: formData,
 	    success: function(response) {
 	        alert("success");
+	        d = new Date();
+	        $("#profile-image-home").attr("src", "Profile-Image.html"+"?"+d.getTime());
 	    },
 	    error: function() {
 	        alert("unable to create the record");
