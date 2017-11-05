@@ -92,6 +92,19 @@ public class MainController {
 		}
 	}
 	
+	
+	@RequestMapping(value = "/goToProfile")
+	public String goToProfile(Model model, HttpServletRequest request) {
+		//VALIDATE SESSION;
+		User user = (User)request.getSession().getAttribute("User");
+		if(user != null){
+			System.out.println(user.getUserName());
+			return "userProfile";
+		}else{
+			return "../../index";
+		}
+	}
+	
 	@RequestMapping(value="/validateUsername", method = RequestMethod.GET)
 	public void validateUsername(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
