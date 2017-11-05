@@ -221,7 +221,10 @@ public class MainController {
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         
+        System.out.println(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName).getPath());
+        
         file = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName+"/"+PROFILE_IMAGE_NAME).getFile());
+        
          
         if(!file.exists()){
             String errorMessage = "Sorry. The file you are looking for does not exist";

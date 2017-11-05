@@ -33,9 +33,11 @@ public class SignupServiceImpl implements SignupService {
 		System.out.println(newDir.getAbsolutePath());
 		System.out.println(newDir.mkdir());
 	
-		File source = new File(parent_root + "user-default.png");
+		File source = new File(parent_root + MainController.PROFILE_IMAGE_NAME);
 		
 		FileUtils.copyFileToDirectory(source, newDir);
+		
+		
 		System.out.println(source.exists());
 
 		return null;
