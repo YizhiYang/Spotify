@@ -1,11 +1,13 @@
 package com.sbu.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,25 +21,23 @@ public class SignupServiceImpl implements SignupService {
 	@Autowired
 	private SignupRepo signupRepo;
 	
-	public User signupUser(User user, HttpServletRequest request) {
+	public User signupUser(User user, HttpServletRequest request) throws IOException {
 		signupRepo.signup(user);
 		
-		//create folder under profileImage then copy user-default.png to that dir. 
-//		String path = request.getSession().getServletContext().getContextPath();
-		
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		
+		String parent_root = classloader.getResource(MainController.PROFILE_IMAGE_PATH).getPath();
+		
 		File newDir = new File(classloader.getResource(MainController.PROFILE_IMAGE_PATH).getPath(), user.getUserName());
+		
+		System.out.println(newDir.getAbsolutePath());
 		System.out.println(newDir.mkdir());
+	
+		File source = new File(parent_root + "user-default.png");
 		
-		
-//		String path = request.getContextPath();
-//		System.out.println(path);
-//		
-//		File file = new File(path);
-//		if(!file.exists()){
-//			System.out.println("false, make path");
-//			System.out.println(file.mkdirs());
-//		}
+		FileUtils.copyFileToDirectory(source, newDir);
+		System.out.println(source.exists());
+
 		return null;
 	}
 	
