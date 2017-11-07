@@ -50,6 +50,10 @@ public class MainController {
 	public static final String PROFILE_IMAGE_PATH = "ProfileImages/";
 	public static final String PROFILE_IMAGE_NAME = "profile.png";
 	
+	
+	//SONG FILE PATH
+	public static final String SONG_FILE_PATH = "Songs/";
+	
 	@Autowired
 	private LoginService loginService;
 	
@@ -208,7 +212,7 @@ public class MainController {
 	
 	
 	@RequestMapping(value="/Profile-Image", method = RequestMethod.GET)
-    public void downloadFile(HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void downloadProfileImage(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		
 		User user = (User)request.getSession().getAttribute("User");
 		
@@ -262,6 +266,73 @@ public class MainController {
  
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
+    }
+	
+	
+	@RequestMapping(value="/requestSongFile/{id}", method = RequestMethod.GET)
+    public void downloadSongFile(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") String id) throws IOException {
+		
+		User user = (User)request.getSession().getAttribute("User");
+		
+		if(user==null){
+			System.out.println("Kicked out of Session");
+			return;
+		}
+		
+		System.out.println(id);
+
+        File file = null;
+
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        
+        String songFileName = null;
+        if(Integer.valueOf(id) == 0){
+        	songFileName = "Activ-Doar Cu Tine.mp3";
+        }else if(Integer.valueOf(id) == 1){
+        	songFileName = "Jos - Crosses.mp3";
+        }
+        
+        String songPath = classloader.getResource(SONG_FILE_PATH).getPath();
+        System.out.println(classloader.getResource(SONG_FILE_PATH).getPath());
+        System.out.println(songPath+songFileName);
+        
+        file = new File(songPath+songFileName);
+        if(!file.exists()){
+            String errorMessage = "Sorry. The file you are looking for does not exist";
+            System.out.println(errorMessage);
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+            outputStream.close();
+            return;
+        }
+         
+        String mimeType= URLConnection.guessContentTypeFromName(file.getName());
+        if(mimeType==null){
+            System.out.println("mimetype is not detectable, will take default");
+            mimeType = "application/octet-stream";
+        }
+         
+        System.out.println("mimetype : "+mimeType);
+         
+        response.setContentType(mimeType);
+         
+        // "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
+        //   while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]
+        response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
+ 
+         
+        // "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting
+        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+        response.setContentLength((int)file.length());
+        
+
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+ 
+        //Copy bytes from source to destination(outputstream in this example), closes both streams.
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+        
+        
     }
  
 }

@@ -1,5 +1,12 @@
 var myPlaylist;
 
+$(document).ready(function() {
+	$("#My-PlayList-Button").click(function(){
+		loadPlayListPrototype();
+	});
+
+});
+
 function loadPlayListPrototype(){
 
     $('#centerSideContent').empty();
@@ -47,12 +54,12 @@ function loadPlayListPrototype(){
 			var songList = [
 				{
 				title:"Doar Cu Tine",
-				mp3:"./music/Activ-Doar Cu Tine.mp3",
+				mp3:"requestSongFile/0.html",
 				artist:"Activ"
 				},
 				{
 				title:"Crosses",
-				mp3:"./music/Jos - Crosses.mp3",
+				mp3:"requestSongFile/1.html",
 				artist:"Jos"
 				}
 			];

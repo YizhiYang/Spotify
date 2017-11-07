@@ -9,6 +9,7 @@
 	<style type="text/css"><%@ include file="css/homepage/left.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/center.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/right.css" %> </style>
+	<style type="text/css"><%@ include file="css/homepage/playListPrototypePage.css" %> </style>
   <link href="https://fonts.googleapis.com/css?family=Raleway | Asap | Work+Sans | Ubuntu | Oxygen | Archivo+Black | Rokkitt | Passion+One" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -18,6 +19,10 @@
   crossorigin="anonymous"></script>
   
   <script type="application/javascript"><%@ include file="js/homepageJS.js" %></script>
+  
+  <script type="application/javascript"><%@ include file="js/jPlayer/jquery.jplayer.min.js" %></script>
+  <script type="application/javascript"><%@ include file="js/jPlayer/jplayer.playlist.min.js" %></script>
+  <script type="application/javascript"><%@ include file="js/playListPrototypePage.js" %></script>
 
 
     
@@ -59,7 +64,7 @@
                         <li></li>
                         <li></li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Liked from Radio</div></li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>My Play List</div></li>
+                        <li class=userSongWrapperList><div class='userSongWrapperItem' id="My-PlayList-Button">My Play List</div></li>
                     </ul>
                 </div>
             
@@ -196,7 +201,10 @@
             </div>
         </div>
     </div>
+    <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
     <div id="playBar">
+		<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+		
         <div id="playBarLeft">
             <div id=playBarImage style="background-image: url(./images/albumCover1.jpg);"></div>
             <div id=playBarLeftAddSong>
@@ -212,26 +220,48 @@
             <div id=playBarFunctionality>
                 <i class="material-icons icons playBarFunctionalityButton">thumb_down</i>
                 <i class="material-icons icons playBarFunctionalityButton" style="font-size:35px;">skip_previous</i>
-                <i class="material-icons icons playBarFunctionalityButton" style="font-size:35px;">play_circle_outline</i>
+				<button class="jp-play" role="button" tabindex="0">
+					<i class="material-icons icons" style="font-size:35px;">play_circle_outline</i>
+				</button>
                 <i class="material-icons icons playBarFunctionalityButton" style="font-size:35px;">skip_next</i>
                 <i class="material-icons icons playBarFunctionalityButton">thumb_up</i>
             </div>
+			
             <div id="progressBar">
+			<div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+			<div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+			<div>&nbsp;</div>
                 <div id="progressBarWrapper">
-                    <input type="range" id='progressBar'>
+                    <div class="jp-seek-bar">
+						<div class="jp-play-bar"></div>
+					</div>
                 </div>
+			
             </div>
         </div>
         <div id="playBarRight">
             <div id="volumeController">
-                <i class="material-icons icons">volume_up</i>
-                <input type="range" id='volumeBar'>
-                <i class="material-icons icons">volume_down</i>
-                <i class="material-icons icons">playlist_play</i>
+				<div class="jp-volume-controls">
+					<button class="jp-mute" role="button" tabindex="0">
+						<i class="material-icons icons">volume_up</i>
+					</button>
+					<div class="jp-volume-bar">
+						<div class="jp-volume-bar-value"></div>
+					</div>
+				</div>
             </div>
         </div>
+		<div class="CurrentPlaylist" style="display: none;">
+			<div class="jp-playlist">
+				<ul>
+					<li>&nbsp;</li>
+				</ul>
+			</div>
+		</div>
+		
+	</div>
     
-    </div>
+	</div>
 
 </body>
 </html>
