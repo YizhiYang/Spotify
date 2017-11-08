@@ -18,10 +18,15 @@
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
   
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  
   <script type="application/javascript"><%@ include file="js/homepageJS.js" %></script>
   
   <script type="application/javascript"><%@ include file="js/jPlayer/jquery.jplayer.min.js" %></script>
   <script type="application/javascript"><%@ include file="js/jPlayer/jplayer.playlist.min.js" %></script>
+  <script type="application/javascript"><%@ include file="js/SongJS.js" %></script>
   <script type="application/javascript"><%@ include file="js/playListPrototypePage.js" %></script>
 
 
@@ -65,8 +70,44 @@
                         <li></li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Liked from Radio</div></li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem' id="My-PlayList-Button">My Play List</div></li>
+                        <li class=userSongWrapperList><div class='userSongWrapperItem' data-toggle="modal" data-target="#uploadSongPopUp">Upload Song</button></div></li>
                     </ul>
                 </div>
+                
+                <!-- Pop up for uploading Song -->
+<div class="modal fade" id="uploadSongPopUp">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="upload-song-form" method="post" enctype="multipart/form-data">
+  			<div class="form-group">
+  				<label class="col-form-label" for="formGroupSongNameInput">Song Name</label>
+    			<input type="text" class="form-control" id="formGroupSongNameInput" name="songName" placeholder="Song Name">
+    			<label class="col-form-label" for="formGroupArtistNameInput">Artist Name</label>
+    			<input type="text" class="form-control" id="formGroupArtistNameInput" name="artistName" placeholder="Artist Name">
+    			<label class="col-form-label" for="formGroupDurationInput">Duration</label>
+    			<input type="text" class="form-control" id="formGroupDurationInput" name="duration" placeholder="0:00">
+    			<label class="col-form-label" for="formGroupAlbumNameInput" name="albumName">Album Name</label>
+    			<input type="text" class="form-control" id="formGroupAlbumNameInput" name="albumName" placeholder="Album Name">
+    			<label for="FormSongFile">Song File</label>
+    			<input type="file" class="form-control-file" name="fileUp" id="FormSongFile" accept=".mp3">
+  			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="submitSongFormButton">Upload Song</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
             
             </div>
         

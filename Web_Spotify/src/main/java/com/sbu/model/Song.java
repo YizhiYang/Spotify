@@ -24,9 +24,9 @@ public class Song {
 	
 	private String song_name;
 	
-	private int durationSecs;
+	private String duration;
 	
-	private URL file;
+	private String fileName;
 	
 	private double rate;
 	
@@ -57,20 +57,20 @@ public class Song {
 
 
 
-	public int getDurationSecs() {
-		return durationSecs;
+	public String getDuration() {
+		return duration;
 	}
 
-	public void setDurationSecs(int durationSecs) {
-		this.durationSecs = durationSecs;
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
-	public URL getFile() {
-		return file;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setFile(URL file) {
-		this.file = file;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public double getRate() {

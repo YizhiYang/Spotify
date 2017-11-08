@@ -22,11 +22,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.service.LoginService;
 import com.sbu.service.SignupService;
+import com.sbu.service.SongUploadService;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -42,6 +45,7 @@ import java.net.URLConnection;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.Base64;
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 @Controller
@@ -59,6 +63,9 @@ public class MainController {
 	
 	@Autowired
 	private SignupService signupService;
+	
+	@Autowired
+	private SongUploadService songUploadService;
 	
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
@@ -267,6 +274,63 @@ public class MainController {
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
+	
+	
+	
+		@PostMapping(value = "/SongFileUpload")
+	   public void songUpload(MultipartHttpServletRequest request, HttpServletResponse response)
+	         throws IOException {
+		   System.out.println("lalaalala");
+		   User user = (User)request.getSession().getAttribute("User");
+			if(user==null){
+				return;
+			}
+			String songName = request.getParameter("songName");
+			String artistName = request.getParameter("artistName");
+			String albumName = request.getParameter("albumName");
+			String duration = request.getParameter("duration");
+			MultipartFile file = request.getFile("fileUp");
+			Song song = new Song();
+			song.setSong_name(songName);
+			song.setDuration(duration);
+			song.setFileName(file.getOriginalFilename());
+			
+			songUploadService.addSongToDatabase(song);
+			
+			System.out.println(file.getOriginalFilename());
+			
+			
+			/*
+			Iterator<String> itr =  request.getFileNames();
+			 
+		     MultipartFile mpf = request.getFile(itr.next());
+		     System.out.println(mpf.getOriginalFilename() +" uploaded!");
+		     */
+			
+			//System.out.println(file.getOriginalFilename());
+			/*
+			String profileFolderName = user.getUserName();
+			System.out.println(profileFolderName);
+
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+			File fileToWriteTo = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName).getPath(),PROFILE_IMAGE_NAME);
+			
+			
+			BufferedOutputStream outputStream = new BufferedOutputStream(
+		               new FileOutputStream(fileToWriteTo));
+			
+		         outputStream.write(file.getBytes());
+		         outputStream.flush();
+		         outputStream.close();
+		         
+			System.out.println(file.getSize());
+
+			System.out.println(file.getBytes());
+			*/
+	      
+	      //return new ResponseEntity<Object>("File Uploaded Successfully.",HttpStatus.OK);
+	   }
+	
 	
 	
 	@RequestMapping(value="/requestSongFile/{id}", method = RequestMethod.GET)
