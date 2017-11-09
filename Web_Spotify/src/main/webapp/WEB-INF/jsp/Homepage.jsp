@@ -255,39 +255,13 @@
       <div class="modal-body">
 		<div class="input-group">
   			<span class="input-group-addon" id="basic-addon3">Username</span>
-  			<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" readonly>
+  			<input type="text" class="form-control" id="basic-url" name ="email" aria-describedby="basic-addon3" readonly>
   		</div>
   		<br>
   		<div class="input-group">
   			<span class="input-group-addon" id="basic-addon3">Email</span>
-  			<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" >
+  			<input type="text" class="form-control" id="basic-url" name = "location" aria-describedby="basic-addon3" >
   		</div>
-  		<br>
-  		<div class="input-group">
-  			<span class="input-group-addon" id="basic-addon3">Email</span>
-  			<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" >
-  		</div>
-  		<br>
-  		<div class="input-group">
-  			<span class="input-group-addon" id="basic-addon3">Email</span>
-  			<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" >
-  		</div>
-  		<br>
-  		<div class="input-group">
-  			<span class="input-group-addon" id="basic-addon3">Email</span>
-  			<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" >
-  		</div>
-  		<br>
-  		<div class="input-group">
-  			<span class="input-group-addon" id="basic-addon3">Email</span>
-  			<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" >
-  		</div>
-  		<br>
-  		<div class="input-group">
-  			<span class="input-group-addon" id="basic-addon3">Email</span>
-  			<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" >
-  		</div>
-  		<br>
 	
       </div>
       <div class="modal-footer">

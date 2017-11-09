@@ -81,9 +81,7 @@ public class MainController {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		User user = new User();
-		user.setUserName(username);
-		user.setPassword(password);
+		User user = this.initNewUser(username);
 		
 		request.getSession().setAttribute("User", user);
 		if(loginService.loginUser(user)) {
@@ -95,6 +93,12 @@ public class MainController {
 			response.setContentType("text/plain");
 			response.getWriter().write(greetings);
 		}		
+	}
+	
+	public User initNewUser(String username) {
+
+		User user = loginService.initUser(username);
+		return user;
 	}
 	
 	
@@ -486,6 +490,8 @@ public class MainController {
 		response.setContentType("text/plain");
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(user);
+		System.out.println(user.getEmail());
+		System.out.println(user.getLocation());
 		System.out.println(jsonString);
 	    response.getWriter().write(jsonString);
 	}

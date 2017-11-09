@@ -18,5 +18,10 @@ public class LoginServiceImpl implements LoginService {
 		System.out.println("Hello0000");
 		return !result.isEmpty();	
 	}
+	public User initUser(String username) {
+
+		List list = loginRepo.getUserAllInformation(username);
+		return (User)list.get(0);
+	}
 
 }

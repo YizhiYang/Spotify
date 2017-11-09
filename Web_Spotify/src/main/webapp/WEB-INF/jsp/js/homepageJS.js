@@ -38,8 +38,7 @@ function uploadProfileImage(){
 
 function editPopUp(){
 	
-	
-	alert("about to call ajax");
+
 	$.ajax({
 		type : "GET",
 		url : "getUserProfile.html",
