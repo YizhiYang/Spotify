@@ -464,21 +464,30 @@ public class MainController {
 	public void getUserProfile(HttpServletResponse response, HttpServletRequest request)
 			throws JSONException, IOException {
 
-		System.out.println("lalaalal");
+		
+		
+		
+		
 		User user = (User) request.getSession().getAttribute("User");
 
-		JSONObject json = new JSONObject();
-
-		String name = user.getUserName();
-		String email = user.getEmail();
-		String location = user.getLocation();
-		String password = user.getPassword();
-
-		json.put("name", name);
-		json.put("email", email);
-		json.put("location", location);
-		response.setContentType("application/json");
-		response.getWriter().write(json.toString());
+//		JSONObject json = new JSONObject();
+//
+//		String name = user.getUserName();
+//		String email = user.getEmail();
+//		String location = user.getLocation();
+//		String password = user.getPassword();
+//
+//		json.put("name", name);
+//		json.put("email", email);
+//		json.put("location", location);
+//		response.setContentType("application/json");
+//		response.getWriter().write(json.toString());
+		
+		response.setContentType("text/plain");
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(user);
+		System.out.println(jsonString);
+	    response.getWriter().write(jsonString);
 	}
  
 }
