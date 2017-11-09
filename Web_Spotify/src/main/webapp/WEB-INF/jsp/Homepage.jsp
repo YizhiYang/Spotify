@@ -44,7 +44,7 @@
                         <div id=userInfo>
                             <div id=username>Jay Bird</div>
                             <div id=usertype>Premium User</div>
-                           	<div id=useredit>Profile</div>
+                           	<!-- <div id=useredit>Profile</div> -->
                         </div>
                     </div>
                 </div>

@@ -235,7 +235,7 @@ public class MainController {
         
         file = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName+"/"+PROFILE_IMAGE_NAME).getFile());
         if(!file.exists()){
-            String errorMessage = "Sorry. The file you are looking for does not exist";
+            String errorMessage = FILE_NOT_FOUND_MESSAGE;
             System.out.println(errorMessage);
             OutputStream outputStream = response.getOutputStream();
             outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
