@@ -2,5 +2,5 @@ package com.sbu.repository;
 
 public interface ChangeProfileInfoRepo {
 	
-	boolean changeProfileInfo(String email, String location);
+	boolean changeProfileInfo(String email, String location, String username);
 }

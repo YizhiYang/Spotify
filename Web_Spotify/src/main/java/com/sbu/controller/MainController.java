@@ -484,10 +484,27 @@ public class MainController {
 	public void changeUserProfileInfo(HttpServletResponse response, HttpServletRequest request)
 			throws JSONException, IOException {
 		
+		User user = (User)request.getSession().getAttribute("User");
+		
+		if(user==null){
+			System.out.println("Kicked out of Session");
+			return;
+		}
+		
+		System.out.println("hello");
+		
 		String email = request.getParameter("email");
 		String location = request.getParameter("location");
+		System.out.println(email+","+location);
 		
-		
+		boolean changeSuccess = changeProfileInfoService.changeUserProfile(location, email, user.getUserName());
+		if(changeSuccess){
+			user.setEmail(email);
+			user.setLocation(location);
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
 		
 	}
  

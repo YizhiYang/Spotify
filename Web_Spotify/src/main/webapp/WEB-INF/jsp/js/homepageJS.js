@@ -5,6 +5,11 @@ $( document ).ready(function() {
 			uploadProfileImage();
 		});
 		
+		$("#save-user-info-update-changes-button").click(function(event) {
+			updateUserInfo();
+		});
+		
+		
 		
 		
 		$('#jquery_jplayer_1').on($.jPlayer.event.play,  function(e){
@@ -49,7 +54,7 @@ function editPopUp(){
 			$('#userinfo-email-input').val(jsonObj.email);
 			$('#userinfo-location-input').val(jsonObj.location);
 		
-			$("#editPopUp").modal('show');
+			$("#editUserInfoPopUp").modal('show');
 		}
 	});	
 }
@@ -63,7 +68,7 @@ function updateUserInfo(){
 		data : newUserInfoData,
 		success : function(data) {
 			console.log(data);
-			$('#uploadSongPopUp').modal('hide');
+			$('#editUserInfoPopUp').modal('hide');
 		}
 	});
 

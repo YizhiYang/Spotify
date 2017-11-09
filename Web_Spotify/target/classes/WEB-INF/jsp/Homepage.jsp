@@ -308,7 +308,7 @@
 	
 	
 	
-	<div class="modal fade" id="editPopUp">
+	<div class="modal fade" id="editUserInfoPopUp">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -334,7 +334,7 @@
 		</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" id="save-user-info-update-changes-button">Save changes</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
