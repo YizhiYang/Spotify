@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.sbu.model.Song;
 import com.sbu.model.User;
+import com.sbu.service.ChangeProfileInfoService;
 import com.sbu.service.LoginService;
 import com.sbu.service.SignupService;
 import com.sbu.service.SongUploadDownloadService;
@@ -72,6 +73,9 @@ public class MainController {
 	
 	@Autowired
 	private SongUploadDownloadService songUploadService;
+	
+	@Autowired
+	private ChangeProfileInfoService changeProfileInfoService;
 	
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
@@ -467,33 +471,24 @@ public class MainController {
 	@RequestMapping(value = "/getUserProfile", method = RequestMethod.GET)
 	public void getUserProfile(HttpServletResponse response, HttpServletRequest request)
 			throws JSONException, IOException {
-
-		
-		
-		
 		
 		User user = (User) request.getSession().getAttribute("User");
-
-//		JSONObject json = new JSONObject();
-//
-//		String name = user.getUserName();
-//		String email = user.getEmail();
-//		String location = user.getLocation();
-//		String password = user.getPassword();
-//
-//		json.put("name", name);
-//		json.put("email", email);
-//		json.put("location", location);
-//		response.setContentType("application/json");
-//		response.getWriter().write(json.toString());
 		
 		response.setContentType("text/plain");
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(user);
-		System.out.println(user.getEmail());
-		System.out.println(user.getLocation());
-		System.out.println(jsonString);
 	    response.getWriter().write(jsonString);
+	}
+	
+	@RequestMapping(value = "/changeUserProfileInfo", method = RequestMethod.POST)
+	public void changeUserProfileInfo(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		String email = request.getParameter("email");
+		String location = request.getParameter("location");
+		
+		
+		
 	}
  
 }
