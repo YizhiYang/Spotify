@@ -205,7 +205,7 @@ public class MainController {
 	   @PostMapping(value = "/ProfileImageUpload")
 	   public ResponseEntity<Object> imageUpload(@RequestParam("fileUp") MultipartFile file, HttpServletRequest request)
 	         throws IOException {
-		   System.out.println("lalaalala");
+		   
 		   User user = (User)request.getSession().getAttribute("User");
 			if(user==null){
 				return null;
