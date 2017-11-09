@@ -7,4 +7,5 @@ import com.sbu.model.User;
 public interface LoginRepo {
 
 	List Login(User user);
+	List getUserAllInformation(String username);
 }

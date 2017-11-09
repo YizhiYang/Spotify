@@ -27,7 +27,7 @@ function uploadProfileImage(){
 	    success: function(response) {
 	        alert("success");
 	        d = new Date();
-	        $("#profile-image-home").attr("src", "Profile-Image.html"+"?"+d.getTime());
+	        $(".profile-image-home").attr("src", "Profile-Image.html"+"?"+d.getTime());
 	    },
 	    error: function() {
 	        alert("unable to create the record");
@@ -35,4 +35,19 @@ function uploadProfileImage(){
 	});
 }
 
+
+function editPopUp(){
+	
+	
+	alert("about to call ajax");
+	$.ajax({
+		type : "GET",
+		url : "getUserProfile.html",
+		success : function(data) {
+			console.log(data);
+		
+			$("#editPopUp").modal('show');
+		}
+	});	
+}
 

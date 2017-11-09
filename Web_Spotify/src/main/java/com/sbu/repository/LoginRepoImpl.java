@@ -27,5 +27,12 @@ public class LoginRepoImpl implements LoginRepo {
 		
 		return results;
 	}
+	
+	public List getUserAllInformation(String username){
+		
+		List result = em.createQuery("SELECT e FROM User e WHERE e.userName LIKE :uname").setParameter("uname", username).getResultList();
+		
+		return result;
+	}
 
 }

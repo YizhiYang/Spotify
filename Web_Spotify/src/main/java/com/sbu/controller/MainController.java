@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -456,5 +458,27 @@ public class MainController {
         
         
     }
+	
+	
+	@RequestMapping(value = "/getUserProfile", method = RequestMethod.GET)
+	public void getUserProfile(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+
+		System.out.println("lalaalal");
+		User user = (User) request.getSession().getAttribute("User");
+
+		JSONObject json = new JSONObject();
+
+		String name = user.getUserName();
+		String email = user.getEmail();
+		String location = user.getLocation();
+		String password = user.getPassword();
+
+		json.put("name", name);
+		json.put("email", email);
+		json.put("location", location);
+		response.setContentType("application/json");
+		response.getWriter().write(json.toString());
+	}
  
 }
