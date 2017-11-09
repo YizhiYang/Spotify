@@ -1,13 +1,24 @@
-var myPlaylist;
+
 
 $(document).ready(function() {
-	$("#My-PlayList-Button").click(function(){
-		loadPlayListPrototype();
+	$("#My-PlayList-Button").click(function(event){
+		loadAllSongs();
+		event.preventDefault();
 	});
 
 });
 
-function loadPlayListPrototype(){
+function loadAllSongs(){
+	$.ajax({
+		type : "GET",
+		url : "getAllSongs.html",
+		success : function(data) {
+			addAllSongsToCenterContent(data);
+		}
+	});
+}
+
+function addAllSongsToCenterContent(jsonData){
 
     $('#centerSideContent').empty();
     $('#centerSideContent').append('<div class=centerSideContentWrapper id=PlayListPrototypeTop>\
@@ -19,6 +30,74 @@ function loadPlayListPrototype(){
                                             <button class=buttonStyle1 id=PlayListPrototypeButton onclick=loadPlayListPrototype()>Play</button>\
                                         </div>\
                                     </div>')
+                                    
+                                    
+    $('#centerSideContent').append('<div class=centerSideContentWrapper id=PlayListPrototypeBottom>\
+                                        <table id=PlayListPrototypeTable>\
+                                            <tr>\
+                                                <th></th>\
+                                                <th>TITLE</th>\
+                                                <th>ARTIST</th>\
+                                                <th>ALBUM</th>\
+                                                <th>RELEASE</th>\
+                                                <th>DURATION</th>\
+                                            </tr>');
+                                    
+    var jsonObj = jQuery.parseJSON(jsonData);
+    
+    
+    
+    for(var i=0; i<jsonObj.length; i++){
+    	console.log(jsonObj[i].song_name);
+    	$('#centerSideContent').append('<tr id=songPageListContent>\
+											<td><i class="material-icons song-content-play-button">play_circle_outline</i><i class="material-icons SongPageAddSong">add</i></td>\
+                                            <td>' + jsonObj[i].song_name + '</td>\
+                                            <td>' + '</td>\
+                                            <td>' + '</td>\
+                                            <td>' + '</td>\
+                                            <td>' + jsonObj[i].duration +'</td>\
+											</tr>');
+    }
+    
+    $('#centerSideContent').append('</table>\
+    								</div>');
+    
+    
+    var songList =[];
+    
+    for(var i=0; i<jsonObj.length; i++){
+    	console.log("requestSongFile/" + jsonObj[i].songId +".html");
+    	var song = {title: jsonObj[i].song_name,
+    			mp3:"requestSongFile/" + jsonObj[i].songId +".html",
+				artist:""}
+    	songList.push(song);
+    }
+    
+    
+    
+    myPlaylist = new jPlayerPlaylist({
+		jPlayer: "#jquery_jplayer_1",
+		cssSelectorAncestor: "#jp_container_1"
+	}, 
+	songList
+	, {
+		supplied: "mp3",
+		solution: "flash, html",
+		wmode: "window",
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true
+	});
+	
+	$(".song-content-play-button").each(function(index){
+		$(this).click(function(event){
+			myPlaylist.play(index);
+		});
+	});
+	
+    
+    /*
     $('#centerSideContent').append('<div class=centerSideContentWrapper id=PlayListPrototypeBottom>\
                                         <table id=PlayListPrototypeTable>\
                                             <tr>\
@@ -86,7 +165,7 @@ function loadPlayListPrototype(){
 			});
 			
 		
-    
+    */
     //this section needs to be MORE DYNAMIC
 	/*
     $('#PlayListPrototypeTable').append('<tr id=songPageListContent>\

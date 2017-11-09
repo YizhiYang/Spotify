@@ -25,11 +25,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.service.LoginService;
 import com.sbu.service.SignupService;
-import com.sbu.service.SongUploadService;
+import com.sbu.service.SongUploadDownloadService;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -46,6 +47,7 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -57,6 +59,8 @@ public class MainController {
 	
 	//SONG FILE PATH
 	public static final String SONG_FILE_PATH = "Songs/";
+	public static final String REQUEST_SUCCESS = "success";
+	public static final String REQUEST_FAILURE = "failure";
 	
 	@Autowired
 	private LoginService loginService;
@@ -65,7 +69,7 @@ public class MainController {
 	private SignupService signupService;
 	
 	@Autowired
-	private SongUploadService songUploadService;
+	private SongUploadDownloadService songUploadService;
 	
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
@@ -277,6 +281,32 @@ public class MainController {
 	
 	
 	
+	
+	
+	
+	
+	
+	@RequestMapping(value="/getAllSongs", method = RequestMethod.GET)
+	public void getAllSongs(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		List<Song> list = songUploadService.getALLSongs();
+		for(int i=0; i<list.size();i++){
+			System.out.println(list.get(i).getFileName());
+		}
+
+		response.setContentType("text/plain");
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(list);
+		System.out.println(jsonString);
+	    response.getWriter().write(jsonString);
+	}
+	
+	
 		@PostMapping(value = "/SongFileUpload")
 	   public void songUpload(MultipartHttpServletRequest request, HttpServletResponse response)
 	         throws IOException {
@@ -294,10 +324,28 @@ public class MainController {
 			song.setSong_name(songName);
 			song.setDuration(duration);
 			song.setFileName(file.getOriginalFilename());
-			
-			songUploadService.addSongToDatabase(song);
-			
-			System.out.println(file.getOriginalFilename());
+			System.out.println(song.getSongId());
+
+			if(songUploadService.addSongToDatabase(song)){
+				System.out.println(song.getSongId());
+				
+				//NOW SAVE THE MUSIC FILE
+				ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+				File newFile = new File(classloader.getResource(SONG_FILE_PATH).getPath(),song.getFileName());		
+				BufferedOutputStream outputStream = new BufferedOutputStream(
+			               new FileOutputStream(newFile));
+				
+			         outputStream.write(file.getBytes());
+			         outputStream.flush();
+			         outputStream.close();
+			         
+			    
+			    response.setContentType("text/plain");
+			    response.getWriter().write(REQUEST_SUCCESS);
+			}else{
+				response.setContentType("text/plain");
+			    response.getWriter().write(REQUEST_FAILURE);
+			}
 			
 			
 			/*
@@ -350,11 +398,19 @@ public class MainController {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         
         String songFileName = null;
+        
+        songFileName = songUploadService.findSongFileBasedOnID(Long.valueOf(id));
+        if(songFileName == null){
+        	return;
+        }
+        /*
         if(Integer.valueOf(id) == 0){
         	songFileName = "Activ-Doar Cu Tine.mp3";
         }else if(Integer.valueOf(id) == 1){
         	songFileName = "Jos - Crosses.mp3";
         }
+        */
+        
         
         String songPath = classloader.getResource(SONG_FILE_PATH).getPath();
         System.out.println(classloader.getResource(SONG_FILE_PATH).getPath());
@@ -379,6 +435,7 @@ public class MainController {
         System.out.println("mimetype : "+mimeType);
          
         response.setContentType(mimeType);
+        
          
         // "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
         //   while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]
@@ -395,6 +452,7 @@ public class MainController {
  
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
+        
         
         
     }

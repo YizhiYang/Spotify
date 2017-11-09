@@ -140,7 +140,7 @@ Added 10/31 by Limeng
 
 .jp-seek-bar{
     position: relative;
-    width: 80% !important;
+    /*width: 80% !important;*/
 	height: 5px;
 	background-color: red;
     bottom: 5px;

@@ -9,6 +9,7 @@ $( document ).ready(function() {
 			event.preventDefault();
 
 		});
+	
 });
 
 
@@ -39,6 +40,8 @@ function uploadSong(){
 		data : formData,
         success: function (data) {
             alert(data)
+            $('#upload-song-form').reset();
+            $('#uploadSongPopUp').modal('hide');
         },
         cache: false,
         contentType: false,

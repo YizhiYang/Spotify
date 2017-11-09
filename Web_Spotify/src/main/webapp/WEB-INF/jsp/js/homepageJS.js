@@ -1,7 +1,16 @@
+var myPlaylist;
+
 $( document ).ready(function() {
 		$("#profile-image-chooser").change(function(event) {
 			uploadProfileImage();
 		});
+		
+		
+		
+		$('#jquery_jplayer_1').on($.jPlayer.event.play,  function(e){
+		    console.log("Current track", e.jPlayer.status.media);
+		    console.log("Currentr track index", myPlaylist.current);
+		});  
 	});
 
 
@@ -25,3 +34,5 @@ function uploadProfileImage(){
 	    }
 	});
 }
+
+

@@ -46,6 +46,10 @@ public class Song {
 	public void setRecentlyPlayedList(Collection<RecentlyPlayedList> recentlyPlayedList) {
 		this.recentlyPlayedList_ID = recentlyPlayedList;
 	}
+	
+	public Long getSongId(){
+		return songId;
+	}
 
 	public String getSong_name() {
 		return song_name;
