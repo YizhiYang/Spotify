@@ -21,7 +21,7 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
-  
+  <script type="application/javascript"><%@ include file="js/signInJS.js" %></script>
   <script type="application/javascript"><%@ include file="js/homepageJS.js" %></script>
   
   <script type="application/javascript"><%@ include file="js/jPlayer/jquery.jplayer.min.js" %></script>
@@ -43,7 +43,7 @@
 						</div>
                         <div id=userInfo>
                             <div id=username>Jay Bird</div>
-                            <div id=usertype>Premium User</div>
+                            <div id=usertype>Basic User</div>
                            	<!-- <div id=useredit>Profile</div> -->
                         </div>
                     </div>

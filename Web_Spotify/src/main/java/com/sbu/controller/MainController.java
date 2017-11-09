@@ -1,6 +1,7 @@
 package com.sbu.controller;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -96,7 +97,7 @@ public class MainController {
 			//If login success, return basic user info to user. and add user to session
 			User user = this.initNewUser(username);
 			request.getSession().setAttribute("User", user);
-			response.getWriter().write(REQUEST_SUCCESS);
+			response.getWriter().write(username);
 		}else {
 			response.getWriter().write(REQUEST_FAILURE);
 		}		
@@ -106,6 +107,18 @@ public class MainController {
 
 		User user = loginService.initUser(username);
 		return user;
+	}
+	
+
+	
+	@RequestMapping(value = "/getUserNameOnPageLoad")
+	public void getUserNameOnPageLoad(HttpServletResponse response, HttpServletRequest request) throws IOException {
+		//VALIDATE SESSION;
+
+		User user = (User)request.getSession().getAttribute("User");
+		if(user != null){
+			response.getWriter().write(user.getUserName());
+		}
 	}
 	
 	
@@ -203,16 +216,21 @@ public class MainController {
 	
 	// Handling Profile Image upload request
 	   @PostMapping(value = "/ProfileImageUpload")
-	   public ResponseEntity<Object> imageUpload(@RequestParam("fileUp") MultipartFile file, HttpServletRequest request)
+	   public void imageUpload(@RequestParam("fileUp") MultipartFile file, HttpServletRequest request, HttpServletResponse response)
 	         throws IOException {
+<<<<<<< HEAD
 		   
+=======
+>>>>>>> 777a264672c947b9fe695c17be6afb3f0582b267
 		   User user = (User)request.getSession().getAttribute("User");
 			if(user==null){
-				return null;
+				System.out.println("Kicked out of Session from Image Upload");
+				return;
 			}
 			
 			changeProfileInfoService.changeUserProfileImage(file, user.getUserName());
-			return new ResponseEntity<Object>(REQUEST_SUCCESS,HttpStatus.OK);
+			
+			response.getWriter().write(REQUEST_SUCCESS);
 	   }
 	
 	
@@ -222,7 +240,7 @@ public class MainController {
 		User user = (User)request.getSession().getAttribute("User");
 		
 		if(user==null){
-			System.out.println("Kicked out of Session");
+			System.out.println("Kicked out of Session from Image Download");
 			return;
 		}
 		
@@ -300,7 +318,7 @@ public class MainController {
 		@PostMapping(value = "/SongFileUpload")
 	   public void songUpload(MultipartHttpServletRequest request, HttpServletResponse response)
 	         throws IOException {
-		   System.out.println("lalaalala");
+
 		   User user = (User)request.getSession().getAttribute("User");
 			if(user==null){
 				return;

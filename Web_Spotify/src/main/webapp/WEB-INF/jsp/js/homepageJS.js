@@ -1,6 +1,8 @@
 var myPlaylist;
 
 $( document ).ready(function() {
+		getUserName();
+		
 		$("#profile-image-chooser").change(function(event) {
 			uploadProfileImage();
 		});
@@ -19,8 +21,23 @@ $( document ).ready(function() {
 	});
 
 
+function getUserName(){
+	$.ajax({
+	    url: "getUserNameOnPageLoad.html",
+	    type: "GET",
+	    success: function(response) {
+	    	$("#username").html(response);
+	    }
+	});
+}
+
+
 function uploadProfileImage(){
-	var formData = new FormData($("#uploadProfileImageForm")[0]);
+	//var formData = new FormData($("#uploadProfileImageForm")[0]);
+	
+	var formData = new FormData();
+	
+	formData.append($('#profile-image-chooser')[0].name,$('#profile-image-chooser')[0].files[0]);
 	
 	$.ajax({
 	    url: "ProfileImageUpload.html",
@@ -33,6 +50,7 @@ function uploadProfileImage(){
 	        alert("success");
 	        d = new Date();
 	        $(".profile-image-home").attr("src", "Profile-Image.html"+"?"+d.getTime());
+	        alert("haha");
 	    },
 	    error: function() {
 	        alert("unable to create the record");
