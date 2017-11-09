@@ -65,6 +65,9 @@ public class MainController {
 	public static final String REQUEST_SUCCESS = "success";
 	public static final String REQUEST_FAILURE = "failure";
 	
+	
+	public static final String FILE_NOT_FOUND_MESSAGE = "Sorry. The file you are looking for does not exist";
+	
 	@Autowired
 	private LoginService loginService;
 	
@@ -80,22 +83,22 @@ public class MainController {
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
 		
-	@RequestMapping(value = "/testing", method = RequestMethod.POST)
-	public void hello(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public void login(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		User tempUser = new User();
+		tempUser.setUserName(username);
+		tempUser.setPassword(password);
 		
-		User user = this.initNewUser(username);
-		
-		request.getSession().setAttribute("User", user);
-		if(loginService.loginUser(user)) {
-			String greetings = "true";
-			response.setContentType("text/plain");
-			response.getWriter().write(greetings);
+		if(loginService.loginUser(tempUser)) {
+			
+			//If login success, return basic user info to user. and add user to session
+			User user = this.initNewUser(username);
+			request.getSession().setAttribute("User", user);
+			response.getWriter().write(REQUEST_SUCCESS);
 		}else {
-			String greetings = "false";
-			response.setContentType("text/plain");
-			response.getWriter().write(greetings);
+			response.getWriter().write(REQUEST_FAILURE);
 		}		
 	}
 	
@@ -111,7 +114,6 @@ public class MainController {
 		//VALIDATE SESSION;
 		User user = (User)request.getSession().getAttribute("User");
 		if(user != null){
-			System.out.println(user.getUserName());
 			return "Homepage";
 		}else{
 			return "../../index";
@@ -199,7 +201,7 @@ public class MainController {
 	
 
 	
-	// Handling file upload request
+	// Handling Profile Image upload request
 	   @PostMapping(value = "/ProfileImageUpload")
 	   public ResponseEntity<Object> imageUpload(@RequestParam("fileUp") MultipartFile file, HttpServletRequest request)
 	         throws IOException {
@@ -209,26 +211,8 @@ public class MainController {
 				return null;
 			}
 			
-			String profileFolderName = user.getUserName();
-			System.out.println(profileFolderName);
-
-			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-			File fileToWriteTo = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName).getPath(),PROFILE_IMAGE_NAME);
-			
-			
-			BufferedOutputStream outputStream = new BufferedOutputStream(
-		               new FileOutputStream(fileToWriteTo));
-			
-		         outputStream.write(file.getBytes());
-		         outputStream.flush();
-		         outputStream.close();
-		         
-			System.out.println(file.getSize());
-
-			System.out.println(file.getBytes());
-			
-	      
-	      return new ResponseEntity<Object>("File Uploaded Successfully.",HttpStatus.OK);
+			changeProfileInfoService.changeUserProfileImage(file, user.getUserName());
+			return new ResponseEntity<Object>(REQUEST_SUCCESS,HttpStatus.OK);
 	   }
 	
 	
@@ -280,10 +264,6 @@ public class MainController {
         
 
         InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-        //byte[] imageBytes = new byte[(int)file.length()];
-        //inputStream.read(imageBytes, 0, imageBytes.length);
-        //inputStream.close();
-        //String imageStr = Base64.getEncoder().encodeToString(imageBytes);
  
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
@@ -456,10 +436,7 @@ public class MainController {
         //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
         response.setContentLength((int)file.length());
         
-
         InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-
- 
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
         
@@ -473,12 +450,21 @@ public class MainController {
 			throws JSONException, IOException {
 		
 		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			System.out.println("Kicked out of Session");
+			return;
+		}
 		
-		response.setContentType("text/plain");
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(user);
 	    response.getWriter().write(jsonString);
 	}
+	
+	
+	
+	/*
+	 * Called when user changes account info such as email and location.
+	 * */
 	
 	@RequestMapping(value = "/changeUserProfileInfo", method = RequestMethod.POST)
 	public void changeUserProfileInfo(HttpServletResponse response, HttpServletRequest request)
@@ -491,11 +477,8 @@ public class MainController {
 			return;
 		}
 		
-		System.out.println("hello");
-		
 		String email = request.getParameter("email");
 		String location = request.getParameter("location");
-		System.out.println(email+","+location);
 		
 		boolean changeSuccess = changeProfileInfoService.changeUserProfile(location, email, user.getUserName());
 		if(changeSuccess){

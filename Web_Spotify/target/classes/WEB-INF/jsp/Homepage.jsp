@@ -39,12 +39,12 @@
                 <div id=userInfoWrapper>
                     <div id="userInfoInnerWrapper">
                     	<div id=profilePic>
-    						<img width="60" height="60" class ="profile-image-home" src="Profile-Image.html"></img>
+    						<a onclick="editPopUp()"><img width="60" height="60" class ="profile-image-home" src="Profile-Image.html"></img></a>
 						</div>
                         <div id=userInfo>
                             <div id=username>Jay Bird</div>
                             <div id=usertype>Premium User</div>
-                           	<div id=useredit><a onclick="editPopUp()">Profile</a></div>
+                           	<div id=useredit>Profile</div>
                         </div>
                     </div>
                 </div>
@@ -308,7 +308,7 @@
 	
 	
 	
-	<div class="modal fade" id="editUserInfoPopUp">
+<div class="modal fade" id="editUserInfoPopUp">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

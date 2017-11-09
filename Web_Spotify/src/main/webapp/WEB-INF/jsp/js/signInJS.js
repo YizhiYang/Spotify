@@ -13,11 +13,11 @@ $( document ).ready(function() {
 			
 		$.ajax({
 			type : "POST",
-			url : "testing.html",
+			url : "login.html",
 			data : data2,
 			success : function(data) {
 				console.log("SUCCESS: ", data);
-				if(data === "false"){
+				if(data === "failure"){
 					displayErrorMessage();
 				}else{
 					window.location.href="goToHome.html";
