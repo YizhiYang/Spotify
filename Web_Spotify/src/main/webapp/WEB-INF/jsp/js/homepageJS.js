@@ -37,16 +37,35 @@ function uploadProfileImage(){
 
 
 function editPopUp(){
-	
 
 	$.ajax({
 		type : "GET",
 		url : "getUserProfile.html",
-		success : function(data) {
-			console.log(data);
+		success : function(jsonData) {
+			console.log(jsonData);
+			var jsonObj = jQuery.parseJSON(jsonData);
+			
+			$('#userinfo-username-input').val(jsonObj.userName);
+			$('#userinfo-email-input').val(jsonObj.email);
+			$('#userinfo-location-input').val(jsonObj.location);
 		
 			$("#editPopUp").modal('show');
 		}
 	});	
+}
+
+function updateUserInfo(){
+	var newUserInfoData = $('#update-user-info-form').serialize();
+	
+	$.ajax({
+		type : "POST",
+		url : "changeUserProfileInfo.html",
+		data : newUserInfoData,
+		success : function(data) {
+			console.log(data);
+			$('#uploadSongPopUp').modal('hide');
+		}
+	});
+
 }
 

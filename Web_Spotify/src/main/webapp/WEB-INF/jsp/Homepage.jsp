@@ -239,39 +239,6 @@
         </div>
     </div>
     
-<div class="modal fade" id="editPopUp">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div height="60" width="60" style="position:relative;">
-        <img width="60" height="60" class ="profile-image-home" src="Profile-Image.html"></img>
-    						<form id="uploadProfileImageForm" enctype="multipart/form-data">
-    							<input type="file" id="profile-image-chooser" name="fileUp" accept=".png,.jpg,.jpeg"
-    							style="position: absolute; top:0; width:60px;height:60px;opacity: 0;">
-    						</form>
-    						</div>
-
-      </div>
-      <div class="modal-body">
-		<div class="input-group">
-  			<span class="input-group-addon" id="basic-addon3">Username</span>
-  			<input type="text" class="form-control" id="basic-url" name ="email" aria-describedby="basic-addon3" readonly>
-  		</div>
-  		<br>
-  		<div class="input-group">
-  			<span class="input-group-addon" id="basic-addon3">Email</span>
-  			<input type="text" class="form-control" id="basic-url" name = "location" aria-describedby="basic-addon3" >
-  		</div>
-	
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-    
     
     
     
@@ -338,6 +305,41 @@
 	</div>
     
 	</div>
+	
+	
+	
+	<div class="modal fade" id="editPopUp">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div height="60" width="60" style="position:relative;">
+        <img width="60" height="60" class ="profile-image-home" src="Profile-Image.html"></img>
+    						<form id="uploadProfileImageForm" enctype="multipart/form-data">
+    							<input type="file" id="profile-image-chooser" name="fileUp" accept=".png,.jpg,.jpeg"
+    							style="position: absolute; top:0; width:60px;height:60px;opacity: 0;">
+    						</form>
+    						</div>
+
+      </div>
+      <div class="modal-body">
+		<form id="update-user-info-form" method="post">
+			<div class="form-group">
+  				<label class="col-form-label" for="userinfo-username-input">UserName</label>
+  				<input type="text" class="form-control" id="userinfo-username-input" name ="username" aria-describedby="basic-addon3" readonly>
+  				<label class="col-form-label" for="userinfo-email-input">Email</label>
+  				<input type="text" class="form-control" id="userinfo-email-input" name ="email" aria-describedby="basic-addon3">
+  				<label class="col-form-label" for="userinfo-location-input">Location</label>
+  				<input type="text" class="form-control" id="userinfo-location-input" name = "location" aria-describedby="basic-addon3" >
+			<div class="form-group">
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
