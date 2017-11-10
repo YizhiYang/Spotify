@@ -218,10 +218,7 @@ public class MainController {
 	   @PostMapping(value = "/ProfileImageUpload")
 	   public void imageUpload(@RequestParam("fileUp") MultipartFile file, HttpServletRequest request, HttpServletResponse response)
 	         throws IOException {
-<<<<<<< HEAD
-		   
-=======
->>>>>>> 777a264672c947b9fe695c17be6afb3f0582b267
+
 		   User user = (User)request.getSession().getAttribute("User");
 			if(user==null){
 				System.out.println("Kicked out of Session from Image Upload");
