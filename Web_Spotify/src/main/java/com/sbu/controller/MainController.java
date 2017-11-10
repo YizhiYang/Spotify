@@ -32,6 +32,7 @@ import com.google.gson.Gson;
 import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.service.ChangeProfileInfoService;
+import com.sbu.service.GenericFileManageService;
 import com.sbu.service.LoginService;
 import com.sbu.service.SignupService;
 import com.sbu.service.SongUploadDownloadService;
@@ -79,6 +80,8 @@ public class MainController {
 	private ChangeProfileInfoService changeProfileInfoService;
 	@Autowired
 	private ValidationService validationService;
+	@Autowired
+	private GenericFileManageService fileManager;
 	
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
@@ -358,10 +361,10 @@ public class MainController {
 			}
 			
 			String albumName = request.getParameter("albumName");
+			String id = request.getParameter("id");
 			MultipartFile pic = request.getFile("pic");
 			
-			
-
+			fileManager.createPicInProfileImages(pic, id);
 		}
 		
 		

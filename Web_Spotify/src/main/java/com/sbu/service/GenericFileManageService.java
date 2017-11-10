@@ -1,5 +1,10 @@
 package com.sbu.service;
 
-public interface GenericFileManageService {
+import java.io.IOException;
 
+import org.springframework.web.multipart.MultipartFile;
+
+public interface GenericFileManageService {
+	
+	public void createPicInProfileImages(MultipartFile file, String id) throws IOException;
 }
