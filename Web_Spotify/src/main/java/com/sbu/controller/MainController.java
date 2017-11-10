@@ -35,6 +35,7 @@ import com.sbu.service.ChangeProfileInfoService;
 import com.sbu.service.LoginService;
 import com.sbu.service.SignupService;
 import com.sbu.service.SongUploadDownloadService;
+import com.sbu.service.ValidationService;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -65,21 +66,18 @@ public class MainController {
 	public static final String SONG_FILE_PATH = "Songs/";
 	public static final String REQUEST_SUCCESS = "success";
 	public static final String REQUEST_FAILURE = "failure";
-	
-	
 	public static final String FILE_NOT_FOUND_MESSAGE = "Sorry. The file you are looking for does not exist";
 	
 	@Autowired
 	private LoginService loginService;
-	
 	@Autowired
 	private SignupService signupService;
-	
 	@Autowired
 	private SongUploadDownloadService songUploadService;
-	
 	@Autowired
 	private ChangeProfileInfoService changeProfileInfoService;
+	@Autowired
+	private ValidationService validationService;
 	
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
@@ -313,7 +311,7 @@ public class MainController {
 	
 	
 		@PostMapping(value = "/SongFileUpload")
-	   public void songUpload(MultipartHttpServletRequest request, HttpServletResponse response)
+	    public void songUpload(MultipartHttpServletRequest request, HttpServletResponse response)
 	         throws IOException {
 
 		   User user = (User)request.getSession().getAttribute("User");
@@ -351,38 +349,24 @@ public class MainController {
 				response.setContentType("text/plain");
 			    response.getWriter().write(REQUEST_FAILURE);
 			}
-			
-			
-			/*
-			Iterator<String> itr =  request.getFileNames();
-			 
-		     MultipartFile mpf = request.getFile(itr.next());
-		     System.out.println(mpf.getOriginalFilename() +" uploaded!");
-		     */
-			
-			//System.out.println(file.getOriginalFilename());
-			/*
-			String profileFolderName = user.getUserName();
-			System.out.println(profileFolderName);
+		}
+		
+		@PostMapping(value = "/UploadAlbum")
+		public void uploadAlbum(MultipartHttpServletRequest request, HttpServletResponse response){
 
-			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-			File fileToWriteTo = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName).getPath(),PROFILE_IMAGE_NAME);
+			User user = (User)request.getSession().getAttribute("User");
+			if(user==null){
+				return;
+			}
+			
+			String albumName = request.getParameter("albumName");
+			MultipartFile pic = request.getFile("pic");
 			
 			
-			BufferedOutputStream outputStream = new BufferedOutputStream(
-		               new FileOutputStream(fileToWriteTo));
-			
-		         outputStream.write(file.getBytes());
-		         outputStream.flush();
-		         outputStream.close();
-		         
-			System.out.println(file.getSize());
 
-			System.out.println(file.getBytes());
-			*/
-	      
-	      //return new ResponseEntity<Object>("File Uploaded Successfully.",HttpStatus.OK);
-	   }
+		}
+		
+		
 	
 	
 	
