@@ -6,11 +6,19 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sbu.model.User;
+import com.sbu.repository.GenericValidationRepo;
+
 @Service("fileManager")
 public class GenericFileManageServiceImpl implements GenericFileManageService {
+	
+	@Autowired
+	private GenericValidationRepo genericValidationRepo;
+	
 	
 	public static final String ALBUMS_PATH = "/AlbumImages";
 	
@@ -25,5 +33,11 @@ public class GenericFileManageServiceImpl implements GenericFileManageService {
 	         outputStream.flush();
 	         outputStream.close();
 		
+	}
+	
+	
+	public User checkArtistExist(String id){
+		
+		return (User)genericValidationRepo.checkArtistExist(id).get(0);
 	}
 }

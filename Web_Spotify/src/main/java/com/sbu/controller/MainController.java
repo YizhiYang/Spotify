@@ -29,6 +29,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.sbu.model.Album;
+import com.sbu.model.ArtistUser;
 import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.service.ChangeProfileInfoService;
@@ -36,7 +38,6 @@ import com.sbu.service.GenericFileManageService;
 import com.sbu.service.LoginService;
 import com.sbu.service.SignupService;
 import com.sbu.service.SongUploadDownloadService;
-import com.sbu.service.ValidationService;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -78,8 +79,7 @@ public class MainController {
 	private SongUploadDownloadService songUploadService;
 	@Autowired
 	private ChangeProfileInfoService changeProfileInfoService;
-	@Autowired
-	private ValidationService validationService;
+
 	@Autowired
 	private GenericFileManageService fileManager;
 	
@@ -360,12 +360,26 @@ public class MainController {
 				return;
 			}
 			
+			
+			
 			String albumName = request.getParameter("albumName");
 			String id = request.getParameter("artistID");
 			MultipartFile pic = request.getFile("fileUp");
 			
-			fileManager.createPicInProfileImages(pic, id);
+			User returnedUser = fileManager.checkArtistExist(id);
 			
+			if(returnedUser == null){
+				response.getWriter().write(REQUEST_FAILURE);
+			}
+			else{
+				ArtistUser artistUser = (ArtistUser) returnedUser;
+				Album album = new Album();
+				album.setAlbum_name(albumName);
+				album.getArtists().add(artistUser);
+				
+			}
+			
+			fileManager.createPicInProfileImages(pic, id);
 			response.getWriter().write(REQUEST_SUCCESS);
 		}
 		
