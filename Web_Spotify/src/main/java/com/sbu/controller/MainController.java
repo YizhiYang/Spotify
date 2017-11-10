@@ -353,7 +353,7 @@ public class MainController {
 		}
 		
 		@PostMapping(value = "/UploadAlbum")
-		public void uploadAlbum(MultipartHttpServletRequest request, HttpServletResponse response){
+		public void uploadAlbum(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException{
 
 			User user = (User)request.getSession().getAttribute("User");
 			if(user==null){
@@ -361,10 +361,12 @@ public class MainController {
 			}
 			
 			String albumName = request.getParameter("albumName");
-			String id = request.getParameter("id");
-			MultipartFile pic = request.getFile("pic");
+			String id = request.getParameter("artistID");
+			MultipartFile pic = request.getFile("fileUp");
 			
 			fileManager.createPicInProfileImages(pic, id);
+			
+			response.getWriter().write(REQUEST_SUCCESS);
 		}
 		
 		
