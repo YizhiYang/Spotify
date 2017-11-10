@@ -3,6 +3,7 @@ package com.sbu.model;
 import java.net.URL;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,19 +21,29 @@ public class Song {
 	
 	@Id
 	@GeneratedValue
+	@Column(name="SONG_ID")
 	private Long songId;
 	
+	@Column(name="SONG_NAME")
 	private String song_name;
 	
+	@Column(name="DURATION")
 	private String duration;
 	
+	/* Using ID for storing file, filename is obsolete.
+	@Column(name="FILE_NAME")
 	private String fileName;
+	*/
 	
-	private double rate;
+	@Column(name="RATING")
+	private double rating;
 	
+	@Column(name="LISTEN_COUNT")
 	private long listenCount;
 	
-	
+	@ManyToOne
+    @JoinColumn(name="ALBUM_ID", nullable=false)
+	private Album album;
 	
 	@ManyToMany
 	@JoinTable(name="JoinRecentlyPlayedListAndSong", joinColumns={@JoinColumn(name="songId")}, inverseJoinColumns={@JoinColumn(name="playlistId")})
@@ -69,28 +80,28 @@ public class Song {
 		this.duration = duration;
 	}
 
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public double getRate() {
-		return rate;
-	}
-
-	public void setRate(double rate) {
-		this.rate = rate;
-	}
-
 	public long getListenCount() {
 		return listenCount;
 	}
 
 	public void setListenCount(long listenCount) {
 		this.listenCount = listenCount;
+	}
+
+	public double getRating() {
+		return rating;
+	}
+
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+
+	public Album getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(Album album) {
+		this.album = album;
 	}
 	
 	

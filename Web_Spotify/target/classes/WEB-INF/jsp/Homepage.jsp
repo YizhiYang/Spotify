@@ -66,11 +66,16 @@
                         <li></li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Liked from Radio</div></li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem' id="My-PlayList-Button">My Play List</div></li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem' data-toggle="modal" data-target="#uploadSongPopUp">Upload Song</button></div></li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' data-toggle="modal" data-target="#uploadSongPopUp">Upload Song</div>
+                        </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' data-toggle="modal" data-target="#createAlbumPopUp">Create Album</div>
+                        </li>
                     </ul>
                 </div>
                 
-                <!-- Pop up for uploading Song -->
+<!-- Pop up for uploading Song -->
 <div class="modal fade" id="uploadSongPopUp">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -103,6 +108,43 @@
     </div>
   </div>
 </div>
+
+<!-- Pop up for creating Album -->
+<div class="modal fade" id="createAlbumPopUp">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="create-album-form" method="post" enctype="multipart/form-data">
+  			<div class="form-group">
+  				<label class="col-form-label" for="createAlbumAlbumNameInput">Album Name</label>
+    			<input type="text" class="form-control" id="createAlbumAlbumNameInput" name="albumName" placeholder="Album Name">
+    			<label class="col-form-label" for="createAlbumArtistIDInput">Artist ID</label>
+    			<input type="text" class="form-control" id="createAlbumArtistIDInput" name="artistID" placeholder="Artist ID">
+    			<label for="createAlbumImageFile">Album Image File</label>
+    			<input type="file" class="form-control-file" name="fileUp" id="createAlbumImageFile" accept=".jpg">
+  			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="submitCreateAlbumButton">Create Album</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
 
             
             </div>
@@ -306,8 +348,7 @@
     
 	</div>
 	
-	
-	
+
 <div class="modal fade" id="editUserInfoPopUp">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -340,6 +381,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 </body>
 </html>

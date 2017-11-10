@@ -64,6 +64,7 @@ public class MainController {
 	
 	//SONG FILE PATH
 	public static final String SONG_FILE_PATH = "Songs/";
+	public static final String SONG_EXTENSION = ".mp3";
 	public static final String REQUEST_SUCCESS = "success";
 	public static final String REQUEST_FAILURE = "failure";
 	public static final String FILE_NOT_FOUND_MESSAGE = "Sorry. The file you are looking for does not exist";
@@ -298,9 +299,6 @@ public class MainController {
 		}
 		
 		List<Song> list = songUploadService.getALLSongs();
-		for(int i=0; i<list.size();i++){
-			System.out.println(list.get(i).getFileName());
-		}
 
 		response.setContentType("text/plain");
 		Gson gson = new Gson();
@@ -326,7 +324,7 @@ public class MainController {
 			Song song = new Song();
 			song.setSong_name(songName);
 			song.setDuration(duration);
-			song.setFileName(file.getOriginalFilename());
+
 			System.out.println(song.getSongId());
 
 			if(songUploadService.addSongToDatabase(song)){
@@ -334,7 +332,7 @@ public class MainController {
 				
 				//NOW SAVE THE MUSIC FILE
 				ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-				File newFile = new File(classloader.getResource(SONG_FILE_PATH).getPath(),song.getFileName());		
+				File newFile = new File(classloader.getResource(SONG_FILE_PATH).getPath(),song.getSongId()+SONG_EXTENSION);		
 				BufferedOutputStream outputStream = new BufferedOutputStream(
 			               new FileOutputStream(newFile));
 				
@@ -388,7 +386,8 @@ public class MainController {
         
         String songFileName = null;
         
-        songFileName = songUploadService.findSongFileBasedOnID(Long.valueOf(id));
+        //songFileName = songUploadService.findSongFileBasedOnID(Long.valueOf(id));
+        songFileName = id + SONG_EXTENSION;
         if(songFileName == null){
         	return;
         }

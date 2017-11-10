@@ -18,6 +18,8 @@ import javax.persistence.Table;
 @Table(name="artist")
 public class ArtistUser extends User{
 
+	
+	/* Song doesn't need artist because a song must belong to an album and an album must belong to an artist. That's enough.
 	@ManyToMany
     @JoinTable(
         name = "Artist_Songs", 
@@ -25,25 +27,16 @@ public class ArtistUser extends User{
         inverseJoinColumns = { @JoinColumn(name = "songId") }
     )
 	private List<Song> songs;
+	*/
 	
 	
 	@ManyToMany
     @JoinTable(
         name = "Artist_Albums", 
         		joinColumns = { @JoinColumn(name = "ARTIST_ID", referencedColumnName = "USER_ID") }, 
-        inverseJoinColumns = { @JoinColumn(name = "albumId") }
+        inverseJoinColumns = { @JoinColumn(name = "ALBUM_ID") }
     )
 	private List<Album> album;
-	
-	
-	public List<Song> getSongs() {
-		return songs;
-	}
-
-
-	public void setSongs(List<Song> songs) {
-		this.songs = songs;
-	}
 
 
 	public List<Album> getAlbum() {

@@ -36,7 +36,7 @@ public class Album {
 	private double totalDuration;
 
 	
-	@OneToMany
+	@OneToMany(mappedBy="album")
 	private List<Song> songs;
 	
 	@ManyToMany(mappedBy="album")
