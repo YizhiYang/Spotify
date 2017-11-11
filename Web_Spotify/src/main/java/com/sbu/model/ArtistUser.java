@@ -1,11 +1,14 @@
 package com.sbu.model;
 
+import java.io.Serializable;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,7 +21,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="artist")
-public class ArtistUser{
+public class ArtistUser implements Serializable{
 
 	
 	/* Song doesn't need artist because a song must belong to an album and an album must belong to an artist. That's enough.
@@ -41,13 +44,16 @@ public class ArtistUser{
 	private User user;
 	
 	
-	@ManyToMany
+	@ManyToMany(cascade = { 
+	        CascadeType.PERSIST, 
+	        CascadeType.MERGE
+	    })
     @JoinTable(
         name = "Artist_Albums", 
-        		joinColumns = { @JoinColumn(name = "ARTIST_ID", referencedColumnName = "USER_ID") }, 
-        inverseJoinColumns = { @JoinColumn(name = "ALBUM_ID") }
+        		joinColumns = { @JoinColumn(name = "ARTIST_ID", nullable = false, updatable = false) }, 
+        inverseJoinColumns = { @JoinColumn(name = "ALBUM_ID", nullable = false, updatable = false) }
     )
-	private List<Album> album;
+	private List<Album> album = new ArrayList<Album>();
 
 	
 	

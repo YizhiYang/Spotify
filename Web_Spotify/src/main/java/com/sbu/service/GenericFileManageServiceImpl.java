@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.User;
 import com.sbu.repository.GenericValidationRepo;
@@ -40,5 +41,17 @@ public class GenericFileManageServiceImpl implements GenericFileManageService {
 	public ArtistUser checkArtistExist(String id){
 		
 		return (ArtistUser)genericValidationRepo.checkArtistExist(id).get(0);
+	}
+
+
+	public boolean saveAlbum(Album album) {
+		// TODO Auto-generated method stub
+		return genericValidationRepo.saveAlbumToDB(album);
+	}
+
+
+	public boolean saveArtist(ArtistUser artist) {
+		// TODO Auto-generated method stub
+		return genericValidationRepo.saveAristToDB(artist);
 	}
 }

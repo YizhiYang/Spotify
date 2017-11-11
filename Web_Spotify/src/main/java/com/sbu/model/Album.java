@@ -39,8 +39,8 @@ public class Album {
 	@OneToMany(mappedBy="album")
 	private List<Song> songs;
 	
-	@ManyToMany(mappedBy="album")
-	private List<ArtistUser> artistUsers;
+	@ManyToMany(mappedBy="album" )
+	private List<ArtistUser> artistUsers = new ArrayList<ArtistUser>();
 	
 	
 	public double getTotalDuration() {

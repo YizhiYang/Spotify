@@ -375,12 +375,15 @@ public class MainController {
 				
 				Album album = new Album();
 				album.setAlbum_name(albumName);
+				fileManager.saveAlbum(album);
 				
 				returnedArtist.getAlbum().add(album);
+				fileManager.saveArtist(returnedArtist);
 				
+				fileManager.createPicInProfileImages(pic, album.getAlbumId().toString());
 			}
 			
-			fileManager.createPicInProfileImages(pic, id);
+			
 			response.getWriter().write(REQUEST_SUCCESS);
 		}
 		
