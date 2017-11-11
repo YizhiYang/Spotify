@@ -372,10 +372,10 @@ public class MainController {
 				response.getWriter().write(REQUEST_FAILURE);
 			}
 			else{
-				ArtistUser artistUser = (ArtistUser) returnedUser;
+				
 				Album album = new Album();
 				album.setAlbum_name(albumName);
-				album.getArtists().add(artistUser);
+				
 				
 			}
 			

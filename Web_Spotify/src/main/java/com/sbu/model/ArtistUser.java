@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,11 +13,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="artist")
-public class ArtistUser extends User{
+public class ArtistUser{
 
 	
 	/* Song doesn't need artist because a song must belong to an album and an album must belong to an artist. That's enough.
@@ -29,6 +31,15 @@ public class ArtistUser extends User{
 	private List<Song> songs;
 	*/
 	
+	@Id
+	@GeneratedValue
+	@Column(name="ARTIST_ID")
+	private long artistID;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID")
+	private User user;
+	
 	
 	@ManyToMany
     @JoinTable(
@@ -38,7 +49,19 @@ public class ArtistUser extends User{
     )
 	private List<Album> album;
 
+	
+	
 
+
+	@ManyToMany
+    @JoinTable(
+        name = "Followers", 
+        		joinColumns = { @JoinColumn(name = "ARTIST_ID", referencedColumnName = "USER_ID") }, 
+        inverseJoinColumns = { @JoinColumn(name = "USER_ID") }
+    )
+	private List<User> followers;
+
+	
 	public List<Album> getAlbum() {
 		return album;
 	}
@@ -59,14 +82,22 @@ public class ArtistUser extends User{
 	}
 
 
-	@ManyToMany
-    @JoinTable(
-        name = "Followers", 
-        		joinColumns = { @JoinColumn(name = "ARTIST_ID", referencedColumnName = "USER_ID") }, 
-        inverseJoinColumns = { @JoinColumn(name = "USER_ID") }
-    )
-	private List<User> followers;
+	public long getArtistID() {
+		return artistID;
+	}
 
-	
-	
+
+	public void setArtistID(long artistID) {
+		this.artistID = artistID;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }
