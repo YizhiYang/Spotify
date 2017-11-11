@@ -366,9 +366,9 @@ public class MainController {
 			String id = request.getParameter("artistID");
 			MultipartFile pic = request.getFile("fileUp");
 			
-			User returnedUser = fileManager.checkArtistExist(id);
+			ArtistUser returnedArtist = fileManager.checkArtistExist(id);
 			
-			if(returnedUser == null){
+			if(returnedArtist == null){
 				response.getWriter().write(REQUEST_FAILURE);
 			}
 			else{
@@ -376,6 +376,7 @@ public class MainController {
 				Album album = new Album();
 				album.setAlbum_name(albumName);
 				
+				returnedArtist.getAlbum().add(album);
 				
 			}
 			

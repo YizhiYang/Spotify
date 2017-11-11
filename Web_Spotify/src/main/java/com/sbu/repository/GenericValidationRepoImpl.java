@@ -18,13 +18,12 @@ public class GenericValidationRepoImpl implements GenericValidationRepo {
 
 	public List checkArtistExist(String id) {
 		
-		long userId = Long.valueOf(id);
+		long artistId = Long.valueOf(id);
 		
-		List result = em.createQuery("SELECT e FROM User e WHERE e.id= :userId")
-		.setParameter("userId", userId).getResultList();
+		List result = em.createQuery("SELECT e FROM ArtistUser e WHERE e.artistID= :id")
+		.setParameter("id", artistId).getResultList();
 		
 		System.out.println(result.isEmpty());
-
 		return result;
 	}
 	
