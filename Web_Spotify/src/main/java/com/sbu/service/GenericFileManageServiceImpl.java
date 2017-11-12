@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sbu.controller.MainController;
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.User;
@@ -22,12 +23,11 @@ public class GenericFileManageServiceImpl implements GenericFileManageService {
 	@Autowired
 	private GenericValidationRepo genericValidationRepo;
 	
-	public static final String ALBUMS_PATH = "/AlbumImages";
 	
 	public void createPicInProfileImages(MultipartFile file, String id) throws IOException{
 			
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-		File newFile = new File(classloader.getResource(ALBUMS_PATH).getPath(), id + ".jpg");		
+		File newFile = new File(classloader.getResource(MainController.ALBUMS_FILE_PATH).getPath(), id + ".jpg");		
 		BufferedOutputStream outputStream = new BufferedOutputStream(
 	               new FileOutputStream(newFile));
 		

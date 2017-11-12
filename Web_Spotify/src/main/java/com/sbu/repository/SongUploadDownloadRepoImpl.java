@@ -19,14 +19,12 @@ public class SongUploadDownloadRepoImpl implements SongUploadDownloadRepo {
 
 
 	public boolean addSong(Song song) {
-		// TODO Auto-generated method stub
 		em.persist(song);
 		return true;
 	}
 
 
 	public String findSongFileNameBasedOnIDInDatabase(long id) {
-		// TODO Auto-generated method stub
 		List results = em.createQuery("SELECT s.fileName FROM Song s WHERE s.songId = :id").setParameter("id", id).getResultList();
 		if(results.isEmpty()){
 			return null;
@@ -37,7 +35,6 @@ public class SongUploadDownloadRepoImpl implements SongUploadDownloadRepo {
 
 
 	public List<Song> getAllSongs() {
-		// TODO Auto-generated method stub
 		List<Song> results = em.createQuery("FROM Song").getResultList();
 		return results;
 	}

@@ -27,7 +27,7 @@ public class Album {
 	private Long albumId;
 	
 	@Column(name="ALBUM_NAME")
-	private String album_name;
+	private String albumName;
 	
 	@Column(name="ALBUM_TOTALCOUNT")
 	private int numOfSongs;
@@ -67,12 +67,12 @@ public class Album {
 		this.albumId = albumId;
 	}
 
-	public String getAlbum_name() {
-		return album_name;
+	public String getAlbumName() {
+		return albumName;
 	}
 
-	public void setAlbum_name(String album_name) {
-		this.album_name = album_name;
+	public void setAlbum_name(String albumName) {
+		this.albumName = albumName;
 	}
 
 	public int getNumOfSongs() {
