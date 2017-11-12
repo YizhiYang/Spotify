@@ -11,5 +11,7 @@ public interface GenericValidationRepo {
 	
 	public boolean saveAlbumToDB(Album album);
 	
+	public List getUserByID(String id);
+	
 	public boolean saveAristToDB(ArtistUser artist);
 }

@@ -29,6 +29,7 @@
   <script type="application/javascript"><%@ include file="js/SongJS.js" %></script>
   <script type="application/javascript"><%@ include file="js/playListPrototypePage.js" %></script>
   <script type="application/javascript"><%@ include file="js/AlbumJS.js" %></script>
+  <script type="application/javascript"><%@ include file="js/ArtistJS.js" %></script>
 
 
     
@@ -72,6 +73,10 @@
                         </li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' data-toggle="modal" data-target="#createAlbumPopUp">Create Album</div>
+                        </li>
+                        </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' data-toggle="modal" data-target="#makeUserArtistPopUp">Make User Artist</div>
                         </li>
                     </ul>
                 </div>
@@ -141,7 +146,33 @@
 </div>
 
 
-
+<!-- Pop up for make user artist -->
+<div class="modal fade" id="makeUserArtistPopUp">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="make-user-artist-form" method="post">
+  			<div class="form-group">
+    			<label class="col-form-label" for="makeUserArtistUserIDInput">User ID to be added as Artist</label>
+    			<input type="text" class="form-control" id="makeUserArtistUserIDInput" name="userID" placeholder="User ID">
+    			<label class="col-form-label" for="makeUserArtistArtistNameInput">Artist Name</label>
+    			<input type="text" class="form-control" id="makeUserArtistArtistNameInput" name="artistName" placeholder="Artist Name">
+  			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="submitMakeUserArtistButton">Make User Artist</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

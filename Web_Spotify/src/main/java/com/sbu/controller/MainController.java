@@ -289,10 +289,6 @@ public class MainController {
 	
 	
 	
-	
-	
-	
-	
 	@RequestMapping(value="/getAllSongs", method = RequestMethod.GET)
 	public void getAllSongs(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
@@ -311,46 +307,45 @@ public class MainController {
 	}
 	
 	
-		@PostMapping(value = "/SongFileUpload")
-	    public void songUpload(MultipartHttpServletRequest request, HttpServletResponse response)
-	         throws IOException {
+	@PostMapping(value = "/SongFileUpload")
+	public void songUpload(MultipartHttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 
-		   User user = (User)request.getSession().getAttribute("User");
-			if(user==null){
-				return;
-			}
-			String songName = request.getParameter("songName");
-			String artistName = request.getParameter("artistName");
-			String albumName = request.getParameter("albumName");
-			String duration = request.getParameter("duration");
-			MultipartFile file = request.getFile("fileUp");
-			Song song = new Song();
-			song.setSong_name(songName);
-			song.setDuration(duration);
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		String songName = request.getParameter("songName");
+		String artistName = request.getParameter("artistName");
+		String albumName = request.getParameter("albumName");
+		String duration = request.getParameter("duration");
+		MultipartFile file = request.getFile("fileUp");
+		Song song = new Song();
+		song.setSong_name(songName);
+		song.setDuration(duration);
 
+		System.out.println(song.getSongId());
+
+		if(songUploadService.addSongToDatabase(song)){
 			System.out.println(song.getSongId());
-
-			if(songUploadService.addSongToDatabase(song)){
-				System.out.println(song.getSongId());
 				
-				//NOW SAVE THE MUSIC FILE
-				ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-				File newFile = new File(classloader.getResource(SONG_FILE_PATH).getPath(),song.getSongId()+SONG_EXTENSION);		
-				BufferedOutputStream outputStream = new BufferedOutputStream(
-			               new FileOutputStream(newFile));
-				
-			         outputStream.write(file.getBytes());
-			         outputStream.flush();
-			         outputStream.close();
+			//NOW SAVE THE MUSIC FILE
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+			File newFile = new File(classloader.getResource(SONG_FILE_PATH).getPath(),song.getSongId()+SONG_EXTENSION);		
+			BufferedOutputStream outputStream = new BufferedOutputStream(
+					new FileOutputStream(newFile));
+			outputStream.write(file.getBytes());
+			outputStream.flush();
+			outputStream.close();
 			         
 			    
-			    response.setContentType("text/plain");
-			    response.getWriter().write(REQUEST_SUCCESS);
-			}else{
-				response.setContentType("text/plain");
-			    response.getWriter().write(REQUEST_FAILURE);
-			}
+			response.setContentType("text/plain");
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.setContentType("text/plain");
+			response.getWriter().write(REQUEST_FAILURE);
 		}
+	}
 		
 		@PostMapping(value = "/UploadAlbum")
 		public void uploadAlbum(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -388,7 +383,22 @@ public class MainController {
 		}
 		
 		
-	
+	@PostMapping(value = "/MakeUserArist")
+	public void makeUserArtist(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String userID = request.getParameter("userID");
+		String artistName = request.getParameter("artistName");
+		
+		if(fileManager.makeNewArtist(userID, artistName)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
 	
 	
 	@RequestMapping(value="/requestSongFile/{id}", method = RequestMethod.GET)

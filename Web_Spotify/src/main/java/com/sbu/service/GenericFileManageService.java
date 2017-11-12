@@ -17,4 +17,6 @@ public interface GenericFileManageService {
 	public boolean saveAlbum(Album album);
 	
 	public boolean saveArtist(ArtistUser artist);
+	
+	public boolean makeNewArtist(String userID, String artistName);
 }

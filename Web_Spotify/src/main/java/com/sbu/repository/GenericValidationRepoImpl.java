@@ -23,19 +23,22 @@ public class GenericValidationRepoImpl implements GenericValidationRepo {
 		
 		long artistId = Long.valueOf(id);
 		
-		System.out.println("Artist ID is: " + artistId);
-		
-		List result = em.createQuery("SELECT e FROM ArtistUser e WHERE e.artistID = :id")
+		List result = em.createQuery("SELECT u FROM ArtistUser u WHERE u.artistID = :id")
 		.setParameter("id", artistId).getResultList();
-		
-		System.out.println("Size is:" + result.size());
 		return result;
 	}
 
 	public boolean saveAlbumToDB(Album album) {
-		// TODO Auto-generated method stub
 		em.persist(album);
 		return true;
+	}
+	
+	public List getUserByID(String id){
+		long userId = Long.valueOf(id);
+		
+		List result = em.createQuery("SELECT u FROM User u WHERE u.id = :id")
+		.setParameter("id", userId).getResultList();
+		return result;
 	}
 
 	public boolean saveAristToDB(ArtistUser artist) {

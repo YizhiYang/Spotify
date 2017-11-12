@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,6 @@ public class GenericFileManageServiceImpl implements GenericFileManageService {
 	
 	@Autowired
 	private GenericValidationRepo genericValidationRepo;
-	
 	
 	public static final String ALBUMS_PATH = "/AlbumImages";
 	
@@ -45,13 +45,26 @@ public class GenericFileManageServiceImpl implements GenericFileManageService {
 
 
 	public boolean saveAlbum(Album album) {
-		// TODO Auto-generated method stub
 		return genericValidationRepo.saveAlbumToDB(album);
 	}
 
 
 	public boolean saveArtist(ArtistUser artist) {
-		// TODO Auto-generated method stub
 		return genericValidationRepo.saveAristToDB(artist);
+	}
+
+
+	public boolean makeNewArtist(String userID, String artistName) {
+		List userResult = genericValidationRepo.getUserByID(userID);
+		if(userResult.isEmpty()){
+			return false;
+		}else{
+			ArtistUser artist = new ArtistUser();
+			artist.setUser((User)(userResult.get(0)));;
+			artist.setArtistName(artistName);
+			genericValidationRepo.saveAristToDB(artist);
+			return true;
+		}
+		
 	}
 }

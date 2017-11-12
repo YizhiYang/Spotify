@@ -43,6 +43,9 @@ public class ArtistUser implements Serializable{
     @JoinColumn(name = "USER_ID")
 	private User user;
 	
+	@Column(name="ARTIST_NAME")
+	private String ArtistName;
+	
 	
 	@ManyToMany(cascade = { 
 	        CascadeType.PERSIST, 
@@ -105,5 +108,15 @@ public class ArtistUser implements Serializable{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+
+	public String getArtistName() {
+		return ArtistName;
+	}
+
+
+	public void setArtistName(String artistName) {
+		ArtistName = artistName;
 	}
 }
