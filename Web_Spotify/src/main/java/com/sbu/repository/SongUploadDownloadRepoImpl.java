@@ -38,5 +38,4 @@ public class SongUploadDownloadRepoImpl implements SongUploadDownloadRepo {
 		List<Song> results = em.createQuery("FROM Song").getResultList();
 		return results;
 	}
-
 }

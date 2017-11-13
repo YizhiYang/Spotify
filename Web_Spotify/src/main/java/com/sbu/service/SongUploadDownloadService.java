@@ -12,4 +12,6 @@ public interface SongUploadDownloadService {
 	List<Song> getALLSongs();
 	String getAllSongsInJSON() throws JSONException;
 	
+	String convertSongsToJSON(List<Song> songs) throws JSONException;
+	
 }

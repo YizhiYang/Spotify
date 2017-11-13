@@ -35,7 +35,10 @@ public class SongUploadDownloadServiceImpl implements SongUploadDownloadService 
 
 	public String getAllSongsInJSON() throws JSONException {
 		List<Song> songs = getALLSongs();
+		return convertSongsToJSON(songs);	
+	}
 
+	public String convertSongsToJSON(List<Song> songs) throws JSONException {
 		JSONArray jsonArray = new JSONArray();
 		
 		for(int i =0; i<songs.size(); i++){
@@ -60,8 +63,5 @@ public class SongUploadDownloadServiceImpl implements SongUploadDownloadService 
 		
 		return jsonArray.toString();
 	}
-	
-	
-	
 
 }

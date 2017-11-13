@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import com.sbu.model.Album;
+import com.sbu.model.Song;
 
 public interface AlbumService {
 	List<Album> getAllAlbums();

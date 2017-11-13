@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
+import com.sbu.model.Song;
 import com.sbu.repository.AlbumRepo;
 
 @Service("albumService")

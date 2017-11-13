@@ -32,7 +32,7 @@ function addAllAlbumsToCenterContent(jsonData){
     var contentToBeAdded = '<div class=centerSideContentWrapper>';
     for(i = 0; i<jsonArray.length; i++){
     	var album = jsonArray[i];
-    	contentToBeAdded += '<div class="AlbumPageContent">\
+    	contentToBeAdded += '<div class="AlbumPageContent" id="album' + album.albumId + '">\
                 							<div class=AlbumContentPicture style="background-image: url(requestAlbumImage/' + album.albumId + '.html);"></div>\
                 								<div class=AlbumContentDescription>\
                     							<div class=AlbumContentName>' + album.albumName + '</div>';
@@ -57,38 +57,20 @@ function addAllAlbumsToCenterContent(jsonData){
     contentToBeAdded+='</div>';
     $("#centerSideContent").append(contentToBeAdded);
     
-    
-    
-    
-    /*
-                                        <div class="AlbumPageContent">\
-                                            <div class=AlbumContentPicture style="background-image: url(./images/albumCover1.jpg);"></div>\
-                                            <div class=AlbumContentDescription>\
-                                                <div class=AlbumContentName>Immortalized</div>\
-                                                <div class=AlbumContentArtist>Disturbed</div>\
-                                            </div>\
-                                        </div>\
-                                        <div class="AlbumPageContent">\
-                                            <div class=AlbumContentPicture style="background-image: url(./images/albumCover2.jpg);"></div>\
-                                            <div class=AlbumContentDescription>\
-                                                <div class=AlbumContentName>Hand Of Blood</div>\
-                                                <div class=AlbumContentArtist>Bullet for my valentine</div>\
-                                            </div>\
-                                        </div>\
-                                        <div class="AlbumPageContent">\
-                                            <div class=AlbumContentPicture style="background-image: url(./images/albumCover3.jpg);"></div>\
-                                            <div class=AlbumContentDescription>\
-                                                <div class=AlbumContentName>Wrong Side of Heaven</div>\
-                                                <div class=AlbumContentArtist>Five Finger Death Punch</div>\
-                                            </div>\
-                                        </div>\
-                                        <div class="AlbumPageContent">\
-                                            <div class=AlbumContentPicture style="background-image: url(./images/albumCover4.jpg);"></div>\
-                                            <div class=AlbumContentDescription>\
-                                                <div class=AlbumContentName>American Idiot</div>\
-                                                <div class=AlbumContentArtist>Green Day</div>\
-                                            </div>\
-                                        </div>\
-                                    </div>');
-                                    */
+    $(".AlbumPageContent").each(function(index) {
+        $(this).on("click", function(event){
+        	var albumID = $(this).attr("id");
+        	goToAlbumSongs(albumID.substring(5, albumID.length));
+        });
+    });
+}
+
+function goToAlbumSongs(albumID){
+	$.ajax({
+		type : "GET",
+		url : "getAllSongsInAlbum/" + albumID + ".html",
+		success : function(data) {
+			addAllSongsToCenterContent(data);
+		}
+	});
 }

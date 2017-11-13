@@ -315,6 +315,12 @@ public class MainController {
 	    response.getWriter().write(jsonString);
 	}
 	
+	
+	/**
+	***********
+	Album related Controller functions
+	***********
+	**/
 	@RequestMapping(value="/getAllAlbums", method = RequestMethod.GET)
 	public void getAllAlbums(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
 		
@@ -428,6 +434,31 @@ public class MainController {
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
 	
+	@RequestMapping(value = "/getAllSongsInAlbum/{id}", method = RequestMethod.GET)
+	public void getAllSongsInAlbum(HttpServletResponse response, HttpServletRequest request,@PathVariable("id") String id)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		Album album = albumService.getAlbumByID(id);
+		String jsonString = songUploadService.convertSongsToJSON(album.getSongs());
+		
+	    response.getWriter().write(jsonString);
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	***********
+	Song related Controller functions
+	***********
+	**/
 	
 	@PostMapping(value = "/SongFileUpload")
 	public void songUpload(MultipartHttpServletRequest request, HttpServletResponse response)
