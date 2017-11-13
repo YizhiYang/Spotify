@@ -34,6 +34,7 @@ import com.sbu.model.ArtistUser;
 import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.service.AlbumService;
+import com.sbu.service.ArtistService;
 import com.sbu.service.ChangeProfileInfoService;
 import com.sbu.service.GenericFileManageService;
 import com.sbu.service.LoginService;
@@ -85,6 +86,8 @@ public class MainController {
 	private SongUploadDownloadService songUploadService;
 	@Autowired
 	private AlbumService albumService;
+	@Autowired
+	private ArtistService artistService;
 	
 	@Autowired
 	private ChangeProfileInfoService changeProfileInfoService;
@@ -468,26 +471,6 @@ public class MainController {
 			response.getWriter().write(REQUEST_FAILURE);
 		}
 	}
-		
-		
-		
-		
-	@PostMapping(value = "/MakeUserArist")
-	public void makeUserArtist(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		User user = (User)request.getSession().getAttribute("User");
-		if(user==null){
-			return;
-		}
-		
-		String userID = request.getParameter("userID");
-		String artistName = request.getParameter("artistName");
-		
-		if(fileManager.makeNewArtist(userID, artistName)){
-			response.getWriter().write(REQUEST_SUCCESS);
-		}else{
-			response.getWriter().write(REQUEST_FAILURE);
-		}
-	}
 	
 	
 	@RequestMapping(value="/requestSongFile/{id}", method = RequestMethod.GET)
@@ -598,5 +581,91 @@ public class MainController {
 		}
 		
 	}
+	
+	
+	@PostMapping(value = "/MakeUserArist")
+	public void makeUserArtist(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String userID = request.getParameter("userID");
+		String artistName = request.getParameter("artistName");
+		
+		if(fileManager.makeNewArtist(userID, artistName)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+	
+	@RequestMapping(value="/getAllArtists", method = RequestMethod.GET)
+	public void getAllArtists(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String jsonString = artistService.getAllArtistsInJSON();
+
+ 		response.setContentType("text/plain");
+		
+		System.out.println(jsonString);
+	    response.getWriter().write(jsonString);
+	}
+	
+	@RequestMapping(value="/getProfileImageWithUsername/{username}", method = RequestMethod.GET)
+    public void getProfileImageWithUsername(HttpServletResponse response, HttpServletRequest request, @PathVariable("username") String username) throws IOException {
+		
+		User user = (User)request.getSession().getAttribute("User");
+		
+		if(user==null){
+			return;
+		}
+		
+		String profileFolderName = username;
+        File file = null;
+
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        
+        System.out.println(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName).getPath());
+        
+        file = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName+"/"+PROFILE_IMAGE_NAME).getFile());
+        if(!file.exists()){
+            String errorMessage = FILE_NOT_FOUND_MESSAGE;
+            System.out.println(errorMessage);
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+            outputStream.close();
+            return;
+        }
+         
+        String mimeType= URLConnection.guessContentTypeFromName(file.getName());
+        if(mimeType==null){
+            System.out.println("mimetype is not detectable, will take default");
+            mimeType = "application/octet-stream";
+        }
+         
+        System.out.println("mimetype : "+mimeType);
+         
+        response.setContentType(mimeType);
+         
+        /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
+            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
+        response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
+ 
+         
+        /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
+        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+        response.setContentLength((int)file.length());
+        
+
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+ 
+        //Copy bytes from source to destination(outputstream in this example), closes both streams.
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+    }
  
 }

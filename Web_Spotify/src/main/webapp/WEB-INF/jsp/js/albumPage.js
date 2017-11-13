@@ -19,9 +19,6 @@ function loadAllAlbums(){
 
 function addAllAlbumsToCenterContent(jsonData){
 	
-	
-	console.log(jsonData);
-	
 	var jsonArray = jQuery.parseJSON(jsonData);
 	
 	
@@ -32,10 +29,10 @@ function addAllAlbumsToCenterContent(jsonData){
                                         </div>\
                                    </div>');
     
-    var contentTobeAdded = '<div class=centerSideContentWrapper>';
+    var contentToBeAdded = '<div class=centerSideContentWrapper>';
     for(i = 0; i<jsonArray.length; i++){
     	var album = jsonArray[i];
-    	contentTobeAdded += '<div class="AlbumPageContent">\
+    	contentToBeAdded += '<div class="AlbumPageContent">\
                 							<div class=AlbumContentPicture style="background-image: url(requestAlbumImage/' + album.albumId + '.html);"></div>\
                 								<div class=AlbumContentDescription>\
                     							<div class=AlbumContentName>' + album.albumName + '</div>';
@@ -49,15 +46,16 @@ function addAllAlbumsToCenterContent(jsonData){
     	var albumArtistNames = album.artistNames;
     	
     	for(j = 0; j<albumArtistNames.length; j++){
-    		contentTobeAdded += '<div class=AlbumContentArtist>'+albumArtistNames[j]+'</div>';
+    		contentToBeAdded += '<div class=AlbumContentArtist>'+albumArtistNames[j]+'</div>';
     	}
     	
-    	contentTobeAdded +='</div>\
-    						</div>\
-            				</div>';
+    	contentToBeAdded +='</div>\
+    						</div>';
     	
     }
-    $("#centerSideContent").append(contentTobeAdded);
+    
+    contentToBeAdded+='</div>';
+    $("#centerSideContent").append(contentToBeAdded);
     
     
     

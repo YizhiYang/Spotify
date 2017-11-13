@@ -11,6 +11,7 @@
 	<style type="text/css"><%@ include file="css/homepage/right.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/playListPrototypePage.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/albumPage.css" %> </style>
+	<style type="text/css"><%@ include file="css/homepage/artistPage.css" %> </style>
   <link href="https://fonts.googleapis.com/css?family=Raleway | Asap | Work+Sans | Ubuntu | Oxygen | Archivo+Black | Rokkitt | Passion+One" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -32,6 +33,7 @@
   <script type="application/javascript"><%@ include file="js/AlbumJS.js" %></script>
   <script type="application/javascript"><%@ include file="js/ArtistJS.js" %></script>
   <script type="application/javascript"><%@ include file="js/albumPage.js" %></script>
+  <script type="application/javascript"><%@ include file="js/artistPage.js" %></script>
 
 
     
@@ -64,7 +66,9 @@
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-Album-Button">Albums</div>
                         </li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Artists</div></li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Home-Artist-Button">Artists</div>
+                        </li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Stations</div></li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Local Files</div></li>
                         <li class=userSongWrapperHeader>MY PLAYLISTS</li>
