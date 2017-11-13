@@ -28,6 +28,9 @@
   
   <script type="application/javascript"><%@ include file="js/jPlayer/jquery.jplayer.min.js" %></script>
   <script type="application/javascript"><%@ include file="js/jPlayer/jplayer.playlist.min.js" %></script>
+  
+  <script type="application/javascript"><%@ include file="js/CenterContentInsertionManager.js" %></script>
+  
   <script type="application/javascript"><%@ include file="js/SongJS.js" %></script>
   <script type="application/javascript"><%@ include file="js/playListPrototypePage.js" %></script>
   <script type="application/javascript"><%@ include file="js/AlbumJS.js" %></script>

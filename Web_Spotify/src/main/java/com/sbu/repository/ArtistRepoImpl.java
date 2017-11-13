@@ -22,4 +22,12 @@ public class ArtistRepoImpl implements ArtistRepo {
 		List<ArtistUser> results = em.createQuery("FROM ArtistUser").getResultList();
 		return results;
 	}
+
+	public List<ArtistUser> getArtistByArtistID(String id) {
+		long artistId = Long.valueOf(id);
+		
+		List<ArtistUser> result = em.createQuery("SELECT a FROM ArtistUser a WHERE a.artistID = :id")
+		.setParameter("id", artistId).getResultList();
+		return result;
+	}
 }

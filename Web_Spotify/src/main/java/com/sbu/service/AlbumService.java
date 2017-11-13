@@ -11,4 +11,5 @@ public interface AlbumService {
 	List<Album> getAllAlbums();
 	String getAllAlbumsInJSON() throws JSONException;
 	public Album getAlbumByID(String id);
+	public String convertAlbumsToJSON(List<Album> albums) throws JSONException;
 }

@@ -44,7 +44,7 @@ public class ArtistUser implements Serializable{
 	private User user;
 	
 	@Column(name="ARTIST_NAME")
-	private String ArtistName;
+	private String artistName;
 	
 	
 	@ManyToMany(cascade = { 
@@ -112,11 +112,11 @@ public class ArtistUser implements Serializable{
 
 
 	public String getArtistName() {
-		return ArtistName;
+		return artistName;
 	}
 
 
 	public void setArtistName(String artistName) {
-		ArtistName = artistName;
+		artistName = artistName;
 	}
 }

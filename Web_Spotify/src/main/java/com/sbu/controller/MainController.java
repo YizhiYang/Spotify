@@ -450,7 +450,26 @@ public class MainController {
 	}
 	
 	
+	/**
+	***********
+	Artist related Controller functions
+	***********
+	**/
 	
+	@RequestMapping(value = "/getAllAlbumsInArtist/{id}", method = RequestMethod.GET)
+	public void getAllAlbumsInArtist(HttpServletResponse response, HttpServletRequest request,@PathVariable("id") String id)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		ArtistUser artist = artistService.getArtistByArtistID(id);
+		String jsonString = albumService.convertAlbumsToJSON(artist.getAlbum());
+		
+	    response.getWriter().write(jsonString);
+	}
 	
 	
 	

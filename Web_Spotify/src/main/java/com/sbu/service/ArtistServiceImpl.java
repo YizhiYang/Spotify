@@ -25,6 +25,10 @@ public class ArtistServiceImpl implements ArtistService {
 
 	public String getAllArtistsInJSON() throws JSONException {
 		List<ArtistUser> artists = getAllArtists();
+		return convertArtistsToJSON(artists);
+	}
+
+	public String convertArtistsToJSON(List<ArtistUser> artists) throws JSONException {
 		JSONArray jsonArray = new JSONArray();
 		
 		for(int i=0; i<artists.size(); i++){
@@ -37,7 +41,8 @@ public class ArtistServiceImpl implements ArtistService {
 			}
 			
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("ArtistName", artist.getArtistName());
+			jsonObject.put("artistID", artist.getArtistID());
+			jsonObject.put("artistName", artist.getArtistName());
 			jsonObject.put("userName", artist.getUser().getUserName());
 			jsonObject.put("totalNumberOfSongs", totalNumberOfSongs);
 			
@@ -45,6 +50,15 @@ public class ArtistServiceImpl implements ArtistService {
 		}
 		
 		return jsonArray.toString();
+	}
+
+	public ArtistUser getArtistByArtistID(String id) {
+		List<ArtistUser> artists = artistRepo.getArtistByArtistID(id);
+		if(artists.isEmpty()){
+			return null;
+		}else{
+			return artists.get(0);
+		}
 	}
 
 }

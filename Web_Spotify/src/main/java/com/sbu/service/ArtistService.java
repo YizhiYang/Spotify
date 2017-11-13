@@ -10,4 +10,8 @@ public interface ArtistService {
 	List<ArtistUser> getAllArtists();
 	
 	String getAllArtistsInJSON() throws JSONException;
+	
+	String convertArtistsToJSON(List<ArtistUser> artists) throws JSONException;
+	
+	ArtistUser getArtistByArtistID(String id);
 }
