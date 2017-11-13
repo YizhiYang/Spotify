@@ -13,7 +13,8 @@ function loadAllSongs(){
 		type : "GET",
 		url : "getAllSongs.html",
 		success : function(data) {
-			addAllSongsToCenterContent(data);
+			$('#centerSideContent').empty();
+			addSongsToCenterContent(data);
 		}
 	});
 }

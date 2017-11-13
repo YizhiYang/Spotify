@@ -36,8 +36,9 @@ public class ArtistServiceImpl implements ArtistService {
 			
 			int totalNumberOfSongs = 0;
 			List<Album> albums = artist.getAlbum();
+			System.out.println(albums.size());
 			for(int j=0; j<albums.size(); j++){
-				totalNumberOfSongs += albums.get(i).getNumOfSongs();
+				totalNumberOfSongs += albums.get(j).getNumOfSongs();
 			}
 			
 			JSONObject jsonObject = new JSONObject();

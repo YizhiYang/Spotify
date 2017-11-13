@@ -516,12 +516,12 @@ public class MainController {
 	@RequestMapping(value="/requestSongFile/{id}", method = RequestMethod.GET)
     public void downloadSongFile(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") String id) throws IOException {
 		
-		User user = (User)request.getSession().getAttribute("User");
-		
-		if(user==null){
-			System.out.println("Kicked out of Session");
-			return;
-		}
+//		User user = (User)request.getSession().getAttribute("User");
+//		
+//		if(user==null){
+//			System.out.println("Kicked out of Session");
+//			return;
+//		}
 		
 		System.out.println(id);
 
