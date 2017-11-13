@@ -45,20 +45,34 @@ function addAllSongsToCenterContent(jsonData){
                                     
     var jsonObj = jQuery.parseJSON(jsonData);
     
-    
+    var contentToBeAdded;
     
     for(var i=0; i<jsonObj.length; i++){
-    	console.log(jsonObj[i].song_name);
-    	$('#centerSideContent').append('<tr id=songPageListContent>\
-											<td><i class="material-icons song-content-play-button">play_circle_outline</i><i class="material-icons SongPageAddSong">add</i></td>\
-                                            <td>' + jsonObj[i].song_name + '</td>\
-                                            <td>' + '</td>\
-                                            <td>' + '</td>\
-                                            <td>' + '</td>\
-                                            <td>' + jsonObj[i].duration +'</td>\
-											</tr>');
+    	contentToBeAdded += '<tr id=songPageListContent>\
+			<td><i class="material-icons song-content-play-button">play_circle_outline</i>\
+				<i class="material-icons SongPageAddSong">add</i></td>';
+    	
+    	var song = jsonObj[i];
+    	contentToBeAdded += '<td>' + song.songName + '</td>';
+    	
+    	var artistNames = song.artistNames;
+    	contentToBeAdded += '<td>';
+    	for(j=0; j<artistNames.length; j++){
+    		contentToBeAdded += artistNames[j] + ' ';
+    	}
+    	contentToBeAdded += '</td>';
+    	
+    	contentToBeAdded += '<td>' + song.albumName + '</td>';
+    	
+    	contentToBeAdded += '<td>' + '</td>';
+    	
+    	contentToBeAdded += '<td>' + song.duration +'</td>'
+    	
+    	contentToBeAdded += '</tr>';
+    	
     }
     
+    $('#centerSideContent').append(contentToBeAdded);
     $('#centerSideContent').append('</table>\
     								</div>');
     

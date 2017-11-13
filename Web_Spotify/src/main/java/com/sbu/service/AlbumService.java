@@ -9,4 +9,5 @@ import com.sbu.model.Album;
 public interface AlbumService {
 	List<Album> getAllAlbums();
 	String getAllAlbumsInJSON() throws JSONException;
+	public Album getAlbumByID(String id);
 }

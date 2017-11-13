@@ -37,6 +37,18 @@ public class GenericFileManageServiceImpl implements GenericFileManageService {
 		
 	}
 	
+	public void saveFileToLocation(MultipartFile file, String path, String filename) throws IOException {
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		File newFile = new File(classloader.getResource(path).getPath(), filename);		
+		BufferedOutputStream outputStream = new BufferedOutputStream(
+	               new FileOutputStream(newFile));
+		
+	         outputStream.write(file.getBytes());
+	         outputStream.flush();
+	         outputStream.close();
+		
+	}
+	
 	
 	public ArtistUser checkArtistExist(String id){
 		
@@ -67,4 +79,8 @@ public class GenericFileManageServiceImpl implements GenericFileManageService {
 		}
 		
 	}
+
+
+
+
 }

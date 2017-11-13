@@ -104,12 +104,10 @@
   			<div class="form-group">
   				<label class="col-form-label" for="formGroupSongNameInput">Song Name</label>
     			<input type="text" class="form-control" id="formGroupSongNameInput" name="songName" placeholder="Song Name">
-    			<label class="col-form-label" for="formGroupArtistNameInput">Artist Name</label>
-    			<input type="text" class="form-control" id="formGroupArtistNameInput" name="artistName" placeholder="Artist Name">
     			<label class="col-form-label" for="formGroupDurationInput">Duration</label>
     			<input type="text" class="form-control" id="formGroupDurationInput" name="duration" placeholder="0:00">
-    			<label class="col-form-label" for="formGroupAlbumNameInput" name="albumName">Album Name</label>
-    			<input type="text" class="form-control" id="formGroupAlbumNameInput" name="albumName" placeholder="Album Name">
+    			<label class="col-form-label" for="formGroupAlbumIDInput" name="albumID">Album ID</label>
+    			<input type="text" class="form-control" id="formGroupAlbumIDInput" name="albumID" placeholder="Album ID">
     			<label for="FormSongFile">Song File</label>
     			<input type="file" class="form-control-file" name="fileUp" id="FormSongFile" accept=".mp3">
   			</div>

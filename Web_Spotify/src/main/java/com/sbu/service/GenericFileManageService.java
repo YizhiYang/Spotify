@@ -10,6 +10,8 @@ import com.sbu.model.User;
 
 public interface GenericFileManageService {
 	
+	public void saveFileToLocation(MultipartFile file, String path, String filename) throws IOException;
+	
 	public void createPicInProfileImages(MultipartFile file, String id) throws IOException;
 	
 	public ArtistUser checkArtistExist(String id);

@@ -25,7 +25,7 @@ public class Song {
 	private Long songId;
 	
 	@Column(name="SONG_NAME")
-	private String song_name;
+	private String songName;
 	
 	@Column(name="DURATION")
 	private String duration;
@@ -62,12 +62,12 @@ public class Song {
 		return songId;
 	}
 
-	public String getSong_name() {
-		return song_name;
+	public String getSongName() {
+		return songName;
 	}
 
-	public void setSong_name(String song_name) {
-		this.song_name = song_name;
+	public void setSongName(String songName) {
+		this.songName = songName;
 	}
 
 

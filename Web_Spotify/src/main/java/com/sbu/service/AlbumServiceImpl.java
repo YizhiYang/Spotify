@@ -24,8 +24,7 @@ public class AlbumServiceImpl implements AlbumService {
 
 	public String getAllAlbumsInJSON() throws JSONException {
 		List<Album> albums = getAllAlbums();
-		
-		
+
 		JSONArray jsonArray = new JSONArray();
 		
 		for(int i =0; i<albums.size(); i++){
@@ -44,9 +43,16 @@ public class AlbumServiceImpl implements AlbumService {
 			jsonArray.put(jsonObject);
 		}
 		
-		
-		
 		return jsonArray.toString();
+	}
+	
+	public Album getAlbumByID(String id){
+		List<Album> result = albumRepo.getAlbumByID(id);
+		if(result.isEmpty()){
+			return null;
+		}else{
+			return result.get(0);
+		}
 	}
 
 }

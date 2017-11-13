@@ -23,4 +23,12 @@ public class AlbumRepoImpl implements AlbumRepo {
 		return results;
 	}
 
+	public List<Album> getAlbumByID(String id) {
+		long albumId = Long.valueOf(id);
+		
+		List<Album> result = em.createQuery("SELECT a FROM Album a WHERE a.albumId = :id")
+		.setParameter("id", albumId).getResultList();
+		return result;
+	}
+
 }

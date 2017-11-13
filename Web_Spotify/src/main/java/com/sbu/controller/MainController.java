@@ -302,18 +302,15 @@ public class MainController {
 	
 	
 	@RequestMapping(value="/getAllSongs", method = RequestMethod.GET)
-	public void getAllSongs(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
+	public void getAllSongs(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
 		
 		User user = (User)request.getSession().getAttribute("User");
 		if(user==null){
 			return;
 		}
 		
-		List<Song> list = songUploadService.getALLSongs();
+		String jsonString = songUploadService.getAllSongsInJSON();
 
-		response.setContentType("text/plain");
-		Gson gson = new Gson();
-		String jsonString = gson.toJson(list);
 		System.out.println(jsonString);
 	    response.getWriter().write(jsonString);
 	}
@@ -441,33 +438,26 @@ public class MainController {
 			return;
 		}
 		String songName = request.getParameter("songName");
-		String artistName = request.getParameter("artistName");
-		String albumName = request.getParameter("albumName");
+		String albumID = request.getParameter("albumID");
 		String duration = request.getParameter("duration");
 		MultipartFile file = request.getFile("fileUp");
+		
+		Album albumToSaveTo = albumService.getAlbumByID(albumID);
+		if(albumToSaveTo==null){
+			return;
+		}
+		
 		Song song = new Song();
-		song.setSong_name(songName);
+		song.setSongName(songName);
 		song.setDuration(duration);
-
-		System.out.println(song.getSongId());
+		song.setAlbum(albumToSaveTo);
 
 		if(songUploadService.addSongToDatabase(song)){
-			System.out.println(song.getSongId());
-				
-			//NOW SAVE THE MUSIC FILE
-			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-			File newFile = new File(classloader.getResource(SONG_FILE_PATH).getPath(),song.getSongId()+SONG_EXTENSION);		
-			BufferedOutputStream outputStream = new BufferedOutputStream(
-					new FileOutputStream(newFile));
-			outputStream.write(file.getBytes());
-			outputStream.flush();
-			outputStream.close();
-			         
-			    
-			response.setContentType("text/plain");
+			//SAVE SONG FILE
+			fileManager.saveFileToLocation(file, SONG_FILE_PATH, song.getSongId()+SONG_EXTENSION);		         
+
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
-			response.setContentType("text/plain");
 			response.getWriter().write(REQUEST_FAILURE);
 		}
 	}
