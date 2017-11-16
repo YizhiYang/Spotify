@@ -1,0 +1,31 @@
+package com.sbu.repository;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.sbu.model.Playlist;
+import com.sbu.model.User;
+
+@Repository("playlistRepo")
+@Transactional
+public class PlaylistRepoImpl implements PlaylistRepo {
+	@PersistenceContext
+	private EntityManager em;
+
+	public boolean saveNewPlaylist(Playlist playlist) {
+		em.persist(playlist);
+		return true;
+	}
+
+	public List<Playlist> getUserPlaylists(User user) {
+		List<Playlist> playlists = em.createQuery("SELECT p FROM Playlist p WHERE p.owner = :user")
+				.setParameter("user", user).getResultList();
+		return playlists;
+	}
+
+}

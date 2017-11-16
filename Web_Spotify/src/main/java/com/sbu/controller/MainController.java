@@ -38,6 +38,7 @@ import com.sbu.service.ArtistService;
 import com.sbu.service.ChangeProfileInfoService;
 import com.sbu.service.GenericFileManageService;
 import com.sbu.service.LoginService;
+import com.sbu.service.PlaylistService;
 import com.sbu.service.SignupService;
 import com.sbu.service.SongService;
 
@@ -88,6 +89,9 @@ public class MainController {
 	private AlbumService albumService;
 	@Autowired
 	private ArtistService artistService;
+	
+	@Autowired
+	private PlaylistService playlistService;
 	
 	@Autowired
 	private ChangeProfileInfoService changeProfileInfoService;
@@ -578,7 +582,7 @@ public class MainController {
 	
 	/**
 	***********
-	Song related Controller functions
+	Search related Controller functions
 	***********
 	**/
 	@RequestMapping(value = "/searchContent", method = RequestMethod.GET)
@@ -604,8 +608,45 @@ public class MainController {
 	}
 	
 	
+	/**
+	***********
+	Playlist related Controller functions
+	***********
+	**/
 	
+	@RequestMapping(value = "/addNewPlaylist", method = RequestMethod.POST)
+	public void addNewPlaylist(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String playlistName = request.getParameter("playlistName");
+		
+		if(playlistService.makeNewPlaylist(user, playlistName)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+		
+	    
+	}
 	
+	@RequestMapping(value = "/getUserPlaylist", method = RequestMethod.GET)
+	public void getUserPlaylist(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+
+		String jsonString = playlistService.getUserPlaylistsInJSON(user);
+		
+	    response.getWriter().write(jsonString);
+	}
 	
 	
 	

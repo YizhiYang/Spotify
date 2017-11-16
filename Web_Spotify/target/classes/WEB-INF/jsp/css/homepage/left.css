@@ -95,7 +95,7 @@ ul{
     position: relative;
     left: 15px;
     top: 50%;
-    transform: translateY(-50%);
+    /*transform: translateY(-50%);*/
     font-family: 'Work Sans', sans-serif;
         list-style: none;
 

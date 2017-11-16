@@ -39,6 +39,8 @@
   <script type="application/javascript"><%@ include file="js/artistPage.js" %></script>
   
   <script type="application/javascript"><%@ include file="js/searchJS.js" %></script>
+  
+  <script type="application/javascript"><%@ include file="js/playlistJS.js" %></script>
 
 
     
@@ -66,8 +68,12 @@
                         <li class=userSongWrapperHeader>YOUR LIBRARY</li>
                         <li></li>
                         <li></li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Recently Played</div></li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Songs</div></li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem'>Recently Played</div>
+                        </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem'>Songs</div>
+                        </li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-Album-Button">Albums</div>
                         </li>
@@ -76,11 +82,18 @@
                         </li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Stations</div></li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Local Files</div></li>
-                        <li class=userSongWrapperHeader>MY PLAYLISTS</li>
-                        <li></li>
-                        <li></li>
+                        <li class=userSongWrapperHeader>MY PLAYLISTS
+                        	<ul id="My-Playlist-List-Wrapper">
+                        		<li></li>
+                        	</ul>
+                        </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' data-toggle="modal" data-target="#addNewPlaylistPopUp">Add New Play List</div>
+                        </li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Liked from Radio</div></li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem' id="My-PlayList-Button">My Play List</div></li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="My-PlayList-Button">My Play List</div>
+                        </li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' data-toggle="modal" data-target="#uploadSongPopUp">Upload Song</div>
                         </li>
@@ -93,6 +106,38 @@
                         </li>
                     </ul>
                 </div>
+                
+
+<!-- Pop up for adding new playlist -->
+<div class="modal fade" id="addNewPlaylistPopUp">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Playlist</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="add-new-playlist-form" method="post">
+  			<div class="form-group">
+    			<label class="col-form-label" for="addNewPlaylistNameInput">Name of Playlist to be added</label>
+    			<input type="text" class="form-control" id="addNewPlaylistNameInput" name="playlistName" placeholder="Playlist Name">
+  			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="submitAddNewPlaylistButton">Make Playlist</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+                
                 
 <!-- Pop up for uploading Song -->
 <div class="modal fade" id="uploadSongPopUp">
