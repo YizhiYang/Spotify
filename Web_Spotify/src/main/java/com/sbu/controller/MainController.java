@@ -39,7 +39,7 @@ import com.sbu.service.ChangeProfileInfoService;
 import com.sbu.service.GenericFileManageService;
 import com.sbu.service.LoginService;
 import com.sbu.service.SignupService;
-import com.sbu.service.SongUploadDownloadService;
+import com.sbu.service.SongService;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -83,7 +83,7 @@ public class MainController {
 	@Autowired
 	private SignupService signupService;
 	@Autowired
-	private SongUploadDownloadService songUploadService;
+	private SongService songService;
 	@Autowired
 	private AlbumService albumService;
 	@Autowired
@@ -309,7 +309,7 @@ public class MainController {
 			return;
 		}
 		
-		String jsonString = songUploadService.getAllSongsInJSON();
+		String jsonString = songService.getAllSongsInJSON();
 
 		System.out.println(jsonString);
 	    response.getWriter().write(jsonString);
@@ -444,7 +444,7 @@ public class MainController {
 		}
 		
 		Album album = albumService.getAlbumByID(id);
-		String jsonString = songUploadService.convertSongsToJSON(album.getSongs());
+		String jsonString = songService.convertSongsToJSON(album.getSongs());
 		
 	    response.getWriter().write(jsonString);
 	}
@@ -502,7 +502,7 @@ public class MainController {
 		song.setDuration(duration);
 		song.setAlbum(albumToSaveTo);
 
-		if(songUploadService.addSongToDatabase(song)){
+		if(songService.addSongToDatabase(song)){
 			//SAVE SONG FILE
 			fileManager.saveFileToLocation(file, SONG_FILE_PATH, song.getSongId()+SONG_EXTENSION);		         
 
@@ -574,6 +574,39 @@ public class MainController {
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
+	
+	
+	/**
+	***********
+	Song related Controller functions
+	***********
+	**/
+	@RequestMapping(value = "/searchContent", method = RequestMethod.GET)
+	public void searchContent(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+
+		String songsJsonString = songService.getSearchSongResultsInJSON(request.getParameter("searchContent"));
+		String artistsJsonString = artistService.getSearchArtistResultsInJSON(request.getParameter("searchContent"));
+		String albumsJsonString = albumService.getSearchAlbumResultsInJSON(request.getParameter("searchContent"));
+		
+		JSONObject totalJsonObject = new JSONObject();
+		totalJsonObject.put("songsJson", songsJsonString);
+		totalJsonObject.put("artistsJson", artistsJsonString);
+		totalJsonObject.put("albumsJson", albumsJsonString);
+		
+		
+	    response.getWriter().write(totalJsonObject.toString());
+	}
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value = "/getUserProfile", method = RequestMethod.GET)

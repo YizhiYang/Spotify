@@ -4,12 +4,9 @@
 
 function addSongsToCenterContent(jsonData){
     $('#centerSideContent').append('<div class=centerSideContentWrapper id=PlayListPrototypeTop>\
-                                        <div id=playListPrototypeImage style="background-image: url(./images/FSProfile3.jpg);"></div>\
-                                        <div id=contentTitleOuterWrapper>\
                                             <div id="contentTitle">\
-                                                <div id="contentTitleWrapper" style="border-bottom:transparent; font-size:45px;">Playlist 1</div>\
+                                                <div id="contentTitleWrapper" style="border-bottom:transparent; font-size:45px;">Songs</div>\
                                             </div>\
-                                            <button class=buttonStyle1 id=PlayListPrototypeButton onclick=loadPlayListPrototype()>Play</button>\
                                         </div>\
                                     </div>')
                                     

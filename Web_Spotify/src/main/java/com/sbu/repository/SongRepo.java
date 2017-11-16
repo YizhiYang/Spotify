@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.sbu.model.Song;
 
-public interface SongUploadDownloadRepo {
+public interface SongRepo {
 	boolean addSong(Song song);
-	String findSongFileNameBasedOnIDInDatabase(long id);
+	
 	List<Song> getAllSongs();
+	
+	List<Song> getSearchSongResults(String searchString);
 
 }

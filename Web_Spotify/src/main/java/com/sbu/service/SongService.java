@@ -6,12 +6,13 @@ import org.json.JSONException;
 
 import com.sbu.model.Song;
 
-public interface SongUploadDownloadService {
+public interface SongService {
 	boolean addSongToDatabase(Song song);
-	String findSongFileBasedOnID(Long id);
 	List<Song> getALLSongs();
 	String getAllSongsInJSON() throws JSONException;
 	
 	String convertSongsToJSON(List<Song> songs) throws JSONException;
+	
+	String getSearchSongResultsInJSON(String searchString) throws JSONException;
 	
 }

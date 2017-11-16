@@ -6,9 +6,7 @@ $( document ).ready(function() {
 			createAlbum();
 			
 			event.preventDefault();
-
 		});
-	
 });
 
 

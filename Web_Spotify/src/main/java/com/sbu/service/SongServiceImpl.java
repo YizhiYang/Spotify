@@ -11,26 +11,20 @@ import org.springframework.stereotype.Service;
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.Song;
-import com.sbu.repository.SongUploadDownloadRepo;
+import com.sbu.repository.SongRepo;
 
-@Service("songUploadService")
-public class SongUploadDownloadServiceImpl implements SongUploadDownloadService {
+@Service("songService")
+public class SongServiceImpl implements SongService {
 	
 	@Autowired
-	private SongUploadDownloadRepo songUploadRepo;
+	private SongRepo songRepo;
 
 	public boolean addSongToDatabase(Song song) {
-		return songUploadRepo.addSong(song);
-	}
-
-	public String findSongFileBasedOnID(Long id) {
-		String fileName = songUploadRepo.findSongFileNameBasedOnIDInDatabase(id);
-		System.out.println(fileName);
-		return fileName;
+		return songRepo.addSong(song);
 	}
 
 	public List<Song> getALLSongs() {
-		return songUploadRepo.getAllSongs();
+		return songRepo.getAllSongs();
 	}
 
 	public String getAllSongsInJSON() throws JSONException {
@@ -62,6 +56,11 @@ public class SongUploadDownloadServiceImpl implements SongUploadDownloadService 
 		}
 		
 		return jsonArray.toString();
+	}
+
+	public String getSearchSongResultsInJSON(String searchString) throws JSONException {
+		List<Song> songs = songRepo.getSearchSongResults(searchString);
+		return convertSongsToJSON(songs);
 	}
 
 }

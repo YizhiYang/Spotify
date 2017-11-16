@@ -31,4 +31,10 @@ public class AlbumRepoImpl implements AlbumRepo {
 		return result;
 	}
 
+	public List<Album> getSearchAlbumResults(String searchString) {
+		List<Album> result = em.createQuery("SELECT a FROM Album a WHERE a.albumName LIKE :searchString")
+		.setParameter("searchString", "%"+searchString+"%").getResultList();
+		return result;
+	}
+
 }

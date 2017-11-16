@@ -14,4 +14,6 @@ public interface ArtistService {
 	String convertArtistsToJSON(List<ArtistUser> artists) throws JSONException;
 	
 	ArtistUser getArtistByArtistID(String id);
+	
+	String getSearchArtistResultsInJSON(String searchString) throws JSONException;
 }

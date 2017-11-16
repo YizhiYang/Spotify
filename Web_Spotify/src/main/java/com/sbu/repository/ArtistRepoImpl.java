@@ -30,4 +30,10 @@ public class ArtistRepoImpl implements ArtistRepo {
 		.setParameter("id", artistId).getResultList();
 		return result;
 	}
+
+	public List<ArtistUser> getSearchArtistResults(String searchString) {
+		List<ArtistUser> result = em.createQuery("SELECT a FROM ArtistUser a WHERE a.artistName LIKE :searchString")
+		.setParameter("searchString", "%"+searchString+"%").getResultList();
+		return result;
+	}
 }

@@ -10,10 +10,10 @@
 #centerTopWrapper{
     position: absolute;
     height: 20px;
-    width: 440px;
+    width: 600px;
     left:50%;
     top:5px;
-    transform: translateX(-50%);
+    transform: translateX(-70%);
     top: 13px;
     
     
@@ -50,10 +50,15 @@
     }
 }
 
-#centerSideContentWrapper{
+#centerSideContent{
+	overflow:scroll
+}
+
+.centerSideContentWrapper{
     position: relative;
     width: 100%;
     height: 300px;
+    display: inline-block
 }
 
 #contentTitle{

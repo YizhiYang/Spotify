@@ -37,6 +37,8 @@
   <script type="application/javascript"><%@ include file="js/ArtistJS.js" %></script>
   <script type="application/javascript"><%@ include file="js/albumPage.js" %></script>
   <script type="application/javascript"><%@ include file="js/artistPage.js" %></script>
+  
+  <script type="application/javascript"><%@ include file="js/searchJS.js" %></script>
 
 
     
@@ -192,20 +194,18 @@
         
         </div>
         <div id="center">
-            <div id=centerTopBar>
-                <div id=centerTopWrapper>
-                    <div class=centerTopBarContent>
-<!--                        <i class="material-icons">search</i>-->
-                        <input class=centerTopBarContent type="text" name="firstname" value="Search">
-                    </div>
-                    <div class=centerTopBarContent>Overview</div>
-                    <div class=centerTopBarContent>Charts</div>
-                    <div class=centerTopBarContent>Genre</div>
-                    <div class=centerTopBarContent>More</div>
+            <div id="centerTopBar">
+                <div id="centerTopWrapper">
+                    <input class="centerTopBarContent" id="searchInput" type="text" name="searchContent">
+                    <i class="material-icons centerTopBarContent" id="searchButton">search</i>
+                    <div class="centerTopBarContent">Overview</div>
+                    <div class="centerTopBarContent">Charts</div>
+                    <div class="centerTopBarContent">Genre</div>
+                    <div class="centerTopBarContent">More</div>
                 </div>
             </div>
             <div id="centerSideContent">
-                <div id=centerSideContentWrapper>
+                <div class="centerSideContentWrapper">
                     <div id="contentTitle">
                         <div id="contentTitleWrapper" style="border-bottom:transparent;">
                             Sleep Well!
@@ -242,7 +242,7 @@
                         </div>
                     </div>
                 </div>
-                <div id=centerSideContentWrapper>
+                <div class="centerSideContentWrapper">
                     <div id="contentTitle">
                         <div id="contentTitleWrapper">
                             Genre & Mood
