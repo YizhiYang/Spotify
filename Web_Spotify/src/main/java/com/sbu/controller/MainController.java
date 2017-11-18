@@ -36,6 +36,7 @@ import com.sbu.model.User;
 import com.sbu.service.AlbumService;
 import com.sbu.service.ArtistService;
 import com.sbu.service.ChangeProfileInfoService;
+import com.sbu.service.ContentFollowService;
 import com.sbu.service.GenericFileManageService;
 import com.sbu.service.LoginService;
 import com.sbu.service.PlaylistService;
@@ -89,6 +90,8 @@ public class MainController {
 	private AlbumService albumService;
 	@Autowired
 	private ArtistService artistService;
+	@Autowired
+	private ContentFollowService contentFollowService;
 	
 	@Autowired
 	private PlaylistService playlistService;
@@ -606,6 +609,99 @@ public class MainController {
 		
 	    response.getWriter().write(totalJsonObject.toString());
 	}
+	/**
+	***********
+	Follow related Controller functions
+	***********
+	**/
+	
+	@RequestMapping(value = "/addToFollowedSongs/{songId}", method = RequestMethod.POST)
+	public void addToFollowedSongs(HttpServletResponse response, HttpServletRequest request,@PathVariable("songId") String songId)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		if(contentFollowService.addToUserFollowedSongs(user, songId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+	
+	
+	@RequestMapping(value = "/loadFollowedSongs", method = RequestMethod.GET)
+	public void loadFollowedSongs(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String jsonString = contentFollowService.getFollowedSongsInJSON(user);
+		
+		response.getWriter().write(jsonString);
+	}
+	
+	@RequestMapping(value = "/addToFollowedAlbums/{albumId}", method = RequestMethod.POST)
+	public void addToFollowedAlbums(HttpServletResponse response, HttpServletRequest request,@PathVariable("albumId") String albumId)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		if(contentFollowService.addToUserFollowedAlbums(user, albumId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+	
+	@RequestMapping(value = "/loadFollowedAlbums", method = RequestMethod.GET)
+	public void loadFollowedAlbums(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String jsonString = contentFollowService.getFollowedAlbumsInJSON(user);
+		
+		response.getWriter().write(jsonString);
+	}
+	
+	@RequestMapping(value = "/addToFollowedArtists/{artistId}", method = RequestMethod.POST)
+	public void addToFollowedArtists(HttpServletResponse response, HttpServletRequest request,@PathVariable("artistId") String artistId)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		if(contentFollowService.addToUserFollowedArtists(user, artistId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+	
+	@RequestMapping(value = "/loadFollowedArtists", method = RequestMethod.GET)
+	public void loadFollowedArtists(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String jsonString = contentFollowService.getFollowedArtistsInJSON(user);
+		
+		response.getWriter().write(jsonString);
+	}
 	
 	
 	/**
@@ -633,6 +729,35 @@ public class MainController {
 		
 	    
 	}
+	
+	
+	/**
+	***********
+	Browse Page related Controller functions
+	***********
+	**/
+	@RequestMapping(value = "/getBrowsePageContent", method = RequestMethod.GET)
+	public void getBrowsePageContent(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+
+		String songsJsonString = songService.getAllSongsInJSON();
+		String artistsJsonString = artistService.getAllArtistsInJSON();
+		String albumsJsonString = albumService.getAllAlbumsInJSON();
+		
+		JSONObject totalJsonObject = new JSONObject();
+		totalJsonObject.put("songsJson", songsJsonString);
+		totalJsonObject.put("artistsJson", artistsJsonString);
+		totalJsonObject.put("albumsJson", albumsJsonString);
+		
+		
+	    response.getWriter().write(totalJsonObject.toString());
+	}
+	
 	
 	@RequestMapping(value = "/getUserPlaylist", method = RequestMethod.GET)
 	public void getUserPlaylist(HttpServletResponse response, HttpServletRequest request)

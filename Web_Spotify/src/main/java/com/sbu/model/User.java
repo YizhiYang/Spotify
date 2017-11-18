@@ -1,11 +1,15 @@
 package com.sbu.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -38,8 +42,15 @@ public class User {
 	
 	@Column(name="USERTYPE")
 	private String userType;
+
+	@OneToMany
+	private List<Song> followedSongs = new ArrayList<Song>();
 	
+	@OneToMany
+	private List<Album> followedAlbums = new ArrayList<Album>();
 	
+	@OneToMany
+	private List<ArtistUser> followedArtist = new ArrayList<ArtistUser>();
 
 	public String getEmail() {
 		return email;
@@ -70,6 +81,24 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public List<Song> getFollowedSongs() {
+		return followedSongs;
+	}
+	public void setFollowedSongs(List<Song> followedSongs) {
+		this.followedSongs = followedSongs;
+	}
+	public List<Album> getFollowedAlbums() {
+		return followedAlbums;
+	}
+	public void setFollowedAlbums(List<Album> followedAlbums) {
+		this.followedAlbums = followedAlbums;
+	}
+	public List<ArtistUser> getFollowedArtist() {
+		return followedArtist;
+	}
+	public void setFollowedArtist(List<ArtistUser> followedArtist) {
+		this.followedArtist = followedArtist;
 	}
 	
 	

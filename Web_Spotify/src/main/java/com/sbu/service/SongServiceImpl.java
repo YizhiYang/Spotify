@@ -26,6 +26,14 @@ public class SongServiceImpl implements SongService {
 	public List<Song> getALLSongs() {
 		return songRepo.getAllSongs();
 	}
+	
+	public Song getSongByID(String songId) {
+		List<Song> result = songRepo.getSongByID(songId);
+		if(result==null || result.isEmpty()){
+			return null;
+		}
+		return result.get(0);
+	}
 
 	public String getAllSongsInJSON() throws JSONException {
 		List<Song> songs = getALLSongs();

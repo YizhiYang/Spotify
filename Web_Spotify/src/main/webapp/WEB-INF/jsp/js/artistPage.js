@@ -1,15 +1,16 @@
 $(document).ready(function() {
 	$("#Home-Artist-Button").click(function(event){
-		loadAllArtists();
+		loadFollowedArtists();
 		event.preventDefault();
 	});
 
 });
 
-function loadAllArtists(){
+
+function loadFollowedArtists(){
 	$.ajax({
 		type : "GET",
-		url : "getAllArtists.html",
+		url : "loadFollowedArtists.html",
 		success : function(data) {
 			$('#centerSideContent').empty();
 			addArtistsToCenterContent(data);

@@ -22,16 +22,16 @@ function addSongsToCenterContent(jsonData){
                                                 <th>DURATION</th>\
                                             </tr>');
                                     
-    var jsonObj = jQuery.parseJSON(jsonData);
+    var jsonArray = jQuery.parseJSON(jsonData);
     
     var contentToBeAdded ="";
     
-    for(var i=0; i<jsonObj.length; i++){
+    for(var i=0; i<jsonArray.length; i++){
     	contentToBeAdded += '<tr id=songPageListContent>\
 			<td><i class="material-icons song-content-play-button">play_circle_outline</i>\
-				<i class="material-icons SongPageAddSong">add</i></td>';
+				<i class="material-icons SongPageFollowSong">add</i></td>';
     	
-    	var song = jsonObj[i];
+    	var song = jsonArray[i];
     	contentToBeAdded += '<td>' + song.songName + '</td>';
     	
     	var artistNames = song.artistNames;
@@ -57,10 +57,10 @@ function addSongsToCenterContent(jsonData){
     
     var songList =[];
     
-    for(var i=0; i<jsonObj.length; i++){
-    	console.log("requestSongFile/" + jsonObj[i].songId +".html");
-    	var song = {title: jsonObj[i].song_name,
-    			mp3:"requestSongFile/" + jsonObj[i].songId +".html",
+    for(var i=0; i<jsonArray.length; i++){
+    	console.log("requestSongFile/" + jsonArray[i].songId +".html");
+    	var song = {title: jsonArray[i].song_name,
+    			mp3:"requestSongFile/" + jsonArray[i].songId +".html",
 				artist:""}
     	songList.push(song);
     }
@@ -87,6 +87,12 @@ function addSongsToCenterContent(jsonData){
 			myPlaylist.play(index);
 		});
 	});
+	
+	$(".SongPageFollowSong").each(function(index){
+		$(this).click(function(event){
+			addToFollowedSongs(jsonArray[index].songId);
+		});
+	});
 
 }
 
@@ -104,10 +110,12 @@ function addAlbumsToCenterContent(jsonData){
     var contentToBeAdded = '<div class=centerSideContentWrapper>';
     for(i = 0; i<jsonArray.length; i++){
     	var album = jsonArray[i];
-    	contentToBeAdded += '<div class="AlbumPageContent" id="album' + album.albumId + '">\
-                							<div class=AlbumContentPicture style="background-image: url(requestAlbumImage/' + album.albumId + '.html);"></div>\
+    	contentToBeAdded += '<div class="AlbumPageContent">\
+                							<div class=AlbumContentPicture id="album' + album.albumId 
+                								+ '" style="background-image: url(requestAlbumImage/' + album.albumId + '.html);"></div>\
                 								<div class=AlbumContentDescription>\
-                    							<div class=AlbumContentName>' + album.albumName + '</div>';
+                    							<div class=AlbumContentName>' + album.albumName
+                    							+ '</div>';
     	
 //    	$("#centerSideContent").append('<div class="AlbumPageContent">\
 //				<img src="requestAlbumImage/' + album.albumId + '.html">\
@@ -121,7 +129,8 @@ function addAlbumsToCenterContent(jsonData){
     		contentToBeAdded += '<div class=AlbumContentArtist>'+albumArtistNames[j]+'</div>';
     	}
     	
-    	contentToBeAdded +='</div>\
+    	contentToBeAdded +='<i class="material-icons AlbumPageFollowAlbum">add</i>\
+    						</div>\
     						</div>';
     	
     }
@@ -129,12 +138,18 @@ function addAlbumsToCenterContent(jsonData){
     contentToBeAdded+='</div>';
     $("#centerSideContent").append(contentToBeAdded);
     
-    $(".AlbumPageContent").each(function(index) {
+    $(".AlbumContentPicture").each(function(index) {
         $(this).on("click", function(event){
         	var albumID = $(this).attr("id");
         	goToAlbumSongs(albumID.substring(5, albumID.length));
         });
     });
+    
+    $(".AlbumPageFollowAlbum").each(function(index){
+		$(this).click(function(event){
+			addToFollowedAlbums(jsonArray[index].albumId);
+		});
+	});
 }
 
 
@@ -153,12 +168,14 @@ function addArtistsToCenterContent(jsonData){
     var contentToBeAdded = '<div class=centerSideContentWrapper>';
     for(i=0; i<jsonArray.length; i++){
     	var artist = jsonArray[i];
-    	contentToBeAdded += '<div class=ArtistPageContent id="artist' + artist.artistID + '">\
-            					<div class=ArtistContentPicture style="background-image: url(getProfileImageWithUsername/' + artist.userName + '.html);"></div>\
+    	contentToBeAdded += '<div class=ArtistPageContent>\
+            					<div class=ArtistContentPicture id="artist' + artist.artistID
+            						+ '" style="background-image: url(getProfileImageWithUsername/' + artist.userName + '.html);"></div>\
             						<div class=ArtistContentDescription>\
     									<div class=ArtistContentName>'+ artist.artistName + '</div>\
                						<div class=ArtistContentListLength>' + artist.totalNumberOfSongs + ' Songs</div>\
             					</div>\
+            					<i class="material-icons ArtistPageFollowArtist">add</i>\
     						</div>'
     }
     
@@ -171,5 +188,11 @@ function addArtistsToCenterContent(jsonData){
         	goToArtistAlbums(artistID.substring(6, artistID.length));
         });
     });
+    
+    $(".ArtistPageFollowArtist").each(function(index){
+		$(this).click(function(event){
+			addToFollowedArtists(jsonArray[index].artistID);
+		});
+	});
 
 }

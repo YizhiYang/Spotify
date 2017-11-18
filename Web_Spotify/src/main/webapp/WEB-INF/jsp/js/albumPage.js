@@ -1,16 +1,16 @@
 $(document).ready(function() {
 	$("#Home-Album-Button").click(function(event){
-		loadAllAlbums();
+		loadFollowedAlbums();
 		event.preventDefault();
 	});
 
 });
 
 
-function loadAllAlbums(){
+function loadFollowedAlbums(){
 	$.ajax({
 		type : "GET",
-		url : "getAllAlbums.html",
+		url : "loadFollowedAlbums.html",
 		success : function(data) {
 			$('#centerSideContent').empty();
 			addAlbumsToCenterContent(data);

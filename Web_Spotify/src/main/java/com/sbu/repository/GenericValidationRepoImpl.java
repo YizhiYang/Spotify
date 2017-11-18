@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
+import com.sbu.model.User;
 
 @Repository("GenericValidationRepo")
 @Transactional
@@ -43,6 +44,11 @@ public class GenericValidationRepoImpl implements GenericValidationRepo {
 
 	public boolean saveAristToDB(ArtistUser artist) {
 		em.persist(artist);
+		return true;
+	}
+
+	public boolean saveUserToDB(User user) {
+		em.persist(user);
 		return true;
 	}
 	

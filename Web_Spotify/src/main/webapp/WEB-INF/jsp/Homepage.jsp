@@ -37,8 +37,13 @@
   <script type="application/javascript"><%@ include file="js/ArtistJS.js" %></script>
   <script type="application/javascript"><%@ include file="js/albumPage.js" %></script>
   <script type="application/javascript"><%@ include file="js/artistPage.js" %></script>
+  <script type="application/javascript"><%@ include file="js/songsPage.js" %></script>
+  <script type="application/javascript"><%@ include file="js/browsePage.js" %></script>
+  
   
   <script type="application/javascript"><%@ include file="js/searchJS.js" %></script>
+  
+  <script type="application/javascript"><%@ include file="js/addToCollectionJS.js" %></script>
   
   <script type="application/javascript"><%@ include file="js/playlistJS.js" %></script>
 
@@ -63,7 +68,9 @@
                 </div>
                 <div id="userSongWrapper">
                     <ul>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Browse</div></li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Home-Browse-Button">Browse</div>
+                        </li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Radio</div></li>
                         <li class=userSongWrapperHeader>YOUR LIBRARY</li>
                         <li></li>
@@ -72,7 +79,7 @@
                         	<div class='userSongWrapperItem'>Recently Played</div>
                         </li>
                         <li class=userSongWrapperList>
-                        	<div class='userSongWrapperItem'>Songs</div>
+                        	<div class='userSongWrapperItem' id="Home-Song-Button">Songs</div>
                         </li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-Album-Button">Albums</div>
