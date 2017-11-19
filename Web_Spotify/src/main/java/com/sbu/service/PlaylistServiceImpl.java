@@ -36,7 +36,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	}
 
 	public String getUserPlaylistsInJSON(User user) throws JSONException{
-		List<Playlist> playlists = playlistRepo.getUserPlaylists(u);
+		List<Playlist> playlists = playlistRepo.getUserPlaylists(user);
 		return convertPlaylistsToJSON(playlists);
 	}
 
