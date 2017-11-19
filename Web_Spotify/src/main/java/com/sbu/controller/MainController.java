@@ -726,19 +726,15 @@ public class MainController {
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);
 		}
-		
-	    
 	}
+	
+	
 	
 	@RequestMapping(value="/addSongToPlaylist/{playlistId}/{songId}", method = RequestMethod.POST)
 	public void addSongToPlaylist(HttpServletRequest request, HttpServletResponse response, 
-			@PathVariable("playlistId") String playlistId, @PathVariable("songId") String songId) throws IOException{
-		
+			@PathVariable("playlistId") String playlistId, @PathVariable("songId") String songId) throws IOException{	
 		long plId = Long.parseLong(playlistId);
 		long sId = Long.parseLong(songId);
-		
-
-		
 		
 		if(playlistService.addSongToPlaylist(plId, sId)){
 			response.getWriter().write(REQUEST_SUCCESS);
@@ -747,6 +743,16 @@ public class MainController {
 		}
 		
 	}
+	
+	@RequestMapping(value="/getPlaylistSongs/{playlistId}", method = RequestMethod.POST)
+	public void getPlaylistSongs(HttpServletRequest request, HttpServletResponse response, 
+			@PathVariable("playlistId") String playlistId) throws IOException, JSONException{	
+		long plId = Long.parseLong(playlistId);
+		response.getWriter().write(playlistService.getPlaylistSongsInJSON(plId));;
+		
+	}
+	
+	
 	
 	
 	/**

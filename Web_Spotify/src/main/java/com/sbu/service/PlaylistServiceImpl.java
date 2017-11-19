@@ -64,6 +64,15 @@ public class PlaylistServiceImpl implements PlaylistService {
 		else
 			return false;
 	}
-
+	
+	public String getPlaylistSongsInJSON(long playlistId) throws JSONException{
+		
+		List<Playlist> playlists = playlistRepo.getPlaylistById(playlistId);
+		Playlist playlist = playlists.get(0);
+		
+		List<Song> songs = playlist.getSongs();
+		
+		return songService.convertSongsToJSON(songs);
+	}
 
 }

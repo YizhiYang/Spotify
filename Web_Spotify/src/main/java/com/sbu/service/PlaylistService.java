@@ -15,4 +15,6 @@ public interface PlaylistService {
 	
 	
 	String convertPlaylistsToJSON(List<Playlist> playlists) throws JSONException;
+	
+	public String getPlaylistSongsInJSON(long playlistId) throws JSONException;
 }
