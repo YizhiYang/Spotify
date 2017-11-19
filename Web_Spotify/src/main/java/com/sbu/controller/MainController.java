@@ -124,6 +124,13 @@ public class MainController {
 		}		
 	}
 	
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+		request.getSession().invalidate();
+		response.getWriter().write(REQUEST_SUCCESS);
+	}
+	
 	public User initNewUser(String username) {
 
 		User user = loginService.initUser(username);
