@@ -36,7 +36,6 @@ public class PlaylistServiceImpl implements PlaylistService {
 	}
 
 	public String getUserPlaylistsInJSON(User user) throws JSONException{
-		User u = (User) genericValidationRepo.getUserByID(user.getId().toString()).get(0);
 		List<Playlist> playlists = playlistRepo.getUserPlaylists(u);
 		return convertPlaylistsToJSON(playlists);
 	}
