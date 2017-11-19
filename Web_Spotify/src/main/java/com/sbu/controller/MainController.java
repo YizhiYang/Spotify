@@ -744,7 +744,7 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping(value="/getPlaylistSongs/{playlistId}", method = RequestMethod.POST)
+	@RequestMapping(value="/getPlaylistSongs/{playlistId}", method = RequestMethod.GET)
 	public void getPlaylistSongs(HttpServletRequest request, HttpServletResponse response, 
 			@PathVariable("playlistId") String playlistId) throws IOException, JSONException{	
 		long plId = Long.parseLong(playlistId);
