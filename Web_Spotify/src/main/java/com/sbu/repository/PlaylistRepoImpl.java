@@ -28,4 +28,20 @@ public class PlaylistRepoImpl implements PlaylistRepo {
 		return playlists;
 	}
 
+	
+	public List<Playlist> getPlaylistById(Long plId){
+		
+		List<Playlist> playlists = em.createQuery("SELECT p FROM Playlist p WHERE p.id = :plId")
+				.setParameter("plId", plId).getResultList();
+
+		return playlists;
+	}
+	
+	public boolean savePlaylist(Playlist playlist){
+		
+		em.persist(playlist);
+		
+		return true;
+	}
+
 }

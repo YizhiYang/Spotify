@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sbu.model.Playlist;
+import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.repository.PlaylistRepo;
 
@@ -17,6 +18,9 @@ public class PlaylistServiceImpl implements PlaylistService {
 
 	@Autowired
 	PlaylistRepo playlistRepo;
+	
+	@Autowired
+	SongService songService;
 	
 	public boolean makeNewPlaylist(User user, String playlistName) {
 		Playlist playlist = new Playlist();
@@ -45,5 +49,21 @@ public class PlaylistServiceImpl implements PlaylistService {
 		}
 		return jsonArray.toString();
 	}
+
+	public boolean addSongToPlaylist(long playlistId, long songId) {
+		
+		List<Playlist> playlists = playlistRepo.getPlaylistById(playlistId);
+		Playlist playlist = playlists.get(0);
+		
+		Song song = songService.getSongByID(String.valueOf(songId));
+		
+		playlist.getSongs().add(song);
+		
+		if(playlistRepo.saveNewPlaylist(playlist))
+			return true;
+		else
+			return false;
+	}
+
 
 }

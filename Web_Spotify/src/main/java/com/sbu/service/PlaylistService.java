@@ -10,6 +10,8 @@ import com.sbu.model.User;
 public interface PlaylistService {
 	boolean makeNewPlaylist(User user, String playlistName);
 	String getUserPlaylistsInJSON(User user) throws JSONException;
+	boolean addSongToPlaylist(long playlistId, long songId);
+	// get playlist by id, 
 	
 	
 	String convertPlaylistsToJSON(List<Playlist> playlists) throws JSONException;

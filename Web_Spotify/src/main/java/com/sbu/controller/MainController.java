@@ -906,5 +906,27 @@ public class MainController {
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
+	
+	
+	//@RequestMapping(value = "/addToFollowedSongs/{songId}", method = RequestMethod.POST)
+	//public void addToFollowedSongs(HttpServletResponse response, HttpServletRequest request,@PathVariable("songId") String songId)
+	
+	@RequestMapping(value="/addSongToPlaylist/{playlistId}/{songId}", method = RequestMethod.POST)
+	public void addSongToPlaylist(HttpServletRequest request, HttpServletResponse response, 
+			@PathVariable("playlistId") String playlistId, @PathVariable("songId") String songId) throws IOException{
+		
+		long plId = Long.parseLong(playlistId);
+		long sId = Long.parseLong(songId);
+		
+
+		
+		
+		if(playlistService.addSongToPlaylist(plId, sId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+		
+	}
  
 }
