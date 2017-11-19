@@ -33,11 +33,15 @@ import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.Song;
 import com.sbu.model.User;
+import com.sbu.service.AlbumService;
+import com.sbu.service.ArtistService;
 import com.sbu.service.ChangeProfileInfoService;
+import com.sbu.service.ContentFollowService;
 import com.sbu.service.GenericFileManageService;
 import com.sbu.service.LoginService;
+import com.sbu.service.PlaylistService;
 import com.sbu.service.SignupService;
-import com.sbu.service.SongUploadDownloadService;
+import com.sbu.service.SongService;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -71,12 +75,27 @@ public class MainController {
 	public static final String REQUEST_FAILURE = "failure";
 	public static final String FILE_NOT_FOUND_MESSAGE = "Sorry. The file you are looking for does not exist";
 	
+	
+	//ALBUM
+	public static final String ALBUMS_FILE_PATH = "AlbumImages/";
+	public static final String ALBUMS_EXTENSION = ".jpg";
+	
 	@Autowired
 	private LoginService loginService;
 	@Autowired
 	private SignupService signupService;
 	@Autowired
-	private SongUploadDownloadService songUploadService;
+	private SongService songService;
+	@Autowired
+	private AlbumService albumService;
+	@Autowired
+	private ArtistService artistService;
+	@Autowired
+	private ContentFollowService contentFollowService;
+	
+	@Autowired
+	private PlaylistService playlistService;
+	
 	@Autowired
 	private ChangeProfileInfoService changeProfileInfoService;
 
@@ -289,107 +308,44 @@ public class MainController {
 	
 	
 	
-	
-	
-	
-	
 	@RequestMapping(value="/getAllSongs", method = RequestMethod.GET)
-	public void getAllSongs(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
+	public void getAllSongs(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
 		
 		User user = (User)request.getSession().getAttribute("User");
 		if(user==null){
 			return;
 		}
 		
-		List<Song> list = songUploadService.getALLSongs();
+		String jsonString = songService.getAllSongsInJSON();
 
-		response.setContentType("text/plain");
-		Gson gson = new Gson();
-		String jsonString = gson.toJson(list);
 		System.out.println(jsonString);
 	    response.getWriter().write(jsonString);
 	}
 	
 	
-		@PostMapping(value = "/SongFileUpload")
-	    public void songUpload(MultipartHttpServletRequest request, HttpServletResponse response)
-	         throws IOException {
-
-		   User user = (User)request.getSession().getAttribute("User");
-			if(user==null){
-				return;
-			}
-			String songName = request.getParameter("songName");
-			String artistName = request.getParameter("artistName");
-			String albumName = request.getParameter("albumName");
-			String duration = request.getParameter("duration");
-			MultipartFile file = request.getFile("fileUp");
-			Song song = new Song();
-			song.setSong_name(songName);
-			song.setDuration(duration);
-
-			System.out.println(song.getSongId());
-
-			if(songUploadService.addSongToDatabase(song)){
-				System.out.println(song.getSongId());
-				
-				//NOW SAVE THE MUSIC FILE
-				ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-				File newFile = new File(classloader.getResource(SONG_FILE_PATH).getPath(),song.getSongId()+SONG_EXTENSION);		
-				BufferedOutputStream outputStream = new BufferedOutputStream(
-			               new FileOutputStream(newFile));
-				
-			         outputStream.write(file.getBytes());
-			         outputStream.flush();
-			         outputStream.close();
-			         
-			    
-			    response.setContentType("text/plain");
-			    response.getWriter().write(REQUEST_SUCCESS);
-			}else{
-				response.setContentType("text/plain");
-			    response.getWriter().write(REQUEST_FAILURE);
-			}
+	/**
+	***********
+	Album related Controller functions
+	***********
+	**/
+	@RequestMapping(value="/getAllAlbums", method = RequestMethod.GET)
+	public void getAllAlbums(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
 		}
 		
-		@PostMapping(value = "/UploadAlbum")
-		public void uploadAlbum(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException{
+		String jsonString = albumService.getAllAlbumsInJSON();
 
-			User user = (User)request.getSession().getAttribute("User");
-			if(user==null){
-				return;
-			}
-			
-			
-			
-			String albumName = request.getParameter("albumName");
-			String id = request.getParameter("artistID");
-			MultipartFile pic = request.getFile("fileUp");
-			
-			ArtistUser returnedArtist = fileManager.checkArtistExist(id);
-			
-			if(returnedArtist == null){
-				response.getWriter().write(REQUEST_FAILURE);
-			}
-			else{
-				
-				Album album = new Album();
-				album.setAlbum_name(albumName);
-				
-				returnedArtist.getAlbum().add(album);
-				
-			}
-			
-			fileManager.createPicInProfileImages(pic, id);
-			response.getWriter().write(REQUEST_SUCCESS);
-		}
+ 		response.setContentType("text/plain");
 		
-		
+		System.out.println(jsonString);
+	    response.getWriter().write(jsonString);
+	}
 	
-	
-	
-	@RequestMapping(value="/requestSongFile/{id}", method = RequestMethod.GET)
-    public void downloadSongFile(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") String id) throws IOException {
+	@RequestMapping(value="/requestAlbumImage/{id}", method = RequestMethod.GET)
+    public void requestAlbumImage(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") String id) throws IOException {
 		
 		User user = (User)request.getSession().getAttribute("User");
 		
@@ -406,19 +362,186 @@ public class MainController {
         
         String songFileName = null;
         
-        //songFileName = songUploadService.findSongFileBasedOnID(Long.valueOf(id));
+        songFileName = id + ALBUMS_EXTENSION;
+        if(songFileName == null){
+        	return;
+        }
+        
+        String songPath = classloader.getResource(ALBUMS_FILE_PATH).getPath();
+        System.out.println(classloader.getResource(ALBUMS_FILE_PATH).getPath());
+        System.out.println(songPath+songFileName);
+        
+        file = new File(songPath+songFileName);
+        if(!file.exists()){
+            String errorMessage = "Sorry. The file you are looking for does not exist";
+            System.out.println(errorMessage);
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+            outputStream.close();
+            return;
+        }
+         
+        String mimeType= URLConnection.guessContentTypeFromName(file.getName());
+        if(mimeType==null){
+            System.out.println("mimetype is not detectable, will take default");
+            mimeType = "application/octet-stream";
+        }
+         
+        System.out.println("mimetype : "+mimeType);
+         
+        response.setContentType(mimeType);
+        
+         
+        // "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
+        //   while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]
+        response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
+ 
+         
+        // "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting
+        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+        response.setContentLength((int)file.length());
+        
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+        //Copy bytes from source to destination(outputstream in this example), closes both streams.
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+    }
+	
+	@PostMapping(value = "/UploadAlbum")
+	public void uploadAlbum(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException{
+
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		
+		
+		String albumName = request.getParameter("albumName");
+		String id = request.getParameter("artistID");
+		MultipartFile pic = request.getFile("fileUp");
+		
+		ArtistUser returnedArtist = fileManager.checkArtistExist(id);
+		
+		if(returnedArtist == null){
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+		else{
+			
+			Album album = new Album();
+			album.setAlbum_name(albumName);
+			fileManager.saveAlbum(album);
+			
+			returnedArtist.getAlbum().add(album);
+			fileManager.saveArtist(returnedArtist);
+			
+			fileManager.createPicInProfileImages(pic, album.getAlbumId().toString());
+		}
+		
+		
+		response.getWriter().write(REQUEST_SUCCESS);
+	}
+	
+	@RequestMapping(value = "/getAllSongsInAlbum/{id}", method = RequestMethod.GET)
+	public void getAllSongsInAlbum(HttpServletResponse response, HttpServletRequest request,@PathVariable("id") String id)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		Album album = albumService.getAlbumByID(id);
+		String jsonString = songService.convertSongsToJSON(album.getSongs());
+		
+	    response.getWriter().write(jsonString);
+	}
+	
+	
+	/**
+	***********
+	Artist related Controller functions
+	***********
+	**/
+	
+	@RequestMapping(value = "/getAllAlbumsInArtist/{id}", method = RequestMethod.GET)
+	public void getAllAlbumsInArtist(HttpServletResponse response, HttpServletRequest request,@PathVariable("id") String id)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		ArtistUser artist = artistService.getArtistByArtistID(id);
+		String jsonString = albumService.convertAlbumsToJSON(artist.getAlbum());
+		
+	    response.getWriter().write(jsonString);
+	}
+	
+	
+	
+	/**
+	***********
+	Song related Controller functions
+	***********
+	**/
+	
+	@PostMapping(value = "/SongFileUpload")
+	public void songUpload(MultipartHttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		String songName = request.getParameter("songName");
+		String albumID = request.getParameter("albumID");
+		String duration = request.getParameter("duration");
+		MultipartFile file = request.getFile("fileUp");
+		
+		Album albumToSaveTo = albumService.getAlbumByID(albumID);
+		if(albumToSaveTo==null){
+			return;
+		}
+		
+		Song song = new Song();
+		song.setSongName(songName);
+		song.setDuration(duration);
+		song.setAlbum(albumToSaveTo);
+
+		if(songService.addSongToDatabase(song)){
+			//SAVE SONG FILE
+			fileManager.saveFileToLocation(file, SONG_FILE_PATH, song.getSongId()+SONG_EXTENSION);		         
+
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+	
+	
+	@RequestMapping(value="/requestSongFile/{id}", method = RequestMethod.GET)
+    public void downloadSongFile(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") String id) throws IOException {
+		
+//		User user = (User)request.getSession().getAttribute("User");
+//		
+//		if(user==null){
+//			System.out.println("Kicked out of Session");
+//			return;
+//		}
+		
+		System.out.println(id);
+
+        File file = null;
+
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        
+        String songFileName = null;
+        
         songFileName = id + SONG_EXTENSION;
         if(songFileName == null){
         	return;
         }
-        /*
-        if(Integer.valueOf(id) == 0){
-        	songFileName = "Activ-Doar Cu Tine.mp3";
-        }else if(Integer.valueOf(id) == 1){
-        	songFileName = "Jos - Crosses.mp3";
-        }
-        */
-        
         
         String songPath = classloader.getResource(SONG_FILE_PATH).getPath();
         System.out.println(classloader.getResource(SONG_FILE_PATH).getPath());
@@ -457,10 +580,199 @@ public class MainController {
         InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
-        
-        
-        
     }
+	
+	
+	/**
+	***********
+	Search related Controller functions
+	***********
+	**/
+	@RequestMapping(value = "/searchContent", method = RequestMethod.GET)
+	public void searchContent(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+
+		String songsJsonString = songService.getSearchSongResultsInJSON(request.getParameter("searchContent"));
+		String artistsJsonString = artistService.getSearchArtistResultsInJSON(request.getParameter("searchContent"));
+		String albumsJsonString = albumService.getSearchAlbumResultsInJSON(request.getParameter("searchContent"));
+		
+		JSONObject totalJsonObject = new JSONObject();
+		totalJsonObject.put("songsJson", songsJsonString);
+		totalJsonObject.put("artistsJson", artistsJsonString);
+		totalJsonObject.put("albumsJson", albumsJsonString);
+		
+		
+	    response.getWriter().write(totalJsonObject.toString());
+	}
+	/**
+	***********
+	Follow related Controller functions
+	***********
+	**/
+	
+	@RequestMapping(value = "/addToFollowedSongs/{songId}", method = RequestMethod.POST)
+	public void addToFollowedSongs(HttpServletResponse response, HttpServletRequest request,@PathVariable("songId") String songId)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		if(contentFollowService.addToUserFollowedSongs(user, songId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+	
+	
+	@RequestMapping(value = "/loadFollowedSongs", method = RequestMethod.GET)
+	public void loadFollowedSongs(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String jsonString = contentFollowService.getFollowedSongsInJSON(user);
+		
+		response.getWriter().write(jsonString);
+	}
+	
+	@RequestMapping(value = "/addToFollowedAlbums/{albumId}", method = RequestMethod.POST)
+	public void addToFollowedAlbums(HttpServletResponse response, HttpServletRequest request,@PathVariable("albumId") String albumId)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		if(contentFollowService.addToUserFollowedAlbums(user, albumId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+	
+	@RequestMapping(value = "/loadFollowedAlbums", method = RequestMethod.GET)
+	public void loadFollowedAlbums(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String jsonString = contentFollowService.getFollowedAlbumsInJSON(user);
+		
+		response.getWriter().write(jsonString);
+	}
+	
+	@RequestMapping(value = "/addToFollowedArtists/{artistId}", method = RequestMethod.POST)
+	public void addToFollowedArtists(HttpServletResponse response, HttpServletRequest request,@PathVariable("artistId") String artistId)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		if(contentFollowService.addToUserFollowedArtists(user, artistId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+	
+	@RequestMapping(value = "/loadFollowedArtists", method = RequestMethod.GET)
+	public void loadFollowedArtists(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String jsonString = contentFollowService.getFollowedArtistsInJSON(user);
+		
+		response.getWriter().write(jsonString);
+	}
+	
+	
+	/**
+	***********
+	Playlist related Controller functions
+	***********
+	**/
+	
+	@RequestMapping(value = "/addNewPlaylist", method = RequestMethod.POST)
+	public void addNewPlaylist(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String playlistName = request.getParameter("playlistName");
+		
+		if(playlistService.makeNewPlaylist(user, playlistName)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+		
+	    
+	}
+	
+	
+	/**
+	***********
+	Browse Page related Controller functions
+	***********
+	**/
+	@RequestMapping(value = "/getBrowsePageContent", method = RequestMethod.GET)
+	public void getBrowsePageContent(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+
+		String songsJsonString = songService.getAllSongsInJSON();
+		String artistsJsonString = artistService.getAllArtistsInJSON();
+		String albumsJsonString = albumService.getAllAlbumsInJSON();
+		
+		JSONObject totalJsonObject = new JSONObject();
+		totalJsonObject.put("songsJson", songsJsonString);
+		totalJsonObject.put("artistsJson", artistsJsonString);
+		totalJsonObject.put("albumsJson", albumsJsonString);
+		
+		
+	    response.getWriter().write(totalJsonObject.toString());
+	}
+	
+	
+	@RequestMapping(value = "/getUserPlaylist", method = RequestMethod.GET)
+	public void getUserPlaylist(HttpServletResponse response, HttpServletRequest request)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+
+		String jsonString = playlistService.getUserPlaylistsInJSON(user);
+		
+	    response.getWriter().write(jsonString);
+	}
+	
 	
 	
 	@RequestMapping(value = "/getUserProfile", method = RequestMethod.GET)
@@ -508,5 +820,91 @@ public class MainController {
 		}
 		
 	}
+	
+	
+	@PostMapping(value = "/MakeUserArist")
+	public void makeUserArtist(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String userID = request.getParameter("userID");
+		String artistName = request.getParameter("artistName");
+		
+		if(fileManager.makeNewArtist(userID, artistName)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+	
+	@RequestMapping(value="/getAllArtists", method = RequestMethod.GET)
+	public void getAllArtists(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String jsonString = artistService.getAllArtistsInJSON();
+
+ 		response.setContentType("text/plain");
+		
+		System.out.println(jsonString);
+	    response.getWriter().write(jsonString);
+	}
+	
+	@RequestMapping(value="/getProfileImageWithUsername/{username}", method = RequestMethod.GET)
+    public void getProfileImageWithUsername(HttpServletResponse response, HttpServletRequest request, @PathVariable("username") String username) throws IOException {
+		
+		User user = (User)request.getSession().getAttribute("User");
+		
+		if(user==null){
+			return;
+		}
+		
+		String profileFolderName = username;
+        File file = null;
+
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        
+        System.out.println(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName).getPath());
+        
+        file = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName+"/"+PROFILE_IMAGE_NAME).getFile());
+        if(!file.exists()){
+            String errorMessage = FILE_NOT_FOUND_MESSAGE;
+            System.out.println(errorMessage);
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+            outputStream.close();
+            return;
+        }
+         
+        String mimeType= URLConnection.guessContentTypeFromName(file.getName());
+        if(mimeType==null){
+            System.out.println("mimetype is not detectable, will take default");
+            mimeType = "application/octet-stream";
+        }
+         
+        System.out.println("mimetype : "+mimeType);
+         
+        response.setContentType(mimeType);
+         
+        /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
+            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
+        response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
+ 
+         
+        /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
+        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+        response.setContentLength((int)file.length());
+        
+
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+ 
+        //Copy bytes from source to destination(outputstream in this example), closes both streams.
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+    }
  
 }

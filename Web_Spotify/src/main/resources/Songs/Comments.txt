@@ -1,0 +1,1 @@
+This is the directory for all songs' files. Format is: [id].mp3.

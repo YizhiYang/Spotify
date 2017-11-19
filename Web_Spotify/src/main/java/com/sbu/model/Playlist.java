@@ -32,6 +32,8 @@ public class Playlist {
 	private double numOfFollwers;
 	
 	private int privacy;
+	
+	@Column(name="PLAYLIST_NAME")
 	private String name;
 	
 	private Date created;

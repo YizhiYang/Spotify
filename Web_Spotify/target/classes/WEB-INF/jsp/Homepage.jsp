@@ -10,6 +10,8 @@
 	<style type="text/css"><%@ include file="css/homepage/center.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/right.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/playListPrototypePage.css" %> </style>
+	<style type="text/css"><%@ include file="css/homepage/albumPage.css" %> </style>
+	<style type="text/css"><%@ include file="css/homepage/artistPage.css" %> </style>
   <link href="https://fonts.googleapis.com/css?family=Raleway | Asap | Work+Sans | Ubuntu | Oxygen | Archivo+Black | Rokkitt | Passion+One" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -26,9 +28,24 @@
   
   <script type="application/javascript"><%@ include file="js/jPlayer/jquery.jplayer.min.js" %></script>
   <script type="application/javascript"><%@ include file="js/jPlayer/jplayer.playlist.min.js" %></script>
+  
+  <script type="application/javascript"><%@ include file="js/CenterContentInsertionManager.js" %></script>
+  
   <script type="application/javascript"><%@ include file="js/SongJS.js" %></script>
   <script type="application/javascript"><%@ include file="js/playListPrototypePage.js" %></script>
   <script type="application/javascript"><%@ include file="js/AlbumJS.js" %></script>
+  <script type="application/javascript"><%@ include file="js/ArtistJS.js" %></script>
+  <script type="application/javascript"><%@ include file="js/albumPage.js" %></script>
+  <script type="application/javascript"><%@ include file="js/artistPage.js" %></script>
+  <script type="application/javascript"><%@ include file="js/songsPage.js" %></script>
+  <script type="application/javascript"><%@ include file="js/browsePage.js" %></script>
+  
+  
+  <script type="application/javascript"><%@ include file="js/searchJS.js" %></script>
+  
+  <script type="application/javascript"><%@ include file="js/addToCollectionJS.js" %></script>
+  
+  <script type="application/javascript"><%@ include file="js/playlistJS.js" %></script>
 
 
     
@@ -51,30 +68,83 @@
                 </div>
                 <div id="userSongWrapper">
                     <ul>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Browse</div></li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Home-Browse-Button">Browse</div>
+                        </li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Radio</div></li>
                         <li class=userSongWrapperHeader>YOUR LIBRARY</li>
                         <li></li>
                         <li></li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Recently Played</div></li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Songs</div></li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Albums</div></li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Artists</div></li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem'>Recently Played</div>
+                        </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Home-Song-Button">Songs</div>
+                        </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Home-Album-Button">Albums</div>
+                        </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Home-Artist-Button">Artists</div>
+                        </li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Stations</div></li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Local Files</div></li>
-                        <li class=userSongWrapperHeader>MY PLAYLISTS</li>
-                        <li></li>
-                        <li></li>
+                        <li class=userSongWrapperHeader>MY PLAYLISTS
+                        	<ul id="My-Playlist-List-Wrapper">
+                        		<li></li>
+                        	</ul>
+                        </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' data-toggle="modal" data-target="#addNewPlaylistPopUp">Add New Play List</div>
+                        </li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Liked from Radio</div></li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem' id="My-PlayList-Button">My Play List</div></li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="My-PlayList-Button">My Play List</div>
+                        </li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' data-toggle="modal" data-target="#uploadSongPopUp">Upload Song</div>
                         </li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' data-toggle="modal" data-target="#createAlbumPopUp">Create Album</div>
                         </li>
+                        </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' data-toggle="modal" data-target="#makeUserArtistPopUp">Make User Artist</div>
+                        </li>
                     </ul>
                 </div>
+                
+
+<!-- Pop up for adding new playlist -->
+<div class="modal fade" id="addNewPlaylistPopUp">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Playlist</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="add-new-playlist-form" method="post">
+  			<div class="form-group">
+    			<label class="col-form-label" for="addNewPlaylistNameInput">Name of Playlist to be added</label>
+    			<input type="text" class="form-control" id="addNewPlaylistNameInput" name="playlistName" placeholder="Playlist Name">
+  			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="submitAddNewPlaylistButton">Make Playlist</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+                
                 
 <!-- Pop up for uploading Song -->
 <div class="modal fade" id="uploadSongPopUp">
@@ -91,12 +161,10 @@
   			<div class="form-group">
   				<label class="col-form-label" for="formGroupSongNameInput">Song Name</label>
     			<input type="text" class="form-control" id="formGroupSongNameInput" name="songName" placeholder="Song Name">
-    			<label class="col-form-label" for="formGroupArtistNameInput">Artist Name</label>
-    			<input type="text" class="form-control" id="formGroupArtistNameInput" name="artistName" placeholder="Artist Name">
     			<label class="col-form-label" for="formGroupDurationInput">Duration</label>
     			<input type="text" class="form-control" id="formGroupDurationInput" name="duration" placeholder="0:00">
-    			<label class="col-form-label" for="formGroupAlbumNameInput" name="albumName">Album Name</label>
-    			<input type="text" class="form-control" id="formGroupAlbumNameInput" name="albumName" placeholder="Album Name">
+    			<label class="col-form-label" for="formGroupAlbumIDInput" name="albumID">Album ID</label>
+    			<input type="text" class="form-control" id="formGroupAlbumIDInput" name="albumID" placeholder="Album ID">
     			<label for="FormSongFile">Song File</label>
     			<input type="file" class="form-control-file" name="fileUp" id="FormSongFile" accept=".mp3">
   			</div>
@@ -141,7 +209,33 @@
 </div>
 
 
-
+<!-- Pop up for make user artist -->
+<div class="modal fade" id="makeUserArtistPopUp">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="make-user-artist-form" method="post">
+  			<div class="form-group">
+    			<label class="col-form-label" for="makeUserArtistUserIDInput">User ID to be added as Artist</label>
+    			<input type="text" class="form-control" id="makeUserArtistUserIDInput" name="userID" placeholder="User ID">
+    			<label class="col-form-label" for="makeUserArtistArtistNameInput">Artist Name</label>
+    			<input type="text" class="form-control" id="makeUserArtistArtistNameInput" name="artistName" placeholder="Artist Name">
+  			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="submitMakeUserArtistButton">Make User Artist</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -152,20 +246,18 @@
         
         </div>
         <div id="center">
-            <div id=centerTopBar>
-                <div id=centerTopWrapper>
-                    <div class=centerTopBarContent>
-<!--                        <i class="material-icons">search</i>-->
-                        <input class=centerTopBarContent type="text" name="firstname" value="Search">
-                    </div>
-                    <div class=centerTopBarContent>Overview</div>
-                    <div class=centerTopBarContent>Charts</div>
-                    <div class=centerTopBarContent>Genre</div>
-                    <div class=centerTopBarContent>More</div>
+            <div id="centerTopBar">
+                <div id="centerTopWrapper">
+                    <input class="centerTopBarContent" id="searchInput" type="text" name="searchContent">
+                    <i class="material-icons centerTopBarContent" id="searchButton">search</i>
+                    <div class="centerTopBarContent">Overview</div>
+                    <div class="centerTopBarContent">Charts</div>
+                    <div class="centerTopBarContent">Genre</div>
+                    <div class="centerTopBarContent">More</div>
                 </div>
             </div>
             <div id="centerSideContent">
-                <div id=centerSideContentWrapper>
+                <div class="centerSideContentWrapper">
                     <div id="contentTitle">
                         <div id="contentTitleWrapper" style="border-bottom:transparent;">
                             Sleep Well!
@@ -202,7 +294,7 @@
                         </div>
                     </div>
                 </div>
-                <div id=centerSideContentWrapper>
+                <div class="centerSideContentWrapper">
                     <div id="contentTitle">
                         <div id="contentTitleWrapper">
                             Genre & Mood
