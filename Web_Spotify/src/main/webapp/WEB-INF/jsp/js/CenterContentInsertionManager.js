@@ -21,17 +21,30 @@ function addSongsToCenterContent(jsonData){
                                                 <th>RELEASE</th>\
                                                 <th>DURATION</th>\
                                             </tr>');
+    $('#centerSideContent').append('</table>\
+	</div>');
                                     
     var jsonArray = jQuery.parseJSON(jsonData);
     
-    var contentToBeAdded ="";
-    
     for(var i=0; i<jsonArray.length; i++){
-    	contentToBeAdded += '<tr id=songPageListContent>\
-			<td><i class="material-icons song-content-play-button">play_circle_outline</i>\
-				<i class="material-icons SongPageFollowSong">add</i></td>';
-    	
     	var song = jsonArray[i];
+    	var contentToBeAdded = '<tr id=songPageListContent>\
+			<td><i class="material-icons song-content-play-button">play_circle_outline</i>\
+				<i class="material-icons SongPageFollowSong">add</i>\
+    		<div class="dropdown" style="position:absolute;display:inline-block;">\
+    		  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#000;">\
+    		    Add\
+    		  </button>\
+    		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+    		  
+    	$(".playlistTab").each(function(index){
+    			contentToBeAdded += '<div class="dropdown-item add-to-playlist-item" id="' + $(this).attr('id') + ',song' + song.songId
+    			+ '" style="color:#000;">' + $(this).html() + '</div>';
+    	});
+    		    
+    	contentToBeAdded += '</div>\
+            			</div>\
+            			</td>';
     	contentToBeAdded += '<td>' + song.songName + '</td>';
     	
     	var artistNames = song.artistNames;
@@ -49,11 +62,10 @@ function addSongsToCenterContent(jsonData){
     	
     	contentToBeAdded += '</tr>';
     	
+    	$('#PlayListPrototypeTable').append(contentToBeAdded);
+    	
     }
     
-    $('#centerSideContent').append(contentToBeAdded);
-    $('#centerSideContent').append('</table>\
-		</div>');
     
     var songList =[];
     
@@ -82,15 +94,34 @@ function addSongsToCenterContent(jsonData){
 		keyEnabled: true
 	});
 	
+    //REGISTER PLAY BUTTON CLICK
 	$(".song-content-play-button").each(function(index){
 		$(this).click(function(event){
 			myPlaylist.play(index);
 		});
 	});
 	
+	//REGISTER FOLLOW SONG CLICK
 	$(".SongPageFollowSong").each(function(index){
 		$(this).click(function(event){
 			addToFollowedSongs(jsonArray[index].songId);
+		});
+	});
+	
+	//REGISTER FOLLOW SONG CLICK
+	$(".SongPageFollowSong").each(function(index){
+		$(this).click(function(event){
+			addToFollowedSongs(jsonArray[index].songId);
+		});
+	});
+	
+	//REGISTER ADD SONG TO PLAYLIST CLICK
+	$(".add-to-playlist-item").each(function(index){
+		$(this).click(function(event){
+			var ids = $(this).attr('id').split(",");
+			var playlistId = ids[0].substring(8,ids[0].length);
+			var songId = ids[1].substring(4,ids[1].length);
+			addSongToPlayList(playlistId, songId);
 		});
 	});
 
@@ -182,7 +213,7 @@ function addArtistsToCenterContent(jsonData){
     contentToBeAdded+='</div>';
     $("#centerSideContent").append(contentToBeAdded);
     
-    $(".ArtistPageContent").each(function(index) {
+    $(".ArtistContentPicture").each(function(index) {
         $(this).on("click", function(event){
         	var artistID = $(this).attr("id");
         	goToArtistAlbums(artistID.substring(6, artistID.length));
