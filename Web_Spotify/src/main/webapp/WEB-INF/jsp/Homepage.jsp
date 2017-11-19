@@ -62,6 +62,7 @@
                         <div id=userInfo>
                             <div id=username>Jay Bird</div>
                             <div id=usertype>Basic User</div>
+                            <div id="logout-button"><i class="material-icons">power_settings_new</i></div>
                            	<!-- <div id=useredit>Profile</div> -->
                         </div>
                     </div>

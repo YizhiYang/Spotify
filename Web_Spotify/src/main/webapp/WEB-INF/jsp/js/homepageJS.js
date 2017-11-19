@@ -17,7 +17,11 @@ $( document ).ready(function() {
 		$('#jquery_jplayer_1').on($.jPlayer.event.play,  function(e){
 		    console.log("Current track", e.jPlayer.status.media);
 		    console.log("Currentr track index", myPlaylist.current);
-		});  
+		});
+		
+		$("#logout-button").click(function(event) {
+			logout();
+		});
 	});
 
 
@@ -90,5 +94,15 @@ function updateUserInfo(){
 		}
 	});
 
+}
+
+function logout(){
+	$.ajax({
+		type : "POST",
+		url : "logout.html",
+		success : function(data) {
+			window.location.replace("index.jsp");
+		}
+	});
 }
 

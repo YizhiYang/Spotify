@@ -756,7 +756,7 @@ public class MainController {
 	public void renamePlaylist(HttpServletResponse response, HttpServletRequest request
 			,@PathVariable("playlistId") String playlistId) throws IOException{
 		
-		String newName = request.getParameter("name");
+		String newName = request.getParameter("playlistName");
 		
 		if(playlistService.renamePlaylist(newName, playlistId)){
 			response.getWriter().write(REQUEST_SUCCESS);
