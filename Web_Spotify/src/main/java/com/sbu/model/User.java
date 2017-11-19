@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -43,13 +46,28 @@ public class User {
 	@Column(name="USERTYPE")
 	private String userType;
 
-	@OneToMany
+	@ManyToMany
+    @JoinTable(
+        name = "user_song", 
+        		joinColumns = { @JoinColumn(name = "USER_ID", nullable = false, updatable = false) }, 
+        inverseJoinColumns = { @JoinColumn(name = "SONG_ID", nullable = false, updatable = false) }
+    )
 	private List<Song> followedSongs = new ArrayList<Song>();
 	
-	@OneToMany
+	@ManyToMany
+    @JoinTable(
+        name = "user_album", 
+        		joinColumns = { @JoinColumn(name = "USER_ID", nullable = false, updatable = false) }, 
+        inverseJoinColumns = { @JoinColumn(name = "ALBUM_ID", nullable = false, updatable = false) }
+    )
 	private List<Album> followedAlbums = new ArrayList<Album>();
 	
-	@OneToMany
+	@ManyToMany
+    @JoinTable(
+        name = "user_artist", 
+        		joinColumns = { @JoinColumn(name = "USER_ID", nullable = false, updatable = false) }, 
+        inverseJoinColumns = { @JoinColumn(name = "ARTIST_ID", nullable = false, updatable = false) }
+    )
 	private List<ArtistUser> followedArtist = new ArrayList<ArtistUser>();
 
 	public String getEmail() {

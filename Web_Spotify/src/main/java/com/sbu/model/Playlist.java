@@ -3,6 +3,7 @@ package com.sbu.model;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +41,12 @@ public class Playlist {
 	
 	//private List<Genre> genre;
 
-	@OneToMany
+	@ManyToMany
+    @JoinTable(
+        name = "playlist_songs", 
+        		joinColumns = { @JoinColumn(name = "PLAYLIST_ID", nullable = false, updatable = false) }, 
+        inverseJoinColumns = { @JoinColumn(name = "SONG_ID", nullable = false, updatable = false) }
+    )
 	private List<Song> songs;
 	
 	@ManyToMany

@@ -809,8 +809,7 @@ public class MainController {
 			return;
 		}
 		
-		Gson gson = new Gson();
-		String jsonString = gson.toJson(user);
+		String jsonString = changeProfileInfoService.getUserInfoInJSON(user);
 	    response.getWriter().write(jsonString);
 	}
 	

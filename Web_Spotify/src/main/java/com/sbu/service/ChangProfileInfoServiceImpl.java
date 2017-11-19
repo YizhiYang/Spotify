@@ -5,7 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sbu.repository.ChangeProfileInfoRepo;
 
 import com.sbu.controller.MainController;
+import com.sbu.model.Playlist;
+import com.sbu.model.User;
 
 
 @Service("changProfileInfoService")
@@ -41,6 +47,16 @@ public class ChangProfileInfoServiceImpl implements ChangeProfileInfoService {
 	         outputStream.flush();
 	         outputStream.close();
 		return true;
+	}
+	
+	public String getUserInfoInJSON(User user) throws JSONException {
+
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("userName", user.getUserName());
+			jsonObject.put("email", user.getEmail());
+			jsonObject.put("location", user.getLocation());
+
+		return jsonObject.toString();
 	}
 
 }
