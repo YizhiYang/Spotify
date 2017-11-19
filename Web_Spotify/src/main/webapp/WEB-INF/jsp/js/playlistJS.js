@@ -80,7 +80,7 @@ function addSongToPlayList(playlistId, songId){
 function goToPlaylistSongs(playlistId){
 	$.ajax({
 		type : "GET",
-		url : "getPlaylistSongs.html",
+		url : "getPlaylistSongs/" + playlistId + ".html",
         success: function (data) {
         	$('#centerSideContent').empty();
 			addSongsToCenterContent(data);
