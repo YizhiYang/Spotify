@@ -5,7 +5,7 @@
 function addSongsToCenterContent(jsonData){
     $('#centerSideContent').append('<div class=centerSideContentWrapper id=PlayListPrototypeTop>\
                                             <div id="contentTitle">\
-                                                <div id="contentTitleWrapper" style="border-bottom:transparent; font-size:45px;">Songs</div>\
+                                                <div id="contentTitleWrapper" class="song-table-title" style="border-bottom:transparent; font-size:45px;">Songs</div>\
                                             </div>\
                                         </div>\
                                     </div>')

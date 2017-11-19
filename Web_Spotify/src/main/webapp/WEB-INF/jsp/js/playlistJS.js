@@ -60,7 +60,7 @@ function addToPlaylistList(jsonData){
 	//REGISTER FOLLOW SONG CLICK
 	$(".playlistTab").each(function(index){
 		$(this).click(function(event){
-			goToPlaylistSongs(jsonArray[index].playlistID);
+			goToPlaylistSongs(jsonArray[index].playlistID, jsonArray[index].playlistName);
 		});
 	});
 	
@@ -77,16 +77,21 @@ function addSongToPlayList(playlistId, songId){
 	});
 }
 
-function goToPlaylistSongs(playlistId){
+function goToPlaylistSongs(playlistId, playlistName){
 	$.ajax({
 		type : "GET",
 		url : "getPlaylistSongs/" + playlistId + ".html",
         success: function (data) {
         	$('#centerSideContent').empty();
 			addSongsToCenterContent(data);
+			$('.song-table-title').html(playlistName);
+			$('.song-table-title').click(function(event){
+				
+			});
         }
 	});
 }
+
 
 
 
