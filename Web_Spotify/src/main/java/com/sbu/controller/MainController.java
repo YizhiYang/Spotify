@@ -752,6 +752,20 @@ public class MainController {
 		
 	}
 	
+	@RequestMapping(value="renamePlaylist/{playlistId}", method = RequestMethod.POST)
+	public void renamePlaylist(HttpServletResponse response, HttpServletRequest request
+			,@PathVariable("playlistId") String playlistId) throws IOException{
+		
+		String newName = request.getParameter("name");
+		
+		if(playlistService.renamePlaylist(newName, playlistId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+		
+	}
+	
 	
 	
 	

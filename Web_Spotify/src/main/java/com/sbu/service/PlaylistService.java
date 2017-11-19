@@ -9,12 +9,14 @@ import com.sbu.model.User;
 
 public interface PlaylistService {
 	boolean makeNewPlaylist(User user, String playlistName);
-	String getUserPlaylistsInJSON(User user) throws JSONException;
-	boolean addSongToPlaylist(long playlistId, long songId);
-	// get playlist by id, 
 	
+	String getUserPlaylistsInJSON(User user) throws JSONException;
+	
+	boolean addSongToPlaylist(long playlistId, long songId);
 	
 	String convertPlaylistsToJSON(List<Playlist> playlists) throws JSONException;
 	
 	public String getPlaylistSongsInJSON(long playlistId) throws JSONException;
+	
+	public Boolean renamePlaylist(String newName, String playlistId);
 }

@@ -36,12 +36,13 @@ public class PlaylistRepoImpl implements PlaylistRepo {
 
 		return playlists;
 	}
-	
-	public boolean savePlaylist(Playlist playlist){
-		
-		em.persist(playlist);
-		
+
+	public boolean renamePlaylist(Playlist pl) {
+		em.persist(pl);
 		return true;
+	
 	}
+	
+
 
 }

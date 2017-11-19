@@ -56,7 +56,6 @@ public class PlaylistServiceImpl implements PlaylistService {
 		Playlist playlist = playlists.get(0);
 		
 		Song song = songService.getSongByID(String.valueOf(songId));
-		
 		playlist.getSongs().add(song);
 		
 		if(playlistRepo.saveNewPlaylist(playlist))
@@ -69,10 +68,20 @@ public class PlaylistServiceImpl implements PlaylistService {
 		
 		List<Playlist> playlists = playlistRepo.getPlaylistById(playlistId);
 		Playlist playlist = playlists.get(0);
-		
 		List<Song> songs = playlist.getSongs();
 		
 		return songService.convertSongsToJSON(songs);
+	}
+
+	public Boolean renamePlaylist(String newName, String playlistId) {
+
+		long plId = Long.parseLong(playlistId);
+		List<Playlist> playlists = playlistRepo.getPlaylistById(plId);
+		Playlist playlist = playlists.get(0);
+		playlist.setName(newName);
+		
+
+		return playlistRepo.renamePlaylist(playlist);
 	}
 
 }

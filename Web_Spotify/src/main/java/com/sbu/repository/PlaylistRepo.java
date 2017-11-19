@@ -9,4 +9,5 @@ public interface PlaylistRepo {
 	boolean saveNewPlaylist(Playlist playlist);
 	List<Playlist> getUserPlaylists(User user);
 	public List<Playlist> getPlaylistById(Long plId);
+	public boolean renamePlaylist(Playlist pl);
 }
