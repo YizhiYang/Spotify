@@ -20,5 +20,5 @@ public interface PlaylistService {
 	
 	public Boolean renamePlaylist(String newName, String playlistId);
 	
-	public Boolean removeplayList(String playlistId);
+	public Boolean removePlayList(String playlistId);
 }

@@ -45,8 +45,8 @@ public class PlaylistRepoImpl implements PlaylistRepo {
 
 	public void removePlaylist(Long plId) {
 	
-		em.createQuery("DELETE p From Playlist WHERE p.id = : plId")
-		.setParameter("plId", plId);
+		em.createQuery("DELETE From Playlist p WHERE p.id = :plId")
+		.setParameter("plId", plId).executeUpdate();
 		
 	}
 	

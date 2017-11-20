@@ -89,13 +89,19 @@ function goToPlaylistSongs(playlistId, playlistName){
         success: function (data) {
         	$('#centerSideContent').empty();
 			addSongsToCenterContent(data);
-			$('.song-table-title').html(playlistName);
-			$('.song-table-title').attr("data-toggle", "modal");
-			$('.song-table-title').attr("data-target", "#changePlaylistNamePopUp");
+			$('.song-table-title').html("");
+			$('.song-table-title').append('<div id="playlist-page-name-title">' + playlistName + '</div>');
+			$('.song-table-title').append('<i class="material-icons" id="removePlaylistButton">delete</i>');
+			$('#playlist-page-name-title').attr("data-toggle", "modal");
+			$('#playlist-page-name-title').attr("data-target", "#changePlaylistNamePopUp");
 			$('#changePlaylistNameInput').val(playlistName);
 			console.log($('#selectedPlaylist').html());
 			$('#selectedPlaylist').html(playlistId);
 			console.log($('#selectedPlaylist').html());
+			
+			$('#removePlaylistButton').click(function(event){
+				removePlaylist(playlistId);
+			});
         }
 	});
 }
@@ -113,6 +119,16 @@ var newPlaylistNameData = $('#change-playlist-name-form').serialize();
 			$('.song-table-title').html($('#changePlaylistNameInput').val());
 			$('#changePlaylistNamePopUp').modal('hide');
 			$('#playlist' + $('#selectedPlaylist').html()).html($('#changePlaylistNameInput').val());
+		}
+	});
+}
+
+function removePlaylist(playlistId){
+	$.ajax({
+		type : "POST",
+		url : "deletePlaylist/" + playlistId + ".html",
+		success : function(data) {
+			window.location.reload();
 		}
 	});
 }

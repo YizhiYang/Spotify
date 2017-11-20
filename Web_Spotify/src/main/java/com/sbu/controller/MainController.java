@@ -739,7 +739,12 @@ public class MainController {
 	
 	@RequestMapping(value="/addSongToPlaylist/{playlistId}/{songId}", method = RequestMethod.POST)
 	public void addSongToPlaylist(HttpServletRequest request, HttpServletResponse response, 
-			@PathVariable("playlistId") String playlistId, @PathVariable("songId") String songId) throws IOException{	
+			@PathVariable("playlistId") String playlistId, @PathVariable("songId") String songId) throws IOException{
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
 		long plId = Long.parseLong(playlistId);
 		long sId = Long.parseLong(songId);
 		
@@ -753,7 +758,11 @@ public class MainController {
 	
 	@RequestMapping(value="/getPlaylistSongs/{playlistId}", method = RequestMethod.GET)
 	public void getPlaylistSongs(HttpServletRequest request, HttpServletResponse response, 
-			@PathVariable("playlistId") String playlistId) throws IOException, JSONException{	
+			@PathVariable("playlistId") String playlistId) throws IOException, JSONException{			
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
 		long plId = Long.parseLong(playlistId);
 		response.getWriter().write(playlistService.getPlaylistSongsInJSON(plId));;
 		
@@ -762,6 +771,10 @@ public class MainController {
 	@RequestMapping(value="renamePlaylist/{playlistId}", method = RequestMethod.POST)
 	public void renamePlaylist(HttpServletResponse response, HttpServletRequest request
 			,@PathVariable("playlistId") String playlistId) throws IOException{
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
 		
 		String newName = request.getParameter("playlistName");
 		
@@ -775,9 +788,18 @@ public class MainController {
 	@RequestMapping(value="deletePlaylist/{playlistId}", method = RequestMethod.POST)
 	public void deletePlaylist(HttpServletResponse response, HttpServletRequest request
 			,@PathVariable("playlistId") String playlistId) throws IOException{
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+
 		
+<<<<<<< HEAD
 		
 		if(playlistService.removePlaylist(playlistId)){
+=======
+		if(playlistService.removePlayList(playlistId)){
+>>>>>>> 3bd0021d2ae8c25aa317f7b853e33c03405f3eab
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);
