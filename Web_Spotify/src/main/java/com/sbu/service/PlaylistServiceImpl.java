@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.sbu.model.Playlist;
 import com.sbu.model.Song;
 import com.sbu.model.User;
+import com.sbu.repository.GenericValidationRepo;
 import com.sbu.repository.PlaylistRepo;
 
 @Service("playlistService")
@@ -21,6 +22,9 @@ public class PlaylistServiceImpl implements PlaylistService {
 	
 	@Autowired
 	SongService songService;
+	
+	@Autowired
+	GenericValidationRepo genericValidationRepo;
 	
 	public boolean makeNewPlaylist(User user, String playlistName) {
 		Playlist playlist = new Playlist();

@@ -285,6 +285,7 @@
                     <div class="centerTopBarContent">Genre</div>
                     <div class="centerTopBarContent">More</div>
                 </div>
+                <div id="logout-button" style="float: right; margin-top: 13px; margin-right: 30px;"><i class="material-icons">power_settings_new</i></div>
             </div>
             <div id="centerSideContent">
                 <div class="centerSideContentWrapper">

@@ -112,6 +112,7 @@ var newPlaylistNameData = $('#change-playlist-name-form').serialize();
 			console.log(data);
 			$('.song-table-title').html($('#changePlaylistNameInput').val());
 			$('#changePlaylistNamePopUp').modal('hide');
+			$('#playlist' + $('#selectedPlaylist').html()).html($('#changePlaylistNameInput').val());
 		}
 	});
 }
