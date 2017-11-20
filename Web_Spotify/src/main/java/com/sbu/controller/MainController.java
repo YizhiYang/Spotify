@@ -776,9 +776,8 @@ public class MainController {
 	public void deletePlaylist(HttpServletResponse response, HttpServletRequest request
 			,@PathVariable("playlistId") String playlistId) throws IOException{
 		
-		String newName = request.getParameter("name");
 		
-		if(playlistService.renamePlaylist(newName, playlistId)){
+		if(playlistService.removePlaylist(playlistId)){
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);
