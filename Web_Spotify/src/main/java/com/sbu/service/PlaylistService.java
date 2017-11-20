@@ -19,4 +19,6 @@ public interface PlaylistService {
 	public String getPlaylistSongsInJSON(long playlistId) throws JSONException;
 	
 	public Boolean renamePlaylist(String newName, String playlistId);
+	
+	public Boolean removeplayList(String playlistId);
 }

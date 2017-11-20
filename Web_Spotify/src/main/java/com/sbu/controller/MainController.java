@@ -770,8 +770,21 @@ public class MainController {
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);
 		}
-		
 	}
+	
+	@RequestMapping(value="deletePlaylist/{playlistId}", method = RequestMethod.POST)
+	public void deletePlaylist(HttpServletResponse response, HttpServletRequest request
+			,@PathVariable("playlistId") String playlistId) throws IOException{
+		
+		String newName = request.getParameter("name");
+		
+		if(playlistService.renamePlaylist(newName, playlistId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+
 	
 	
 	
