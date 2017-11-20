@@ -89,10 +89,11 @@ function goToPlaylistSongs(playlistId, playlistName){
         success: function (data) {
         	$('#centerSideContent').empty();
 			addSongsToCenterContent(data);
-			$('.song-table-title').html(playlistName);
+			$('.song-table-title').html("");
+			$('.song-table-title').append('<div id="playlist-page-name-title">' + playlistName + '</div>');
 			$('.song-table-title').append('<i class="material-icons" id="removePlaylistButton">delete</i>');
-			$('.song-table-title').attr("data-toggle", "modal");
-			$('.song-table-title').attr("data-target", "#changePlaylistNamePopUp");
+			$('#playlist-page-name-title').attr("data-toggle", "modal");
+			$('#playlist-page-name-title').attr("data-target", "#changePlaylistNamePopUp");
 			$('#changePlaylistNameInput').val(playlistName);
 			console.log($('#selectedPlaylist').html());
 			$('#selectedPlaylist').html(playlistId);
@@ -125,7 +126,7 @@ var newPlaylistNameData = $('#change-playlist-name-form').serialize();
 function removePlaylist(playlistId){
 	$.ajax({
 		type : "POST",
-		url : "removePlaylist/" + playlistId + ".html",
+		url : "deletePlaylist/" + playlistId + ".html",
 		success : function(data) {
 			window.location.reload();
 		}

@@ -88,9 +88,13 @@ public class PlaylistServiceImpl implements PlaylistService {
 		return playlistRepo.renamePlaylist(playlist);
 	}
 
-	public Boolean removeplayList(String playlistId) {
+	public Boolean removePlayList(String playlistId) {
 		
 		Long plId = Long.parseLong(playlistId);
+		List<Playlist> playlists = playlistRepo.getPlaylistById(plId);
+		Playlist playlist = playlists.get(0);
+		playlist.getSongs().clear();
+		playlistRepo.saveNewPlaylist(playlist);
 		playlistRepo.removePlaylist(plId);
 		
 		return true;
