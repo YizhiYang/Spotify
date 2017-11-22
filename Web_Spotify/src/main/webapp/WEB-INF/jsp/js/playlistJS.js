@@ -82,6 +82,17 @@ function addSongToPlayList(playlistId, songId){
 	});
 }
 
+function removeSongFromPlaylist(playlistId, playlistName, songId){
+	$.ajax({
+		type : "POST",
+		url : "removeSongFromPlaylist/" + playlistId + "/" + songId+ ".html",
+        success: function (data) {
+            alert(data)
+            goToPlaylistSongs(playlistId, playlistName);
+        }
+	});
+}
+
 function goToPlaylistSongs(playlistId, playlistName){
 	$.ajax({
 		type : "GET",
@@ -89,15 +100,26 @@ function goToPlaylistSongs(playlistId, playlistName){
         success: function (data) {
         	$('#centerSideContent').empty();
 			addSongsToCenterContent(data);
+			//ADD AND REGISTER REMOVE SONG FROM PLAYLIST BUTTON
+			$('.songPageListContent').each(function(index){
+				$(this).first().append('<i class="material-icons removeSongFromPlaylistButton">remove_circle</i>');
+			});
+			
+			$('.removeSongFromPlaylistButton').each(function(index){
+				$(this).click(function(event){
+					var songIdString = $('.songPageListContent').eq(index).attr("id");
+					removeSongFromPlaylist(playlistId, playlistName, songIdString.substring(4, songIdString.length));
+				});
+			});
+			
+			//CHANGE "Songs" TO PLAYLIST NAME,AND REGISTER RENAME AND DELETE FUNCTIONS
 			$('.song-table-title').html("");
 			$('.song-table-title').append('<div id="playlist-page-name-title">' + playlistName + '</div>');
 			$('.song-table-title').append('<i class="material-icons" id="removePlaylistButton">delete</i>');
 			$('#playlist-page-name-title').attr("data-toggle", "modal");
 			$('#playlist-page-name-title').attr("data-target", "#changePlaylistNamePopUp");
 			$('#changePlaylistNameInput').val(playlistName);
-			console.log($('#selectedPlaylist').html());
 			$('#selectedPlaylist').html(playlistId);
-			console.log($('#selectedPlaylist').html());
 			
 			$('#removePlaylistButton').click(function(event){
 				removePlaylist(playlistId);

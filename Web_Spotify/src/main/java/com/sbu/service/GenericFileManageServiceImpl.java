@@ -15,13 +15,9 @@ import com.sbu.controller.MainController;
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.User;
-import com.sbu.repository.GenericValidationRepo;
 
 @Service("fileManager")
 public class GenericFileManageServiceImpl implements GenericFileManageService {
-	
-	@Autowired
-	private GenericValidationRepo genericValidationRepo;
 	
 	
 	public void createPicInProfileImages(MultipartFile file, String id) throws IOException{
@@ -46,37 +42,6 @@ public class GenericFileManageServiceImpl implements GenericFileManageService {
 	         outputStream.write(file.getBytes());
 	         outputStream.flush();
 	         outputStream.close();
-		
-	}
-	
-	
-	public ArtistUser checkArtistExist(String id){
-		
-		return (ArtistUser)genericValidationRepo.checkArtistExist(id).get(0);
-	}
-
-
-	public boolean saveAlbum(Album album) {
-		return genericValidationRepo.saveAlbumToDB(album);
-	}
-
-
-	public boolean saveArtist(ArtistUser artist) {
-		return genericValidationRepo.saveAristToDB(artist);
-	}
-
-
-	public boolean makeNewArtist(String userID, String artistName) {
-		List userResult = genericValidationRepo.getUserByID(userID);
-		if(userResult.isEmpty()){
-			return false;
-		}else{
-			ArtistUser artist = new ArtistUser();
-			artist.setUser((User)(userResult.get(0)));;
-			artist.setArtistName(artistName);
-			genericValidationRepo.saveAristToDB(artist);
-			return true;
-		}
 		
 	}
 

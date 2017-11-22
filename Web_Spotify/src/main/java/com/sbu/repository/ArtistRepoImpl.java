@@ -36,4 +36,25 @@ public class ArtistRepoImpl implements ArtistRepo {
 		.setParameter("searchString", "%"+searchString+"%").getResultList();
 		return result;
 	}
+
+	public List<ArtistUser> getArtistsOfAlbum(long albumId) {
+		List<ArtistUser> result = em.createQuery("SELECT a FROM ArtistUser a JOIN a.album al WHERE al.albumId = :albumId")
+		.setParameter("albumId", albumId).getResultList();
+		return result;
+	}
+	
+
+	public boolean saveAristToDB(ArtistUser artist) {
+		em.persist(artist);
+		return true;
+	}
+	
+	public List checkArtistExist(String id) {
+		
+		long artistId = Long.valueOf(id);
+		
+		List result = em.createQuery("SELECT u FROM ArtistUser u WHERE u.artistID = :id")
+		.setParameter("id", artistId).getResultList();
+		return result;
+	}
 }

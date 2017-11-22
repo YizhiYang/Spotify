@@ -427,7 +427,7 @@ public class MainController {
 		String id = request.getParameter("artistID");
 		MultipartFile pic = request.getFile("fileUp");
 		
-		ArtistUser returnedArtist = fileManager.checkArtistExist(id);
+		ArtistUser returnedArtist = artistService.checkArtistExist(id);
 		
 		if(returnedArtist == null){
 			response.getWriter().write(REQUEST_FAILURE);
@@ -436,10 +436,10 @@ public class MainController {
 			
 			Album album = new Album();
 			album.setAlbum_name(albumName);
-			fileManager.saveAlbum(album);
+			albumService.saveAlbum(album);
 			
 			returnedArtist.getAlbum().add(album);
-			fileManager.saveArtist(returnedArtist);
+			artistService.saveArtist(returnedArtist);
 			
 			fileManager.createPicInProfileImages(pic, album.getAlbumId().toString());
 		}
@@ -447,6 +447,20 @@ public class MainController {
 		
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
+	
+	@RequestMapping(value = "/removeAlbum/{albumID}", method = RequestMethod.POST)
+	public void removeAlbum(HttpServletResponse response, HttpServletRequest request,@PathVariable("albumID") String albumID)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		albumService.removeAlbum(albumID);
+	    response.getWriter().write(REQUEST_SUCCESS);
+	}
+	
 	
 	@RequestMapping(value = "/getAllSongsInAlbum/{id}", method = RequestMethod.GET)
 	public void getAllSongsInAlbum(HttpServletResponse response, HttpServletRequest request,@PathVariable("id") String id)
@@ -756,6 +770,25 @@ public class MainController {
 		
 	}
 	
+	@RequestMapping(value="/removeSongFromPlaylist/{playlistId}/{songId}", method = RequestMethod.POST)
+	public void removeSongFromPlaylist(HttpServletRequest request, HttpServletResponse response, 
+			@PathVariable("playlistId") String playlistId, @PathVariable("songId") String songId) throws IOException{
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		long plId = Long.parseLong(playlistId);
+		long sId = Long.parseLong(songId);
+		
+		if(playlistService.removeSongFromPlaylist(plId, sId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+		
+	}
+	
 	@RequestMapping(value="/getPlaylistSongs/{playlistId}", method = RequestMethod.GET)
 	public void getPlaylistSongs(HttpServletRequest request, HttpServletResponse response, 
 			@PathVariable("playlistId") String playlistId) throws IOException, JSONException{			
@@ -905,7 +938,7 @@ public class MainController {
 		String userID = request.getParameter("userID");
 		String artistName = request.getParameter("artistName");
 		
-		if(fileManager.makeNewArtist(userID, artistName)){
+		if(artistService.makeNewArtist(userID, artistName)){
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);

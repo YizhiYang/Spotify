@@ -14,6 +14,8 @@ public interface PlaylistService {
 	
 	boolean addSongToPlaylist(long playlistId, long songId);
 	
+	boolean removeSongFromPlaylist(long playlistId, long songId);
+	
 	String convertPlaylistsToJSON(List<Playlist> playlists) throws JSONException;
 	
 	public String getPlaylistSongsInJSON(long playlistId) throws JSONException;

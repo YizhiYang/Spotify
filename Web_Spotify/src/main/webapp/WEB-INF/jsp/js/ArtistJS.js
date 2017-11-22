@@ -27,3 +27,23 @@ function makeUserArtist(){
         },
 	});
 }
+
+function removeArtist(artistID){
+	$.ajax({
+		type : "POST",
+		url : "removeArtist/" + artistID + ".html",
+        success: function (data) {
+            alert(data)
+            removeArtistFromRender(artistID);
+        }
+	});
+}
+
+function removeArtistFromRender(artistID){
+	$(".AlbumContentPicture").each(function(index) {
+        var artistIDString = $(this).attr("id");
+        if(artistIDString === ("artist"+artistID)){
+        	$(".AlbumPageContent").eq(index).remove();
+        }
+    });
+}

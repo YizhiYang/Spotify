@@ -45,3 +45,23 @@ function createAlbum(){
         processData: false
 	});
 }
+
+function removeAlbum(albumID){
+	$.ajax({
+		type : "POST",
+		url : "removeAlbum/" + albumID + ".html",
+        success: function (data) {
+            alert(data)
+            removeAlbumFromRender(albumID);
+        }
+	});
+}
+
+function removeAlbumFromRender(albumID){
+	$(".AlbumContentPicture").each(function(index) {
+        var albumIDString = $(this).attr("id");
+        if(albumIDString === ("album"+albumID)){
+        	$(".AlbumPageContent").eq(index).remove();
+        }
+    });
+}

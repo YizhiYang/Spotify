@@ -45,7 +45,7 @@ td {
     animation-duration: 1s;
 }
 
-#songPageListContent:hover{
+.songPageListContent:hover{
     background-color:grey;
     cursor: pointer;
 }

@@ -37,4 +37,14 @@ public class AlbumRepoImpl implements AlbumRepo {
 		return result;
 	}
 
+	public void removeAlbum(Long albumId) {
+		em.createQuery("DELETE From Album a WHERE a.albumId = :albumId")
+		.setParameter("albumId", albumId).executeUpdate();
+	}
+	
+	public boolean saveAlbumToDB(Album album) {
+		em.persist(album);
+		return true;
+	}
+
 }

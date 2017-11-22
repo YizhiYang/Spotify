@@ -71,4 +71,11 @@ public class SongServiceImpl implements SongService {
 		return convertSongsToJSON(songs);
 	}
 
+	public void removeSong(Song song) {
+		//REMOVE FROM ALL USER FOLLOWS
+		
+		//REMOVE FROM ALL PLAYLISTS THAT HAS THIS SONG
+		
+	}
+
 }

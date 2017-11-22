@@ -28,7 +28,7 @@ function addSongsToCenterContent(jsonData){
     
     for(var i=0; i<jsonArray.length; i++){
     	var song = jsonArray[i];
-    	var contentToBeAdded = '<tr id=songPageListContent>\
+    	var contentToBeAdded = '<tr class="songPageListContent" id="song' + song.songId + '">\
 			<td><i class="material-icons song-content-play-button">play_circle_outline</i>\
 				<i class="material-icons SongPageFollowSong">add</i>\
     		<div class="dropdown" style="position:absolute;display:inline-block;">\
@@ -161,6 +161,7 @@ function addAlbumsToCenterContent(jsonData){
     	}
     	
     	contentToBeAdded +='<i class="material-icons AlbumPageFollowAlbum">add</i>\
+    						<i class="material-icons removeAlbumButton">delete</i>\
     						</div>\
     						</div>';
     	
@@ -179,6 +180,12 @@ function addAlbumsToCenterContent(jsonData){
     $(".AlbumPageFollowAlbum").each(function(index){
 		$(this).click(function(event){
 			addToFollowedAlbums(jsonArray[index].albumId);
+		});
+	});
+    
+    $(".removeAlbumButton").each(function(index){
+		$(this).click(function(event){
+			removeAlbum(jsonArray[index].albumId);
 		});
 	});
 }
@@ -207,6 +214,7 @@ function addArtistsToCenterContent(jsonData){
                						<div class=ArtistContentListLength>' + artist.totalNumberOfSongs + ' Songs</div>\
             					</div>\
             					<i class="material-icons ArtistPageFollowArtist">add</i>\
+            					<i class="material-icons removeArtistButton">delete</i>\
     						</div>'
     }
     
@@ -223,6 +231,12 @@ function addArtistsToCenterContent(jsonData){
     $(".ArtistPageFollowArtist").each(function(index){
 		$(this).click(function(event){
 			addToFollowedArtists(jsonArray[index].artistID);
+		});
+	});
+    
+    $(".removeArtistButton").each(function(index){
+		$(this).click(function(event){
+			removeArtistButton(jsonArray[index].artistID);
 		});
 	});
 

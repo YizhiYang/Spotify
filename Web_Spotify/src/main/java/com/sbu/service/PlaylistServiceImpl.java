@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.sbu.model.Playlist;
 import com.sbu.model.Song;
 import com.sbu.model.User;
-import com.sbu.repository.GenericValidationRepo;
 import com.sbu.repository.PlaylistRepo;
 
 @Service("playlistService")
@@ -22,9 +21,6 @@ public class PlaylistServiceImpl implements PlaylistService {
 	
 	@Autowired
 	SongService songService;
-	
-	@Autowired
-	GenericValidationRepo genericValidationRepo;
 	
 	public boolean makeNewPlaylist(User user, String playlistName) {
 		Playlist playlist = new Playlist();
@@ -67,6 +63,23 @@ public class PlaylistServiceImpl implements PlaylistService {
 		else
 			return false;
 	}
+	
+	public boolean removeSongFromPlaylist(long playlistId, long songId) {
+		List<Playlist> playlists = playlistRepo.getPlaylistById(playlistId);
+		Playlist playlist = playlists.get(0);
+		Song songToRemove = null;
+		for(Song s: playlist.getSongs()){
+			if(s.getSongId() == songId){
+				songToRemove = s;
+			}
+		}
+		playlist.getSongs().remove(songToRemove);
+		if(playlistRepo.saveNewPlaylist(playlist))
+			return true;
+		else
+			return false;
+	}
+
 	
 	public String getPlaylistSongsInJSON(long playlistId) throws JSONException{
 		
