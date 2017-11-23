@@ -1,7 +1,11 @@
+//THE LOADED LIST OF SONGS FOR THE MUSIC PLAYER
 var myPlaylist;
+//STORES THE LIST OF SONGS USER IS FOLLOWING
+var userFollowedSongs;
 
 $( document ).ready(function() {
 		getUserName();
+		reloadFollowedSongs();
 		
 		$("#profile-image-chooser").change(function(event) {
 			uploadProfileImage();
@@ -9,10 +13,7 @@ $( document ).ready(function() {
 		
 		$("#save-user-info-update-changes-button").click(function(event) {
 			updateUserInfo();
-		});
-		
-		
-		
+		});	
 		
 		$('#jquery_jplayer_1').on($.jPlayer.event.play,  function(e){
 		    console.log("Current track", e.jPlayer.status.media);
@@ -106,3 +107,12 @@ function logout(){
 	});
 }
 
+function reloadFollowedSongs(){
+	$.ajax({
+		type : "GET",
+		url : "loadFollowedSongs.html",
+		success : function(data) {
+			userFollowedSongs = data;
+		}
+	});
+}

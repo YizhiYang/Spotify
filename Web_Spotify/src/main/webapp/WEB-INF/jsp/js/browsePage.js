@@ -13,7 +13,7 @@ function getBrowsePageContent(){
 		url : "getBrowsePageContent.html",
         success: function (data) {
         	$('#centerSideContent').empty();
-        	renderAllSearchResults(data);
+        	renderResults(data);
         },
 	});
 }

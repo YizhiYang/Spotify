@@ -78,4 +78,18 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 		return artistService.convertArtistsToJSON(u.getFollowedArtist());
 	}
 
+
+	public boolean removeFromFollowedSongs(User user, String songId) {
+		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		Song songToUnfollow = null;
+		for(Song song: u.getFollowedSongs()){
+			if(song.getSongId() == Long.valueOf(songId)){
+				songToUnfollow = song;
+			}
+		}
+		u.getFollowedSongs().remove(songToUnfollow);
+		signupRepo.saveUserToDB(u);
+		return true;
+	}
+
 }
