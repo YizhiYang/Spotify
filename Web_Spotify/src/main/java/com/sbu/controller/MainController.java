@@ -270,6 +270,7 @@ public class MainController {
 		}
 		
 		String profileFolderName = user.getUserName();
+		System.out.println(profileFolderName);
         File file = null;
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
@@ -1032,6 +1033,32 @@ public class MainController {
 	//@RequestMapping(value = "/addToFollowedSongs/{songId}", method = RequestMethod.POST)
 	//public void addToFollowedSongs(HttpServletResponse response, HttpServletRequest request,@PathVariable("songId") String songId)
 	
+	/*Additional Function that checks if Artist is associated With a User, if not, Add a user account*/
 	
+	@RequestMapping(value = "/checkAndAddAccountForArtists")
+	public void checkAndAddAccountForArtists(Model model, HttpServletRequest request) throws IOException {
+		List<ArtistUser> artists = artistService.getAllArtists();
+		for(ArtistUser artist: artists){
+			if(artist.getUser()==null){
+				String artistname = artist.getArtistName();
+				artistname = artistname.replaceAll(" ", "");
+				String username = artistname;
+				boolean userNameAvailable = signupService.validateUsername(username);
+				int counter = 0;
+				while(userNameAvailable == false){
+					username = artistname + counter;
+					userNameAvailable = signupService.validateUsername(username);
+					counter++;
+				}
+				User user = new User();
+				user.setUserName(username);
+				user.setPassword(username);
+				signupService.signupUser(user, request);
+				artist.setUser(user);
+				artistService.saveArtist(artist);
+			}
+		}
+		
+	}
  
 }
