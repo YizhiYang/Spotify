@@ -78,8 +78,6 @@ public class AlbumServiceImpl implements AlbumService {
 		//REMOVE SONGS IN ALBUM
 		List<Song> songs = getAlbumByID(albumID).getSongs();
 		for(int i=0; i<songs.size(); i++){
-			
-			// potential error
 			songService.removeSong(String.valueOf(songs.get(i).getSongId()));
 		}
 		//REMOVE ALBUM ARTIST RELATION
@@ -94,6 +92,8 @@ public class AlbumServiceImpl implements AlbumService {
 			artist.getAlbum().remove(albumToRemove);
 			artistService.saveArtist(artist);
 		}
+		//REMOVE FROM ALL FOLLOWED ALBUM FOR ALL USERS WHO FOLLOWS THIS ALBUM
+		
 		//REMOVE ALBUM
 		albumRepo.removeAlbum(albumIdLong);
 		return true;

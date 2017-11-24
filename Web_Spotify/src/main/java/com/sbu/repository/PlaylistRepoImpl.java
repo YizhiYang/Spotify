@@ -53,7 +53,7 @@ public class PlaylistRepoImpl implements PlaylistRepo {
 	public List<Playlist> getPlaylistsThatContainsSong(String songId) {
 		List<Playlist> results = em.createQuery("SELECT p FROM Playlist p JOIN p.songs s WHERE s.songId= :songId")
 		.setParameter("songId", Long.valueOf(songId)).getResultList();
-		return null;
+		return results;
 	}
 	
 

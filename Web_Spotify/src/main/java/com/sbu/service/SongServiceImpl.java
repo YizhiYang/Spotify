@@ -101,8 +101,9 @@ public class SongServiceImpl implements SongService {
 		List<Playlist> lists = playlistService.getPlaylistsThatContainsSong(songId);
 		
 		for(int i = 0; i < lists.size(); i++){
-			playlistService.removeSongFromPlaylist(lists.get(i).getId(), songId);
+			playlistService.removeSongFromPlaylist(lists.get(i).getId(), Long.valueOf(songId));
 		}
+		songRepo.removeSong(songId);
 	}
 
 

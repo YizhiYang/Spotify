@@ -49,5 +49,11 @@ public class SongRepoImpl implements SongRepo {
 				.setParameter("songId", Long.valueOf(songId)).getResultList();
 		return results;
 	}
+
+
+	public void removeSong(String songId) {
+		em.createQuery("DELETE From Song s WHERE s.songId = :songId")
+		.setParameter("songId", Long.valueOf(songId)).executeUpdate();
+	}
 	
 }

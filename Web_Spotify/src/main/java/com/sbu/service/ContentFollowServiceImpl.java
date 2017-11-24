@@ -101,4 +101,10 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 		return songRepo.getAllFollowers(songId);
 	}
 
+
+	public boolean removeFromFollowedAlbums(User user, String albumId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

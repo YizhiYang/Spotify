@@ -13,5 +13,7 @@ public interface SongRepo {
 	
 	List<Song> getSearchSongResults(String searchString);
 	List<User> getAllFollowers(String songId);
+	
+	void removeSong(String songId);
 
 }
