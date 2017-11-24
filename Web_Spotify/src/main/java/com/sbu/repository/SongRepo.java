@@ -12,5 +12,6 @@ public interface SongRepo {
 	List<Song> getSongByID(String songId);
 	
 	List<Song> getSearchSongResults(String searchString);
+	List<User> getAllFollowers(String songId);
 
 }

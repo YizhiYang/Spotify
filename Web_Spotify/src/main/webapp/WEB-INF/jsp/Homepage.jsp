@@ -71,10 +71,7 @@
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-Browse-Button">Browse</div>
                         </li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Radio</div></li>
-                        <li class=userSongWrapperHeader>YOUR LIBRARY</li>
-                        <li></li>
-                        <li></li>
+                        <li class="sideBarMenuHeader">YOUR LIBRARY</li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem'>Recently Played</div>
                         </li>
@@ -89,7 +86,7 @@
                         </li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Stations</div></li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Local Files</div></li>
-                        <li class=userSongWrapperHeader>MY PLAYLISTS
+                        <li class="sideBarMenuHeader">MY PLAYLISTS
                         	<ul id="My-Playlist-List-Wrapper">
                         		<li></li>
                         	</ul>
