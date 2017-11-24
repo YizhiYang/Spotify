@@ -481,7 +481,6 @@
     							style="position: absolute; top:0; width:60px;height:60px;opacity: 0;">
     						</form>
     						</div>
-
       </div>
       <div class="modal-body">
 		<form id="update-user-info-form" method="post">
@@ -502,6 +501,26 @@
     </div>
   </div>
 </div>
+
+  <div class="modal fade" id="successPopUp" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>PlaceHolder</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 
 
