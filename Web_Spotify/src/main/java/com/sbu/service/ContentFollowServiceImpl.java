@@ -1,5 +1,7 @@
 package com.sbu.service;
 
+import java.util.List;
+
 import org.hibernate.Hibernate;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import com.sbu.model.ArtistUser;
 import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.repository.SignupRepo;
+import com.sbu.repository.SongRepo;
 
 @Service("contentFollowService")
 public class ContentFollowServiceImpl implements ContentFollowService {
@@ -26,7 +29,8 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 	@Autowired
 	private SignupRepo signupRepo;
 	
-	
+	@Autowired
+	private SongRepo songRepo;
 	
 	public boolean addToUserFollowedSongs(User user, String songId) {
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
@@ -90,6 +94,11 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 		u.getFollowedSongs().remove(songToUnfollow);
 		signupRepo.saveUserToDB(u);
 		return true;
+	}
+
+
+	public List<User> getAllFollowersOfSong(String songId) {
+		return songRepo.getAllFollowers(songId);
 	}
 
 }

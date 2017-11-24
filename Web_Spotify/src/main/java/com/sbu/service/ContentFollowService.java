@@ -1,7 +1,10 @@
 package com.sbu.service;
 
+import java.util.List;
+
 import org.json.JSONException;
 
+import com.sbu.model.Song;
 import com.sbu.model.User;
 
 public interface ContentFollowService {
@@ -15,4 +18,5 @@ public interface ContentFollowService {
 	String getFollowedArtistsInJSON(User user) throws JSONException;
 	
 	boolean removeFromFollowedSongs(User user, String songId);
+	List<User> getAllFollowersOfSong(String songId);
 }
