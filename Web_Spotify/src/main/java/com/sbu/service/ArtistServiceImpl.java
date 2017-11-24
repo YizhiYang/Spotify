@@ -22,6 +22,8 @@ public class ArtistServiceImpl implements ArtistService {
 	private ArtistRepo artistRepo;
 	@Autowired
 	private SignupRepo signupRepo;
+	@Autowired
+	private AlbumService albumService;
 	
 	public boolean saveArtist(ArtistUser artist) {
 		return artistRepo.saveAristToDB(artist);
@@ -96,6 +98,12 @@ public class ArtistServiceImpl implements ArtistService {
 
 	public List<ArtistUser> getArtistsOfAlbum(long albumId) {
 		return artistRepo.getArtistsOfAlbum(albumId);
+	}
+
+	public void removeArtist(String artistId) {
+		//REMOVE ALL ALBUM OF THIS ARTIST
+		
+		
 	}
 
 }

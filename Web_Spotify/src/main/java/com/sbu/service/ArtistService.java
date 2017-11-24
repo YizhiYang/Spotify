@@ -25,4 +25,6 @@ public interface ArtistService {
 	String getSearchArtistResultsInJSON(String searchString) throws JSONException;
 	
 	List<ArtistUser> getArtistsOfAlbum(long albumId);
+	
+	void removeArtist(String artistId);
 }

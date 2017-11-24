@@ -9,6 +9,7 @@ function addToFollowedSongs(songId, index){
         	reloadFollowedSongs();
         	$(".SongPageFollowSong").eq(index).hide();
         	$(".SongPageUnfollowSong").eq(index).show();
+        	$("#successPopUp").modal("show");
         }
 	});
 }
