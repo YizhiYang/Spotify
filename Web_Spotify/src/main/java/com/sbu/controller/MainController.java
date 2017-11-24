@@ -794,12 +794,8 @@ public class MainController {
 		}
 
 		
-<<<<<<< HEAD
-		
-		if(playlistService.removePlaylist(playlistId)){
-=======
 		if(playlistService.removePlayList(playlistId)){
->>>>>>> 3bd0021d2ae8c25aa317f7b853e33c03405f3eab
+
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);
