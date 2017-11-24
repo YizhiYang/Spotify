@@ -597,6 +597,21 @@ public class MainController {
 		}
 	}
 	
+	@RequestMapping(value = "/removeFromFollowedAlbum/{albumId}", method = RequestMethod.POST)
+	public void removeFromFollowedAlbum(HttpServletResponse response, HttpServletRequest request,@PathVariable("albumId") String albumId)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		if(contentFollowService.removeFromFollowedAlbums(user, albumId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+	
 	@RequestMapping(value = "/loadFollowedAlbums", method = RequestMethod.GET)
 	public void loadFollowedAlbums(HttpServletResponse response, HttpServletRequest request)
 			throws JSONException, IOException {
