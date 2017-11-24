@@ -18,6 +18,14 @@ public class AlbumServiceImpl implements AlbumService {
 
 	@Autowired
 	private AlbumRepo albumRepo;
+	@Autowired
+	private ArtistService artistService;
+	@Autowired
+	private SongService songService;
+	
+	public boolean saveAlbum(Album album) {
+		return albumRepo.saveAlbumToDB(album);
+	}
 	
 	public List<Album> getAllAlbums() {
 		return albumRepo.getAllAlbums();
@@ -63,6 +71,30 @@ public class AlbumServiceImpl implements AlbumService {
 	public String getSearchAlbumResultsInJSON(String searchString) throws JSONException {
 		List<Album> albums = albumRepo.getSearchAlbumResults(searchString);
 		return convertAlbumsToJSON(albums);
+	}
+
+	public boolean removeAlbum(String albumID) {
+		long albumIdLong = Long.valueOf(albumID);
+		//REMOVE SONGS IN ALBUM
+		List<Song> songs = getAlbumByID(albumID).getSongs();
+		for(int i=0; i<songs.size(); i++){
+			songService.removeSong(songs.get(i));
+		}
+		//REMOVE ALBUM ARTIST RELATION
+		List<ArtistUser> artists= artistService.getArtistsOfAlbum(albumIdLong);
+		for(ArtistUser artist: artists){
+			Album albumToRemove = null;
+			for(Album album: artist.getAlbum()){
+				if(album.getAlbumId() == albumIdLong){
+					albumToRemove = album;
+				}
+			}
+			artist.getAlbum().remove(albumToRemove);
+			artistService.saveArtist(artist);
+		}
+		//REMOVE ALBUM
+		albumRepo.removeAlbum(albumIdLong);
+		return true;
 	}
 
 }

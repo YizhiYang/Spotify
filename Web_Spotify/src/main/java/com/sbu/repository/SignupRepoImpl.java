@@ -30,5 +30,18 @@ public class SignupRepoImpl implements SignupRepo {
 		return results;
 		
 	}
+	
+	public List getUserByID(String id){
+		long userId = Long.valueOf(id);
+		
+		List result = em.createQuery("SELECT u FROM User u WHERE u.id = :id")
+		.setParameter("id", userId).getResultList();
+		return result;
+	}
+	
+	public boolean saveUserToDB(User user) {
+		em.persist(user);
+		return true;
+	}
 
 }

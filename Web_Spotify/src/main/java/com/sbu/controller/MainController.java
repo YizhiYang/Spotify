@@ -270,6 +270,7 @@ public class MainController {
 		}
 		
 		String profileFolderName = user.getUserName();
+		System.out.println(profileFolderName);
         File file = null;
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
@@ -427,7 +428,7 @@ public class MainController {
 		String id = request.getParameter("artistID");
 		MultipartFile pic = request.getFile("fileUp");
 		
-		ArtistUser returnedArtist = fileManager.checkArtistExist(id);
+		ArtistUser returnedArtist = artistService.checkArtistExist(id);
 		
 		if(returnedArtist == null){
 			response.getWriter().write(REQUEST_FAILURE);
@@ -436,10 +437,10 @@ public class MainController {
 			
 			Album album = new Album();
 			album.setAlbum_name(albumName);
-			fileManager.saveAlbum(album);
+			albumService.saveAlbum(album);
 			
 			returnedArtist.getAlbum().add(album);
-			fileManager.saveArtist(returnedArtist);
+			artistService.saveArtist(returnedArtist);
 			
 			fileManager.createPicInProfileImages(pic, album.getAlbumId().toString());
 		}
@@ -447,6 +448,20 @@ public class MainController {
 		
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
+	
+	@RequestMapping(value = "/removeAlbum/{albumID}", method = RequestMethod.POST)
+	public void removeAlbum(HttpServletResponse response, HttpServletRequest request,@PathVariable("albumID") String albumID)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		albumService.removeAlbum(albumID);
+	    response.getWriter().write(REQUEST_SUCCESS);
+	}
+	
 	
 	@RequestMapping(value = "/getAllSongsInAlbum/{id}", method = RequestMethod.GET)
 	public void getAllSongsInAlbum(HttpServletResponse response, HttpServletRequest request,@PathVariable("id") String id)
@@ -637,6 +652,21 @@ public class MainController {
 		}
 	}
 	
+	@RequestMapping(value = "/removeFromFollowedSongs/{songId}", method = RequestMethod.POST)
+	public void removeFromFollowedSongs(HttpServletResponse response, HttpServletRequest request,@PathVariable("songId") String songId)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		if(contentFollowService.removeFromFollowedSongs(user, songId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+	}
+	
 	
 	@RequestMapping(value = "/loadFollowedSongs", method = RequestMethod.GET)
 	public void loadFollowedSongs(HttpServletResponse response, HttpServletRequest request)
@@ -749,6 +779,25 @@ public class MainController {
 		long sId = Long.parseLong(songId);
 		
 		if(playlistService.addSongToPlaylist(plId, sId)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}
+		
+	}
+	
+	@RequestMapping(value="/removeSongFromPlaylist/{playlistId}/{songId}", method = RequestMethod.POST)
+	public void removeSongFromPlaylist(HttpServletRequest request, HttpServletResponse response, 
+			@PathVariable("playlistId") String playlistId, @PathVariable("songId") String songId) throws IOException{
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		long plId = Long.parseLong(playlistId);
+		long sId = Long.parseLong(songId);
+		
+		if(playlistService.removeSongFromPlaylist(plId, sId)){
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);
@@ -906,7 +955,7 @@ public class MainController {
 		String userID = request.getParameter("userID");
 		String artistName = request.getParameter("artistName");
 		
-		if(fileManager.makeNewArtist(userID, artistName)){
+		if(artistService.makeNewArtist(userID, artistName)){
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);
@@ -985,6 +1034,32 @@ public class MainController {
 	//@RequestMapping(value = "/addToFollowedSongs/{songId}", method = RequestMethod.POST)
 	//public void addToFollowedSongs(HttpServletResponse response, HttpServletRequest request,@PathVariable("songId") String songId)
 	
+	/*Additional Function that checks if Artist is associated With a User, if not, Add a user account*/
 	
+	@RequestMapping(value = "/checkAndAddAccountForArtists")
+	public void checkAndAddAccountForArtists(Model model, HttpServletRequest request) throws IOException {
+		List<ArtistUser> artists = artistService.getAllArtists();
+		for(ArtistUser artist: artists){
+			if(artist.getUser()==null){
+				String artistname = artist.getArtistName();
+				artistname = artistname.replaceAll(" ", "");
+				String username = artistname;
+				boolean userNameAvailable = signupService.validateUsername(username);
+				int counter = 0;
+				while(userNameAvailable == false){
+					username = artistname + counter;
+					userNameAvailable = signupService.validateUsername(username);
+					counter++;
+				}
+				User user = new User();
+				user.setUserName(username);
+				user.setPassword(username);
+				signupService.signupUser(user, request);
+				artist.setUser(user);
+				artistService.saveArtist(artist);
+			}
+		}
+		
+	}
  
 }

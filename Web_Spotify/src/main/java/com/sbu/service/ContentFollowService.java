@@ -13,4 +13,6 @@ public interface ContentFollowService {
 	
 	String getFollowedAlbumsInJSON(User user) throws JSONException;
 	String getFollowedArtistsInJSON(User user) throws JSONException;
+	
+	boolean removeFromFollowedSongs(User user, String songId);
 }

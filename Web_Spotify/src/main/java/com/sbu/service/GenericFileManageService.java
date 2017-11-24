@@ -14,11 +14,4 @@ public interface GenericFileManageService {
 	
 	public void createPicInProfileImages(MultipartFile file, String id) throws IOException;
 	
-	public ArtistUser checkArtistExist(String id);
-	
-	public boolean saveAlbum(Album album);
-	
-	public boolean saveArtist(ArtistUser artist);
-	
-	public boolean makeNewArtist(String userID, String artistName);
 }

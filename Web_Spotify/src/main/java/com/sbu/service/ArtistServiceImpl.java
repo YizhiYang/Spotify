@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
+import com.sbu.model.User;
 import com.sbu.repository.ArtistRepo;
+import com.sbu.repository.SignupRepo;
 
 
 @Service("artistService")
@@ -18,6 +20,31 @@ public class ArtistServiceImpl implements ArtistService {
 
 	@Autowired
 	private ArtistRepo artistRepo;
+	@Autowired
+	private SignupRepo signupRepo;
+	
+	public boolean saveArtist(ArtistUser artist) {
+		return artistRepo.saveAristToDB(artist);
+	}
+	
+	public boolean makeNewArtist(String userID, String artistName) {
+		List userResult = signupRepo.getUserByID(userID);
+		if(userResult.isEmpty()){
+			return false;
+		}else{
+			ArtistUser artist = new ArtistUser();
+			artist.setUser((User)(userResult.get(0)));;
+			artist.setArtistName(artistName);
+			artistRepo.saveAristToDB(artist);
+			return true;
+		}
+		
+	}
+	
+	public ArtistUser checkArtistExist(String id){
+		
+		return (ArtistUser)artistRepo.checkArtistExist(id).get(0);
+	}
 	
 	public List<ArtistUser> getAllArtists() {
 		return artistRepo.getAllArtists();
@@ -65,6 +92,10 @@ public class ArtistServiceImpl implements ArtistService {
 	public String getSearchArtistResultsInJSON(String searchString) throws JSONException {
 		List<ArtistUser> artists = artistRepo.getSearchArtistResults(searchString);
 		return convertArtistsToJSON(artists);
+	}
+
+	public List<ArtistUser> getArtistsOfAlbum(long albumId) {
+		return artistRepo.getArtistsOfAlbum(albumId);
 	}
 
 }

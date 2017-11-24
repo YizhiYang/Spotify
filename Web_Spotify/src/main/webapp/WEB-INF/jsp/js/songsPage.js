@@ -8,6 +8,7 @@ $(document).ready(function() {
 
 
 function loadFollowedSongs(){
+	/*
 	$.ajax({
 		type : "GET",
 		url : "loadFollowedSongs.html",
@@ -16,4 +17,7 @@ function loadFollowedSongs(){
 			addSongsToCenterContent(data);
 		}
 	});
+	*/
+	$('#centerSideContent').empty();
+	addSongsToCenterContent(userFollowedSongs);
 }

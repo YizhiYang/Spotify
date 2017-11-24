@@ -1,12 +1,26 @@
 /**
  * 
  */
-function addToFollowedSongs(songId){
+function addToFollowedSongs(songId, index){
 	$.ajax({
 		type : "POST",
 		url : "addToFollowedSongs/" + songId + ".html",
         success: function (data) {
-            alert(data)
+        	reloadFollowedSongs();
+        	$(".SongPageFollowSong").eq(index).hide();
+        	$(".SongPageUnfollowSong").eq(index).show();
+        },
+	});
+}
+
+function removeFromFollowedSongs(songId, index){
+	$.ajax({
+		type : "POST",
+		url : "removeFromFollowedSongs/" + songId + ".html",
+        success: function (data) {
+        	reloadFollowedSongs();
+        	$(".SongPageUnfollowSong").eq(index).hide();
+        	$(".SongPageFollowSong").eq(index).show();
         },
 	});
 }

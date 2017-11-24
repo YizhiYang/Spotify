@@ -16,4 +16,6 @@ public interface SongService {
 	
 	String getSearchSongResultsInJSON(String searchString) throws JSONException;
 	
+	void removeSong(Song song);
+	
 }
