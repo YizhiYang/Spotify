@@ -288,13 +288,13 @@ function addArtistsToCenterContent(jsonData){
     
     $(".ArtistPageFollowArtist").each(function(index){
 		$(this).click(function(event){
-			addToFollowedArtists(jsonArray[index].artistID);
+			addToFollowedArtists(jsonArray[index].artistID, index);
 		});
 	});
     
     $(".ArtistPageUnfollowArtist").each(function(index){
 		$(this).click(function(event){
-			removeFromFollowedArtists(jsonArray[index].artistID);
+			removeFromFollowedArtists(jsonArray[index].artistID, index);
 		});
 	});
     

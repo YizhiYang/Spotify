@@ -49,7 +49,7 @@ function removeFromFollowedAlbums(albumId, index){
 	});
 }
 
-function addToFollowedArtists(artistId){
+function addToFollowedArtists(artistId, index){
 	$.ajax({
 		type : "POST",
 		url : "addToFollowedArtists/" + artistId + ".html",
