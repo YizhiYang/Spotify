@@ -123,4 +123,21 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 		return albumRepo.getAllFollowers(albumId);
 	}
 
+
+	public boolean removeFromFollowedArtists(User user, String artistId) {
+		
+		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		ArtistUser artistToUnfollow = null;
+		
+		for(ArtistUser artistUser: u.getFollowedArtist()){
+			if(artistUser.getArtistID() == Long.valueOf(artistId)){
+				artistToUnfollow = artistUser;
+			}
+		}
+		u.getFollowedArtist().remove(artistToUnfollow);
+		signupRepo.saveUserToDB(u);
+		return true;
+		
+	}
+
 }
