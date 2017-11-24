@@ -78,7 +78,9 @@ public class AlbumServiceImpl implements AlbumService {
 		//REMOVE SONGS IN ALBUM
 		List<Song> songs = getAlbumByID(albumID).getSongs();
 		for(int i=0; i<songs.size(); i++){
-			songService.removeSong(songs.get(i));
+			
+			// potential error
+			songService.removeSong(String.valueOf(songs.get(i).getSongId()));
 		}
 		//REMOVE ALBUM ARTIST RELATION
 		List<ArtistUser> artists= artistService.getArtistsOfAlbum(albumIdLong);

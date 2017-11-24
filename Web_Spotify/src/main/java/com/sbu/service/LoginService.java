@@ -5,6 +5,7 @@ import com.sbu.model.User;
 public interface LoginService {
 
 	boolean loginUser(User user);
+	
 	User initUser(String username);
 
 }

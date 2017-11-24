@@ -12,6 +12,7 @@ import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.Song;
 import com.sbu.model.User;
+import com.sbu.repository.SignupRepo;
 import com.sbu.repository.SongRepo;
 
 @Service("songService")
@@ -22,6 +23,9 @@ public class SongServiceImpl implements SongService {
 	
 	@Autowired
 	private ContentFollowService contentFollowService;
+	
+	@Autowired
+	private SignupRepo signupRepo;
 
 	public boolean addSongToDatabase(Song song) {
 		return songRepo.addSong(song);
@@ -81,6 +85,7 @@ public class SongServiceImpl implements SongService {
 		Song song = this.getSongByID(songId);
 		for(int i = 0; i < users.size(); i++){   // !!!!!!!!!!      potential errror here. 
 			users.get(i).getFollowedSongs().remove(song);
+			signupRepo.saveUserToDB(users.get(i));
 		}
 		
 		//REMOVE FROM ALL PLAYLISTS THAT HAS THIS SONG

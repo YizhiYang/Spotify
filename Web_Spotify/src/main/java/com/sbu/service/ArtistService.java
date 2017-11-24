@@ -7,11 +7,12 @@ import org.json.JSONException;
 import com.sbu.model.ArtistUser;
 
 public interface ArtistService {
-	public boolean saveArtist(ArtistUser artist);
 	
-	public boolean makeNewArtist(String userID, String artistName);
+	boolean saveArtist(ArtistUser artist);
 	
-	public ArtistUser checkArtistExist(String id);
+	boolean makeNewArtist(String userID, String artistName);
+	
+	ArtistUser checkArtistExist(String id);
 	
 	List<ArtistUser> getAllArtists();
 	
