@@ -156,6 +156,7 @@ function addSongsToCenterContent(jsonData){
 function addAlbumsToCenterContent(jsonData){
 	
 	var jsonArray = jQuery.parseJSON(jsonData);
+	var jsonUserFollowedAlbums = jQuery.parseJSON(userFollowedAlbums);
 	
     $("#centerSideContent").append('<div class=centerSideContentWrapper id=AlbumPageTop>\
                                         <div id="contentTitle">\
@@ -185,8 +186,22 @@ function addAlbumsToCenterContent(jsonData){
     		contentToBeAdded += '<div class=AlbumContentArtist>'+albumArtistNames[j]+'</div>';
     	}
     	
-    	contentToBeAdded +='<i class="material-icons AlbumPageFollowAlbum">add</i>\
-    						<i class="material-icons removeAlbumButton">delete</i>\
+    	var isAlbumFollowed = false;
+    	for(j=0; j<jsonUserFollowedAlbums.length; j++){
+    		if(jsonUserFollowedAlbums[j].albumId == album.albumId){
+    			isAlbumFollowed = true;
+    		}
+    	}
+    	
+    	if(isAlbumFollowed){
+    		contentToBeAdded +=	'<i class="material-icons AlbumPageUnfollowAlbum">check_circle</i>';
+        	contentToBeAdded +=	'<i class="material-icons AlbumPageFollowAlbum" style="display:none;">radio_button_unchecked</i>';
+    	}else{
+    		contentToBeAdded +=	'<i class="material-icons AlbumPageUnfollowAlbum" style="display:none;">check_circle</i>';
+        	contentToBeAdded +=	'<i class="material-icons AlbumPageFollowAlbum">radio_button_unchecked</i>';
+    	}
+    	
+    	contentToBeAdded +='<i class="material-icons removeAlbumButton">delete</i>\
     						</div>\
     						</div>';
     	
@@ -204,7 +219,13 @@ function addAlbumsToCenterContent(jsonData){
     
     $(".AlbumPageFollowAlbum").each(function(index){
 		$(this).click(function(event){
-			addToFollowedAlbums(jsonArray[index].albumId);
+			addToFollowedAlbums(jsonArray[index].albumId, index);
+		});
+	});
+    
+    $(".AlbumPageUnfollowAlbum").each(function(index){
+		$(this).click(function(event){
+			removeFromFollowedAlbums(jsonArray[index].albumId, index);
 		});
 	});
     

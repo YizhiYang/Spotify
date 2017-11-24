@@ -25,12 +25,26 @@ function removeFromFollowedSongs(songId, index){
 	});
 }
 
-function addToFollowedAlbums(albumId){
+function addToFollowedAlbums(albumId, index){
 	$.ajax({
 		type : "POST",
 		url : "addToFollowedAlbums/" + albumId + ".html",
         success: function (data) {
-            alert(data)
+        	reloadFollowedAlbums();
+        	$(".AlbumPageFollowAlbum").eq(index).hide();
+        	$(".AlbumPageUnfollowAlbum").eq(index).show();
+        },
+	});
+}
+
+function removeFromFollowedAlbums(albumId, index){
+	$.ajax({
+		type : "POST",
+		url : "removeFromFollowedAlbums/" + albumId + ".html",
+        success: function (data) {
+        	reloadFollowedAlbums();
+        	$(".AlbumPageUnfollowAlbum").eq(index).hide();
+        	$(".AlbumPageFollowAlbum").eq(index).show();
         },
 	});
 }

@@ -2,10 +2,13 @@
 var myPlaylist;
 //STORES THE LIST OF SONGS USER IS FOLLOWING
 var userFollowedSongs;
+//STORES THE LIST OF ALBUMS
+var userFollowedAlbums;
 
 $( document ).ready(function() {
 		getUserName();
 		reloadFollowedSongs();
+		reloadFollowedAlbums();
 		
 		$("#profile-image-chooser").change(function(event) {
 			uploadProfileImage();
@@ -113,6 +116,16 @@ function reloadFollowedSongs(){
 		url : "loadFollowedSongs.html",
 		success : function(data) {
 			userFollowedSongs = data;
+		}
+	});
+}
+
+function reloadFollowedAlbums(){
+	$.ajax({
+		type : "GET",
+		url : "loadFollowedAlbums.html",
+		success : function(data) {
+			userFollowedAlbums = data;
 		}
 	});
 }
