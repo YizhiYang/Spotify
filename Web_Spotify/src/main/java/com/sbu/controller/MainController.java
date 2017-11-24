@@ -141,7 +141,6 @@ public class MainController {
 	
 	@RequestMapping(value = "/getUserNameOnPageLoad")
 	public void getUserNameOnPageLoad(HttpServletResponse response, HttpServletRequest request) throws IOException {
-		//VALIDATE SESSION;
 
 		User user = (User)request.getSession().getAttribute("User");
 		if(user != null){
@@ -152,7 +151,6 @@ public class MainController {
 	
 	@RequestMapping(value = "/goToHome")
 	public String goToHomepage(Model model, HttpServletRequest request) {
-		//VALIDATE SESSION;
 		User user = (User)request.getSession().getAttribute("User");
 		if(user != null){
 			return "Homepage";
@@ -164,7 +162,6 @@ public class MainController {
 	
 	@RequestMapping(value = "/goToProfile")
 	public String goToProfile(Model model, HttpServletRequest request) {
-		//VALIDATE SESSION;
 		User user = (User)request.getSession().getAttribute("User");
 		if(user != null){
 			System.out.println(user.getUserName());
@@ -211,8 +208,7 @@ public class MainController {
 		user.setEmail(email);
 		user.setLocation(location);
 		
-		boolean result = signupService.validateUsername(username);
-		
+		boolean result = signupService.validateUsername(username);	
 		if(!result){
 			String greetings = "false";
 			response.setContentType("text/plain");
@@ -226,23 +222,7 @@ public class MainController {
 		}
     }
 	
-//	
-//	public void sendImage(HttpServletRequest request, HttpServletResponse response){
-//		
-//	}
 	
-	
-	@RequestMapping(value = "/passwordController", method=RequestMethod.POST)
-	public String authenticate(Model model, HttpServletRequest request){
-		System.out.println(request.getParameter("username"));
-		LOGGER.info(request.getParameter("password"));
-		model.addAttribute("testing", "Hello I am Matt");
-		return "hello";
-	}
-	
-
-	
-	// Handling Profile Image upload request
 	   @PostMapping(value = "/ProfileImageUpload")
 	   public void imageUpload(@RequestParam("fileUp") MultipartFile file, HttpServletRequest request, HttpServletResponse response)
 	         throws IOException {
@@ -254,7 +234,6 @@ public class MainController {
 			}
 			
 			changeProfileInfoService.changeUserProfileImage(file, user.getUserName());
-			
 			response.getWriter().write(REQUEST_SUCCESS);
 	   }
 	
@@ -262,21 +241,16 @@ public class MainController {
 	@RequestMapping(value="/Profile-Image", method = RequestMethod.GET)
     public void downloadProfileImage(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		
-		User user = (User)request.getSession().getAttribute("User");
-		
+		User user = (User)request.getSession().getAttribute("User");	
 		if(user==null){
 			System.out.println("Kicked out of Session from Image Download");
 			return;
-		}
-		
+		}	
 		String profileFolderName = user.getUserName();
 		System.out.println(profileFolderName);
         File file = null;
-
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         
-        System.out.println(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName).getPath());
-        
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();           
         file = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName+"/"+PROFILE_IMAGE_NAME).getFile());
         if(!file.exists()){
             String errorMessage = FILE_NOT_FOUND_MESSAGE;
@@ -292,27 +266,14 @@ public class MainController {
             System.out.println("mimetype is not detectable, will take default");
             mimeType = "application/octet-stream";
         }
-         
-        System.out.println("mimetype : "+mimeType);
-         
+                
         response.setContentType(mimeType);
-         
-        /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
-            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
         response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
- 
-         
-        /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
-        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
         response.setContentLength((int)file.length());
-        
 
         InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
- 
-        //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
-	
 	
 	
 	
@@ -323,10 +284,7 @@ public class MainController {
 		if(user==null){
 			return;
 		}
-		
 		String jsonString = songService.getAllSongsInJSON();
-
-		System.out.println(jsonString);
 	    response.getWriter().write(jsonString);
 	}
 	
@@ -343,12 +301,8 @@ public class MainController {
 		if(user==null){
 			return;
 		}
-		
 		String jsonString = albumService.getAllAlbumsInJSON();
-
- 		response.setContentType("text/plain");
-		
-		System.out.println(jsonString);
+ 		response.setContentType("text/plain");		
 	    response.getWriter().write(jsonString);
 	}
 	
@@ -356,29 +310,20 @@ public class MainController {
     public void requestAlbumImage(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") String id) throws IOException {
 		
 		User user = (User)request.getSession().getAttribute("User");
-		
 		if(user==null){
 			System.out.println("Kicked out of Session");
 			return;
 		}
 		
-		System.out.println(id);
-
         File file = null;
-
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        
-        String songFileName = null;
-        
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();    
+        String songFileName = null;    
         songFileName = id + ALBUMS_EXTENSION;
         if(songFileName == null){
         	return;
         }
         
-        String songPath = classloader.getResource(ALBUMS_FILE_PATH).getPath();
-        System.out.println(classloader.getResource(ALBUMS_FILE_PATH).getPath());
-        System.out.println(songPath+songFileName);
-        
+        String songPath = classloader.getResource(ALBUMS_FILE_PATH).getPath();      
         file = new File(songPath+songFileName);
         if(!file.exists()){
             String errorMessage = "Sorry. The file you are looking for does not exist";
@@ -393,61 +338,44 @@ public class MainController {
         if(mimeType==null){
             System.out.println("mimetype is not detectable, will take default");
             mimeType = "application/octet-stream";
-        }
-         
-        System.out.println("mimetype : "+mimeType);
-         
+        }       
         response.setContentType(mimeType);
-        
-         
-        // "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
-        //   while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]
         response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
- 
-         
-        // "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting
-        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
         response.setContentLength((int)file.length());
         
         InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-        //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
 	
+	
 	@PostMapping(value = "/UploadAlbum")
 	public void uploadAlbum(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException{
-
 		User user = (User)request.getSession().getAttribute("User");
 		if(user==null){
 			return;
 		}
-		
-		
-		
+			
 		String albumName = request.getParameter("albumName");
 		String id = request.getParameter("artistID");
 		MultipartFile pic = request.getFile("fileUp");
 		
 		ArtistUser returnedArtist = artistService.checkArtistExist(id);
-		
 		if(returnedArtist == null){
 			response.getWriter().write(REQUEST_FAILURE);
 		}
 		else{
-			
 			Album album = new Album();
 			album.setAlbum_name(albumName);
 			albumService.saveAlbum(album);
 			
 			returnedArtist.getAlbum().add(album);
 			artistService.saveArtist(returnedArtist);
-			
 			fileManager.createPicInProfileImages(pic, album.getAlbumId().toString());
 		}
 		
-		
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
+	
 	
 	@RequestMapping(value = "/removeAlbum/{albumID}", method = RequestMethod.POST)
 	public void removeAlbum(HttpServletResponse response, HttpServletRequest request,@PathVariable("albumID") String albumID)
@@ -456,8 +384,7 @@ public class MainController {
 		User user = (User) request.getSession().getAttribute("User");
 		if(user==null){
 			return;
-		}
-		
+		}	
 		albumService.removeAlbum(albumID);
 	    response.getWriter().write(REQUEST_SUCCESS);
 	}
@@ -466,15 +393,13 @@ public class MainController {
 	@RequestMapping(value = "/getAllSongsInAlbum/{id}", method = RequestMethod.GET)
 	public void getAllSongsInAlbum(HttpServletResponse response, HttpServletRequest request,@PathVariable("id") String id)
 			throws JSONException, IOException {
-		
 		User user = (User) request.getSession().getAttribute("User");
 		if(user==null){
 			return;
 		}
 		
 		Album album = albumService.getAlbumByID(id);
-		String jsonString = songService.convertSongsToJSON(album.getSongs());
-		
+		String jsonString = songService.convertSongsToJSON(album.getSongs());	
 	    response.getWriter().write(jsonString);
 	}
 	
@@ -492,11 +417,9 @@ public class MainController {
 		User user = (User) request.getSession().getAttribute("User");
 		if(user==null){
 			return;
-		}
-		
+		}	
 		ArtistUser artist = artistService.getArtistByArtistID(id);
 		String jsonString = albumService.convertAlbumsToJSON(artist.getAlbum());
-		
 	    response.getWriter().write(jsonString);
 	}
 	
@@ -507,6 +430,8 @@ public class MainController {
 	Song related Controller functions
 	***********
 	**/
+	
+	
 	
 	@PostMapping(value = "/SongFileUpload")
 	public void songUpload(MultipartHttpServletRequest request, HttpServletResponse response)
@@ -525,16 +450,13 @@ public class MainController {
 		if(albumToSaveTo==null){
 			return;
 		}
-		
 		Song song = new Song();
 		song.setSongName(songName);
 		song.setDuration(duration);
 		song.setAlbum(albumToSaveTo);
 
 		if(songService.addSongToDatabase(song)){
-			//SAVE SONG FILE
 			fileManager.saveFileToLocation(file, SONG_FILE_PATH, song.getSongId()+SONG_EXTENSION);		         
-
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);
@@ -544,20 +466,9 @@ public class MainController {
 	
 	@RequestMapping(value="/requestSongFile/{id}", method = RequestMethod.GET)
     public void downloadSongFile(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") String id) throws IOException {
-		
-//		User user = (User)request.getSession().getAttribute("User");
-//		
-//		if(user==null){
-//			System.out.println("Kicked out of Session");
-//			return;
-//		}
-		
-		System.out.println(id);
-
+			
         File file = null;
-
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();    
         String songFileName = null;
         
         songFileName = id + SONG_EXTENSION;
@@ -585,22 +496,11 @@ public class MainController {
             mimeType = "application/octet-stream";
         }
          
-        System.out.println("mimetype : "+mimeType);
-         
-        response.setContentType(mimeType);
-        
-         
-        // "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
-        //   while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]
+        System.out.println("mimetype : "+mimeType);     
+        response.setContentType(mimeType); 
         response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
- 
-         
-        // "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting
-        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
         response.setContentLength((int)file.length());
-        
         InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-        //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
 	
@@ -618,7 +518,6 @@ public class MainController {
 		if(user==null){
 			return;
 		}
-
 		String songsJsonString = songService.getSearchSongResultsInJSON(request.getParameter("searchContent"));
 		String artistsJsonString = artistService.getSearchArtistResultsInJSON(request.getParameter("searchContent"));
 		String albumsJsonString = albumService.getSearchAlbumResultsInJSON(request.getParameter("searchContent"));
@@ -626,9 +525,7 @@ public class MainController {
 		JSONObject totalJsonObject = new JSONObject();
 		totalJsonObject.put("songsJson", songsJsonString);
 		totalJsonObject.put("artistsJson", artistsJsonString);
-		totalJsonObject.put("albumsJson", albumsJsonString);
-		
-		
+		totalJsonObject.put("albumsJson", albumsJsonString);	
 	    response.getWriter().write(totalJsonObject.toString());
 	}
 	/**
@@ -678,7 +575,6 @@ public class MainController {
 		}
 		
 		String jsonString = contentFollowService.getFollowedSongsInJSON(user);
-		
 		response.getWriter().write(jsonString);
 	}
 	
@@ -706,8 +602,7 @@ public class MainController {
 			return;
 		}
 		
-		String jsonString = contentFollowService.getFollowedAlbumsInJSON(user);
-		
+		String jsonString = contentFollowService.getFollowedAlbumsInJSON(user);	
 		response.getWriter().write(jsonString);
 	}
 	
@@ -733,10 +628,8 @@ public class MainController {
 		User user = (User) request.getSession().getAttribute("User");
 		if(user==null){
 			return;
-		}
-		
-		String jsonString = contentFollowService.getFollowedArtistsInJSON(user);
-		
+		}	
+		String jsonString = contentFollowService.getFollowedArtistsInJSON(user);	
 		response.getWriter().write(jsonString);
 	}
 	
@@ -746,7 +639,6 @@ public class MainController {
 	Playlist related Controller functions
 	***********
 	**/
-	
 	@RequestMapping(value = "/addNewPlaylist", method = RequestMethod.POST)
 	public void addNewPlaylist(HttpServletResponse response, HttpServletRequest request)
 			throws JSONException, IOException {
@@ -754,10 +646,8 @@ public class MainController {
 		User user = (User) request.getSession().getAttribute("User");
 		if(user==null){
 			return;
-		}
-		
+		}	
 		String playlistName = request.getParameter("playlistName");
-		
 		if(playlistService.makeNewPlaylist(user, playlistName)){
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
@@ -777,7 +667,6 @@ public class MainController {
 		
 		long plId = Long.parseLong(playlistId);
 		long sId = Long.parseLong(songId);
-		
 		if(playlistService.addSongToPlaylist(plId, sId)){
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
@@ -795,8 +684,7 @@ public class MainController {
 		}
 		
 		long plId = Long.parseLong(playlistId);
-		long sId = Long.parseLong(songId);
-		
+		long sId = Long.parseLong(songId);	
 		if(playlistService.removeSongFromPlaylist(plId, sId)){
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
@@ -823,10 +711,8 @@ public class MainController {
 		User user = (User) request.getSession().getAttribute("User");
 		if(user==null){
 			return;
-		}
-		
-		String newName = request.getParameter("playlistName");
-		
+		}	
+		String newName = request.getParameter("playlistName");	
 		if(playlistService.renamePlaylist(newName, playlistId)){
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
@@ -840,9 +726,7 @@ public class MainController {
 		User user = (User) request.getSession().getAttribute("User");
 		if(user==null){
 			return;
-		}
-
-		
+		}	
 		if(playlistService.removePlayList(playlistId)){
 
 			response.getWriter().write(REQUEST_SUCCESS);
@@ -851,9 +735,6 @@ public class MainController {
 		}
 	}
 
-	
-	
-	
 	
 	/**
 	***********
@@ -878,7 +759,6 @@ public class MainController {
 		totalJsonObject.put("artistsJson", artistsJsonString);
 		totalJsonObject.put("albumsJson", albumsJsonString);
 		
-		
 	    response.getWriter().write(totalJsonObject.toString());
 	}
 	
@@ -891,9 +771,7 @@ public class MainController {
 		if(user==null){
 			return;
 		}
-
-		String jsonString = playlistService.getUserPlaylistsInJSON(user);
-		
+		String jsonString = playlistService.getUserPlaylistsInJSON(user);		
 	    response.getWriter().write(jsonString);
 	}
 	
@@ -908,7 +786,6 @@ public class MainController {
 			System.out.println("Kicked out of Session");
 			return;
 		}
-		
 		String jsonString = changeProfileInfoService.getUserInfoInJSON(user);
 	    response.getWriter().write(jsonString);
 	}
@@ -918,7 +795,6 @@ public class MainController {
 	/*
 	 * Called when user changes account info such as email and location.
 	 * */
-	
 	@RequestMapping(value = "/changeUserProfileInfo", method = RequestMethod.POST)
 	public void changeUserProfileInfo(HttpServletResponse response, HttpServletRequest request)
 			throws JSONException, IOException {
