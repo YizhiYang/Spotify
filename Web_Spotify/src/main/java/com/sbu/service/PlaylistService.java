@@ -23,4 +23,6 @@ public interface PlaylistService {
 	Boolean renamePlaylist(String newName, String playlistId);
 	
 	Boolean removePlayList(String playlistId);
+	
+	List<Playlist> getPlaylistsThatContainsSong(String songId);
 }

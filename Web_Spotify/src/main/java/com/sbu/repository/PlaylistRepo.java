@@ -15,4 +15,6 @@ public interface PlaylistRepo {
 	boolean renamePlaylist(Playlist pl);
 	
 	void removePlaylist(Long plId);
+	
+	List<Playlist> getPlaylistsThatContainsSong(String songId);
 }
