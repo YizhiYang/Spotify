@@ -428,9 +428,16 @@ public class MainController {
 	/**
 	***********
 	Song related Controller functions
+	 * @throws IOException 
 	***********
 	**/
-	
+	@RequestMapping(value = "/removeSong/{songId}", method = RequestMethod.POST)
+	public void removeSong(HttpServletResponse response, HttpServletRequest request, 
+			@PathVariable("songId") String songId) throws IOException{
+		
+		songService.removeSong(songId);
+		response.getWriter().write(REQUEST_SUCCESS);
+	}
 	
 	
 	@PostMapping(value = "/SongFileUpload")
@@ -477,9 +484,7 @@ public class MainController {
         }
         
         String songPath = classloader.getResource(SONG_FILE_PATH).getPath();
-        System.out.println(classloader.getResource(SONG_FILE_PATH).getPath());
-        System.out.println(songPath+songFileName);
-        
+      
         file = new File(songPath+songFileName);
         if(!file.exists()){
             String errorMessage = "Sorry. The file you are looking for does not exist";
@@ -496,7 +501,6 @@ public class MainController {
             mimeType = "application/octet-stream";
         }
          
-        System.out.println("mimetype : "+mimeType);     
         response.setContentType(mimeType); 
         response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
         response.setContentLength((int)file.length());
