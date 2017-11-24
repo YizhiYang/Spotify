@@ -597,8 +597,8 @@ public class MainController {
 		}
 	}
 	
-	@RequestMapping(value = "/removeFromFollowedAlbum/{albumId}", method = RequestMethod.POST)
-	public void removeFromFollowedAlbum(HttpServletResponse response, HttpServletRequest request,@PathVariable("albumId") String albumId)
+	@RequestMapping(value = "/removeFromFollowedAlbums/{albumId}", method = RequestMethod.POST)
+	public void removeFromFollowedAlbums(HttpServletResponse response, HttpServletRequest request,@PathVariable("albumId") String albumId)
 			throws JSONException, IOException {
 		
 		User user = (User) request.getSession().getAttribute("User");

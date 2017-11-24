@@ -11,6 +11,7 @@ import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.Song;
 import com.sbu.model.User;
+import com.sbu.repository.AlbumRepo;
 import com.sbu.repository.SignupRepo;
 import com.sbu.repository.SongRepo;
 
@@ -31,6 +32,9 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 	
 	@Autowired
 	private SongRepo songRepo;
+	
+	@Autowired
+	private AlbumRepo albumRepo;
 	
 	public boolean addToUserFollowedSongs(User user, String songId) {
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
@@ -95,13 +99,7 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 		signupRepo.saveUserToDB(u);
 		return true;
 	}
-
-
-	public List<User> getAllFollowersOfSong(String songId) {
-		return songRepo.getAllFollowers(songId);
-	}
-
-
+	
 	public boolean removeFromFollowedAlbums(User user, String albumId) {
 		// unfollow albums
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
@@ -115,6 +113,14 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 		u.getFollowedAlbums().remove(albumToUnfollow);
 		signupRepo.saveUserToDB(u);
 		return true;
+	}
+
+	public List<User> getAllFollowersOfSong(String songId) {
+		return songRepo.getAllFollowers(songId);
+	}
+	
+	public List<User> getAllFollowersOfAlbum(String albumId) {
+		return albumRepo.getAllFollowers(albumId);
 	}
 
 }

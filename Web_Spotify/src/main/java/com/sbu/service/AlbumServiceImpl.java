@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.Song;
+import com.sbu.model.User;
 import com.sbu.repository.AlbumRepo;
 
 @Service("albumService")
@@ -22,6 +23,8 @@ public class AlbumServiceImpl implements AlbumService {
 	private ArtistService artistService;
 	@Autowired
 	private SongService songService;
+	@Autowired
+	private ContentFollowService contentFollowService;
 	
 	public boolean saveAlbum(Album album) {
 		return albumRepo.saveAlbumToDB(album);
@@ -93,7 +96,10 @@ public class AlbumServiceImpl implements AlbumService {
 			artistService.saveArtist(artist);
 		}
 		//REMOVE FROM ALL FOLLOWED ALBUM FOR ALL USERS WHO FOLLOWS THIS ALBUM
-		
+		List<User> users = contentFollowService.getAllFollowersOfAlbum(albumID);
+		for(User u: users){
+			contentFollowService.removeFromFollowedAlbums(u, albumID);
+		}
 		//REMOVE ALBUM
 		albumRepo.removeAlbum(albumIdLong);
 		return true;

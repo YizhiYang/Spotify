@@ -26,4 +26,5 @@ public interface ContentFollowService {
 	boolean removeFromFollowedAlbums(User user, String albumId);
 	
 	List<User> getAllFollowersOfSong(String songId);
+	List<User> getAllFollowersOfAlbum(String albumId);
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sbu.model.Album;
+import com.sbu.model.User;
 
 
 @Repository("albumRepo")
@@ -45,6 +46,12 @@ public class AlbumRepoImpl implements AlbumRepo {
 	public boolean saveAlbumToDB(Album album) {
 		em.persist(album);
 		return true;
+	}
+
+	public List<User> getAllFollowers(String albumId) {
+		List<User> results = em.createQuery("SELECT u FROM User u JOIN u.followedAlbums a WHERE a.albumId= :albumId")
+				.setParameter("albumId", Long.valueOf(albumId)).getResultList();
+		return results;
 	}
 
 }
