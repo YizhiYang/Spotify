@@ -18,9 +18,9 @@ public interface PlaylistService {
 	
 	String convertPlaylistsToJSON(List<Playlist> playlists) throws JSONException;
 	
-	public String getPlaylistSongsInJSON(long playlistId) throws JSONException;
+	String getPlaylistSongsInJSON(long playlistId) throws JSONException;
 	
-	public Boolean renamePlaylist(String newName, String playlistId);
+	Boolean renamePlaylist(String newName, String playlistId);
 	
-	public Boolean removePlayList(String playlistId);
+	Boolean removePlayList(String playlistId);
 }

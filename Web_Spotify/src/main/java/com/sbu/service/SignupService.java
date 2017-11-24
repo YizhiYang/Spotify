@@ -9,6 +9,7 @@ import com.sbu.model.User;
 
 public interface SignupService{
 
-		User signupUser(User user, HttpServletRequest request) throws IOException;	
-		public boolean validateUsername(String username);
+		User signupUser(User user, HttpServletRequest request) throws IOException;
+		
+		boolean validateUsername(String username);
 }

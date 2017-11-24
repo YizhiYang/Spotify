@@ -8,14 +8,16 @@ import com.sbu.model.Song;
 
 public interface SongService {
 	boolean addSongToDatabase(Song song);
+	
 	List<Song> getALLSongs();
+	
 	Song getSongByID(String songId);
+	
 	String getAllSongsInJSON() throws JSONException;
 	
 	String convertSongsToJSON(List<Song> songs) throws JSONException;
 	
 	String getSearchSongResultsInJSON(String searchString) throws JSONException;
 	
-	void removeSong(Song song);
-	
+	void removeSong(String songId);
 }

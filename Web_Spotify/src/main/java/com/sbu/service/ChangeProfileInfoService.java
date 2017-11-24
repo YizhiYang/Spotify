@@ -11,6 +11,8 @@ import com.sbu.model.User;
 public interface ChangeProfileInfoService {
 	
 	boolean changeUserProfile(String location, String email, String username);
+	
 	boolean changeUserProfileImage(MultipartFile file, String username) throws IOException;
-	public String getUserInfoInJSON(User user) throws JSONException;
+	
+	String getUserInfoInJSON(User user) throws JSONException;
 }
