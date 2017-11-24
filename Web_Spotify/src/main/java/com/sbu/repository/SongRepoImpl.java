@@ -46,7 +46,7 @@ public class SongRepoImpl implements SongRepo {
 
 	public List<User> getAllFollowers(String songId) {
 		List<User> results = em.createQuery("SELECT u FROM User u JOIN u.followedSongs s WHERE s.songId= :songId")
-				.setParameter("songId", songId).getResultList();
+				.setParameter("songId", Long.valueOf(songId)).getResultList();
 		return results;
 	}
 	

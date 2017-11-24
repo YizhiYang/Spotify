@@ -113,4 +113,8 @@ public class PlaylistServiceImpl implements PlaylistService {
 		return true;
 	}
 
+	public List<Playlist> getPlaylistsThatContainsSong(String songId) {
+		return playlistRepo.getPlaylistsThatContainsSong(songId);
+	}
+
 }
