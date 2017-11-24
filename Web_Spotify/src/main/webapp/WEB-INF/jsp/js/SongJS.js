@@ -48,3 +48,13 @@ function uploadSong(){
         processData: false
 	});
 }
+
+function sendRemoveSongsRequestToServer(songId){
+	$.ajax({
+		type : "POST",
+		url : "removeSong/" + songId + ".html",
+		success : function(data) {
+			alert(data);
+		}
+	});
+}

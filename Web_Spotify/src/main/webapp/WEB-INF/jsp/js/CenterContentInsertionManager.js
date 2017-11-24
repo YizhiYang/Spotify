@@ -57,8 +57,8 @@ function addSongsToCenterContent(jsonData){
     	});
     		    
     	contentToBeAdded += '</div>\
-            			</div>\
-            			</td>';
+            			</div>'
+    	contentToBeAdded += '</td>';
     	contentToBeAdded += '<td>' + song.songName + '</td>';
     	
     	var artistNames = song.artistNames;
@@ -72,7 +72,11 @@ function addSongsToCenterContent(jsonData){
     	
     	contentToBeAdded += '<td>' + '</td>';
     	
-    	contentToBeAdded += '<td>' + song.duration +'</td>'
+    	contentToBeAdded += '<td>' + song.duration;
+    	
+    	contentToBeAdded += '<i class="material-icons adminDeleteSongButton" style="float:right;" id="song' + song.songId + '">delete</i>';
+    	
+    	contentToBeAdded += '</td>'
     	
     	contentToBeAdded += '</tr>';
     	
@@ -138,7 +142,14 @@ function addSongsToCenterContent(jsonData){
 			addSongToPlayList(playlistId, songId);
 		});
 	});
-
+	
+	//REGISTER UNFOLLOW SONG CLICK
+	$(".adminDeleteSongButton").each(function(index){
+		$(this).click(function(event){
+			var songIdStr = $(this).attr("id");
+			sendRemoveSongsRequestToServer(songIdStr.substring(4, songIdStr.length));
+		});
+	});
 }
 
 
