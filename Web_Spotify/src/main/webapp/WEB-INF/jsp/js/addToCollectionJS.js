@@ -9,7 +9,7 @@ function addToFollowedSongs(songId, index){
         	reloadFollowedSongs();
         	$(".SongPageFollowSong").eq(index).hide();
         	$(".SongPageUnfollowSong").eq(index).show();
-        },
+        }
 	});
 }
 
@@ -21,7 +21,7 @@ function removeFromFollowedSongs(songId, index){
         	reloadFollowedSongs();
         	$(".SongPageUnfollowSong").eq(index).hide();
         	$(".SongPageFollowSong").eq(index).show();
-        },
+        }
 	});
 }
 
@@ -33,7 +33,7 @@ function addToFollowedAlbums(albumId, index){
         	reloadFollowedAlbums();
         	$(".AlbumPageFollowAlbum").eq(index).hide();
         	$(".AlbumPageUnfollowAlbum").eq(index).show();
-        },
+        }
 	});
 }
 
@@ -45,7 +45,7 @@ function removeFromFollowedAlbums(albumId, index){
         	reloadFollowedAlbums();
         	$(".AlbumPageUnfollowAlbum").eq(index).hide();
         	$(".AlbumPageFollowAlbum").eq(index).show();
-        },
+        }
 	});
 }
 
@@ -54,7 +54,21 @@ function addToFollowedArtists(artistId){
 		type : "POST",
 		url : "addToFollowedArtists/" + artistId + ".html",
         success: function (data) {
-            alert(data)
-        },
+        	reloadFollowedArtists();
+        	$(".ArtistPageFollowArtist").eq(index).hide();
+        	$(".ArtistPageUnfollowArtist").eq(index).show();
+        }
+	});
+}
+
+function removeFromFollowedArtists(artistId, index){
+	$.ajax({
+		type : "POST",
+		url : "removeFromFollowedArtists/" + artistId + ".html",
+        success: function (data) {
+        	reloadFollowedArtists();
+        	$(".ArtistPageUnfollowArtist").eq(index).hide();
+        	$(".ArtistPageFollowArtist").eq(index).show();
+        }
 	});
 }

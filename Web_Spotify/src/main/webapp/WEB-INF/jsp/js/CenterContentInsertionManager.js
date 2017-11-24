@@ -239,10 +239,8 @@ function addAlbumsToCenterContent(jsonData){
 
 
 function addArtistsToCenterContent(jsonData){
-	
-	console.log(jsonData);
-	
 	var jsonArray = jQuery.parseJSON(jsonData);
+	var jsonUserFollowedArtists = jQuery.parseJSON(userFollowedArtists);
     $("#centerSideContent").append('<div class=centerSideContentWrapper id=AlbumPageTop>\
                                         <div id="contentTitle">\
                                             <div id="contentTitleWrapper" style="border-bottom:transparent; font-size:45px;">Artist</div>\
@@ -258,9 +256,23 @@ function addArtistsToCenterContent(jsonData){
             						<div class=ArtistContentDescription>\
     									<div class=ArtistContentName>'+ artist.artistName + '</div>\
                						<div class=ArtistContentListLength>' + artist.totalNumberOfSongs + ' Songs</div>\
-            					</div>\
-            					<i class="material-icons ArtistPageFollowArtist">add</i>\
-            					<i class="material-icons removeArtistButton">delete</i>\
+            					</div>'
+               						
+        var isArtistFollowed = false;
+    	for(j=0; j<jsonUserFollowedArtists.length; j++){
+    		if(jsonUserFollowedArtists[j].artistID == artist.artistID){
+    			isArtistFollowed = true;
+    		}
+    	}
+    	
+    	if(isArtistFollowed){
+    		contentToBeAdded +=	'<i class="material-icons ArtistPageUnfollowArtist">check_circle</i>';
+        	contentToBeAdded +=	'<i class="material-icons ArtistPageFollowArtist" style="display:none;">radio_button_unchecked</i>';
+    	}else{
+    		contentToBeAdded +=	'<i class="material-icons ArtistPageUnfollowArtist" style="display:none;">check_circle</i>';
+        	contentToBeAdded +=	'<i class="material-icons ArtistPageFollowArtist">radio_button_unchecked</i>';
+    	}
+    	contentToBeAdded +=	'<i class="material-icons removeArtistButton">delete</i>\
     						</div>'
     }
     
@@ -277,6 +289,12 @@ function addArtistsToCenterContent(jsonData){
     $(".ArtistPageFollowArtist").each(function(index){
 		$(this).click(function(event){
 			addToFollowedArtists(jsonArray[index].artistID);
+		});
+	});
+    
+    $(".ArtistPageUnfollowArtist").each(function(index){
+		$(this).click(function(event){
+			removeFromFollowedArtists(jsonArray[index].artistID);
 		});
 	});
     

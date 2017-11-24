@@ -4,6 +4,8 @@ var myPlaylist;
 var userFollowedSongs;
 //STORES THE LIST OF ALBUMS
 var userFollowedAlbums;
+//STORES THE LIST OF ALBUMS
+var userFollowedArtists;
 
 $( document ).ready(function() {
 		getUserName();
@@ -126,6 +128,16 @@ function reloadFollowedAlbums(){
 		url : "loadFollowedAlbums.html",
 		success : function(data) {
 			userFollowedAlbums = data;
+		}
+	});
+}
+
+function reloadFollowedArtists(){
+	$.ajax({
+		type : "GET",
+		url : "loadFollowedArtists.html",
+		success : function(data) {
+			userFollowedArtists = data;
 		}
 	});
 }
