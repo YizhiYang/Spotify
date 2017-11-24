@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
+import com.sbu.model.Playlist;
 import com.sbu.model.Song;
 import com.sbu.model.User;
+import com.sbu.repository.PlaylistRepo;
 import com.sbu.repository.SignupRepo;
 import com.sbu.repository.SongRepo;
 
@@ -26,6 +28,11 @@ public class SongServiceImpl implements SongService {
 	
 	@Autowired
 	private SignupRepo signupRepo;
+	
+	@Autowired
+	private PlaylistService playlistService;
+	
+	
 
 	public boolean addSongToDatabase(Song song) {
 		return songRepo.addSong(song);
@@ -83,13 +90,21 @@ public class SongServiceImpl implements SongService {
 		
 		List<User> users = contentFollowService.getAllFollowersOfSong(songId);
 		Song song = this.getSongByID(songId);
-		for(int i = 0; i < users.size(); i++){   // !!!!!!!!!!      potential errror here. 
-			users.get(i).getFollowedSongs().remove(song);
-			signupRepo.saveUserToDB(users.get(i));
+		for(int i = 0; i < users.size(); i++){   
+			//users.get(i).getFollowedSongs().remove(song);
+			//signupRepo.saveUserToDB(users.get(i));
+			contentFollowService.removeFromFollowedSongs(users.get(i), songId);
 		}
 		
 		//REMOVE FROM ALL PLAYLISTS THAT HAS THIS SONG
 		
+		List<Playlist> lists = playlistService.getPlaylistsThatContainsSong(songId);
+		
+		for(int i = 0; i < lists.size(); i++){
+			playlistService.removeSongFromPlaylist(lists.get(i).getId(), songId);
+		}
 	}
+
+
 
 }
