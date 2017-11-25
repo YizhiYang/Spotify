@@ -379,23 +379,7 @@ public class MainController {
 	public void upgradeAccount(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
 		User user = (User) request.getSession().getAttribute("User");
-		String cardNumber = request.getParameter("cardNumber");
-		String name = request.getParameter("cardHolderName");
-		String address = request.getParameter("billingAddress");
-		String expredDate = request.getParameter("expredDate");
-		String cvv = request.getParameter("cvv");
-		
-		CreditCard card = new CreditCard();
-		card.setCardNumber(cardNumber);
-		card.setHolderName(name);
-		card.setAddress(address);
-		card.setExpiration(expredDate);
-		card.setCvv(Integer.parseInt(cvv));
-		card.setUser(user);
-		
-		signupService.storeCreditCard(card);
-		user.setUserType(UserType.PREMIUM);
-		signupService.upgradeUser(user);
+		signupService.upgradeUser(user, request);
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
 }

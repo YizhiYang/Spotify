@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.sbu.model.CreditCard;
 import com.sbu.model.User;
+import com.sbu.model.UserType;
 import com.sbu.repository.SignupRepo;
 import com.sbu.controller.MainController;
 
@@ -50,8 +51,24 @@ public class SignupServiceImpl implements SignupService {
 		return result.isEmpty();
 	}
 
-	public void upgradeUser(User user) {
+	public void upgradeUser(User user, HttpServletRequest request) {
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		String cardNumber = request.getParameter("cardNumber");
+		String name = request.getParameter("cardHolderName");
+		String address = request.getParameter("billingAddress");
+		String expredDate = request.getParameter("expredDate");
+		String cvv = request.getParameter("cvv");
+		
+		CreditCard card = new CreditCard();
+		card.setCardNumber(cardNumber);
+		card.setHolderName(name);
+		card.setAddress(address);
+		card.setExpiration(expredDate);
+		card.setCvv(Integer.parseInt(cvv));
+		card.setUser(u);
+		
+		storeCreditCard(card);
+		u.setUserType(UserType.PREMIUM);
 		signupRepo.saveUserToDB(u);
 		
 	}
