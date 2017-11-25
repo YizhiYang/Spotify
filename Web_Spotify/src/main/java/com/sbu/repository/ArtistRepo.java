@@ -3,6 +3,7 @@ package com.sbu.repository;
 import java.util.List;
 
 import com.sbu.model.ArtistUser;
+import com.sbu.model.User;
 
 public interface ArtistRepo {
 	List<ArtistUser> getAllArtists();
@@ -15,4 +16,8 @@ public interface ArtistRepo {
 	public boolean saveAristToDB(ArtistUser artist);
 	
 	public List checkArtistExist(String id);
+	
+	List<User> getAllFollowers(String artistId);
+	
+	void removeArtist(String artistId);
 }

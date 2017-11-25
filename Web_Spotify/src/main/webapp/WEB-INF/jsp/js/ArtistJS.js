@@ -34,7 +34,7 @@ function removeArtist(artistID){
 		url : "removeArtist/" + artistID + ".html",
         success: function (data) {
             alert(data)
-            removeArtistFromRender(artistID);
+            getBrowsePageContent();
         }
 	});
 }

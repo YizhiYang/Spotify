@@ -300,7 +300,7 @@ function addArtistsToCenterContent(jsonData){
     
     $(".removeArtistButton").each(function(index){
 		$(this).click(function(event){
-			removeArtistButton(jsonArray[index].artistID);
+			removeArtist(jsonArray[index].artistID);
 		});
 	});
 

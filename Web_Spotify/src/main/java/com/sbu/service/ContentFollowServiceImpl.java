@@ -12,6 +12,7 @@ import com.sbu.model.ArtistUser;
 import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.repository.AlbumRepo;
+import com.sbu.repository.ArtistRepo;
 import com.sbu.repository.SignupRepo;
 import com.sbu.repository.SongRepo;
 
@@ -35,6 +36,9 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 	
 	@Autowired
 	private AlbumRepo albumRepo;
+	
+	@Autowired
+	private ArtistRepo artistRepo;
 	
 	public boolean addToUserFollowedSongs(User user, String songId) {
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
@@ -60,7 +64,7 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 	public boolean addToUserFollowedArtists(User user, String artistId) {
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
 		ArtistUser artist = artistService.getArtistByArtistID(artistId);
-		if(u.getFollowedArtist().add(artist)){
+		if(u.getFollowedArtists().add(artist)){
 			signupRepo.saveUserToDB(u);
 		}
 		return true;
@@ -83,7 +87,7 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 
 	public String getFollowedArtistsInJSON(User user) throws JSONException {
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
-		return artistService.convertArtistsToJSON(u.getFollowedArtist());
+		return artistService.convertArtistsToJSON(u.getFollowedArtists());
 	}
 
 
@@ -129,15 +133,20 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
 		ArtistUser artistToUnfollow = null;
 		
-		for(ArtistUser artistUser: u.getFollowedArtist()){
+		for(ArtistUser artistUser: u.getFollowedArtists()){
 			if(artistUser.getArtistID() == Long.valueOf(artistId)){
 				artistToUnfollow = artistUser;
 			}
 		}
-		u.getFollowedArtist().remove(artistToUnfollow);
+		u.getFollowedArtists().remove(artistToUnfollow);
 		signupRepo.saveUserToDB(u);
 		return true;
 		
+	}
+
+
+	public List<User> getAllFollowersOfArtist(String artistId) {
+		return artistRepo.getAllFollowers(artistId);
 	}
 
 }

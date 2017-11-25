@@ -24,6 +24,8 @@ public class ArtistServiceImpl implements ArtistService {
 	private SignupRepo signupRepo;
 	@Autowired
 	private AlbumService albumService;
+	@Autowired
+	private ContentFollowService contentFollowService;
 	
 	public boolean saveArtist(ArtistUser artist) {
 		return artistRepo.saveAristToDB(artist);
@@ -102,8 +104,16 @@ public class ArtistServiceImpl implements ArtistService {
 
 	public void removeArtist(String artistId) {
 		//REMOVE ALL ALBUM OF THIS ARTIST
-		
-		
+		ArtistUser artist = getArtistByArtistID(artistId);
+		for(int i=0; i<artist.getAlbum().size();i++){
+			albumService.removeAlbum(artist.getAlbum().get(i).getAlbumId().toString());
+		}
+		//REMOVE ALL USER FOLLOW ARTIST RELATION
+		List<User> users = contentFollowService.getAllFollowersOfArtist(artistId);
+		for(User u: users){
+			contentFollowService.removeFromFollowedArtists(u, artistId);
+		}
+		artistRepo.removeArtist(artistId);
 	}
 
 }

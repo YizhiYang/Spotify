@@ -655,6 +655,18 @@ public class MainController {
 		}
 	}
 	
+	@RequestMapping(value = "/removeArtist/{artistID}", method = RequestMethod.POST)
+	public void removeArtist(HttpServletResponse response, HttpServletRequest request,@PathVariable("artistID") String artistID)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}	
+		artistService.removeArtist(artistID);
+	    response.getWriter().write(REQUEST_SUCCESS);
+	}
+	
 	@RequestMapping(value = "/loadFollowedArtists", method = RequestMethod.GET)
 	public void loadFollowedArtists(HttpServletResponse response, HttpServletRequest request)
 			throws JSONException, IOException {

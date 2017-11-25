@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sbu.model.ArtistUser;
+import com.sbu.model.User;
 
 @Repository("artistRepo")
 @Transactional
@@ -56,5 +57,16 @@ public class ArtistRepoImpl implements ArtistRepo {
 		List result = em.createQuery("SELECT u FROM ArtistUser u WHERE u.artistID = :id")
 		.setParameter("id", artistId).getResultList();
 		return result;
+	}
+
+	public List<User> getAllFollowers(String artistId) {
+		List<User> results = em.createQuery("SELECT u FROM User u JOIN u.followedArtists a WHERE a.artistID= :artistId")
+				.setParameter("artistId", Long.valueOf(artistId)).getResultList();
+		return results;
+	}
+
+	public void removeArtist(String artistId) {
+		em.createQuery("DELETE From ArtistUser a WHERE a.artistID = :artistId")
+		.setParameter("artistId", Long.valueOf(artistId)).executeUpdate();
 	}
 }

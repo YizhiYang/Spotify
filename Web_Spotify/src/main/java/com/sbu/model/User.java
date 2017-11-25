@@ -68,7 +68,7 @@ public class User {
         		joinColumns = { @JoinColumn(name = "USER_ID", nullable = false, updatable = false) }, 
         inverseJoinColumns = { @JoinColumn(name = "ARTIST_ID", nullable = false, updatable = false) }
     )
-	private List<ArtistUser> followedArtist = new ArrayList<ArtistUser>();
+	private List<ArtistUser> followedArtists = new ArrayList<ArtistUser>();
 
 	public String getEmail() {
 		return email;
@@ -112,11 +112,11 @@ public class User {
 	public void setFollowedAlbums(List<Album> followedAlbums) {
 		this.followedAlbums = followedAlbums;
 	}
-	public List<ArtistUser> getFollowedArtist() {
-		return followedArtist;
+	public List<ArtistUser> getFollowedArtists() {
+		return followedArtists;
 	}
-	public void setFollowedArtist(List<ArtistUser> followedArtist) {
-		this.followedArtist = followedArtist;
+	public void setFollowedArtists(List<ArtistUser> followedArtists) {
+		this.followedArtists = followedArtists;
 	}
 	
 	
