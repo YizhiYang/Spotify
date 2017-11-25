@@ -382,4 +382,9 @@ public class MainController {
 		signupService.upgradeUser(user, request);
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
+	
+	@RequestMapping(value="downgradeAccount", method = RequestMethod.POST)
+	public void downgradeAccount(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+	}
 }
