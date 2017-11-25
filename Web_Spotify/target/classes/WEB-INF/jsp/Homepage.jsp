@@ -504,14 +504,12 @@
 
 
      
-		
-		<div class="modal fade" id="successPopUp">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="successPopUp">
+  <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header"></div>
       <div class="modal-body">
 			Success!
-		</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
