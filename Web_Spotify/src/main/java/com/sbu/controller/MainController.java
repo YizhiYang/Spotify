@@ -364,7 +364,14 @@ public class MainController {
 				artistService.saveArtist(artist);
 			}
 		}
+	}
+	
+	@RequestMapping(value="/getUserType")
+	public void getUserType(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+		User user = (User) request.getSession().getAttribute(("User"));
+		System.out.println((user.getUserType().toString()));
+		response.getWriter().write(user.getUserType().toString());
 		
 	}
- 
 }
