@@ -302,22 +302,10 @@ public class MainController {
 		}
 	}
 	
-	@RequestMapping(value="/getAllArtists", method = RequestMethod.GET)
-	public void getAllArtists(Model model, HttpServletRequest request, 
-			HttpServletResponse response) throws IOException, JSONException{
-		
-		User user = (User)request.getSession().getAttribute("User");
-		if(user==null){
-			return;
-		}
-		
-		String jsonString = artistService.getAllArtistsInJSON();
- 		response.setContentType("text/plain");
-	    response.getWriter().write(jsonString);
-	}
 	
 	@RequestMapping(value="/getProfileImageWithUsername/{username}", method = RequestMethod.GET)
-    public void getProfileImageWithUsername(HttpServletResponse response, HttpServletRequest request, @PathVariable("username") String username) throws IOException {
+    public void getProfileImage(HttpServletResponse response, 
+    		HttpServletRequest request, @PathVariable("username") String username) throws IOException {
 		
 		User user = (User)request.getSession().getAttribute("User");		
 		if(user==null){

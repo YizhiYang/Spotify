@@ -9,6 +9,7 @@ function addToFollowedSongs(songId, index){
         	reloadFollowedSongs();
         	$(".SongPageFollowSong").eq(index).hide();
         	$(".SongPageUnfollowSong").eq(index).show();
+        	$("#puopUpMessage").html("Follow Success.");
         	$("#successPopUp").modal("show");
         }
 	});
@@ -22,6 +23,8 @@ function removeFromFollowedSongs(songId, index){
         	reloadFollowedSongs();
         	$(".SongPageUnfollowSong").eq(index).hide();
         	$(".SongPageFollowSong").eq(index).show();
+        	$("#puopUpMessage").html("Unfollow Success.");
+        	$("#successPopUp").modal("show");
         }
 	});
 }
@@ -34,6 +37,8 @@ function addToFollowedAlbums(albumId, index){
         	reloadFollowedAlbums();
         	$(".AlbumPageFollowAlbum").eq(index).hide();
         	$(".AlbumPageUnfollowAlbum").eq(index).show();
+        	$("#puopUpMessage").html("Follow Success.");
+        	$("#successPopUp").modal("show");
         }
 	});
 }
@@ -46,6 +51,8 @@ function removeFromFollowedAlbums(albumId, index){
         	reloadFollowedAlbums();
         	$(".AlbumPageUnfollowAlbum").eq(index).hide();
         	$(".AlbumPageFollowAlbum").eq(index).show();
+        	$("#puopUpMessage").html("Unfollow Success.");
+        	$("#successPopUp").modal("show");
         }
 	});
 }
@@ -58,6 +65,8 @@ function addToFollowedArtists(artistId, index){
         	reloadFollowedArtists();
         	$(".ArtistPageFollowArtist").eq(index).hide();
         	$(".ArtistPageUnfollowArtist").eq(index).show();
+        	$("#puopUpMessage").html("Follow Success.");
+        	$("#successPopUp").modal("show");
         }
 	});
 }
@@ -70,6 +79,8 @@ function removeFromFollowedArtists(artistId, index){
         	reloadFollowedArtists();
         	$(".ArtistPageUnfollowArtist").eq(index).hide();
         	$(".ArtistPageFollowArtist").eq(index).show();
+        	$("#puopUpMessage").html("Unfollow Success.");
+        	$("#successPopUp").modal("show");
         }
 	});
 }

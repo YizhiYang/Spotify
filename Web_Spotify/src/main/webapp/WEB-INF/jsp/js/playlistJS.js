@@ -25,9 +25,10 @@ function addNewPlaylist(){
 		url : "addNewPlaylist.html",
 		data : newPlayListData,
         success: function (data) {
-            alert(data)
             $('#addNewPlaylistPopUp').modal('hide');
             getUserPlaylists();
+        	$("#puopUpMessage").html("New Playlist Added.");
+        	$("#successPopUp").modal("show");
         }
 	});
 }
@@ -77,7 +78,8 @@ function addSongToPlayList(playlistId, songId){
 		type : "POST",
 		url : "addSongToPlaylist/" + playlistId + "/" + songId+ ".html",
         success: function (data) {
-            alert(data)
+        	$("#puopUpMessage").html("Song Added");
+        	$("#successPopUp").modal("show");
         }
 	});
 }
@@ -87,8 +89,9 @@ function removeSongFromPlaylist(playlistId, playlistName, songId){
 		type : "POST",
 		url : "removeSongFromPlaylist/" + playlistId + "/" + songId+ ".html",
         success: function (data) {
-            alert(data)
             goToPlaylistSongs(playlistId, playlistName);
+        	$("#puopUpMessage").html("Remove Success");
+        	$("#successPopUp").modal("show");
         }
 	});
 }
@@ -150,6 +153,8 @@ function removePlaylist(playlistId){
 		type : "POST",
 		url : "deletePlaylist/" + playlistId + ".html",
 		success : function(data) {
+        	$("#puopUpMessage").html("Remove Success");
+        	$("#successPopUp").modal("show");
 			window.location.reload();
 		}
 	});
