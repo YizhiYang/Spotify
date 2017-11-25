@@ -49,4 +49,10 @@ public class SignupServiceImpl implements SignupService {
 		return result.isEmpty();
 	}
 
+	public void upgradeUser(User user) {
+		
+		signupRepo.saveUserToDB(user);
+		
+	}
+
 }

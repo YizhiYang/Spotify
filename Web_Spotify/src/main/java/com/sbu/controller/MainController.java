@@ -372,6 +372,20 @@ public class MainController {
 		User user = (User) request.getSession().getAttribute(("User"));
 		System.out.println((user.getUserType().toString()));
 		response.getWriter().write(user.getUserType().toString());
+	}
+	
+	@RequestMapping(value="/upgradeAccount", method = RequestMethod.POST)
+	public void upgradeAccount(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
+		String cardNumber = request.getParameter("cardNumber");
+		String name = request.getParameter("cardHolderName");
+		String address = request.getParameter("billingAddress");
+		String expredDate = request.getParameter("expredDate");
+		String cvv = request.getParameter("cvv");
+		
+		User user = (User) request.getSession().getAttribute("User");
+		user.setUserType(UserType.PREMIUM);
+		signupService.upgradeUser(user);
+		response.getWriter().write(REQUEST_SUCCESS);
 	}
 }

@@ -12,4 +12,6 @@ public interface SignupService{
 		User signupUser(User user, HttpServletRequest request) throws IOException;
 		
 		boolean validateUsername(String username);
+		
+		void upgradeUser(User user);
 }
