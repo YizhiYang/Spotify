@@ -133,7 +133,7 @@ function goToPlaylistSongs(playlistId, playlistName){
 
 
 function changePlaylistName(){
-var newPlaylistNameData = $('#change-playlist-name-form').serialize();
+	var newPlaylistNameData = $('#change-playlist-name-form').serialize();
 	
 	$.ajax({
 		type : "POST",

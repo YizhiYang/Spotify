@@ -12,6 +12,7 @@ $( document ).ready(function() {
 		reloadFollowedSongs();
 		reloadFollowedAlbums();
 		reloadFollowedArtists();
+		getBrowsePageContent();
 		
 		$("#profile-image-chooser").change(function(event) {
 			uploadProfileImage();

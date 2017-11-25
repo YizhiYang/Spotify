@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.User;
+import com.sbu.model.UserType;
 import com.sbu.service.AlbumService;
 import com.sbu.service.ArtistService;
 import com.sbu.service.ProfileService;
@@ -159,6 +160,7 @@ public class MainController {
 		user.setPassword(password);
 		user.setEmail(email);
 		user.setLocation(location);
+		user.setUserType(UserType.BASIC);
 		
 		boolean result = signupService.validateUsername(username);	
 		if(!result){

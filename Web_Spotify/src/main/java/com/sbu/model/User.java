@@ -44,7 +44,7 @@ public class User {
 	private boolean loggedin;
 	
 	@Column(name="USERTYPE")
-	private String userType;
+	private UserType userType;
 
 	@ManyToMany
     @JoinTable(
@@ -117,6 +117,12 @@ public class User {
 	}
 	public void setFollowedArtists(List<ArtistUser> followedArtists) {
 		this.followedArtists = followedArtists;
+	}
+	public UserType getUserType() {
+		return userType;
+	}
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 	
 	
