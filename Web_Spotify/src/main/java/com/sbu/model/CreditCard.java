@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +20,7 @@ public class CreditCard {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long cardId;
 	
-	@Column(name="USER")
+	@OneToOne
 	private User user;
 	
 	@Column(name="HOLDER_NAME")

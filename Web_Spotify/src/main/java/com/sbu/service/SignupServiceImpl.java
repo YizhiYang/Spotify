@@ -50,8 +50,8 @@ public class SignupServiceImpl implements SignupService {
 	}
 
 	public void upgradeUser(User user) {
-		
-		signupRepo.saveUserToDB(user);
+		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		signupRepo.saveUserToDB(u);
 		
 	}
 
