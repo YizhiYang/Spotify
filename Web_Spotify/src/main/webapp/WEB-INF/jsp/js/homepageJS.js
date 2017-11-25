@@ -26,6 +26,9 @@ $( document ).ready(function() {
 		$("#confirm-upgrade-button").click(function(event){
 			upgradeAccount();
 		});
+		$("#confirm-downgrade-button").click(function(event){
+			downgradeAccount();
+		});
 		$('#jquery_jplayer_1').on($.jPlayer.event.play,  function(e){
 		    console.log("Current track", e.jPlayer.status.media);
 		    console.log("Currentr track index", myPlaylist.current);
@@ -121,6 +124,7 @@ function upgradeAccount(){
 	$.ajax({
 		type : "POST",
 		url : "upgradeAccount.html",
+		data: creditCardInfoData,
 		success : function(data) {
 			location.reload();
 		}
@@ -128,7 +132,13 @@ function upgradeAccount(){
 }
 
 function downgradeAccount(){
-	
+	$.ajax({
+		type : "POST",
+		url : "downgradeAccount.html",
+		success : function(data) {
+			location.reload();
+		}
+	});
 }
 
 function logout(){

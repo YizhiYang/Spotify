@@ -140,7 +140,7 @@
 <div class="modal fade" id="accountDowngradePopUp">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header"></div>
+      <div class="modal-header">Downgrade from Premium Account to Basic Account</div>
       <div class="modal-body">
       	<div class="modal-footer">
         	<button type="button" class="btn btn-primary" id="confirm-downgrade-button">Confirm Downgrade</button>

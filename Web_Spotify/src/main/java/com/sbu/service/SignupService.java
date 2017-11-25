@@ -14,7 +14,7 @@ public interface SignupService{
 		
 		boolean validateUsername(String username);
 		
-		void upgradeUser(User user, HttpServletRequest request);
+		User upgradeUser(User user, HttpServletRequest request);
 		
 		void storeCreditCard(CreditCard creditCard);
 		

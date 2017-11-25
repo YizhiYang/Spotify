@@ -51,13 +51,15 @@ public class SignupServiceImpl implements SignupService {
 		return result.isEmpty();
 	}
 
-	public void upgradeUser(User user, HttpServletRequest request) {
+	public User upgradeUser(User user, HttpServletRequest request) {
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
 		String cardNumber = request.getParameter("cardNumber");
+		System.out.println("cardnumber:" + cardNumber);
 		String name = request.getParameter("cardHolderName");
 		String address = request.getParameter("billingAddress");
 		String expredDate = request.getParameter("expredDate");
 		String cvv = request.getParameter("cvv");
+		System.out.println(cvv);
 		
 		CreditCard card = new CreditCard();
 		card.setCardNumber(cardNumber);
@@ -70,7 +72,7 @@ public class SignupServiceImpl implements SignupService {
 		storeCreditCard(card);
 		u.setUserType(UserType.PREMIUM);
 		signupRepo.saveUserToDB(u);
-		
+		return u;
 	}
 	
 	public void storeCreditCard(CreditCard creditCard){
