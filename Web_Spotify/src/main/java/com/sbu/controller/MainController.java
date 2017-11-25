@@ -200,12 +200,12 @@ public class MainController {
 		if(user==null){
 			System.out.println("Kicked out of Session from Image Download");
 			return;
-		}	
+		}
+		
 		String profileFolderName = user.getUserName();
-
-        File file = null;
+        File file = null;      
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();           
         file = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName+"/"+PROFILE_IMAGE_NAME).getFile());
         if(!file.exists()){
             String errorMessage = FILE_NOT_FOUND_MESSAGE;
@@ -366,7 +366,7 @@ public class MainController {
 		}
 	}
 	
-	@RequestMapping(value="/getUserType")
+	@RequestMapping(value="/getUserType", method = RequestMethod.GET)
 	public void getUserType(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
 		User user = (User) request.getSession().getAttribute(("User"));
