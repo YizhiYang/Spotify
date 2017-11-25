@@ -11,13 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository("changProfileInfoRepo")
 @Transactional
-public class ChangeProfileInfoRepoImpl implements ChangeProfileInfoRepo {
+public class ProfileRepoImpl implements ProfileRepo {
 	
 	@PersistenceContext
 	private EntityManager em;
 
 	public boolean changeProfileInfo(String email, String location, String username) {
-		int success = em.createQuery("UPDATE User set email= :email, location= :location WHERE username= :username")
+		int success = em.createQuery("UPDATE User "
+				+ "set email= :email, location= :location WHERE username= :username")
 		.setParameter("email", email)
 		.setParameter("location", location)
 		.setParameter("username", username).executeUpdate();

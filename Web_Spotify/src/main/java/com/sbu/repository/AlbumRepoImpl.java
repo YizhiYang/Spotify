@@ -33,7 +33,8 @@ public class AlbumRepoImpl implements AlbumRepo {
 	}
 
 	public List<Album> getSearchAlbumResults(String searchString) {
-		List<Album> result = em.createQuery("SELECT a FROM Album a WHERE a.albumName LIKE :searchString")
+		List<Album> result = em.createQuery("SELECT a "
+				+ "FROM Album a WHERE a.albumName LIKE :searchString")
 		.setParameter("searchString", "%"+searchString+"%").getResultList();
 		return result;
 	}
@@ -49,7 +50,8 @@ public class AlbumRepoImpl implements AlbumRepo {
 	}
 
 	public List<User> getAllFollowers(String albumId) {
-		List<User> results = em.createQuery("SELECT u FROM User u JOIN u.followedAlbums a WHERE a.albumId= :albumId")
+		List<User> results = em.createQuery("SELECT u "
+				+ "FROM User u JOIN u.followedAlbums a WHERE a.albumId= :albumId")
 				.setParameter("albumId", Long.valueOf(albumId)).getResultList();
 		return results;
 	}

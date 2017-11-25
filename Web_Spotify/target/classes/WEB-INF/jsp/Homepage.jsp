@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>Jay Bird&#8482;</title>
+	<title>Spotify</title>
 	<style type="text/css"><%@ include file="css/homepage/bodyStyle.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/playBar.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/left.css" %> </style>

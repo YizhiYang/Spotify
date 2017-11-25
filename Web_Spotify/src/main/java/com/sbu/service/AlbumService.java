@@ -8,6 +8,7 @@ import com.sbu.model.Album;
 import com.sbu.model.Song;
 
 public interface AlbumService {
+	
 	boolean saveAlbum(Album album);
 	
 	List<Album> getAllAlbums();

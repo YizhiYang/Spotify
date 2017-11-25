@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sbu.repository.ChangeProfileInfoRepo;
+import com.sbu.repository.ProfileRepo;
 
 import com.sbu.controller.MainController;
 import com.sbu.model.Playlist;
@@ -26,7 +26,7 @@ public class ProfileServiceImpl implements ProfileService {
 	
 	
 	@Autowired
-	private ChangeProfileInfoRepo changProfileInfoRepo;
+	private ProfileRepo changProfileInfoRepo;
 	
 	public boolean changeUserProfile(String location, String email, String username) {
 		return changProfileInfoRepo.changeProfileInfo(email, location, username);

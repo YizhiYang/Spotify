@@ -22,17 +22,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="artist")
 public class ArtistUser implements Serializable{
-
-	
-	/* Song doesn't need artist because a song must belong to an album and an album must belong to an artist. That's enough.
-	@ManyToMany
-    @JoinTable(
-        name = "Artist_Songs", 
-        joinColumns = { @JoinColumn(name = "ARTIST_ID", referencedColumnName = "USER_ID") }, 
-        inverseJoinColumns = { @JoinColumn(name = "songId") }
-    )
-	private List<Song> songs;
-	*/
 	
 	@Id
 	@GeneratedValue
@@ -57,10 +46,6 @@ public class ArtistUser implements Serializable{
         inverseJoinColumns = { @JoinColumn(name = "ALBUM_ID", nullable = false, updatable = false) }
     )
 	private List<Album> album = new ArrayList<Album>();
-
-	
-	
-
 
 	@ManyToMany
     @JoinTable(

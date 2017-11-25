@@ -27,19 +27,22 @@ public class ArtistRepoImpl implements ArtistRepo {
 	public List<ArtistUser> getArtistByArtistID(String id) {
 		long artistId = Long.valueOf(id);
 		
-		List<ArtistUser> result = em.createQuery("SELECT a FROM ArtistUser a WHERE a.artistID = :id")
+		List<ArtistUser> result = em.createQuery("SELECT "
+				+ "a FROM ArtistUser a WHERE a.artistID = :id")
 		.setParameter("id", artistId).getResultList();
 		return result;
 	}
 
 	public List<ArtistUser> getSearchArtistResults(String searchString) {
-		List<ArtistUser> result = em.createQuery("SELECT a FROM ArtistUser a WHERE a.artistName LIKE :searchString")
+		List<ArtistUser> result = em.createQuery("SELECT "
+				+ "a FROM ArtistUser a WHERE a.artistName LIKE :searchString")
 		.setParameter("searchString", "%"+searchString+"%").getResultList();
 		return result;
 	}
 
 	public List<ArtistUser> getArtistsOfAlbum(long albumId) {
-		List<ArtistUser> result = em.createQuery("SELECT a FROM ArtistUser a JOIN a.album al WHERE al.albumId = :albumId")
+		List<ArtistUser> result = em.createQuery("SELECT "
+				+ "a FROM ArtistUser a JOIN a.album al WHERE al.albumId = :albumId")
 		.setParameter("albumId", albumId).getResultList();
 		return result;
 	}
@@ -60,7 +63,8 @@ public class ArtistRepoImpl implements ArtistRepo {
 	}
 
 	public List<User> getAllFollowers(String artistId) {
-		List<User> results = em.createQuery("SELECT u FROM User u JOIN u.followedArtists a WHERE a.artistID= :artistId")
+		List<User> results = em.createQuery("SELECT "
+				+ "u FROM User u JOIN u.followedArtists a WHERE a.artistID= :artistId")
 				.setParameter("artistId", Long.valueOf(artistId)).getResultList();
 		return results;
 	}

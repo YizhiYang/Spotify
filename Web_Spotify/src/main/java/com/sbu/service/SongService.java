@@ -7,6 +7,7 @@ import org.json.JSONException;
 import com.sbu.model.Song;
 
 public interface SongService {
+	
 	boolean addSongToDatabase(Song song);
 	
 	List<Song> getALLSongs();

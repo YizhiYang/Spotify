@@ -7,6 +7,7 @@ import com.sbu.model.User;
 
 public interface ArtistRepo {
 	List<ArtistUser> getAllArtists();
+	
 	List<ArtistUser> getArtistByArtistID(String id);
 	
 	List<ArtistUser> getSearchArtistResults(String searchString);
