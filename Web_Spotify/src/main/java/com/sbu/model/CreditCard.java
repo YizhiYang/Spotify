@@ -19,26 +19,27 @@ public class CreditCard {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long cardId;
 	
-	private String holder_FirstName;
-	private String holder_LastName;
+	@Column(name="USER")
+	private User user;
 	
+	@Column(name="HOLDER_NAME")
+	private String holderName;
+	
+	@Column(name="CARD_COMPANY")
 	@Enumerated(EnumType.STRING)
 	private CardCompany cardCompany;
 	
+	@Column(name="ADDRESS")
+	private String address;
+	
+	@Column(name="CARD_NUMBER")
 	private String cardNumber;
 	
-	public String getHolder_FirstName() {
-		return holder_FirstName;
-	}
-	public void setHolder_FirstName(String holder_FirstName) {
-		this.holder_FirstName = holder_FirstName;
-	}
-	public String getHolder_LastName() {
-		return holder_LastName;
-	}
-	public void setHolder_LastName(String holder_LastName) {
-		this.holder_LastName = holder_LastName;
-	}
+	@Column(name="EXPIRATION")
+	private String expiration;
+	
+	@Column(name="CVV")
+	private int cvv;
 	
 	@Enumerated(EnumType.STRING)
 	public CardCompany getCardCompany() {
@@ -56,20 +57,53 @@ public class CreditCard {
 	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
-	public Date getExpiration() {
-		return expiration;
-	}
-	public void setExpiration(Date expiration) {
-		this.expiration = expiration;
-	}
+
 	public int getCvv() {
 		return cvv;
 	}
 	public void setCvv(int cvv) {
 		this.cvv = cvv;
 	}
-	private Date expiration;
-	private int cvv;
+
+	public Long getCardId() {
+		return cardId;
+	}
+
+	public void setCardId(Long cardId) {
+		this.cardId = cardId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getHolderName() {
+		return holderName;
+	}
+
+	public void setHolderName(String holderName) {
+		this.holderName = holderName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getExpiration() {
+		return expiration;
+	}
+
+	public void setExpiration(String expiration) {
+		this.expiration = expiration;
+	}
 	
 
 }

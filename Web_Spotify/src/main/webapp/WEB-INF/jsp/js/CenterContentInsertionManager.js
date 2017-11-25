@@ -26,7 +26,7 @@ function addSongsToCenterContent(jsonData){
                                     
     var jsonArray = jQuery.parseJSON(jsonData);
     var jsonUserFollowedSongs = "";
-    if(jsonUserFollowedSongs!=null){
+    if(userFollowedSongs!=null){
     	jsonUserFollowedSongs = jQuery.parseJSON(userFollowedSongs);
     }
     
@@ -149,18 +149,27 @@ function addSongsToCenterContent(jsonData){
 	
 	//REGISTER UNFOLLOW SONG CLICK
 	$(".adminDeleteSongButton").each(function(index){
-		$(this).click(function(event){
-			var songIdStr = $(this).attr("id");
-			sendRemoveSongsRequestToServer(songIdStr.substring(4, songIdStr.length));
-		});
+		if(userType == "ADMIN"){
+			$(this).click(function(event){
+				var songIdStr = $(this).attr("id");
+				sendRemoveSongsRequestToServer(songIdStr.substring(4, songIdStr.length));
+			});
+		}else{
+			$(this).hide();
+		}
 	});
+	
 }
 
 
 function addAlbumsToCenterContent(jsonData){
 	
 	var jsonArray = jQuery.parseJSON(jsonData);
-	var jsonUserFollowedAlbums = jQuery.parseJSON(userFollowedAlbums);
+	
+	var jsonUserFollowedAlbums = "";
+	if(userFollowedAlbums !=null){
+		jsonUserFollowedAlbums = jQuery.parseJSON(userFollowedAlbums);
+	}
 	
     $("#centerSideContent").append('<div class=centerSideContentWrapper id=AlbumPageTop>\
                                         <div id="contentTitle">\
@@ -234,9 +243,13 @@ function addAlbumsToCenterContent(jsonData){
 	});
     
     $(".removeAlbumButton").each(function(index){
-		$(this).click(function(event){
-			removeAlbum(jsonArray[index].albumId);
-		});
+    	if(userType == "ADMIN"){
+    		$(this).click(function(event){
+    			removeAlbum(jsonArray[index].albumId);
+    		});
+    	}else{
+    		$(this).hide();
+    	}
 	});
 }
 
@@ -303,9 +316,13 @@ function addArtistsToCenterContent(jsonData){
 	});
     
     $(".removeArtistButton").each(function(index){
-		$(this).click(function(event){
-			removeArtist(jsonArray[index].artistID);
-		});
+    	if(userType == "ADMIN"){
+    		$(this).click(function(event){
+    			removeArtist(jsonArray[index].artistID);
+    		});
+    	}else{
+    		$(this).hide();
+    	}
 	});
 
 }
