@@ -32,4 +32,6 @@ public interface ContentFollowService {
 	List<User> getAllFollowersOfAlbum(String albumId);
 	
 	List<User> getAllFollowersOfArtist(String artistId);
+	
+	
 }

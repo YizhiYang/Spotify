@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.sbu.model.ArtistUser;
+import com.sbu.model.CreditCard;
 import com.sbu.model.User;
 import com.sbu.model.UserType;
 import com.sbu.service.AlbumService;
@@ -377,13 +378,22 @@ public class MainController {
 	@RequestMapping(value="/upgradeAccount", method = RequestMethod.POST)
 	public void upgradeAccount(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
+		User user = (User) request.getSession().getAttribute("User");
 		String cardNumber = request.getParameter("cardNumber");
 		String name = request.getParameter("cardHolderName");
 		String address = request.getParameter("billingAddress");
 		String expredDate = request.getParameter("expredDate");
 		String cvv = request.getParameter("cvv");
 		
-		User user = (User) request.getSession().getAttribute("User");
+		CreditCard card = new CreditCard();
+		card.setCardNumber(cardNumber);
+		card.setHolderName(name);
+		card.setAddress(address);
+		card.setExpiration(expredDate);
+		card.setCvv(Integer.parseInt(cvv));
+		card.setUser(user);
+		
+		signupService.storeCreditCard(card);
 		user.setUserType(UserType.PREMIUM);
 		signupService.upgradeUser(user);
 		response.getWriter().write(REQUEST_SUCCESS);

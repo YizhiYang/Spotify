@@ -2,6 +2,7 @@ package com.sbu.repository;
 
 import java.util.List;
 
+import com.sbu.model.CreditCard;
 import com.sbu.model.User;
 
 public interface SignupRepo {
@@ -13,4 +14,6 @@ public interface SignupRepo {
 		List getUserByID(String id);
 		
 		boolean saveUserToDB(User user);
+
+		void storeCreditCard(CreditCard creditCard);
 }

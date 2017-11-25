@@ -11,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sbu.model.CreditCard;
 import com.sbu.model.User;
 import com.sbu.repository.SignupRepo;
 import com.sbu.controller.MainController;
@@ -53,6 +54,11 @@ public class SignupServiceImpl implements SignupService {
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
 		signupRepo.saveUserToDB(u);
 		
+	}
+	
+	public void storeCreditCard(CreditCard creditCard){
+		
+		signupRepo.storeCreditCard(creditCard);
 	}
 
 }

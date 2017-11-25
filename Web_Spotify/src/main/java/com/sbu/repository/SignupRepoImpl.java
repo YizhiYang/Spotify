@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sbu.model.CreditCard;
 import com.sbu.model.User;
 
 @Repository("signupRepo")
@@ -42,6 +43,12 @@ public class SignupRepoImpl implements SignupRepo {
 	public boolean saveUserToDB(User user) {
 		em.persist(user);
 		return true;
+	}
+
+	public void storeCreditCard(CreditCard creditCard) {
+		
+		em.persist(creditCard);
+		
 	}
 
 }
