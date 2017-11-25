@@ -25,12 +25,16 @@ function addSongsToCenterContent(jsonData){
 	</div>');
                                     
     var jsonArray = jQuery.parseJSON(jsonData);
-    var jsonUserFollowedSongs = jQuery.parseJSON(userFollowedSongs);
+    var jsonUserFollowedSongs = "";
+    if(jsonUserFollowedSongs!=null){
+    	jsonUserFollowedSongs = jQuery.parseJSON(userFollowedSongs);
+    }
     
     for(var i=0; i<jsonArray.length; i++){
     	var song = jsonArray[i];
     	var contentToBeAdded = '<tr class="songPageListContent" id="song' + song.songId + '">\
 			<td><i class="material-icons song-content-play-button">play_circle_outline</i>';
+    	
     	var isSongFollowed = false;
     	for(j=0; j<jsonUserFollowedSongs.length; j++){
     		if(jsonUserFollowedSongs[j].songId == song.songId){
