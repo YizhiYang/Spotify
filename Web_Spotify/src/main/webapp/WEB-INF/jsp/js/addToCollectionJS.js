@@ -7,9 +7,10 @@ function addToFollowedSongs(songId, index){
 		url : "addToFollowedSongs/" + songId + ".html",
         success: function (data) {
         	reloadFollowedSongs();
-        	$(".SongPageFollowSong").eq(index).hide();
-        	$(".SongPageUnfollowSong").eq(index).show();
         	$("#successPopUp").modal("show");
+//        	$(".SongPageFollowSong").eq(index).hide();
+//        	$(".SongPageUnfollowSong").eq(index).show();
+        	
         }
 	});
 }
