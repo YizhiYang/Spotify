@@ -505,7 +505,7 @@
 
      
 		
-		<div class="modal fade" id="successPopUp">
+<div class="modal fade" id="successPopUp">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
