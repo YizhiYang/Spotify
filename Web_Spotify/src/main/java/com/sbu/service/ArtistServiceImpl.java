@@ -93,7 +93,7 @@ public class ArtistServiceImpl implements ArtistService {
 		}
 	}
 
-	public String getSearchArtistResultsInJSON(String searchString) throws JSONException {
+	public String searchArtists(String searchString) throws JSONException {
 		List<ArtistUser> artists = artistRepo.getSearchArtistResults(searchString);
 		return convertArtistsToJSON(artists);
 	}

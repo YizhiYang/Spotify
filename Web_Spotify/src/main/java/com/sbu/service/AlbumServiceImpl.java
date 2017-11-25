@@ -71,7 +71,7 @@ public class AlbumServiceImpl implements AlbumService {
 		return jsonArray.toString();
 	}
 
-	public String getSearchAlbumResultsInJSON(String searchString) throws JSONException {
+	public String searchAlbums(String searchString) throws JSONException {
 		List<Album> albums = albumRepo.getSearchAlbumResults(searchString);
 		return convertAlbumsToJSON(albums);
 	}

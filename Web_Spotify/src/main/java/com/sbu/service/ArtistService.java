@@ -22,7 +22,7 @@ public interface ArtistService {
 	
 	ArtistUser getArtistByArtistID(String id);
 	
-	String getSearchArtistResultsInJSON(String searchString) throws JSONException;
+	String searchArtists(String searchString) throws JSONException;
 	
 	List<ArtistUser> getArtistsOfAlbum(long albumId);
 	

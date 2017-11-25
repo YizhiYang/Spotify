@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sbu.model.User;
 
-public interface ChangeProfileInfoService {
+public interface ProfileService {
 	
 	boolean changeUserProfile(String location, String email, String username);
 	

@@ -22,7 +22,7 @@ import com.sbu.model.User;
 
 
 @Service("changProfileInfoService")
-public class ChangProfileInfoServiceImpl implements ChangeProfileInfoService {
+public class ProfileServiceImpl implements ProfileService {
 	
 	
 	@Autowired

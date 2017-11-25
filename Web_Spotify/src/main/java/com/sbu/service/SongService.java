@@ -17,7 +17,7 @@ public interface SongService {
 	
 	String convertSongsToJSON(List<Song> songs) throws JSONException;
 	
-	String getSearchSongResultsInJSON(String searchString) throws JSONException;
+	String searchSongs(String searchString) throws JSONException;
 	
 	void removeSong(String songId);
 }

@@ -81,7 +81,7 @@ public class SongServiceImpl implements SongService {
 		return jsonArray.toString();
 	}
 
-	public String getSearchSongResultsInJSON(String searchString) throws JSONException {
+	public String searchSongs(String searchString) throws JSONException {
 		List<Song> songs = songRepo.getSearchSongResults(searchString);
 		return convertSongsToJSON(songs);
 	}
