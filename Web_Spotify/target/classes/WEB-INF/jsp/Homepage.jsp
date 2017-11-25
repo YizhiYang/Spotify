@@ -32,7 +32,6 @@
   <script type="application/javascript"><%@ include file="js/CenterContentInsertionManager.js" %></script>
   
   <script type="application/javascript"><%@ include file="js/SongJS.js" %></script>
-  <script type="application/javascript"><%@ include file="js/playListPrototypePage.js" %></script>
   <script type="application/javascript"><%@ include file="js/AlbumJS.js" %></script>
   <script type="application/javascript"><%@ include file="js/ArtistJS.js" %></script>
   <script type="application/javascript"><%@ include file="js/albumPage.js" %></script>
@@ -57,15 +56,23 @@
                 <div id=userInfoWrapper>
                     <div id="userInfoInnerWrapper">
                     	<div id=profilePic>
-    						<a onclick="editPopUp()"><img width="60" height="60" class ="profile-image-home" src="Profile-Image.html"></img></a>
+    						<img width="60" height="60" class ="profile-image-home" src="Profile-Image.html"></img>
 						</div>
                         <div id=userInfo>
-                            <div id=username>Jay Bird</div>
-                            <div id=usertype>Basic User</div>
-                           	<!-- <div id=useredit>Profile</div> -->
+                            <div id="username">Jay Bird</div>
+                            <div id="usertype">Basic User</div>
+                           	<div class="dropdown" id="accoun-info-menu">
+    		    				<i class="material-icons dropdown-toggle" data-toggle="dropdown">more_horiz</i>
+    		  					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width:0px;background-color:transparent;">
+    		  						<div class="dropdown-item"><a onclick="upOrDowngradeAccountPopUp()"><i class="material-icons">info</i></a></div>
+    		  						<div class="dropdown-item"><a onclick="editPopUp()"><i class="material-icons">settings</i></a></div>
+    		  					</div>
+    		  				</div>
                         </div>
                     </div>
                 </div>
+                <br/>
+                <br/>
                 <div id="userSongWrapper">
                     <ul>
                         <li class=userSongWrapperList>
@@ -95,21 +102,54 @@
                         	<div class='userSongWrapperItem' data-toggle="modal" data-target="#addNewPlaylistPopUp">Add New Play List</div>
                         </li>
                         <li class=userSongWrapperList>
-                        	<div class='userSongWrapperItem' id="My-PlayList-Button">My Play List</div>
+                        	<div class='userSongWrapperItem' data-toggle="modal" id="Admin-UploadSong-Button" data-target="#uploadSongPopUp">Upload Song</div>
                         </li>
                         <li class=userSongWrapperList>
-                        	<div class='userSongWrapperItem' data-toggle="modal" data-target="#uploadSongPopUp">Upload Song</div>
-                        </li>
-                        <li class=userSongWrapperList>
-                        	<div class='userSongWrapperItem' data-toggle="modal" data-target="#createAlbumPopUp">Create Album</div>
+                        	<div class='userSongWrapperItem' data-toggle="modal" id="Admin-CreateAlbum-Button" data-target="#createAlbumPopUp">Create Album</div>
                         </li>
                         </li>
                         <li class=userSongWrapperList>
-                        	<div class='userSongWrapperItem' data-toggle="modal" data-target="#makeUserArtistPopUp">Make User Artist</div>
+                        	<div class='userSongWrapperItem' data-toggle="modal" id="Admin-MakeUserArtist-Button" data-target="#makeUserArtistPopUp">Make User Artist</div>
                         </li>
                     </ul>
                 </div>
-                
+
+<!-- Pop up for Account Upgrade -->
+<div class="modal fade" id="accountUpgradePopUp">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">Add Credit Card Info And Upgrade to Premium</div>
+      <div class="modal-body">
+		<form id="credit-card-form" method="post">
+  			<input class="form-control" id="cardNumber" type="text" name="cardNumber" placeholder="Card number">                      
+            <input class="form-control" id="cardName" type="text" name="cardHolderName" placeholder="Card holder name">
+            <input class="form-control" id="billingAddress" type="text" name="billingAddress" placeholder="Billing address">
+           	<input class="form-control" id="expiredDate" type="text" name="expiredDate" placeholder="Expiration date">                      
+            <input class="form-control" id="cvv" type="text" name="cvv" placeholder="CVV">
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="confirm-upgrade-button">Confirm Upgrade</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pop up for Account Downgrade -->
+<div class="modal fade" id="accountDowngradePopUp">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header"></div>
+      <div class="modal-body">
+      	<div class="modal-footer">
+        	<button type="button" class="btn btn-primary" id="confirm-downgrade-button">Confirm Downgrade</button>
+        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Pop up for changing playlist name -->

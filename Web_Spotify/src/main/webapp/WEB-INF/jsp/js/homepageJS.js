@@ -6,27 +6,30 @@ var userFollowedSongs;
 var userFollowedAlbums;
 //STORES THE LIST OF ALBUMS
 var userFollowedArtists;
+//STORES WHAT USERTYPE THIS USER IS, BASIC, PREMUIUM, ARTIST, ADMIN
+var userType;
 
 $( document ).ready(function() {
+		getUserTypeAndRerender();
 		getUserName();
 		reloadFollowedSongs();
 		reloadFollowedAlbums();
 		reloadFollowedArtists();
 		getBrowsePageContent();
-		
 		$("#profile-image-chooser").change(function(event) {
 			uploadProfileImage();
 		});
-		
 		$("#save-user-info-update-changes-button").click(function(event) {
 			updateUserInfo();
 		});	
 		
+		$("#confirm-upgrade-button").click(function(event){
+			upgradeAccount();
+		});
 		$('#jquery_jplayer_1').on($.jPlayer.event.play,  function(e){
 		    console.log("Current track", e.jPlayer.status.media);
 		    console.log("Currentr track index", myPlaylist.current);
 		});
-		
 		$("#logout-button").click(function(event) {
 			logout();
 		});
@@ -83,7 +86,7 @@ function editPopUp(){
 			$('#userinfo-username-input').val(jsonObj.userName);
 			$('#userinfo-email-input').val(jsonObj.email);
 			$('#userinfo-location-input').val(jsonObj.location);
-		
+			
 			$("#editUserInfoPopUp").modal('show');
 		}
 	});	
@@ -102,6 +105,30 @@ function updateUserInfo(){
 		}
 	});
 
+}
+
+function upOrDowngradeAccountPopUp(){
+	if(userType == "BASIC"){
+		$('#accountUpgradePopUp').modal('show');
+	}else if(userType == "PREMIUM"){
+		$('#accountDowngradePopUp').modal('show');
+	}
+}
+
+function upgradeAccount(){
+	var creditCardInfoData = $('#credit-card-form').serialize();
+	
+	$.ajax({
+		type : "POST",
+		url : "upgradeAccount.html",
+		success : function(data) {
+			location.reload();
+		}
+	});
+}
+
+function downgradeAccount(){
+	
 }
 
 function logout(){
@@ -142,4 +169,37 @@ function reloadFollowedArtists(){
 			userFollowedArtists = data;
 		}
 	});
+}
+
+function getUserTypeAndRerender(){
+	$.ajax({
+		type : "GET",
+		url : "getUserType.html",
+		success : function(data) {
+			userType = data;
+			displayUserType(userType);
+			if(userType != "ADMIN"){
+				hideAdminGUI();
+			}
+		}
+	});
+}
+
+function displayUserType(userType){
+	if(userType == "BASIC"){
+		$("#usertype").html("Basic User");
+	}else if(userType == "PREMIUM"){
+		$("#usertype").html("Premium User");
+	}else if(userType == "ARTIST"){
+		$("#usertype").html("Artist User");
+	}else if(userType == "ADMIN"){
+		$("#usertype").html("Admin User");
+	}
+}
+
+
+function hideAdminGUI(){
+	$("#Admin-UploadSong-Button").parent().hide();
+	$("#Admin-CreateAlbum-Button").parent().hide();
+	$("#Admin-MakeUserArtist-Button").parent().hide();
 }

@@ -44,8 +44,12 @@
     color:white;
     padding-top: 5px;
     font-family: 'Ubuntu', sans-serif;
-    
 }
+#accoun-info-menu{
+	position: absolute;
+	right:0;
+}
+
 #username{
     position: relative;
     width: 170px;

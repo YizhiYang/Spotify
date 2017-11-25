@@ -1,3 +1,10 @@
+#playlist-page-name-title{
+	cursor:pointer;
+}
+i{
+	cursor:pointer;
+}
+
 #centerTopBar{
     position: relative;
     width: 100%;
