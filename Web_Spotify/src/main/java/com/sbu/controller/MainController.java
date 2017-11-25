@@ -379,7 +379,8 @@ public class MainController {
 	public void upgradeAccount(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
 		User user = (User) request.getSession().getAttribute("User");
-		signupService.upgradeUser(user, request);
+		User newUser = signupService.upgradeUser(user, request);
+		request.getSession().setAttribute("User", newUser);
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
 	
