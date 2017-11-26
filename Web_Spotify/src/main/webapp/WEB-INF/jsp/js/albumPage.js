@@ -3,9 +3,7 @@ $(document).ready(function() {
 		loadFollowedAlbums();
 		event.preventDefault();
 	});
-
 });
-
 
 function loadFollowedAlbums(){
 	$.ajax({

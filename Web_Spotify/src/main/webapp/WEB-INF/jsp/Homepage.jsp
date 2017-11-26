@@ -12,45 +12,30 @@
 	<style type="text/css"><%@ include file="css/homepage/playListPrototypePage.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/albumPage.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/artistPage.css" %> </style>
-  <link href="https://fonts.googleapis.com/css?family=Raleway | Asap | Work+Sans | Ubuntu | Oxygen | Archivo+Black | Rokkitt | Passion+One" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+ 	<link href="https://fonts.googleapis.com/css?family=Raleway | Asap | Work+Sans | Ubuntu | Oxygen | Archivo+Black | Rokkitt | Passion+One" rel="stylesheet">
+ 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-      <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-  
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-  <script type="application/javascript"><%@ include file="js/signInJS.js" %></script>
-  <script type="application/javascript"><%@ include file="js/homepageJS.js" %></script>
-  
-  <script type="application/javascript"><%@ include file="js/jPlayer/jquery.jplayer.min.js" %></script>
-  <script type="application/javascript"><%@ include file="js/jPlayer/jplayer.playlist.min.js" %></script>
-  
-  <script type="application/javascript"><%@ include file="js/CenterContentInsertionManager.js" %></script>
-  
-  <script type="application/javascript"><%@ include file="js/SongJS.js" %></script>
-  <script type="application/javascript"><%@ include file="js/AlbumJS.js" %></script>
-  <script type="application/javascript"><%@ include file="js/ArtistJS.js" %></script>
-  <script type="application/javascript"><%@ include file="js/albumPage.js" %></script>
-  <script type="application/javascript"><%@ include file="js/artistPage.js" %></script>
-  <script type="application/javascript"><%@ include file="js/songsPage.js" %></script>
-  <script type="application/javascript"><%@ include file="js/browsePage.js" %></script>
-  
-  
-  <script type="application/javascript"><%@ include file="js/searchJS.js" %></script>
-  
-  <script type="application/javascript"><%@ include file="js/addToCollectionJS.js" %></script>
-  
-  <script type="application/javascript"><%@ include file="js/playlistJS.js" %></script>
-
-
-    
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<script type="application/javascript"><%@ include file="js/signInJS.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/homepageJS.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/jPlayer/jquery.jplayer.min.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/jPlayer/jplayer.playlist.min.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/CenterContentInsertionManager.js" %></script> 
+  	<script type="application/javascript"><%@ include file="js/SongJS.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/AlbumJS.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/ArtistJS.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/albumPage.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/artistPage.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/songsPage.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/browsePage.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/searchJS.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/addToCollectionJS.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/playlistJS.js" %></script>
 </head>
 <body>
-    <div id="main">
+	<div id="main">
         <div id=left>
             <div id="leftWrapper">
                 <div id=userInfoWrapper>
@@ -110,7 +95,137 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+        
+        </div>
+        <div id="center">
+            <div id="centerTopBar">
+                <div id="centerTopWrapper">
+                    <input class="centerTopBarContent" id="searchInput" type="text" name="searchContent">
+                    <i class="material-icons centerTopBarContent" id="searchButton">search</i>
+                    <div class="centerTopBarContent">Overview</div>
+                    <div class="centerTopBarContent">Charts</div>
+                    <div class="centerTopBarContent">Genre</div>
+                    <div class="centerTopBarContent">More</div>
+                </div>
+                <div id="logout-button" style="float: right; margin-top: 13px; margin-right: 30px;"><i class="material-icons">power_settings_new</i></div>
+            </div>
+            <div id="centerSideContent">                                   
+            </div>
+            <div id=right>
+                <div id=rightTopWrapper>
+                    <p id="findFriendsText">See what your friends are playing</p>
+                    <button id="findFriends">Find Friends</button>
+                </div>
+                <div id=rightBottomWrapper>
+                    <div class=FSContent>
+                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile1.jpg);"></div></div>
+                        <div class=FSSongDetails>
+                            <div class="FSFriendName">Matt Yang</div>
+                            <div class="FSInnerContent">Decadence</div>
+                            <div class="FSInnerContent">Ten Thousand Fists</div>
+                            <div class="FSInnerContent">Disturbed</div>
+                            <div class="FSInnerContent">Alternative Metal</div>
+                        </div>
+                        <div class="FSPlaySong">
+                            <i class="material-icons icons" style="font-size:50px;">play_circle_filled</i>   
+                        </div>
+                    </div>
+                    <div class=FSContent>
+                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile2.jpg);"></div></div>
+                        <div class=FSSongDetails>
+                            <div class="FSFriendName">Dan Choe</div>
+                            <div class="FSInnerContent">Hand of Blood</div>
+                            <div class="FSInnerContent">the Poison</div>
+                            <div class="FSInnerContent">Bullet for my valentine</div>
+                            <div class="FSInnerContent">Metal</div>
+                        </div>
+                        <div class="FSPlaySong">
+                            <i class="material-icons icons" style="font-size:50px;">play_circle_filled</i>   
+                        </div>
+                    </div>
+                    <div class=FSContent>
+                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile3.jpg);"></div></div>
+                        <div class=FSSongDetails>
+                            <div class="FSFriendName">Limeng Ruan</div>
+                            <div class="FSInnerContent">Wrong Side of Heaven</div>
+                            <div class="FSInnerContent">The Wrong Side of Heaven</div>
+                            <div class="FSInnerContent">Five Finger Death Punch</div>
+                            <div class="FSInnerContent">Alternative Metal</div>
+                        </div>
+                        <div class="FSPlaySong">
+                            <i class="material-icons icons" style="font-size:50px;">play_circle_filled</i>   
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    <!-- Play Bar -->
+    <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+    	<div id="playBar">
+			<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+        	<div id="playBarLeft">
+            	<div id=playBarImage style="background-image: url(./images/albumCover1.jpg);"></div>
+            	<div id=playBarLeftAddSong>
+                	<div id=playBarLeftAddSongWrapper>
+                    	<i class="material-icons icons" style="font-size:35px;">playlist_add</i>
+                	</div>
+            	</div>
+            	<div id=albumName>Immortalized</div>
+            	<div id="artistName">Disturbed</div>
 
+        	</div>
+        	<div id="playBarCenter">
+            	<div id=playBarFunctionality>
+                	<i class="material-icons icons playBarFunctionalityButton">thumb_down</i>
+                	<i class="material-icons icons playBarFunctionalityButton" style="font-size:35px;">skip_previous</i>
+					<button class="jp-play" role="button" tabindex="0">
+						<i class="material-icons icons" style="font-size:35px;">play_circle_outline</i>
+					</button>
+                	<i class="material-icons icons playBarFunctionalityButton" style="font-size:35px;">skip_next</i>
+                	<i class="material-icons icons playBarFunctionalityButton">thumb_up</i>
+            	</div>
+			
+            	<div id="progressBar">
+				<div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+				<div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+				<div>&nbsp;</div>
+                	<div id="progressBarWrapper">
+                    	<div class="jp-seek-bar">
+							<div class="jp-play-bar"></div>
+						</div>
+                	</div>	
+            	</div>
+        	</div>
+        	<div id="playBarRight">
+            	<div id="volumeController">
+					<div class="jp-volume-controls">
+						<button class="jp-mute" role="button" tabindex="0">
+							<i class="material-icons icons">volume_up</i>
+						</button>
+						<div class="jp-volume-bar">
+							<div class="jp-volume-bar-value"></div>
+						</div>
+					</div>
+            	</div>
+        	</div>
+			<div class="CurrentPlaylist" style="display: none;">
+				<div class="jp-playlist">
+					<ul>
+						<li>&nbsp;</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 <!-- Pop up for Account Upgrade -->
 <div class="modal fade" id="accountUpgradePopUp">
   <div class="modal-dialog" role="document">
@@ -148,7 +263,6 @@
   </div>
 </div>
 
-
 <!-- Pop up for changing playlist name -->
 <div class="modal fade" id="changePlaylistNamePopUp">
   <div class="modal-dialog" role="document">
@@ -174,9 +288,7 @@
       </div>
     </div>
   </div>
-</div>                
-                
-                
+</div>                        
 
 <!-- Pop up for adding new playlist -->
 <div class="modal fade" id="addNewPlaylistPopUp">
@@ -202,12 +314,7 @@
       </div>
     </div>
   </div>
-</div>
-
-
-
-
-                
+</div>    
                 
 <!-- Pop up for uploading Song -->
 <div class="modal fade" id="uploadSongPopUp">
@@ -300,147 +407,7 @@
   </div>
 </div>
 
-
-
-
-
-            
-            </div>
-        
-        </div>
-        <div id="center">
-            <div id="centerTopBar">
-                <div id="centerTopWrapper">
-                    <input class="centerTopBarContent" id="searchInput" type="text" name="searchContent">
-                    <i class="material-icons centerTopBarContent" id="searchButton">search</i>
-                    <div class="centerTopBarContent">Overview</div>
-                    <div class="centerTopBarContent">Charts</div>
-                    <div class="centerTopBarContent">Genre</div>
-                    <div class="centerTopBarContent">More</div>
-                </div>
-                <div id="logout-button" style="float: right; margin-top: 13px; margin-right: 30px;"><i class="material-icons">power_settings_new</i></div>
-            </div>
-            <div id="centerSideContent">                                   
-            </div>
-            <div id=right>
-                <div id=rightTopWrapper>
-                    <p id="findFriendsText">See what your friends are playing</p>
-                    <button id="findFriends">Find Friends</button>
-                </div>
-                <div id=rightBottomWrapper>
-                    <div class=FSContent>
-                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile1.jpg);"></div></div>
-                        <div class=FSSongDetails>
-                            <div class="FSFriendName">Matt Yang</div>
-                            <div class="FSInnerContent">Decadence</div>
-                            <div class="FSInnerContent">Ten Thousand Fists</div>
-                            <div class="FSInnerContent">Disturbed</div>
-                            <div class="FSInnerContent">Alternative Metal</div>
-                        </div>
-                        <div class="FSPlaySong">
-                            <i class="material-icons icons" style="font-size:50px;">play_circle_filled</i>   
-                        </div>
-                    </div>
-                    <div class=FSContent>
-                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile2.jpg);"></div></div>
-                        <div class=FSSongDetails>
-                            <div class="FSFriendName">Dan Choe</div>
-                            <div class="FSInnerContent">Hand of Blood</div>
-                            <div class="FSInnerContent">the Poison</div>
-                            <div class="FSInnerContent">Bullet for my valentine</div>
-                            <div class="FSInnerContent">Metal</div>
-                        </div>
-                        <div class="FSPlaySong">
-                            <i class="material-icons icons" style="font-size:50px;">play_circle_filled</i>   
-                        </div>
-                    </div>
-                    <div class=FSContent>
-                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile3.jpg);"></div></div>
-                        <div class=FSSongDetails>
-                            <div class="FSFriendName">Limeng Ruan</div>
-                            <div class="FSInnerContent">Wrong Side of Heaven</div>
-                            <div class="FSInnerContent">The Wrong Side of Heaven</div>
-                            <div class="FSInnerContent">Five Finger Death Punch</div>
-                            <div class="FSInnerContent">Alternative Metal</div>
-                        </div>
-                        <div class="FSPlaySong">
-                            <i class="material-icons icons" style="font-size:50px;">play_circle_filled</i>   
-                        </div>
-                    </div>
-                </div>
-    
-            </div>
-        </div>
-    </div>
-    
-    
-    
-    
-    
-    <!-- Play Bar -->
-    <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
-    <div id="playBar">
-		<div id="jquery_jplayer_1" class="jp-jplayer"></div>
-		
-        <div id="playBarLeft">
-            <div id=playBarImage style="background-image: url(./images/albumCover1.jpg);"></div>
-            <div id=playBarLeftAddSong>
-                <div id=playBarLeftAddSongWrapper>
-                    <i class="material-icons icons" style="font-size:35px;">playlist_add</i>
-                </div>
-            </div>
-            <div id=albumName>Immortalized</div>
-            <div id="artistName">Disturbed</div>
-
-        </div>
-        <div id="playBarCenter">
-            <div id=playBarFunctionality>
-                <i class="material-icons icons playBarFunctionalityButton">thumb_down</i>
-                <i class="material-icons icons playBarFunctionalityButton" style="font-size:35px;">skip_previous</i>
-				<button class="jp-play" role="button" tabindex="0">
-					<i class="material-icons icons" style="font-size:35px;">play_circle_outline</i>
-				</button>
-                <i class="material-icons icons playBarFunctionalityButton" style="font-size:35px;">skip_next</i>
-                <i class="material-icons icons playBarFunctionalityButton">thumb_up</i>
-            </div>
-			
-            <div id="progressBar">
-			<div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
-			<div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
-			<div>&nbsp;</div>
-                <div id="progressBarWrapper">
-                    <div class="jp-seek-bar">
-						<div class="jp-play-bar"></div>
-					</div>
-                </div>
-			
-            </div>
-        </div>
-        <div id="playBarRight">
-            <div id="volumeController">
-				<div class="jp-volume-controls">
-					<button class="jp-mute" role="button" tabindex="0">
-						<i class="material-icons icons">volume_up</i>
-					</button>
-					<div class="jp-volume-bar">
-						<div class="jp-volume-bar-value"></div>
-					</div>
-				</div>
-            </div>
-        </div>
-		<div class="CurrentPlaylist" style="display: none;">
-			<div class="jp-playlist">
-				<ul>
-					<li>&nbsp;</li>
-				</ul>
-			</div>
-		</div>
-		
-	</div>
-    
-	</div>
-	
-	
+<!-- Displays Success Message -->
 <div class="modal fade" id="successPopUp">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -454,18 +421,18 @@
   </div>
 </div>
 	
-
+<!-- Popup for editing user info -->
 <div class="modal fade" id="editUserInfoPopUp">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <div height="60" width="60" style="position:relative;">
-        <img width="60" height="60" class ="profile-image-home" src="Profile-Image.html"></img>
-    						<form id="uploadProfileImageForm" enctype="multipart/form-data">
-    							<input type="file" id="profile-image-chooser" name="fileUp" accept=".png,.jpg,.jpeg"
-    							style="position: absolute; top:0; width:60px;height:60px;opacity: 0;">
-    						</form>
-    						</div>
+        	<img width="60" height="60" class ="profile-image-home" src="Profile-Image.html"></img>
+    		<form id="uploadProfileImageForm" enctype="multipart/form-data">
+    			<input type="file" id="profile-image-chooser" name="fileUp" accept=".png,.jpg,.jpeg"
+    				style="position: absolute; top:0; width:60px;height:60px;opacity: 0;">
+    		</form>
+    	</div>
       </div>
       <div class="modal-body">
 		<form id="update-user-info-form" method="post">

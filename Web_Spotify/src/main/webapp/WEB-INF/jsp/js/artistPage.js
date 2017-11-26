@@ -3,9 +3,7 @@ $(document).ready(function() {
 		loadFollowedArtists();
 		event.preventDefault();
 	});
-
 });
-
 
 function loadFollowedArtists(){
 	$.ajax({

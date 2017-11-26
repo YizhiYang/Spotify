@@ -6,18 +6,8 @@ $(document).ready(function() {
 
 });
 
-
 function loadFollowedSongs(){
-	/*
-	$.ajax({
-		type : "GET",
-		url : "loadFollowedSongs.html",
-		success : function(data) {
-			$('#centerSideContent').empty();
-			addSongsToCenterContent(data);
-		}
-	});
-	*/
+	//DATA IS ALREADY LOADED, JUST RENDER
 	$('#centerSideContent').empty();
 	addSongsToCenterContent(userFollowedSongs);
 }

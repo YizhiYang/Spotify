@@ -10,28 +10,25 @@ var userFollowedArtists;
 var userType;
 
 $( document ).ready(function() {
+		//GET INITIAL DATA NEEDED AND STORE THEM
 		getUserTypeAndRerender();
 		getUserName();
 		reloadFollowedSongs();
 		reloadFollowedAlbums();
 		reloadFollowedArtists();
 		getBrowsePageContent();
+		//REGISTER ACCOUNT RELATED EVENTS
 		$("#profile-image-chooser").change(function(event) {
 			uploadProfileImage();
 		});
 		$("#save-user-info-update-changes-button").click(function(event) {
 			updateUserInfo();
-		});	
-		
+		});
 		$("#confirm-upgrade-button").click(function(event){
 			upgradeAccount();
 		});
 		$("#confirm-downgrade-button").click(function(event){
 			downgradeAccount();
-		});
-		$('#jquery_jplayer_1').on($.jPlayer.event.play,  function(e){
-		    console.log("Current track", e.jPlayer.status.media);
-		    console.log("Currentr track index", myPlaylist.current);
 		});
 		$("#logout-button").click(function(event) {
 			logout();
@@ -51,12 +48,8 @@ function getUserName(){
 
 
 function uploadProfileImage(){
-	//var formData = new FormData($("#uploadProfileImageForm")[0]);
-	
 	var formData = new FormData();
-	
 	formData.append($('#profile-image-chooser')[0].name,$('#profile-image-chooser')[0].files[0]);
-	
 	$.ajax({
 	    url: "ProfileImageUpload.html",
 	    type: "POST",
@@ -68,7 +61,6 @@ function uploadProfileImage(){
 	        alert("success");
 	        d = new Date();
 	        $(".profile-image-home").attr("src", "Profile-Image.html"+"?"+d.getTime());
-	        alert("haha");
 	    },
 	    error: function() {
 	        alert("unable to create the record");
@@ -78,18 +70,15 @@ function uploadProfileImage(){
 
 
 function editPopUp(){
-
 	$.ajax({
 		type : "GET",
 		url : "getUserProfile.html",
 		success : function(jsonData) {
 			console.log(jsonData);
 			var jsonObj = jQuery.parseJSON(jsonData);
-			
 			$('#userinfo-username-input').val(jsonObj.userName);
 			$('#userinfo-email-input').val(jsonObj.email);
 			$('#userinfo-location-input').val(jsonObj.location);
-			
 			$("#editUserInfoPopUp").modal('show');
 		}
 	});	
@@ -97,7 +86,6 @@ function editPopUp(){
 
 function updateUserInfo(){
 	var newUserInfoData = $('#update-user-info-form').serialize();
-	
 	$.ajax({
 		type : "POST",
 		url : "changeUserProfileInfo.html",
@@ -107,7 +95,6 @@ function updateUserInfo(){
 			$('#editUserInfoPopUp').modal('hide');
 		}
 	});
-
 }
 
 function upOrDowngradeAccountPopUp(){
@@ -120,7 +107,6 @@ function upOrDowngradeAccountPopUp(){
 
 function upgradeAccount(){
 	var creditCardInfoData = $('#credit-card-form').serialize();
-	
 	$.ajax({
 		type : "POST",
 		url : "upgradeAccount.html",
