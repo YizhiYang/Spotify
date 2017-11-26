@@ -1,6 +1,27 @@
+/*Playlist Page*/
+#removePlaylistButton{
+	margin-top: 25px;
+	float:right;
+}
 #playlist-page-name-title{
 	cursor:pointer;
+	float: left;
 }
+.removeSongFromPlaylistButton{
+	margin-right: 20px;
+}
+.dropdown-menu{
+	min-width:0px !important;
+}
+.add-to-playlist-item{
+	cursor:pointer;
+	padding: 5px;
+}
+.add-to-playlist-item:hover{
+	background-color: #514f4f;
+	color: #fff !important;
+}
+
 i{
 	cursor:pointer;
 }

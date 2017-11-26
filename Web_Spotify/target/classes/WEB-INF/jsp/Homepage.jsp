@@ -93,13 +93,10 @@
                         </li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Stations</div></li>
                         <li class=userSongWrapperList><div class='userSongWrapperItem'>Local Files</div></li>
-                        <li class="sideBarMenuHeader">MY PLAYLISTS
+                        <li class="sideBarMenuHeader">MY PLAYLISTS <i class="material-icons" data-toggle="modal" data-target="#addNewPlaylistPopUp">library_add</i>
                         	<ul id="My-Playlist-List-Wrapper">
                         		<li></li>
                         	</ul>
-                        </li>
-                        <li class=userSongWrapperList>
-                        	<div class='userSongWrapperItem' data-toggle="modal" data-target="#addNewPlaylistPopUp">Add New Play List</div>
                         </li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' data-toggle="modal" id="Admin-UploadSong-Button" data-target="#uploadSongPopUp">Upload Song</div>

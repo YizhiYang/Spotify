@@ -50,9 +50,9 @@ function addSongsToCenterContent(jsonData){
         	contentToBeAdded +=	'<i class="material-icons SongPageFollowSong">radio_button_unchecked</i>';
     	}
     	contentToBeAdded += '<div class="dropdown" style="position:absolute;display:inline-block;">\
-    		  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#000;">\
-    		    Add\
-    		  </button>\
+    		  <i class="material-icons dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+    		    add\
+    		  </i>\
     		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
     		  
     	$(".playlistTab").each(function(index){
