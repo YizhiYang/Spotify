@@ -16,6 +16,10 @@ public interface SignupService{
 		
 		User upgradeUser(User user, HttpServletRequest request);
 		
+		User downgradeUser(User user);
+		
 		void storeCreditCard(CreditCard creditCard);
+		
+		
 		
 }

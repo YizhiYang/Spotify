@@ -79,5 +79,13 @@ public class SignupServiceImpl implements SignupService {
 		
 		signupRepo.storeCreditCard(creditCard);
 	}
+	
+	public User downgradeUser(User user){
+		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		u.setUserType(UserType.BASIC);
+		signupRepo.saveUserToDB(u);
+		return u;
+		
+	}
 
 }

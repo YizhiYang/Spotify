@@ -384,8 +384,11 @@ public class MainController {
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
 	
-	@RequestMapping(value="downgradeAccount", method = RequestMethod.POST)
+	@RequestMapping(value="/downgradeAccount", method = RequestMethod.POST)
 	public void downgradeAccount(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
+		User user = (User) request.getSession().getAttribute("User");
+		request.getSession().setAttribute("User", signupService.downgradeUser(user));
+		response.getWriter().write(REQUEST_SUCCESS);
 	}
 }
