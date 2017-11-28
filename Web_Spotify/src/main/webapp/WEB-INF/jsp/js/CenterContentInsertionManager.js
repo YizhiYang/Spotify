@@ -83,34 +83,18 @@ function addSongsToCenterContent(jsonData){
     	$('#PlayListPrototypeTable').append(contentToBeAdded);
     }
     
-    //ADD THE SONGS TO THE MUSIC PLAYER
-    var songList =[];
-    for(var i=0; i<jsonArray.length; i++){
-    	console.log("requestSongFile/" + jsonArray[i].songId +".html");
-    	var song = {title: jsonArray[i].song_name,
-    			mp3:"requestSongFile/" + jsonArray[i].songId +".html",
-				artist:""}
-    	songList.push(song);
+    //ADD THE SONGS TO THE MUSIC PLAYER PLAYLIST
+    for(i=0; i<jsonArray.length; i++){
+    	myPlaylist.push({mp3:"requestSongFile/" + jsonArray[i].songId +".html"});
     }
-    myPlaylist = new jPlayerPlaylist({
-		jPlayer: "#jquery_jplayer_1",
-		cssSelectorAncestor: "#jp_container_1"
-	}, 
-	songList
-	, {
-		supplied: "mp3",
-		solution: "flash, html",
-		wmode: "window",
-		useStateClassSkin: true,
-		autoBlur: false,
-		smoothPlayBar: true,
-		keyEnabled: true
-	});
+    playlistLength = jsonArray.length;
 	
     //REGISTER PLAY BUTTON CLICK
 	$(".song-content-play-button").each(function(index){
 		$(this).click(function(event){
-			myPlaylist.play(index);
+			player.jPlayer("setMedia", myPlaylist[index]);
+			currentPlayingIndex = index;
+			player.jPlayer("play");
 		});
 	});
 	
@@ -243,7 +227,10 @@ function addArtistsToCenterContent(jsonData){
 	//GET DATA IN JSON
 	var jsonArray = jQuery.parseJSON(jsonData);
 	//GET THE USER FOLLOWED ARTISTS DATA
-	var jsonUserFollowedArtists = jQuery.parseJSON(userFollowedArtists);
+	var jsonUserFollowedArtists = "";
+	if(userFollowedArtists !=null){
+		jsonUserFollowedArtists = jQuery.parseJSON(userFollowedArtists);
+	}
 	//ADD ARIST PAGE TITLE
     $("#centerSideContent").append('<div class=centerSideContentWrapper id=AlbumPageTop>\
                                         <div id="contentTitle">\

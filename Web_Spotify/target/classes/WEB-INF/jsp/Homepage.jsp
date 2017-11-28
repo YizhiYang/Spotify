@@ -21,7 +21,7 @@
   	<script type="application/javascript"><%@ include file="js/signInJS.js" %></script>
   	<script type="application/javascript"><%@ include file="js/homepageJS.js" %></script>
   	<script type="application/javascript"><%@ include file="js/jPlayer/jquery.jplayer.min.js" %></script>
-  	<script type="application/javascript"><%@ include file="js/jPlayer/jplayer.playlist.min.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/musicPlayerJS.js" %></script>
   	<script type="application/javascript"><%@ include file="js/CenterContentInsertionManager.js" %></script> 
   	<script type="application/javascript"><%@ include file="js/SongJS.js" %></script>
   	<script type="application/javascript"><%@ include file="js/AlbumJS.js" %></script>
@@ -185,12 +185,14 @@
         	<div id="playBarCenter">
             	<div id=playBarFunctionality>
                 	<i class="material-icons icons playBarFunctionalityButton">thumb_down</i>
-                	<i class="material-icons icons playBarFunctionalityButton" style="font-size:35px;">skip_previous</i>
-					<button class="jp-play" role="button" tabindex="0">
-						<i class="material-icons icons" style="font-size:35px;">play_circle_outline</i>
-					</button>
-                	<i class="material-icons icons playBarFunctionalityButton" style="font-size:35px;">skip_next</i>
+                	<i class="material-icons icons playBarFunctionalityButton" id="prev-button" style="font-size:35px;">skip_previous</i>
+					<i class="material-icons icons playBarFunctionalityButton jp-play" id="play-button" style="font-size:35px;">play_circle_outline</i>
+					<i class="material-icons icons playBarFunctionalityButton jp-pause" id="pause-button" style="font-size:35px;" style="display:none;">pause</i>
+					<i class="material-icons icons playBarFunctionalityButton jp-stop" id="stop-button">stop</i>
+                	<i class="material-icons icons playBarFunctionalityButton" id="next-button" style="font-size:35px;">skip_next</i>
                 	<i class="material-icons icons playBarFunctionalityButton">thumb_up</i>
+                	<i class="material-icons icons playBarFunctionalityButton" id="repeat-toggle-button">arrow_forward</i>
+                	<i class="material-icons icons playBarFunctionalityButton" id="shuffle-button">shuffle</i>
             	</div>
 			
             	<div id="progressBar">

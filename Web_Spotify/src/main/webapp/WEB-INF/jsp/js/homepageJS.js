@@ -1,5 +1,15 @@
-//THE LOADED LIST OF SONGS FOR THE MUSIC PLAYER
-var myPlaylist;
+//MEDIA PLAYER OBJECT
+var player;
+//THE LIST OF SONGS FOR THE MUSIC PLAYER
+var myPlaylist=[];
+//THE LENGTH OF PLAYLIST LOADED IN PLAYER
+var playlistLength;
+//THE INDEX OF THE SONG BEING PLAYED BY PLAYER
+var currentPlayingIndex;
+//REPEAT TYPE ( 0 for no repeat, 1 for one song repeat, anything else means repeat playlist)
+var currentRepeatType = 0;
+//IF SHUFFLE
+var isShuffleOn = false;
 //STORES THE LIST OF SONGS USER IS FOLLOWING
 var userFollowedSongs;
 //STORES THE LIST OF ALBUMS
