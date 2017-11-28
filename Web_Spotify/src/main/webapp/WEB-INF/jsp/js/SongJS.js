@@ -14,6 +14,7 @@ function uploadSong(){
         formData.append(this.name, $(this).val());
     });
     formData.append($('#FormSongFile')[0].name,$('#FormSongFile')[0].files[0]);
+    formData.append($('#FormLyricsFile')[0].name,$('#FormLyricsFile')[0].files[0]);
 	$.ajax({
 		type : "POST",
 		enctype: 'multipart/form-data',

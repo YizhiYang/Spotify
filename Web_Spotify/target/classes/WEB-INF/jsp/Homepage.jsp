@@ -193,6 +193,7 @@
                 	<i class="material-icons icons playBarFunctionalityButton">thumb_up</i>
                 	<i class="material-icons icons playBarFunctionalityButton" id="repeat-toggle-button">arrow_forward</i>
                 	<i class="material-icons icons playBarFunctionalityButton" id="shuffle-button">shuffle</i>
+                	<i class="material-icons icons playBarFunctionalityButton" data-toggle="modal" data-target="#lyricsPopup" id="lyrics-button">receipt</i>
             	</div>
 			
             	<div id="progressBar">
@@ -227,6 +228,22 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+<!-- Pop up for Lyrics -->
+<div class="modal fade" id="lyricsPopup">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header"></div>
+      <div class="modal-body lyrics-body">
+      	No Lyrics Found
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 	
 <!-- Pop up for Account Upgrade -->
 <div class="modal fade" id="accountUpgradePopUp">
@@ -339,6 +356,8 @@
     			<input type="text" class="form-control" id="formGroupAlbumIDInput" name="albumID" placeholder="Album ID">
     			<label for="FormSongFile">Song File</label>
     			<input type="file" class="form-control-file" name="fileUp" id="FormSongFile" accept=".mp3">
+    			<label for="FormLyricsFile">Lyrics File</label>
+    			<input type="file" class="form-control-file" name="lyricsFileUp" id="FormLyricsFile" accept=".lrc">
   			</div>
 		</form>
       </div>

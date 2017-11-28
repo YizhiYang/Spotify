@@ -2,7 +2,11 @@ $( document ).ready(function() {
 	player = $('#jquery_jplayer_1').jPlayer({
 		ended: function() { // The $.jPlayer.event.ended event
 		    $(this).jPlayer("play"); // Repeat the media
-		  }
+		},
+		timeupdate: function(event) { // 4Hz
+			// Restrict playback to first 60 seconds.
+			console.log(event.jPlayer.status.currentTime);
+		}
 	});
 	$("#next-button").click(function(event){
 		playNextSong();
@@ -38,6 +42,9 @@ $( document ).ready(function() {
 	player.on($.jPlayer.event.play, function(e){
 		$("#play-button").hide();
 		$("#pause-button").show();
+		var tempArr = myPlaylist[currentPlayingIndex].mp3.split("/");
+		var songId = tempArr[tempArr.length-1].substring(0,tempArr[tempArr.length-1].length-5);
+		getLyrics(songId);
 	});
 	player.on($.jPlayer.event.pause, function(e){
 		$("#play-button").show();
@@ -86,4 +93,19 @@ function playPreviousSong(){
 	}
 	player.jPlayer("setMedia", myPlaylist[currentPlayingIndex]);
 	player.jPlayer("play");
+}
+
+function getLyrics(songId){
+	$.ajax({
+		type : "GET",
+		url : "requestLyricsFile/" + songId + ".html",
+		success : function(data) {
+			currentLyrics = data;
+			renderLyrics();
+		}
+	});
+}
+
+function renderLyrics(){
+	$(".lyrics-body").html(currentLyrics);
 }

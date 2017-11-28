@@ -36,6 +36,7 @@ public class SongsController {
 	
 	public static final String SONG_FILE_PATH = "Songs/";
 	public static final String SONG_EXTENSION = ".mp3";
+	public static final String LYRICS_EXTENSION = ".lrc";
 	public static final String REQUEST_SUCCESS = "success";
 	public static final String REQUEST_FAILURE = "failure";
 	public static final String FILE_NOT_FOUND_MESSAGE = "Sorry. The file you are looking for does not exist";
@@ -69,6 +70,7 @@ public class SongsController {
 		String albumID = request.getParameter("albumID");
 		String duration = request.getParameter("duration");
 		MultipartFile file = request.getFile("fileUp");
+		MultipartFile lyricsFile = request.getFile("lyricsFileUp");
 		
 		Album albumToSaveTo = albumService.getAlbumByID(albumID);
 		if(albumToSaveTo==null){
@@ -80,7 +82,8 @@ public class SongsController {
 		song.setAlbum(albumToSaveTo);
 
 		if(songService.addSongToDatabase(song)){
-			fileManager.saveFileToLocation(file, SONG_FILE_PATH, song.getSongId()+SONG_EXTENSION);		         
+			fileManager.saveFileToLocation(file, SONG_FILE_PATH, song.getSongId()+SONG_EXTENSION);	
+			fileManager.saveFileToLocation(lyricsFile, SONG_FILE_PATH, song.getSongId()+LYRICS_EXTENSION);	
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);
@@ -96,9 +99,6 @@ public class SongsController {
         String songFileName = null;
         
         songFileName = id + SONG_EXTENSION;
-        if(songFileName == null){
-        	return;
-        }
         
         String songPath = classloader.getResource(SONG_FILE_PATH).getPath();
       
@@ -134,5 +134,26 @@ public class SongsController {
 		}
 		String jsonString = songService.getAllSongsInJSON();
 	    response.getWriter().write(jsonString);
+	}
+	
+	@RequestMapping(value="/requestLyricsFile/{id}", method = RequestMethod.GET)
+    public void requestLyricsFile(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") String id) throws IOException {
+		File file = null;
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();    
+        String lyricsFileName = null;
+        
+        lyricsFileName = id + LYRICS_EXTENSION;
+        
+        String songPath = classloader.getResource(SONG_FILE_PATH).getPath();
+      
+        file = new File(songPath+lyricsFileName);
+        if(!file.exists()){
+        	response.getWriter().write("not found");
+        }else{
+        	response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
+            response.setContentLength((int)file.length());
+            InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+            FileCopyUtils.copy(inputStream, response.getOutputStream());
+        }
 	}
 }

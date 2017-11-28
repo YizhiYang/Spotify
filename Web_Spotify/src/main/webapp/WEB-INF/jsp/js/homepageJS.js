@@ -10,6 +10,8 @@ var currentPlayingIndex;
 var currentRepeatType = 0;
 //IF SHUFFLE
 var isShuffleOn = false;
+//CURRENT SONG LYRICS
+var currentLyrics;
 //STORES THE LIST OF SONGS USER IS FOLLOWING
 var userFollowedSongs;
 //STORES THE LIST OF ALBUMS
