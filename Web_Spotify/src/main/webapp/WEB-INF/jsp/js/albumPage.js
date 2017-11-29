@@ -12,6 +12,7 @@ function loadFollowedAlbums(){
 		success : function(data) {
 			$('#centerSideContent').empty();
 			addAlbumsToCenterContent(data);
+			lastAjaxCallToRenderToCenter = "loadFollowedAlbums()";
 		}
 	});
 }
@@ -23,6 +24,7 @@ function goToAlbumSongs(albumID){
 		success : function(data) {
 			$('#centerSideContent').empty();
 			addSongsToCenterContent(data);
+			lastAjaxCallToRenderToCenter = "goToAlbumSongs(" + albumID + ")";
 		}
 	});
 }

@@ -109,6 +109,7 @@ function goToPlaylistSongs(playlistId, playlistName){
 			$('#removePlaylistButton').click(function(event){
 				removePlaylist(playlistId);
 			});
+			lastAjaxCallToRenderToCenter = "goToPlaylistSongs(" + playlistId + "," + playlistName + ")";
         }
 	});
 }

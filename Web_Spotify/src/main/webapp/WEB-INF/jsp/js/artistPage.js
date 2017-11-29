@@ -12,6 +12,7 @@ function loadFollowedArtists(){
 		success : function(data) {
 			$('#centerSideContent').empty();
 			addArtistsToCenterContent(data);
+			lastAjaxCallToRenderToCenter = "loadFollowedArtists()";
 		}
 	});
 }
@@ -23,6 +24,7 @@ function goToArtistAlbums(artistID){
 		success : function(data) {
 			$('#centerSideContent').empty();
 			addAlbumsToCenterContent(data);
+			lastAjaxCallToRenderToCenter = "goToArtistAlbums(" + artistID + ")";
 		}
 	});
 }

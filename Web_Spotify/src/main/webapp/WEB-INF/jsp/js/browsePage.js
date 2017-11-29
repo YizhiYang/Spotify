@@ -12,6 +12,7 @@ function getBrowsePageContent(){
         success: function (data) {
         	$('#centerSideContent').empty();
         	renderResults(data);
+        	lastAjaxCallToRenderToCenter = "getBrowsePageContent()";
         }
 	});
 }

@@ -22,6 +22,8 @@ var userFollowedAlbums;
 var userFollowedArtists;
 //STORES WHAT USERTYPE THIS USER IS, BASIC, PREMUIUM, ARTIST, ADMIN
 var userType;
+//RECORDS THE LAST AJAX SO WE CAN REFRESH WHEN NEEDED
+var lastAjaxCallToRenderToCenter;
 
 $( document ).ready(function() {
 		//GET INITIAL DATA NEEDED AND STORE THEM

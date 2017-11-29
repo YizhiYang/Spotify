@@ -14,6 +14,7 @@ function sendSearchRequest(){
         success: function (data) {
         	$('#centerSideContent').empty();
         	renderAllSearchResults(data);
+        	lastAjaxCallToRenderToCenter = "sendSearchRequest()";
         }
 	});
 }
