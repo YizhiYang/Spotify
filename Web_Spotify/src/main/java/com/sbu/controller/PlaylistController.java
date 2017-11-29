@@ -123,7 +123,7 @@ public class PlaylistController {
 			return;
 		}
 		long plId = Long.parseLong(playlistId);
-		response.getWriter().write(playlistService.getPlaylistSongsInJSON(plId));;
+		response.getWriter().write(playlistService.getPlaylistSongs(plId));;
 		
 	}
 	

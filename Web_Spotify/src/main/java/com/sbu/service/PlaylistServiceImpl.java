@@ -22,20 +22,22 @@ public class PlaylistServiceImpl implements PlaylistService {
 	@Autowired
 	SongService songService;
 	
+	
 	public boolean makeNewPlaylist(User user, String playlistName) {
 		Playlist playlist = new Playlist();
 		playlist.setName(playlistName);
 		playlist.setOwner(user);
 		playlistRepo.saveNewPlaylist(playlist);
 		return true;
-		
 	}
 
-	public String getUserPlaylistsInJSON(User user) throws JSONException{
+	
+	public String getUserPlaylists(User user) throws JSONException{
 		List<Playlist> playlists = playlistRepo.getUserPlaylists(user);
 		return convertPlaylistsToJSON(playlists);
 	}
 
+	
 	public String convertPlaylistsToJSON(List<Playlist> playlists) throws JSONException {
 		JSONArray jsonArray = new JSONArray();	
 		for(int i =0; i<playlists.size(); i++){
@@ -43,8 +45,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 			
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("playlistID", playlist.getId());
-			jsonObject.put("playlistName", playlist.getName());
-			
+			jsonObject.put("playlistName", playlist.getName());		
 			jsonArray.put(jsonObject);
 		}
 		return jsonArray.toString();
@@ -81,7 +82,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	}
 
 	
-	public String getPlaylistSongsInJSON(long playlistId) throws JSONException{
+	public String getPlaylistSongs(long playlistId) throws JSONException{
 		
 		List<Playlist> playlists = playlistRepo.getPlaylistById(playlistId);
 		Playlist playlist = playlists.get(0);
@@ -96,7 +97,6 @@ public class PlaylistServiceImpl implements PlaylistService {
 		List<Playlist> playlists = playlistRepo.getPlaylistById(plId);
 		Playlist playlist = playlists.get(0);
 		playlist.setName(newName);
-		
 
 		return playlistRepo.renamePlaylist(playlist);
 	}
@@ -113,8 +113,8 @@ public class PlaylistServiceImpl implements PlaylistService {
 		return true;
 	}
 
-	public List<Playlist> getPlaylistsThatContainsSong(String songId) {
-		return playlistRepo.getPlaylistsThatContainsSong(songId);
+	public List<Playlist> getPlaylistsContainSong(String songId) {
+		return playlistRepo.getPlaylistsContainSong(songId);
 	}
 
 }

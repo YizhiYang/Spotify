@@ -79,7 +79,7 @@ public class BrowsePageController {
 		if(user==null){
 			return;
 		}
-		String jsonString = playlistService.getUserPlaylistsInJSON(user);		
+		String jsonString = playlistService.getUserPlaylists(user);		
 	    response.getWriter().write(jsonString);
 	}
 	

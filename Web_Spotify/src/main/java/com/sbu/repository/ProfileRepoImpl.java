@@ -22,9 +22,7 @@ public class ProfileRepoImpl implements ProfileRepo {
 		.setParameter("email", email)
 		.setParameter("location", location)
 		.setParameter("username", username).executeUpdate();
-		
-		System.out.println("update is " + success);
-
+	
 		return true;
 	}
 

@@ -14,6 +14,7 @@ import com.sbu.model.User;
 @Repository("playlistRepo")
 @Transactional
 public class PlaylistRepoImpl implements PlaylistRepo {
+	
 	@PersistenceContext
 	private EntityManager em;
 
@@ -28,29 +29,26 @@ public class PlaylistRepoImpl implements PlaylistRepo {
 		return playlists;
 	}
 
-	
-	public List<Playlist> getPlaylistById(Long plId){
+	public List<Playlist> getPlaylistById(Long plId){	
 		
 		List<Playlist> playlists = em.createQuery("SELECT p FROM Playlist p WHERE p.id = :plId")
 				.setParameter("plId", plId).getResultList();
-
 		return playlists;
 	}
 
 	public boolean renamePlaylist(Playlist pl) {
 		em.persist(pl);
 		return true;
-	
 	}
 
 	public void removePlaylist(Long plId) {
-	
+		
 		em.createQuery("DELETE From Playlist p WHERE p.id = :plId")
 		.setParameter("plId", plId).executeUpdate();
-		
 	}
 
-	public List<Playlist> getPlaylistsThatContainsSong(String songId) {
+	public List<Playlist> getPlaylistsContainSong(String songId) {
+		
 		List<Playlist> results = em.createQuery("SELECT p "
 				+ "FROM Playlist p JOIN p.songs s WHERE s.songId= :songId")
 		.setParameter("songId", Long.valueOf(songId)).getResultList();

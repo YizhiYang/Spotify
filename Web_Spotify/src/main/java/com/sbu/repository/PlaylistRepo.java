@@ -17,5 +17,5 @@ public interface PlaylistRepo {
 	
 	void removePlaylist(Long plId);
 	
-	List<Playlist> getPlaylistsThatContainsSong(String songId);
+	List<Playlist> getPlaylistsContainSong(String songId);
 }

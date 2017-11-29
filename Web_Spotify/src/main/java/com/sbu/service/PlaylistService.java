@@ -11,7 +11,7 @@ public interface PlaylistService {
 	
 	boolean makeNewPlaylist(User user, String playlistName);
 	
-	String getUserPlaylistsInJSON(User user) throws JSONException;
+	String getUserPlaylists(User user) throws JSONException;
 	
 	boolean addSongToPlaylist(long playlistId, long songId);
 	
@@ -19,11 +19,11 @@ public interface PlaylistService {
 	
 	String convertPlaylistsToJSON(List<Playlist> playlists) throws JSONException;
 	
-	String getPlaylistSongsInJSON(long playlistId) throws JSONException;
+	String getPlaylistSongs(long playlistId) throws JSONException;
 	
 	Boolean renamePlaylist(String newName, String playlistId);
 	
 	Boolean removePlayList(String playlistId);
 	
-	List<Playlist> getPlaylistsThatContainsSong(String songId);
+	List<Playlist> getPlaylistsContainSong(String songId);
 }
