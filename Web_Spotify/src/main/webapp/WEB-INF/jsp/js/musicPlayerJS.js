@@ -17,29 +17,21 @@ $( document ).ready(function() {
 	});
 	$("#repeat-toggle-button").click(function(event){
 		currentRepeatType++;
-		if(currentRepeatType > 2){
+		if(currentRepeatType > 3){
+			isShuffleOn = false;
 			currentRepeatType = 0;
 		}
 		if(currentRepeatType == 0){
 			$(this).html("arrow_forward");
 		}else if(currentRepeatType == 1){
 			$(this).html("repeat_one");
-		}else{
+		}else if(currentRepeatType == 2){
 			$(this).html("repeat");
-		}
-	});
-	$("#shuffle-button").click(function(event){
-		if(isShuffleOn == true){
-			$(this).css("color", "white");
-			isShuffleOn = false;
 		}else{
-			$(this).css("color", "blue");
 			isShuffleOn = true;
+			$(this).html("shuffle");
 		}
 	});
-//	player.on($.jPlayer.event.ended + ".jp-repeat", function(event) { // Using ".jp-repeat" namespace so we can easily remove this event
-//	    $(this).jPlayer("play"); // Add a repeat behaviour so media replays when it ends. (Loops)
-//	  });
 	player.on($.jPlayer.event.play, function(e){
 		$("#play-button").hide();
 		$("#pause-button").show();
@@ -123,14 +115,8 @@ function getLyrics(songId){
 }
 
 function renderLyrics(currentTime){
-//	var timeStringArr = $(".jp-current-time").html().split(":");
-//	var minute = parseInt(timeStringArr[0]);
-//	var second = parseInt(timeStringArr[1]);
-//	var totalSeconds = minute*60 + second;
 	var indexOfNextLyricsLine = -1;
 	for(i=0; i<currentLyricsTime.length; i++){
-		//console.log(currentTime);
-		//console.log(currentLyricsTime[i]);
 		if(currentTime<currentLyricsTime[i]){
 			indexOfNextLyricsLine = i;
 			break;
@@ -155,7 +141,6 @@ function renderLyrics(currentTime){
 	if(indexOfNextLyricsLine - 1 >= 0){
 		totalLyricsToDisplay += '<p style="color:red;">' + currentLyricsLine[indexOfNextLyricsLine - 1] + '</p>';
 	}
-	
 	//RENDER NEXT LINE
 	totalLyricsToDisplay += '<p>' + currentLyricsLine[indexOfNextLyricsLine] + '</p>';
 	

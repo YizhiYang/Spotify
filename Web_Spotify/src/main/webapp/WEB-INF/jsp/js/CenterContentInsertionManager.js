@@ -84,6 +84,7 @@ function addSongsToCenterContent(jsonData){
     }
     
     //ADD THE SONGS TO THE MUSIC PLAYER PLAYLIST
+    myPlaylist = [];
     for(i=0; i<jsonArray.length; i++){
     	myPlaylist.push({mp3:"requestSongFile/" + jsonArray[i].songId +".html"});
     }

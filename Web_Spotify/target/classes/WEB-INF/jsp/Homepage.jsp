@@ -192,7 +192,6 @@
                 	<i class="material-icons icons playBarFunctionalityButton" id="next-button" style="font-size:35px;">skip_next</i>
                 	<i class="material-icons icons playBarFunctionalityButton">thumb_up</i>
                 	<i class="material-icons icons playBarFunctionalityButton" id="repeat-toggle-button">arrow_forward</i>
-                	<i class="material-icons icons playBarFunctionalityButton" id="shuffle-button">shuffle</i>
                 	<i class="material-icons icons playBarFunctionalityButton" data-toggle="modal" data-target="#lyricsPopup" id="lyrics-button">receipt</i>
             	</div>
 			

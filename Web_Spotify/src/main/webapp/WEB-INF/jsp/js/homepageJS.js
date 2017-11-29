@@ -6,7 +6,7 @@ var myPlaylist=[];
 var playlistLength;
 //THE INDEX OF THE SONG BEING PLAYED BY PLAYER
 var currentPlayingIndex;
-//REPEAT TYPE ( 0 for no repeat, 1 for one song repeat, anything else means repeat playlist)
+//REPEAT TYPE ( 0 for no repeat, 1 for one song repeat, 2 for playlist repeat, 3 for shuffle)
 var currentRepeatType = 0;
 //IF SHUFFLE
 var isShuffleOn = false;
