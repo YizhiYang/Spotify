@@ -4,8 +4,9 @@ $( document ).ready(function() {
 		    $(this).jPlayer("play"); // Repeat the media
 		},
 		timeupdate: function(event) { // 4Hz
-			// Restrict playback to first 60 seconds.
-			console.log(event.jPlayer.status.currentTime);
+			if(event.jPlayer.status.currentTime > 1){
+				renderLyrics(event.jPlayer.status.currentTime);
+			}
 		}
 	});
 	$("#next-button").click(function(event){
@@ -100,12 +101,63 @@ function getLyrics(songId){
 		type : "GET",
 		url : "requestLyricsFile/" + songId + ".html",
 		success : function(data) {
-			currentLyrics = data;
-			renderLyrics();
+			var allLines = data.split('[');
+			currentLyricsLine = [];
+			currentLyricsTime = [];
+			for(i=0; i<allLines.length; i++){
+				var line = allLines[i];
+				if(line.indexOf("]")>=0){
+					var timeAndLine = line.split("]");
+					var timeStringArr = timeAndLine[0].split(":");
+					var minute = parseInt(timeStringArr[0]);
+					var second = parseInt(timeStringArr[1]);
+					var totalSeconds = minute*60 + second;
+					currentLyricsTime.push(totalSeconds);
+					currentLyricsLine.push(timeAndLine[1]);
+				}
+			}
+			console.log(currentLyricsLine);
+			console.log(currentLyricsTime);
 		}
 	});
 }
 
-function renderLyrics(){
-	$(".lyrics-body").html(currentLyrics);
+function renderLyrics(currentTime){
+//	var timeStringArr = $(".jp-current-time").html().split(":");
+//	var minute = parseInt(timeStringArr[0]);
+//	var second = parseInt(timeStringArr[1]);
+//	var totalSeconds = minute*60 + second;
+	var indexOfNextLyricsLine = -1;
+	for(i=0; i<currentLyricsTime.length; i++){
+		//console.log(currentTime);
+		//console.log(currentLyricsTime[i]);
+		if(currentTime<currentLyricsTime[i]){
+			indexOfNextLyricsLine = i;
+			break;
+		}
+	}
+	var totalLyricsToDisplay = "";
+	if(indexOfNextLyricsLine == -1){
+		//END OF SONG
+		//RENDER LAST THREE LINES
+		indexOfNextLyricsLine = currentLyricsLine.length;
+		totalLyricsToDisplay += '<p>' + currentLyricsLine[indexOfNextLyricsLine - 3] + '</p>';
+		totalLyricsToDisplay += '<p>' + currentLyricsLine[indexOfNextLyricsLine - 2] + '</p>';
+		totalLyricsToDisplay += '<p style="color:red;">' + currentLyricsLine[indexOfNextLyricsLine - 1] + '</p>';
+		$(".lyrics-body").html(totalLyricsToDisplay);
+		return;
+	}
+	//RENDER PREVIOUS LINE
+	if(indexOfNextLyricsLine - 2 >= 0){
+		totalLyricsToDisplay += '<p>' + currentLyricsLine[indexOfNextLyricsLine - 2] + '</p>';
+	}
+	//RENDER CURRENT LINE
+	if(indexOfNextLyricsLine - 1 >= 0){
+		totalLyricsToDisplay += '<p style="color:red;">' + currentLyricsLine[indexOfNextLyricsLine - 1] + '</p>';
+	}
+	
+	//RENDER NEXT LINE
+	totalLyricsToDisplay += '<p>' + currentLyricsLine[indexOfNextLyricsLine] + '</p>';
+	
+	$(".lyrics-body").html(totalLyricsToDisplay);
 }

@@ -102,6 +102,6 @@ public class ArtistUser implements Serializable{
 
 
 	public void setArtistName(String artistName) {
-		artistName = artistName;
+		this.artistName = artistName;
 	}
 }

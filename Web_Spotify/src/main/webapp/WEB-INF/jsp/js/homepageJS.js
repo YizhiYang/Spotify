@@ -11,7 +11,9 @@ var currentRepeatType = 0;
 //IF SHUFFLE
 var isShuffleOn = false;
 //CURRENT SONG LYRICS
-var currentLyrics;
+var currentLyricsLine;
+//CURRENT SONG LYRICS TIME
+var currentLyricsTime;
 //STORES THE LIST OF SONGS USER IS FOLLOWING
 var userFollowedSongs;
 //STORES THE LIST OF ALBUMS
