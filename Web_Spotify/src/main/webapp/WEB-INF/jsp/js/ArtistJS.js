@@ -12,8 +12,8 @@ function makeUserArtist(){
 		url : "MakeUserArist.html",
 		data : UserArtistData,
         success: function (data) {
-            alert(data)
             $('#makeUserArtistPopUp').modal('hide');
+            refreshCenterContent();
         },
 	});
 }
@@ -23,12 +23,12 @@ function removeArtist(artistID){
 		type : "POST",
 		url : "removeArtist/" + artistID + ".html",
         success: function (data) {
-            alert(data)
-            getBrowsePageContent();
+        	refreshCenterContent();
         }
 	});
 }
 
+/*Not useful anymore, keeping for now just in case*/
 function removeArtistFromRender(artistID){
 	$(".AlbumContentPicture").each(function(index) {
         var artistIDString = $(this).attr("id");

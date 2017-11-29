@@ -34,6 +34,8 @@ function getUserPlaylists(){
 		success : function(data) {
 			$("#My-Playlist-List-Wrapper").empty();
 			addToPlaylistList(data);
+			//SO THAT SONGS IN THE CENTER CAN BE RELOADED TO HAVE THIS PLAYLIST AS AN OPTION TO ADD TO
+			refreshCenterContent();
 		}
 	});
 }
@@ -74,7 +76,7 @@ function removeSongFromPlaylist(playlistId, playlistName, songId){
 		type : "POST",
 		url : "removeSongFromPlaylist/" + playlistId + "/" + songId+ ".html",
         success: function (data) {
-            goToPlaylistSongs(playlistId, playlistName);
+        	refreshCenterContent();
         	$("#puopUpMessage").html("Remove Success");
         	$("#successPopUp").modal("show");
         }
@@ -109,7 +111,7 @@ function goToPlaylistSongs(playlistId, playlistName){
 			$('#removePlaylistButton').click(function(event){
 				removePlaylist(playlistId);
 			});
-			lastAjaxCallToRenderToCenter = "goToPlaylistSongs(" + playlistId + "," + playlistName + ")";
+			lastAjaxCallToRenderToCenter = "goToPlaylistSongs(" + playlistId + "," + "'" + playlistName + "'" + ")";
         }
 	});
 }
@@ -122,7 +124,6 @@ function changePlaylistName(){
 		url : "renamePlaylist/" + $('#selectedPlaylist').html() + ".html",
 		data : newPlaylistNameData,
 		success : function(data) {
-			console.log(data);
 			$('.song-table-title').html($('#changePlaylistNameInput').val());
 			$('#changePlaylistNamePopUp').modal('hide');
 			$('#playlist' + $('#selectedPlaylist').html()).html($('#changePlaylistNameInput').val());
@@ -137,6 +138,7 @@ function removePlaylist(playlistId){
 		success : function(data) {
         	$("#puopUpMessage").html("Remove Success");
         	$("#successPopUp").modal("show");
+        	//PLAYLIST NO LONGER EXISTS, NOT REFRESHING A PAGE THAT SHOULDN'T EXIST, GO BACK TO BROWSE
 			window.location.reload();
 		}
 	});

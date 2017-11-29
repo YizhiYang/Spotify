@@ -21,9 +21,8 @@ function uploadSong(){
 		url : "SongFileUpload.html",
 		data : formData,
         success: function (data) {
-            alert(data)
-            $('#upload-song-form').reset();
             $('#uploadSongPopUp').modal('hide');
+            refreshCenterContent();
         },
         cache: false,
         contentType: false,

@@ -29,9 +29,9 @@ $( document ).ready(function() {
 		//GET INITIAL DATA NEEDED AND STORE THEM
 		getUserTypeAndRerender();
 		getUserName();
-		reloadFollowedSongs();
-		reloadFollowedAlbums();
-		reloadFollowedArtists();
+		reloadFollowedSongs(false);
+		reloadFollowedAlbums(false);
+		reloadFollowedArtists(false);
 		getBrowsePageContent();
 		//REGISTER ACCOUNT RELATED EVENTS
 		$("#profile-image-chooser").change(function(event) {
@@ -153,32 +153,44 @@ function logout(){
 	});
 }
 
-function reloadFollowedSongs(){
+function reloadFollowedSongs(isRefreshCall){
 	$.ajax({
 		type : "GET",
 		url : "loadFollowedSongs.html",
 		success : function(data) {
 			userFollowedSongs = data;
+			if(isRefreshCall){
+				//IF WE ARE ON THE FOLLOWED SONG PAGE, THEN WE NEED TO REMOVE THIS SONG BY REFRESHING CENTER CONTENT
+	        	refreshCenterContent();
+			}
 		}
 	});
 }
 
-function reloadFollowedAlbums(){
+function reloadFollowedAlbums(isRefreshCall){
 	$.ajax({
 		type : "GET",
 		url : "loadFollowedAlbums.html",
 		success : function(data) {
 			userFollowedAlbums = data;
+			if(isRefreshCall){
+				//IF WE ARE ON THE FOLLOWED SONG PAGE, THEN WE NEED TO REMOVE THIS SONG BY REFRESHING CENTER CONTENT
+	        	refreshCenterContent();
+			}
 		}
 	});
 }
 
-function reloadFollowedArtists(){
+function reloadFollowedArtists(isRefreshCall){
 	$.ajax({
 		type : "GET",
 		url : "loadFollowedArtists.html",
 		success : function(data) {
 			userFollowedArtists = data;
+			if(isRefreshCall){
+				//IF WE ARE ON THE FOLLOWED SONG PAGE, THEN WE NEED TO REMOVE THIS SONG BY REFRESHING CENTER CONTENT
+	        	refreshCenterContent();
+			}
 		}
 	});
 }
@@ -214,4 +226,9 @@ function hideAdminGUI(){
 	$("#Admin-UploadSong-Button").parent().hide();
 	$("#Admin-CreateAlbum-Button").parent().hide();
 	$("#Admin-MakeUserArtist-Button").parent().hide();
+}
+
+function refreshCenterContent(){
+	console.log(lastAjaxCallToRenderToCenter);
+	eval(lastAjaxCallToRenderToCenter);
 }

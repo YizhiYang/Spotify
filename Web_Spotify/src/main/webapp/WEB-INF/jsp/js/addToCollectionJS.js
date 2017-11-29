@@ -4,7 +4,7 @@ function addToFollowedSongs(songId, index){
 		url : "addToFollowedSongs/" + songId + ".html",
         success: function (data) {
         	//RELOAD THE DATA OF FOLLOWED SONGS STORED ON CLIENT SIDE
-        	reloadFollowedSongs();
+        	reloadFollowedSongs(false);
         	//SWITCH THE BUTTON FOR FOLLOW/UNFOLLOW
         	$(".SongPageFollowSong").eq(index).hide();
         	$(".SongPageUnfollowSong").eq(index).show();
@@ -19,9 +19,7 @@ function removeFromFollowedSongs(songId, index){
 		type : "POST",
 		url : "removeFromFollowedSongs/" + songId + ".html",
         success: function (data) {
-        	reloadFollowedSongs();
-        	$(".SongPageUnfollowSong").eq(index).hide();
-        	$(".SongPageFollowSong").eq(index).show();
+        	reloadFollowedSongs(true);
         	$("#puopUpMessage").html("Unfollow Success.");
         	$("#successPopUp").modal("show");
         }
@@ -34,7 +32,7 @@ function addToFollowedAlbums(albumId, index){
 		url : "addToFollowedAlbums/" + albumId + ".html",
         success: function (data) {
         	//RELOAD THE DATA OF FOLLOWED ALBUMS STORED ON CLIENT SIDE
-        	reloadFollowedAlbums();
+        	reloadFollowedAlbums(false);
         	//SWITCH THE BUTTON FOR FOLLOW/UNFOLLOW
         	$(".AlbumPageFollowAlbum").eq(index).hide();
         	$(".AlbumPageUnfollowAlbum").eq(index).show();
@@ -49,9 +47,7 @@ function removeFromFollowedAlbums(albumId, index){
 		type : "POST",
 		url : "removeFromFollowedAlbums/" + albumId + ".html",
         success: function (data) {
-        	reloadFollowedAlbums();
-        	$(".AlbumPageUnfollowAlbum").eq(index).hide();
-        	$(".AlbumPageFollowAlbum").eq(index).show();
+        	reloadFollowedAlbums(true);
         	$("#puopUpMessage").html("Unfollow Success.");
         	$("#successPopUp").modal("show");
         }
@@ -64,7 +60,7 @@ function addToFollowedArtists(artistId, index){
 		url : "addToFollowedArtists/" + artistId + ".html",
         success: function (data) {
         	//RELOAD THE DATA OF FOLLOWED ARTISTS STORED ON CLIENT SIDE
-        	reloadFollowedArtists();
+        	reloadFollowedArtists(false);
         	//SWITCH THE BUTTON FOR FOLLOW/UNFOLLOW
         	$(".ArtistPageFollowArtist").eq(index).hide();
         	$(".ArtistPageUnfollowArtist").eq(index).show();
@@ -79,9 +75,7 @@ function removeFromFollowedArtists(artistId, index){
 		type : "POST",
 		url : "removeFromFollowedArtists/" + artistId + ".html",
         success: function (data) {
-        	reloadFollowedArtists();
-        	$(".ArtistPageUnfollowArtist").eq(index).hide();
-        	$(".ArtistPageFollowArtist").eq(index).show();
+        	reloadFollowedArtists(true);
         	$("#puopUpMessage").html("Unfollow Success.");
         	$("#successPopUp").modal("show");
         }

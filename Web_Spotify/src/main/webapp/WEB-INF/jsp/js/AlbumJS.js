@@ -20,9 +20,8 @@ function createAlbum(){
 		url : "UploadAlbum.html",
 		data : formData,
         success: function (data) {
-            alert(data)
-            $('#create-album-form').reset();
             $('#createAlbumPopUp').modal('hide');
+            refreshCenterContent();
         },
         cache: false,
         contentType: false,
@@ -35,12 +34,12 @@ function removeAlbum(albumID){
 		type : "POST",
 		url : "removeAlbum/" + albumID + ".html",
         success: function (data) {
-            alert(data)
-            removeAlbumFromRender(albumID);
+	        refreshCenterContent();
         }
 	});
 }
 
+/*Not Useful Anymore, but keeping for now just in case*/
 function removeAlbumFromRender(albumID){
 	$(".AlbumContentPicture").each(function(index) {
         var albumIDString = $(this).attr("id");
