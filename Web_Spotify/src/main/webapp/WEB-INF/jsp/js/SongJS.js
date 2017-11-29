@@ -1,7 +1,35 @@
+//FOR DETERMINING SONG DURATION
+var objectUrl;
 $( document ).ready(function() {
 		$("#submitSongFormButton").click(function(event) {
 			uploadSong();
 			event.preventDefault();
+		});
+		
+		$("#upload-temp-audio").on("canplaythrough", function(e){
+		    var time = Math.floor($(this).get(0).duration);
+		    var minute = Math.floor(time / 60);
+		    var second = time % 60;
+		    var timeString = "";
+		    if(minute >= 10){
+		    	timeString += minute;
+		    }else{
+		    	timeString += "0" + minute;
+		    }
+		    timeString +=":";
+		    if(second >= 10){
+		    	timeString += second;
+		    }else{
+		    	timeString += "0"+second;
+		    }
+		    $("#formGroupDurationInput").val(timeString);
+		    URL.revokeObjectURL(objectUrl);
+		});
+
+		$("#FormSongFile").change(function(e){
+		    var file = e.currentTarget.files[0]; 
+		    objectUrl = URL.createObjectURL(file);
+		    $("#upload-temp-audio").prop("src", objectUrl);
 		});
 });
 

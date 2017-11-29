@@ -340,12 +340,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">Upload Song</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+      <audio id="upload-temp-audio"></audio>
         <form id="upload-song-form" method="post" enctype="multipart/form-data">
   			<div class="form-group">
   				<label class="col-form-label" for="formGroupSongNameInput">Song Name</label>
