@@ -287,7 +287,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Change Playlist Name</h5>
-        <div style="display:none;" id="selectedPlaylist">id</div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
