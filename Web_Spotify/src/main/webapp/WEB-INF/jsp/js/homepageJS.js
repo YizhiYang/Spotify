@@ -20,6 +20,8 @@ var userFollowedSongs;
 var userFollowedAlbums;
 //STORES THE LIST OF ALBUMS
 var userFollowedArtists;
+//STORES USER PLAYLISTS
+var userPlaylists=[];
 //STORES WHAT USERTYPE THIS USER IS, BASIC, PREMUIUM, ARTIST, ADMIN
 var userType;
 //RECORDS THE LAST AJAX SO WE CAN REFRESH WHEN NEEDED

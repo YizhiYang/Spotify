@@ -27,9 +27,8 @@ public class ArtistRepoImpl implements ArtistRepo {
 	public List<ArtistUser> getArtistByArtistID(String id) {
 		long artistId = Long.valueOf(id);
 		
-		List<ArtistUser> result = em.createQuery("SELECT "
-				+ "a FROM ArtistUser a WHERE a.artistID = :id")
-		.setParameter("id", artistId).getResultList();
+		List<ArtistUser> result = em.createQuery("SELECT " + "a FROM ArtistUser a WHERE a.artistID = :id")
+				.setParameter("id", artistId).getResultList();
 		return result;
 	}
 

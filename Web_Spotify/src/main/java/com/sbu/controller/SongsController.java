@@ -82,8 +82,10 @@ public class SongsController {
 		song.setAlbum(albumToSaveTo);
 
 		if(songService.addSongToDatabase(song)){
-			fileManager.saveFileToLocation(file, SONG_FILE_PATH, song.getSongId()+SONG_EXTENSION);	
-			fileManager.saveFileToLocation(lyricsFile, SONG_FILE_PATH, song.getSongId()+LYRICS_EXTENSION);	
+			fileManager.saveFileToLocation(file, SONG_FILE_PATH, song.getSongId()+SONG_EXTENSION);
+			if(lyricsFile!=null){
+				fileManager.saveFileToLocation(lyricsFile, SONG_FILE_PATH, song.getSongId()+LYRICS_EXTENSION);
+			}
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);
