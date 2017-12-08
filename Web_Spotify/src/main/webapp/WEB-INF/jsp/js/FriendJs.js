@@ -1,4 +1,6 @@
 $( document ).ready(function() {
+	getFriendList();
+	
 	$("#findFriendsButton").click(function(event){
 		searchAndAddFriend();
 	})
@@ -21,9 +23,10 @@ function renderFriendList(jsonData){
 	for(var i=0; i<jsonArray.length; i++){
 		var friend = jsonArray[i];
 		var contentToBeAdded = '<div class=FSContent>\
-            <div class="FSImage"><div class=FSImageInner id="'+ friend.friendId+'"style="background-image: url(getProfileImageWithUsername/'+ friend.friendUserName +');"></div></div>\
+            <div class="FSImage"><div class=FSImageInner id="'+ friend.friendId+'"style="background-image: url(getProfileImageWithUsername/'+ friend.friendUserName +'.html);"></div></div>\
             <div class="FSFriendName">'+friend.friendUserName+'</div>\
         </div>';
+		$('#rightBottomWrapper').append(contentToBeAdded);
 	}
 }
 
@@ -34,11 +37,11 @@ function searchAndAddFriend(){
 	}
 	$.ajax({
 		type : "POST",
-		url : "getFriendList.html",
+		url : "addFriend/"+ searchUsername + ".html",
         success: function (data) {
         	if(data == "success"){
         		$('#rightBottomWrapper').empty();
-        		renderFriendList(data);
+        		getFriendList();
         	}
         }
 	});

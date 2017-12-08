@@ -403,7 +403,7 @@ public class MainController {
 		response.getWriter().write(friendsJSON);
 	}
 	
-	@RequestMapping(value="/addFriend", method = RequestMethod.POST)
+	@RequestMapping(value="/addFriend/{friendUsername}", method = RequestMethod.POST)
 	public void addFriendToList(HttpServletRequest request, HttpServletResponse response 
 			,@PathVariable("friendUsername") String friendusername) throws IOException{
 		

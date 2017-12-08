@@ -115,7 +115,7 @@ public class SignupServiceImpl implements SignupService {
 	}
 	
 	public boolean addFriendToList(User user, String friendUsername){
-//		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
 		List<User> list = signupRepo.validateUsername(friendUsername);
 		User friend;
 		if(!list.isEmpty()){
@@ -125,10 +125,10 @@ public class SignupServiceImpl implements SignupService {
 			return false;
 		}
 		
-		user.getFriends().add(friend);
-		signupRepo.saveUserToDB(user);
+		u.getFriends().add(friend);
+		signupRepo.saveUserToDB(u);
 		
-		friend.getFriends().add(user);
+		friend.getFriends().add(u);
 		signupRepo.saveUserToDB(friend);
 		return true;
 	}
