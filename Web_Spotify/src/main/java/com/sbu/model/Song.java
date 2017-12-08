@@ -38,6 +38,9 @@ public class Song {
 	@Column(name="RATING")
 	private double rating;
 	
+	@Column(name="APPROVED")
+	private boolean approved;
+	
 	@Column(name="LISTEN_COUNT")
 	private long listenCount;
 	
@@ -102,6 +105,14 @@ public class Song {
 
 	public void setAlbum(Album album) {
 		this.album = album;
+	}
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 	
 	

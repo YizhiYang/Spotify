@@ -3,6 +3,11 @@ $(document).ready(function() {
 		loadFollowedSongs();
 		event.preventDefault();
 	});
+	
+	$("#Admin-PendingSongs-Button").click(function(event) {
+		loadPendingSongs();
+		event.preventDefault();
+	});
 
 });
 
@@ -11,4 +16,34 @@ function loadFollowedSongs(){
 	$('#centerSideContent').empty();
 	addSongsToCenterContent(userFollowedSongs);
 	lastAjaxCallToRenderToCenter = "loadFollowedSongs()";
+}
+
+function loadPendingSongs(){
+	$.ajax({
+		type : "GET",
+		url : "getAllSongsPendingApproval.html",
+		success : function(data) {
+			$('#centerSideContent').empty();
+			addSongsToCenterContent(data);
+			//ADD APPROVE BUTTON
+			addApproveButtonToSongs();
+			$('.song-table-title').html("Songs Appending Approval");
+			lastAjaxCallToRenderToCenter = "loadPendingSongs()";
+		}
+	});
+}
+
+function addApproveButtonToSongs(){
+	$(".adminDeleteSongButton").each(function(index){
+		var approveButton = '<i class="material-icons adminApproveSongButton" style="float:right;" id="' + $(this).attr('id')
+		+ '">done</i>';
+		$(this).parent().append(approveButton);
+	});
+	
+	$(".adminApproveSongButton").each(function(index){
+		$(this).click(function(event){
+			var songIdStr = $(this).attr("id");
+			sendApproveSongsRequestToServer(songIdStr.substring(4, songIdStr.length));
+		});
+	});
 }

@@ -194,6 +194,7 @@ function addAlbumsToCenterContent(jsonData){
     $(".AlbumContentPicture").each(function(index) {
         $(this).on("click", function(event){
         	var albumID = $(this).attr("id");
+        	selectedAlbumName = $(".AlbumContentName").eq(index).html();
         	goToAlbumSongs(albumID.substring(5, albumID.length));
         });
     });

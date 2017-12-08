@@ -22,6 +22,10 @@
 	color: #fff !important;
 }
 
+#addSongToAlbumButton{
+	cursor:pointer;
+}
+
 i{
 	cursor:pointer;
 }

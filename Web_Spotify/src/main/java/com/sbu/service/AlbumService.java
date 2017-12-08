@@ -6,6 +6,7 @@ import org.json.JSONException;
 
 import com.sbu.model.Album;
 import com.sbu.model.Song;
+import com.sbu.model.User;
 
 public interface AlbumService {
 	
@@ -22,4 +23,6 @@ public interface AlbumService {
 	String searchAlbums(String searchString) throws JSONException;
 	
 	boolean removeAlbum(String albumID);
+	
+	String getOwnedAlbumIds(User user);
 }

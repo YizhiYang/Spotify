@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import com.sbu.model.ArtistUser;
+import com.sbu.model.User;
 
 public interface ArtistService {
 	
@@ -22,9 +23,12 @@ public interface ArtistService {
 	
 	ArtistUser getArtistByArtistID(String id);
 	
+	ArtistUser getArtistByUser(User user);
+	
 	String searchArtists(String searchString) throws JSONException;
 	
 	List<ArtistUser> getArtistsOfAlbum(long albumId);
 	
 	void removeArtist(String artistId);
+
 }

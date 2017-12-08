@@ -31,6 +31,13 @@ public class ArtistRepoImpl implements ArtistRepo {
 				.setParameter("id", artistId).getResultList();
 		return result;
 	}
+	
+	public List<ArtistUser> getArtistByUser(User user) {
+		
+		List<ArtistUser> result = em.createQuery("SELECT " + "a FROM ArtistUser a WHERE a.user = :user")
+				.setParameter("user", user).getResultList();
+		return result;
+	}
 
 	public List<ArtistUser> getSearchArtistResults(String searchString) {
 		List<ArtistUser> result = em.createQuery("SELECT "
@@ -72,4 +79,5 @@ public class ArtistRepoImpl implements ArtistRepo {
 		em.createQuery("DELETE From ArtistUser a WHERE a.artistID = :artistId")
 		.setParameter("artistId", Long.valueOf(artistId)).executeUpdate();
 	}
+
 }

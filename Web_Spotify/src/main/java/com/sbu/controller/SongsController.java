@@ -138,6 +138,31 @@ public class SongsController {
 	    response.getWriter().write(jsonString);
 	}
 	
+	@RequestMapping(value="/getAllSongsPendingApproval", method = RequestMethod.GET)
+	public void getAllSongsPendingApproval(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		String jsonString = songService.getAllPendingSongsInJSON();
+	    response.getWriter().write(jsonString);
+	}
+	
+	@RequestMapping(value = "/approveSong/{songId}", method = RequestMethod.POST)
+	public void approveSong(HttpServletResponse response, HttpServletRequest request,@PathVariable("songId") String songId)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		songService.approveSong(songId);
+		
+		response.getWriter().write(REQUEST_SUCCESS);
+	}
+	
 	@RequestMapping(value="/requestLyricsFile/{id}", method = RequestMethod.GET)
     public void requestLyricsFile(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") String id) throws IOException {
 		File file = null;

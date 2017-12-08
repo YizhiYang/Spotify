@@ -10,6 +10,8 @@ public interface ArtistRepo {
 	
 	List<ArtistUser> getArtistByArtistID(String id);
 	
+	List<ArtistUser> getArtistByUser(User user);
+	
 	List<ArtistUser> getSearchArtistResults(String searchString);
 	
 	List<ArtistUser> getArtistsOfAlbum(long albumId);

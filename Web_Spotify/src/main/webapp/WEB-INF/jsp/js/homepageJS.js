@@ -29,6 +29,13 @@ var userType;
 //RECORDS THE LAST AJAX SO WE CAN REFRESH WHEN NEEDED
 var lastAjaxCallToRenderToCenter;
 
+
+
+//FOR ALBUM PAGE
+var selectedAlbumName;
+//ARTIST OWNED ALBUMS
+var ownedAlbumIDs=[];
+
 $( document ).ready(function() {
 		//GET INITIAL DATA NEEDED AND STORE THEM
 		getUserTypeAndRerender();
@@ -36,6 +43,7 @@ $( document ).ready(function() {
 		reloadFollowedSongs(false);
 		reloadFollowedAlbums(false);
 		reloadFollowedArtists(false);
+		reloadOwnedAlbumIDs(false);
 		getBrowsePageContent();
 		//REGISTER ACCOUNT RELATED EVENTS
 		$("#profile-image-chooser").change(function(event) {
@@ -199,6 +207,22 @@ function reloadFollowedArtists(isRefreshCall){
 	});
 }
 
+function reloadOwnedAlbumIDs(isRefreshCall){
+	$.ajax({
+		type : "GET",
+		url : "loadOwnedAlbums.html",
+		success : function(data) {
+			ownedAlbumIDs = [];
+			if(data!=""){
+				ownedAlbumIDs = data.split(",");
+			}
+			if(isRefreshCall){
+	        	refreshCenterContent();
+			}
+		}
+	});
+}
+
 function getUserTypeAndRerender(){
 	$.ajax({
 		type : "GET",
@@ -230,6 +254,7 @@ function hideAdminGUI(){
 	$("#Admin-UploadSong-Button").parent().hide();
 	$("#Admin-CreateAlbum-Button").parent().hide();
 	$("#Admin-MakeUserArtist-Button").parent().hide();
+	$("#Admin-PendingSongs-Button").parent().hide();
 }
 
 function refreshCenterContent(){

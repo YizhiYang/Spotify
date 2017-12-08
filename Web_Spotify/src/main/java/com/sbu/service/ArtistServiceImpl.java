@@ -92,6 +92,15 @@ public class ArtistServiceImpl implements ArtistService {
 			return artists.get(0);
 		}
 	}
+	
+	public ArtistUser getArtistByUser(User user) {
+		List<ArtistUser> artists = artistRepo.getArtistByUser(user);
+		if(artists.isEmpty()){
+			return null;
+		}else{
+			return artists.get(0);
+		}
+	}
 
 	public String searchArtists(String searchString) throws JSONException {
 		List<ArtistUser> artists = artistRepo.getSearchArtistResults(searchString);

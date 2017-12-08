@@ -93,6 +93,9 @@
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' data-toggle="modal" id="Admin-MakeUserArtist-Button" data-target="#makeUserArtistPopUp">Make User Artist</div>
                         </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Admin-PendingSongs-Button">Songs Pending To Be Approved</div>
+                        </li>
                     </ul>
                 </div>
             </div>

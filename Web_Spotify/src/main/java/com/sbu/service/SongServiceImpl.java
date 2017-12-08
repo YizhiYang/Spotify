@@ -60,22 +60,26 @@ public class SongServiceImpl implements SongService {
 		
 		for(int i =0; i<songs.size(); i++){
 			Song song = songs.get(i);
-			Album album = song.getAlbum();
-			List<ArtistUser> artists = album.getArtists();
+			//DETERMINE IF SONG IS APPROVED
+			if(song.isApproved()){
+			
+				Album album = song.getAlbum();
+				List<ArtistUser> artists = album.getArtists();
 
-			JSONArray artistNames = new JSONArray();
-			for(int j=0; j< artists.size(); j++){
-				artistNames.put(artists.get(j).getArtistName());
+				JSONArray artistNames = new JSONArray();
+				for(int j=0; j< artists.size(); j++){
+					artistNames.put(artists.get(j).getArtistName());
+				}
+			
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("songId", song.getSongId());
+				jsonObject.put("songName", song.getSongName());
+				jsonObject.put("albumName", album.getAlbumName());
+				jsonObject.put("artistNames", artistNames);
+				jsonObject.put("duration", song.getDuration());
+			
+				jsonArray.put(jsonObject);
 			}
-			
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("songId", song.getSongId());
-			jsonObject.put("songName", song.getSongName());
-			jsonObject.put("albumName", album.getAlbumName());
-			jsonObject.put("artistNames", artistNames);
-			jsonObject.put("duration", song.getDuration());
-			
-			jsonArray.put(jsonObject);
 		}
 		
 		return jsonArray.toString();
@@ -104,6 +108,44 @@ public class SongServiceImpl implements SongService {
 			playlistService.removeSongFromPlaylist(lists.get(i).getId(), Long.valueOf(songId));
 		}
 		songRepo.removeSong(songId);
+	}
+
+	public String getAllPendingSongsInJSON() throws JSONException {
+		List<Song> songs = getALLSongs();
+		
+		JSONArray jsonArray = new JSONArray();
+		
+		for(int i =0; i<songs.size(); i++){
+			Song song = songs.get(i);
+			//DETERMINE IF SONG IS APPROVED
+			if(!song.isApproved()){
+			
+				Album album = song.getAlbum();
+				List<ArtistUser> artists = album.getArtists();
+
+				JSONArray artistNames = new JSONArray();
+				for(int j=0; j< artists.size(); j++){
+					artistNames.put(artists.get(j).getArtistName());
+				}
+			
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("songId", song.getSongId());
+				jsonObject.put("songName", song.getSongName());
+				jsonObject.put("albumName", album.getAlbumName());
+				jsonObject.put("artistNames", artistNames);
+				jsonObject.put("duration", song.getDuration());
+			
+				jsonArray.put(jsonObject);
+			}
+		}
+		return jsonArray.toString();
+	}
+
+	public void approveSong(String songId) {
+		Song song = this.getSongByID(songId);
+		song.setApproved(true);
+		//PERSIST SONG
+		songRepo.addSong(song);	
 	}
 
 

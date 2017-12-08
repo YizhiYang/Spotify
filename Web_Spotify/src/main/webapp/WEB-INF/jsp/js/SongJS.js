@@ -1,6 +1,7 @@
 //FOR DETERMINING SONG DURATION
 var objectUrl;
 $( document ).ready(function() {
+	
 		$("#submitSongFormButton").click(function(event) {
 			uploadSong();
 			event.preventDefault();
@@ -30,7 +31,7 @@ $( document ).ready(function() {
 		    var file = e.currentTarget.files[0]; 
 		    objectUrl = URL.createObjectURL(file);
 		    $("#upload-temp-audio").prop("src", objectUrl);
-		});
+		});	
 });
 
 function uploadSong(){
@@ -64,6 +65,16 @@ function sendRemoveSongsRequestToServer(songId){
 		url : "removeSong/" + songId + ".html",
 		success : function(data) {
 			getBrowsePageContent();
+		}
+	});
+}
+
+function sendApproveSongsRequestToServer(songId){
+	$.ajax({
+		type : "POST",
+		url : "approveSong/" + songId + ".html",
+		success : function(data) {
+			refreshCenterContent();
 		}
 	});
 }

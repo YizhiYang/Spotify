@@ -69,6 +69,18 @@ public class AlbumsController {
 	    response.getWriter().write(jsonString);
 	}
 	
+	@RequestMapping(value="/loadOwnedAlbums", method = RequestMethod.GET)
+	public void loadOwnedAlbums(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		String albumIds = albumService.getOwnedAlbumIds(user);
+ 		response.setContentType("text/plain");		
+	    response.getWriter().write(albumIds);
+	}
+	
 	@RequestMapping(value="/requestAlbumImage/{id}", method = RequestMethod.GET)
     public void requestAlbumImage(HttpServletResponse response, HttpServletRequest request, @PathVariable("id") String id) throws IOException {
 		

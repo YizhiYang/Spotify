@@ -105,4 +105,18 @@ public class AlbumServiceImpl implements AlbumService {
 		return true;
 	}
 
+	public String getOwnedAlbumIds(User user) {
+		ArtistUser artist = artistService.getArtistByUser(user);
+		if(artist!=null){
+			String albumIds = "";
+			for(Album album: artist.getAlbum()){
+				albumIds += album.getAlbumId() + ",";
+			}
+			return albumIds.substring(0, albumIds.length()-1);
+		}else{
+			return "";
+		}
+		
+	}
+
 }
