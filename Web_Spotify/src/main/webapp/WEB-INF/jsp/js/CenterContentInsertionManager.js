@@ -149,7 +149,7 @@ function addAlbumsToCenterContent(jsonData){
 	//APPEND ALBUM TITLE
     $("#centerSideContent").append('<div class=centerSideContentWrapper id=AlbumPageTop>\
                                         <div id="contentTitle">\
-                                            <div id="contentTitleWrapper" style="border-bottom:transparent; font-size:45px;">Album</div>\
+                                            <div id="contentTitleWrapper" class="album-table-title" style="border-bottom:transparent; font-size:45px;">Album</div>\
                                         </div>\
                                    </div>');
     //LOOP TO APPEND EACH ALBUM
@@ -236,7 +236,7 @@ function addArtistsToCenterContent(jsonData){
 	//ADD ARIST PAGE TITLE
     $("#centerSideContent").append('<div class=centerSideContentWrapper id=AlbumPageTop>\
                                         <div id="contentTitle">\
-                                            <div id="contentTitleWrapper" style="border-bottom:transparent; font-size:45px;">Artist</div>\
+                                            <div id="contentTitleWrapper" class="artist-table-title" style="border-bottom:transparent; font-size:45px;">Artist</div>\
                                         </div>\
                                     </div>');
     //LOOP TO ADD EACH ARTIST

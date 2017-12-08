@@ -64,7 +64,7 @@ function sendRemoveSongsRequestToServer(songId){
 		type : "POST",
 		url : "removeSong/" + songId + ".html",
 		success : function(data) {
-			getBrowsePageContent();
+			refreshCenterContent();
 		}
 	});
 }

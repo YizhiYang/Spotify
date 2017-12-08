@@ -65,6 +65,9 @@
                         </li>
                         <li class="sideBarMenuHeader">YOUR LIBRARY</li>
                         <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Home-Library-Overview-Button">Overview</div>
+                        </li>
+                        <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-History-Button">Play History</div>
                         </li>
                         <li class=userSongWrapperList>

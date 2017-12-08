@@ -6,15 +6,19 @@ $(document).ready(function() {
 });
 
 function loadFollowedAlbums(){
-	$.ajax({
-		type : "GET",
-		url : "loadFollowedAlbums.html",
-		success : function(data) {
-			$('#centerSideContent').empty();
-			addAlbumsToCenterContent(data);
-			lastAjaxCallToRenderToCenter = "loadFollowedAlbums()";
-		}
-	});
+//	$.ajax({
+//		type : "GET",
+//		url : "loadFollowedAlbums.html",
+//		success : function(data) {
+//			$('#centerSideContent').empty();
+//			addAlbumsToCenterContent(data);
+//			lastAjaxCallToRenderToCenter = "loadFollowedAlbums()";
+//		}
+//	});
+	$('#centerSideContent').empty();
+	addAlbumsToCenterContent(userFollowedAlbums);
+	$('.album-table-title').html("Albums I Like");
+	lastAjaxCallToRenderToCenter = "loadFollowedAlbums()";
 }
 
 function goToAlbumSongs(albumID){

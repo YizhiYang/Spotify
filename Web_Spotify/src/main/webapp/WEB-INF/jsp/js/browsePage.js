@@ -3,7 +3,27 @@ $( document ).ready(function() {
 		getBrowsePageContent();
 		event.preventDefault();
 	});
+	
+	$("#Home-Library-Overview-Button").click(function(event) {
+		loadLibraryOverview();
+		event.preventDefault();
+	});
 });
+
+function loadLibraryOverview(){
+	$('#centerSideContent').empty();
+	
+	addSongsToCenterContent(userFollowedSongs);
+	$('.song-table-title').html("Songs I Like");
+	
+	addAlbumsToCenterContent(userFollowedAlbums);
+	$('.album-table-title').html("Albums I Like");
+	
+	addArtistsToCenterContent(userFollowedArtists);
+	$('.artist-table-title').html("Artists I Follows");
+	
+	lastAjaxCallToRenderToCenter = "loadLibraryOverview()";
+}
 
 function getBrowsePageContent(){
 	$.ajax({

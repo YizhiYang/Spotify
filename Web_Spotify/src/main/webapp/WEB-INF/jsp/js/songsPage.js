@@ -20,6 +20,7 @@ function loadFollowedSongs(){
 	//DATA IS ALREADY LOADED, JUST RENDER
 	$('#centerSideContent').empty();
 	addSongsToCenterContent(userFollowedSongs);
+	$('.song-table-title').html("Songs I Like");
 	lastAjaxCallToRenderToCenter = "loadFollowedSongs()";
 }
 

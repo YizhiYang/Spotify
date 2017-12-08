@@ -6,15 +6,20 @@ $(document).ready(function() {
 });
 
 function loadFollowedArtists(){
-	$.ajax({
-		type : "GET",
-		url : "loadFollowedArtists.html",
-		success : function(data) {
-			$('#centerSideContent').empty();
-			addArtistsToCenterContent(data);
-			lastAjaxCallToRenderToCenter = "loadFollowedArtists()";
-		}
-	});
+//	$.ajax({
+//		type : "GET",
+//		url : "loadFollowedArtists.html",
+//		success : function(data) {
+//			$('#centerSideContent').empty();
+//			addArtistsToCenterContent(data);
+//			lastAjaxCallToRenderToCenter = "loadFollowedArtists()";
+//		}
+//	});
+	
+	$('#centerSideContent').empty();
+	addArtistsToCenterContent(userFollowedArtists);
+	$('.artist-table-title').html("Artists I Follows");
+	lastAjaxCallToRenderToCenter = "loadFollowedArtists()";
 }
 
 function goToArtistAlbums(artistID){
