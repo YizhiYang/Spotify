@@ -33,6 +33,7 @@
   	<script type="application/javascript"><%@ include file="js/searchJS.js" %></script>
   	<script type="application/javascript"><%@ include file="js/addToCollectionJS.js" %></script>
   	<script type="application/javascript"><%@ include file="js/playlistJS.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/FriendJs.js" %></script>
 </head>
 <body>
 	<div id="main">
@@ -120,8 +121,9 @@
             </div>
             <div id=right>
                 <div id=rightTopWrapper>
-                    <p id="findFriendsText">See what your friends are playing</p>
-                    <button id="findFriends">Find Friends</button>
+                    <p id="friend-list-title">Friends</p>
+                    <input id="searchFriendInput" type="text" name="friendUsername">
+                    <button id="findFriendsButton">Find And Add Friend</button>
                 </div>
                 <div id=rightBottomWrapper>
                     <div class=FSContent>
