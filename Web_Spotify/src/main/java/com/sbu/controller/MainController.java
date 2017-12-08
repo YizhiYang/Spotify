@@ -403,12 +403,17 @@ public class MainController {
 		response.getWriter().write(friendsJSON);
 	}
 	
+	@RequestMapping(value="/addFriend", method = RequestMethod.POST)
 	public void addFriendToList(HttpServletRequest request, HttpServletResponse response 
-			,@PathVariable("friendUsername") String friendusername){
+			,@PathVariable("friendUsername") String friendusername) throws IOException{
 		
 		User user = (User) request.getSession().getAttribute(("User"));
 		
-		signupService.
-		
+		if(signupService.addFriendToList(user, friendusername)){
+			response.getWriter().write(REQUEST_SUCCESS);
+		}
+		else{
+			response.getWriter().write(REQUEST_FAILURE);
+		}	
 	}
 }
