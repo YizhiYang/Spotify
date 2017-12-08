@@ -1,7 +1,11 @@
+#unfriendButton{
+	width: 50px;
+	cursor:pointer;
+}
+
 /*Playlist Page*/
 #removePlaylistButton{
 	margin-top: 25px;
-	float:right;
 }
 #playlist-page-name-title{
 	cursor:pointer;

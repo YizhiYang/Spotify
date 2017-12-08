@@ -88,7 +88,7 @@ public class BrowsePageController {
 	
 	@RequestMapping(value = "/getFriendsPlaylist/{friendId}", method = RequestMethod.GET)
 	public void getFriendPlaylist(HttpServletResponse response, HttpServletRequest request
-			,@PathVariable("friendUsername") String friendId)
+			,@PathVariable("friendId") String friendId)
 			throws JSONException, IOException {
 		
 		User user = (User) request.getSession().getAttribute("User");

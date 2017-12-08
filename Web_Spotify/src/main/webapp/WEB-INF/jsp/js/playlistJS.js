@@ -147,3 +147,21 @@ function removePlaylist(playlistId){
 		}
 	});
 }
+
+
+
+function goToFriendPlaylist(playlistId, playlistName){
+	$.ajax({
+		type : "GET",
+		url : "getPlaylistSongs/" + playlistId + ".html",
+        success: function (data) {
+        	$('#centerSideContent').empty();
+			addSongsToCenterContent(data);
+			//CHANGE "Songs" TO PLAYLIST NAME
+			$('.song-table-title').html("");
+			$('.song-table-title').append('<div id="playlist-page-name-title">' + playlistName + '</div>');
+			lastAjaxCallToRenderToCenter = "goToFriendPlaylist(" + playlistId + "," +"'" + playlistName + "')";
+			console.log(lastAjaxCallToRenderToCenter);
+        }
+	});
+}

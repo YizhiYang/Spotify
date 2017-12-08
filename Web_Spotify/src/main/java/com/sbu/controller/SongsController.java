@@ -29,6 +29,7 @@ import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.service.AlbumService;
 import com.sbu.service.GenericFileManageService;
+import com.sbu.service.SignupService;
 import com.sbu.service.SongService;
 
 @Controller
@@ -47,6 +48,8 @@ public class SongsController {
 	private AlbumService albumService;
 	@Autowired
 	private GenericFileManageService fileManager;
+	@Autowired
+	private SignupService signupService;
 	
 	
 	@RequestMapping(value = "/removeSong/{songId}", method = RequestMethod.POST)
@@ -207,6 +210,18 @@ public class SongsController {
 			return;
 		}
 		String jsonString = songService.getPlayHistoryInJSON(user);
+	    response.getWriter().write(jsonString);
+	}
+	
+	@RequestMapping(value="/getFriendPlayHistorySongs/{friendId}", method = RequestMethod.GET)
+	public void getFriendPlayHistorySongs(Model model, HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("friendId") String friendId) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		String jsonString = songService.getPlayHistoryInJSON(signupService.getUserByID(friendId));
 	    response.getWriter().write(jsonString);
 	}
 }

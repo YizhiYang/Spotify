@@ -305,3 +305,28 @@ function addArtistsToCenterContent(jsonData){
     	}
 	});
 }
+
+function addPlaylistsToCenterContent(jsonData){
+	console.log(jsonData);
+	var jsonArray = jQuery.parseJSON(jsonData);
+	$("#centerSideContent").append('<div class=centerSideContentWrapper id=AlbumPageTop>\
+            <div id="contentTitle">\
+                <div id="contentTitleWrapper" class="playlist-table-title" style="border-bottom:transparent; font-size:45px;">Playlists</div>\
+            </div>\
+        </div>');
+	var contentToBeAdded = '<div class=centerSideContentWrapper>';
+	for(i=0; i<jsonArray.length; i++){
+		var pl = jsonArray[i];
+		contentToBeAdded += '<div class="centerPlaylistItem" id="playlist'+ pl.playlistID+'">'
+		+ pl.playlistName + '</div>';
+	}
+	contentToBeAdded += '</div>';
+	$("#centerSideContent").append(contentToBeAdded);
+	
+	$(".centerPlaylistItem").each(function(index){
+		$(this).click(function(event){
+			var playlistIdStr = $(this).attr("id");
+			goToFriendPlaylist(playlistIdStr.substr(8, playlistIdStr.length), $(this).html());
+		});
+	});
+}
