@@ -402,4 +402,13 @@ public class MainController {
 		
 		response.getWriter().write(friendsJSON);
 	}
+	
+	public void addFriendToList(HttpServletRequest request, HttpServletResponse response 
+			,@PathVariable("friendUsername") String friendusername){
+		
+		User user = (User) request.getSession().getAttribute(("User"));
+		
+		signupService.
+		
+	}
 }

@@ -113,5 +113,43 @@ public class SignupServiceImpl implements SignupService {
 		
 		return jsonArray.toString();
 	}
+	
+	public boolean addFriendToList(User user, String friendUsername){
+//		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		List<User> list = signupRepo.validateUsername(friendUsername);
+		User friend;
+		if(!list.isEmpty()){
+			friend = list.get(0);
+		}
+		else{
+			return false;
+		}
+		
+		user.getFriends().add(friend);
+		signupRepo.saveUserToDB(user);
+		
+		friend.getFriends().add(user);
+		signupRepo.saveUserToDB(friend);
+		return true;
+	}
+	
+	public void removeFriendToList(User user, String friendUsername){
+		
+		List<User> list = signupRepo.validateUsername(friendUsername);
+		User friend;
+		
+		if(!list.isEmpty()){
+			friend = list.get(0);
+		}
+		else{
+			System.out.println("No friend found!");
+			return;
+		}
+		user.getFriends().remove(friend);
+		signupRepo.saveUserToDB(user);
+		
+		friend.getFriends().remove(user);
+		signupRepo.saveUserToDB(user);
+	}
 
 }

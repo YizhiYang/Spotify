@@ -24,4 +24,7 @@ public interface SignupService{
 		
 		String getFriendsInJSON(User user) throws JSONException;
 		
+		boolean addFriendToList(User user, String friendUsername);
+		
+		void removeFriendToList(User user, String friendUsername);
 }
