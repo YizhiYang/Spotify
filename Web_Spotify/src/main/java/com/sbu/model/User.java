@@ -79,6 +79,15 @@ public class User {
         inverseJoinColumns = { @JoinColumn(name = "HISTORY_SONG_ID", nullable = false, updatable = false) }
     )
 	private List<Song> playedSongsHistory = new ArrayList<Song>();
+	
+	
+	@ManyToMany
+    @JoinTable(
+        name = "user_friend", 
+        		joinColumns = { @JoinColumn(name = "USER_ID", nullable = false, updatable = false) }, 
+        inverseJoinColumns = { @JoinColumn(name = "FRIEND_ID", nullable = false, updatable = false) }
+    )
+	private List<User> friends = new ArrayList<User>();
 
 	public List<Song> getPlayedSongsHistory() {
 		return playedSongsHistory;
@@ -139,6 +148,12 @@ public class User {
 	}
 	public void setUserType(UserType userType) {
 		this.userType = userType;
+	}
+	public List<User> getFriends() {
+		return friends;
+	}
+	public void setFriends(List<User> friends) {
+		this.friends = friends;
 	}
 	
 	

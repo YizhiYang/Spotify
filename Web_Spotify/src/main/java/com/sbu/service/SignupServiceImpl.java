@@ -8,10 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sbu.model.Album;
+import com.sbu.model.ArtistUser;
 import com.sbu.model.CreditCard;
+import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.model.UserType;
 import com.sbu.repository.SignupRepo;
@@ -86,6 +92,26 @@ public class SignupServiceImpl implements SignupService {
 		signupRepo.saveUserToDB(u);
 		return u;
 		
+	}
+
+	public String getFriendsInJSON(User user) throws JSONException {
+		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		List<User> friends = u.getFriends();
+		
+		
+		JSONArray jsonArray = new JSONArray();
+		
+		for(int i =0; i<friends.size(); i++){
+			User friend = friends.get(i);
+			
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("friendId", friend.getId());
+			jsonObject.put("friendUserName", friend.getUserName());
+			
+			jsonArray.put(jsonObject);
+		}
+		
+		return jsonArray.toString();
 	}
 
 }

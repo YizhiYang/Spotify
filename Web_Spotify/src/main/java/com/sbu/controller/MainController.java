@@ -206,7 +206,7 @@ public class MainController {
 		String profileFolderName = user.getUserName();
         File file = null;      
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        
+        System.out.println(classloader.getResource(PROFILE_IMAGE_PATH).getPath());
         file = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName+"/"+PROFILE_IMAGE_NAME).getFile());
         if(!file.exists()){
             String errorMessage = FILE_NOT_FOUND_MESSAGE;
@@ -390,5 +390,16 @@ public class MainController {
 		User user = (User) request.getSession().getAttribute("User");
 		request.getSession().setAttribute("User", signupService.downgradeUser(user));
 		response.getWriter().write(REQUEST_SUCCESS);
+	}
+	
+	
+	@RequestMapping(value="/getFriendList", method = RequestMethod.GET)
+	public void getFriendList(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		
+		User user = (User) request.getSession().getAttribute(("User"));
+		
+		String friendsJSON = signupService.getFriendsInJSON(user);
+		
+		response.getWriter().write(friendsJSON);
 	}
 }

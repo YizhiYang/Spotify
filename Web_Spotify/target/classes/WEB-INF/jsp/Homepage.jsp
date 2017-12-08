@@ -126,42 +126,15 @@
                 <div id=rightBottomWrapper>
                     <div class=FSContent>
                         <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile1.jpg);"></div></div>
-                        <div class=FSSongDetails>
-                            <div class="FSFriendName">Matt Yang</div>
-                            <div class="FSInnerContent">Decadence</div>
-                            <div class="FSInnerContent">Ten Thousand Fists</div>
-                            <div class="FSInnerContent">Disturbed</div>
-                            <div class="FSInnerContent">Alternative Metal</div>
-                        </div>
-                        <div class="FSPlaySong">
-                            <i class="material-icons icons" style="font-size:50px;">play_circle_filled</i>   
-                        </div>
+                        <div class="FSFriendName">Matt Yang</div>
                     </div>
                     <div class=FSContent>
-                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile2.jpg);"></div></div>
-                        <div class=FSSongDetails>
-                            <div class="FSFriendName">Dan Choe</div>
-                            <div class="FSInnerContent">Hand of Blood</div>
-                            <div class="FSInnerContent">the Poison</div>
-                            <div class="FSInnerContent">Bullet for my valentine</div>
-                            <div class="FSInnerContent">Metal</div>
-                        </div>
-                        <div class="FSPlaySong">
-                            <i class="material-icons icons" style="font-size:50px;">play_circle_filled</i>   
-                        </div>
+                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile2.jpg);"></div></div>                        
+                        <div class="FSFriendName">Dan Choe</div>
                     </div>
                     <div class=FSContent>
                         <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile3.jpg);"></div></div>
-                        <div class=FSSongDetails>
-                            <div class="FSFriendName">Limeng Ruan</div>
-                            <div class="FSInnerContent">Wrong Side of Heaven</div>
-                            <div class="FSInnerContent">The Wrong Side of Heaven</div>
-                            <div class="FSInnerContent">Five Finger Death Punch</div>
-                            <div class="FSInnerContent">Alternative Metal</div>
-                        </div>
-                        <div class="FSPlaySong">
-                            <i class="material-icons icons" style="font-size:50px;">play_circle_filled</i>   
-                        </div>
+                        <div class="FSFriendName">Limeng Ruan</div>
                     </div>
                 </div>
     

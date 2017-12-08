@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+
 import com.sbu.model.CreditCard;
 import com.sbu.model.User;
 
@@ -20,6 +22,6 @@ public interface SignupService{
 		
 		void storeCreditCard(CreditCard creditCard);
 		
-		
+		String getFriendsInJSON(User user) throws JSONException;
 		
 }
