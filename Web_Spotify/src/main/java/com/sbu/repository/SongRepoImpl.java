@@ -55,5 +55,12 @@ public class SongRepoImpl implements SongRepo {
 		em.createQuery("DELETE From Song s WHERE s.songId = :songId")
 		.setParameter("songId", Long.valueOf(songId)).executeUpdate();
 	}
+
+
+	public List<User> getAllUsersWhoPlayedSong(String songId) {
+		List<User> results = em.createQuery("SELECT u FROM User u JOIN u.playedSongsHistory s WHERE s.songId= :songId")
+				.setParameter("songId", Long.valueOf(songId)).getResultList();
+		return results;
+	}
 	
 }

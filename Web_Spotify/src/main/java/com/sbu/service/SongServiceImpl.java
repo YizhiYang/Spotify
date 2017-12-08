@@ -1,5 +1,6 @@
 package com.sbu.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -95,9 +96,12 @@ public class SongServiceImpl implements SongService {
 		List<User> users = contentFollowService.getAllFollowersOfSong(songId);
 		Song song = this.getSongByID(songId);
 		for(int i = 0; i < users.size(); i++){   
-			//users.get(i).getFollowedSongs().remove(song);
-			//signupRepo.saveUserToDB(users.get(i));
 			contentFollowService.removeFromFollowedSongs(users.get(i), songId);
+		}
+		
+		List<User> users2 = getAllUsersPlayedSong(songId);
+		for(int i = 0; i < users2.size(); i++){   
+			removeSongFromPlayHistory(users2.get(i), song);
 		}
 		
 		//REMOVE FROM ALL PLAYLISTS THAT HAS THIS SONG
@@ -146,6 +150,38 @@ public class SongServiceImpl implements SongService {
 		song.setApproved(true);
 		//PERSIST SONG
 		songRepo.addSong(song);	
+	}
+
+	public void addSongToPlayHistory(User user, Song song) {
+		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		for(Song s: u.getPlayedSongsHistory()){
+			if(s.getSongId()==song.getSongId()){
+				return;
+			}
+		}
+		u.getPlayedSongsHistory().add(song);
+		signupRepo.saveUserToDB(u);
+	}
+
+	public void removeSongFromPlayHistory(User user, Song song) {
+		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		Song songToBeRemovedFromHistory = null;
+		for(Song s: u.getPlayedSongsHistory()){
+			if(s.getSongId()==song.getSongId()){
+				songToBeRemovedFromHistory = s;
+			}
+		}
+		u.getPlayedSongsHistory().remove(songToBeRemovedFromHistory);
+		signupRepo.saveUserToDB(u);
+	}
+
+	public String getPlayHistoryInJSON(User user) throws JSONException {
+		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		return convertSongsToJSON(u.getPlayedSongsHistory());
+	}
+
+	public List<User> getAllUsersPlayedSong(String songId) {
+		return songRepo.getAllUsersWhoPlayedSong(songId);
 	}
 
 

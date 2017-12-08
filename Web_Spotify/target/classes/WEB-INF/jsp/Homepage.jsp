@@ -65,7 +65,7 @@
                         </li>
                         <li class="sideBarMenuHeader">YOUR LIBRARY</li>
                         <li class=userSongWrapperList>
-                        	<div class='userSongWrapperItem'>Recently Played</div>
+                        	<div class='userSongWrapperItem' id="Home-History-Button">Play History</div>
                         </li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-Song-Button">Songs</div>

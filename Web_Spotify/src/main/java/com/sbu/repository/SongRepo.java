@@ -17,6 +17,8 @@ public interface SongRepo {
 	
 	List<User> getAllFollowers(String songId);
 	
+	List<User> getAllUsersWhoPlayedSong(String songId);
+	
 	void removeSong(String songId);
 
 }

@@ -183,4 +183,30 @@ public class SongsController {
             FileCopyUtils.copy(inputStream, response.getOutputStream());
         }
 	}
+	
+	@RequestMapping(value = "/addSongToPlayHistory/{songId}", method = RequestMethod.POST)
+	public void addSongToPlayHistory(HttpServletResponse response, HttpServletRequest request,@PathVariable("songId") String songId)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		Song song  = songService.getSongByID(songId);
+		songService.addSongToPlayHistory(user, song);
+		
+		response.getWriter().write(REQUEST_SUCCESS);
+	}
+	
+	@RequestMapping(value="/getPlayHistorySongs", method = RequestMethod.GET)
+	public void getPlayHistorySongs(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		String jsonString = songService.getPlayHistoryInJSON(user);
+	    response.getWriter().write(jsonString);
+	}
 }

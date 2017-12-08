@@ -69,7 +69,23 @@ public class User {
         inverseJoinColumns = { @JoinColumn(name = "ARTIST_ID", nullable = false, updatable = false) }
     )
 	private List<ArtistUser> followedArtists = new ArrayList<ArtistUser>();
+	
+	
+	
+	@ManyToMany
+    @JoinTable(
+        name = "user_song_history", 
+        		joinColumns = { @JoinColumn(name = "USER_ID", nullable = false, updatable = false) }, 
+        inverseJoinColumns = { @JoinColumn(name = "HISTORY_SONG_ID", nullable = false, updatable = false) }
+    )
+	private List<Song> playedSongsHistory = new ArrayList<Song>();
 
+	public List<Song> getPlayedSongsHistory() {
+		return playedSongsHistory;
+	}
+	public void setPlayedSongsHistory(List<Song> playedSongsHistory) {
+		this.playedSongsHistory = playedSongsHistory;
+	}
 	public String getEmail() {
 		return email;
 	}

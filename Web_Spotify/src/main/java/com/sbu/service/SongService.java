@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import com.sbu.model.Song;
+import com.sbu.model.User;
 
 public interface SongService {
 	
@@ -25,4 +26,12 @@ public interface SongService {
 	void removeSong(String songId);
 	
 	void approveSong(String songId);
+	
+	void addSongToPlayHistory(User user, Song song);
+	
+	void removeSongFromPlayHistory(User user, Song song);
+	
+	String getPlayHistoryInJSON(User user) throws JSONException;
+	
+	List<User> getAllUsersPlayedSong(String songId);
 }

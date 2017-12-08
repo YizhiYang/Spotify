@@ -4,6 +4,11 @@ $(document).ready(function() {
 		event.preventDefault();
 	});
 	
+	$("#Home-History-Button").click(function(event){
+		loadPlayHistory();
+		event.preventDefault();
+	});
+	
 	$("#Admin-PendingSongs-Button").click(function(event) {
 		loadPendingSongs();
 		event.preventDefault();
@@ -45,5 +50,20 @@ function addApproveButtonToSongs(){
 			var songIdStr = $(this).attr("id");
 			sendApproveSongsRequestToServer(songIdStr.substring(4, songIdStr.length));
 		});
+	});
+}
+
+
+function loadPlayHistory(){
+	$.ajax({
+		type : "GET",
+		url : "getPlayHistorySongs.html",
+		success : function(data) {
+			$('#centerSideContent').empty();
+			addSongsToCenterContent(data);
+			
+			$('.song-table-title').html("Play History");
+			lastAjaxCallToRenderToCenter = "loadPlayHistory()";
+		}
 	});
 }

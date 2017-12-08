@@ -38,6 +38,7 @@ $( document ).ready(function() {
 		var tempArr = myPlaylist[currentPlayingIndex].mp3.split("/");
 		var songId = tempArr[tempArr.length-1].substring(0,tempArr[tempArr.length-1].length-5);
 		getLyrics(songId);
+		addSongToPlayHistory(songId);
 	});
 	player.on($.jPlayer.event.pause, function(e){
 		$("#play-button").show();
@@ -145,4 +146,14 @@ function renderLyrics(currentTime){
 	totalLyricsToDisplay += '<p>' + currentLyricsLine[indexOfNextLyricsLine] + '</p>';
 	
 	$(".lyrics-body").html(totalLyricsToDisplay);
+}
+
+function addSongToPlayHistory(songId){
+	$.ajax({
+		type : "POST",
+		url : "addSongToPlayHistory/" + songId + ".html",
+		success : function(data) {
+			refreshCenterContent();
+		}
+	});
 }
