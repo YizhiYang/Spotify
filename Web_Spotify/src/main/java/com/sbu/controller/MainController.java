@@ -416,4 +416,14 @@ public class MainController {
 			response.getWriter().write(REQUEST_FAILURE);
 		}	
 	}
+	
+	@RequestMapping(value="/removeFriend/{friendId}", method = RequestMethod.POST)
+	public void removeFriend(HttpServletRequest request, HttpServletResponse response 
+			,@PathVariable("friendId") String friendId) throws IOException{
+		
+		User user = (User) request.getSession().getAttribute(("User"));
+		
+		signupService.removeFriendToList(user, friendId);
+		
+	}
 }

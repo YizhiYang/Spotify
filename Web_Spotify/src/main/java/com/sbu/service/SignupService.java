@@ -27,4 +27,6 @@ public interface SignupService{
 		boolean addFriendToList(User user, String friendUsername);
 		
 		void removeFriendToList(User user, String friendUsername);
+		
+		User getUserByID(String id);
 }

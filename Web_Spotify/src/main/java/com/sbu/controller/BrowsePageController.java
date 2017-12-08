@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -47,6 +48,8 @@ public class BrowsePageController {
 	private PlaylistService playlistService;
 	@Autowired
 	private ProfileService changeProfileInfoService;
+	@Autowired
+	private SignupService signupService;
 
 	
 	@RequestMapping(value = "/getBrowsePageContent", method = RequestMethod.GET)
@@ -83,6 +86,18 @@ public class BrowsePageController {
 	    response.getWriter().write(jsonString);
 	}
 	
+	@RequestMapping(value = "/getFriendsPlaylist/{friendId}", method = RequestMethod.GET)
+	public void getFriendPlaylist(HttpServletResponse response, HttpServletRequest request
+			,@PathVariable("friendUsername") String friendId)
+			throws JSONException, IOException {
+		
+		User user = (User) request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		String jsonString = playlistService.getUserPlaylists(signupService.getUserByID(friendId));		
+	    response.getWriter().write(jsonString);
+	}
 	
 	
 	@RequestMapping(value = "/getUserProfile", method = RequestMethod.GET)

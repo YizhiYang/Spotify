@@ -133,11 +133,10 @@ public class SignupServiceImpl implements SignupService {
 		return true;
 	}
 	
-	public void removeFriendToList(User user, String friendUsername){
-		
-		List<User> list = signupRepo.validateUsername(friendUsername);
+	public void removeFriendToList(User user, String friendId){
+		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
+		List<User> list = signupRepo.getUserByID(friendId);
 		User friend;
-		
 		if(!list.isEmpty()){
 			friend = list.get(0);
 		}
@@ -145,11 +144,15 @@ public class SignupServiceImpl implements SignupService {
 			System.out.println("No friend found!");
 			return;
 		}
-		user.getFriends().remove(friend);
-		signupRepo.saveUserToDB(user);
+		u.getFriends().remove(friend);
+		signupRepo.saveUserToDB(u);
 		
-		friend.getFriends().remove(user);
-		signupRepo.saveUserToDB(user);
+		friend.getFriends().remove(u);
+		signupRepo.saveUserToDB(u);
+	}
+	
+	public User getUserByID(String id){
+		return (User)signupRepo.getUserByID(id).get(0);
 	}
 
 }
