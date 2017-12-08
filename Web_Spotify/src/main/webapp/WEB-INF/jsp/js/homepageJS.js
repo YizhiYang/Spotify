@@ -36,6 +36,10 @@ var selectedAlbumName;
 //ARTIST OWNED ALBUMS
 var ownedAlbumIDs=[];
 
+
+//FRIENDS
+var friendIds=[];
+
 $( document ).ready(function() {
 		//GET INITIAL DATA NEEDED AND STORE THEM
 		getUserTypeAndRerender();

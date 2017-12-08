@@ -417,6 +417,16 @@ public class MainController {
 		}	
 	}
 	
+	@RequestMapping(value="/searchFriend/{friendUsername}", method = RequestMethod.POST)
+	public void searchFriend(HttpServletRequest request, HttpServletResponse response 
+			,@PathVariable("friendUsername") String friendusername) throws IOException, JSONException{
+		
+		User user = (User) request.getSession().getAttribute(("User"));
+		
+		String friendsStr = signupService.getSearchUsersByUsernameJSON(friendusername);
+		response.getWriter().write(friendsStr);
+	}
+	
 	@RequestMapping(value="/removeFriend/{friendId}", method = RequestMethod.POST)
 	public void removeFriend(HttpServletRequest request, HttpServletResponse response 
 			,@PathVariable("friendId") String friendId) throws IOException{

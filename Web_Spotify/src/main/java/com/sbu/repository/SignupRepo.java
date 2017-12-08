@@ -16,4 +16,6 @@ public interface SignupRepo {
 		boolean saveUserToDB(User user);
 
 		void storeCreditCard(CreditCard creditCard);
+		
+		List<User> searchByUsername(String username);
 }

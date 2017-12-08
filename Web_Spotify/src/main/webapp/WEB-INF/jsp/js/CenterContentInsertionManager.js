@@ -330,3 +330,46 @@ function addPlaylistsToCenterContent(jsonData){
 		});
 	});
 }
+
+function addFriendsToCenterContent(jsonData){
+	console.log(jsonData);
+	var jsonArray = jQuery.parseJSON(jsonData);
+	$("#centerSideContent").append('<div class=centerSideContentWrapper id=AlbumPageTop>\
+            <div id="contentTitle">\
+                <div id="contentTitleWrapper" class="users-table-title" style="border-bottom:transparent; font-size:45px;">User Search Result</div>\
+            </div>\
+        </div>');
+	var contentToBeAdded = '<div class=centerSideContentWrapper>';
+	for(i=0; i<jsonArray.length; i++){
+		var friend = jsonArray[i];
+		contentToBeAdded += '<div class="FSContent centerFriendListItem" id="friend'+ friend.friendId+'">\
+        <div class="FSImage"><div class=FSImageInner style="background-image: url(getProfileImageWithUsername/'+ friend.friendUserName +'.html);"></div></div>\
+        <div class="FSFriendName centerFriendListFriendName">'+friend.friendUserName+'</div>';
+        
+        var isfriend = false;
+        for(j=0;j<friendIds.length;j++){
+        	if(friend.friendId == friendIds[j]){
+        		isfriend = true;
+        	}
+        }
+        if(!isfriend){
+        	contentToBeAdded += '<div class="addFriendButton">Add Friend</div>';
+        }
+        contentToBeAdded += '</div>';
+	}
+	contentToBeAdded += '</div>';
+	$("#centerSideContent").append(contentToBeAdded);
+	
+	$(".centerFriendListItem").each(function(index){
+		$(this).click(function(event){
+			var friendIdStr= $(this).attr("id");
+			goToFriendPage(friendIdStr.substr(6, friendIdStr.length), $(".centerFriendListFriendName").eq(index).html());
+		});
+	});
+	
+	$(".addFriendButton").each(function(index){
+		$(this).click(function(event){
+			addFriend($(".centerFriendListFriendName").eq(index).html());
+		});
+	});
+}

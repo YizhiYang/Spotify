@@ -19,19 +19,22 @@ function getFriendList(){
 }
 
 function renderFriendList(jsonData){
+	friendIds = [];
 	var jsonArray = jQuery.parseJSON(jsonData);
 	for(var i=0; i<jsonArray.length; i++){
 		var friend = jsonArray[i];
-		var contentToBeAdded = '<div class="FSContent" id="friend'+ friend.friendId+'">\
+		var contentToBeAdded = '<div class="FSContent rightFriendListItem" id="friend'+ friend.friendId+'">\
             <div class="FSImage"><div class=FSImageInner style="background-image: url(getProfileImageWithUsername/'+ friend.friendUserName +'.html);"></div></div>\
-            <div class="FSFriendName">'+friend.friendUserName+'</div>\
+            <div class="FSFriendName rightFriendListFriendName">'+friend.friendUserName+'</div>\
         </div>';
 		$('#rightBottomWrapper').append(contentToBeAdded);
+		
+		friendIds.push(friend.friendId);
 	}
-	$(".FSContent").each(function(index){
+	$(".rightFriendListItem").each(function(index){
 		$(this).click(function(event){
 			var friendIdStr= $(this).attr("id");
-			goToFriendPage(friendIdStr.substr(6, friendIdStr.length), $(".FSFriendName").eq(index).html());
+			goToFriendPage(friendIdStr.substr(6, friendIdStr.length), $(".rightFriendListFriendName").eq(index).html());
 		});
 	});
 }
@@ -43,7 +46,18 @@ function searchAndAddFriend(){
 	}
 	$.ajax({
 		type : "POST",
-		url : "addFriend/"+ searchUsername + ".html",
+		url : "searchFriend/"+ searchUsername + ".html",
+        success: function (data) {
+        	$("#centerSideContent").empty();
+        	addFriendsToCenterContent(data);
+        }
+	});
+}
+
+function addFriend(friendUsername){
+	$.ajax({
+		type : "POST",
+		url : "addFriend/"+ friendUsername + ".html",
         success: function (data) {
         	if(data == "success"){
         		$('#rightBottomWrapper').empty();

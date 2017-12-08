@@ -51,4 +51,11 @@ public class SignupRepoImpl implements SignupRepo {
 		
 	}
 
+	public List<User> searchByUsername(String username) {
+		// TODO Auto-generated method stub
+		List<User> results = em.createQuery("SELECT e FROM User e WHERE e.userName LIKE :uname")
+				.setParameter("uname", "%"+username+"%").getResultList();
+		return results;
+	}
+
 }

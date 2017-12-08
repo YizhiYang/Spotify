@@ -98,7 +98,10 @@ public class SignupServiceImpl implements SignupService {
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
 		List<User> friends = u.getFriends();
 		
-		
+		return convertFriendsToJSON(friends);
+	}
+	
+	public String convertFriendsToJSON(List<User> friends) throws JSONException {
 		JSONArray jsonArray = new JSONArray();
 		
 		for(int i =0; i<friends.size(); i++){
@@ -153,6 +156,11 @@ public class SignupServiceImpl implements SignupService {
 	
 	public User getUserByID(String id){
 		return (User)signupRepo.getUserByID(id).get(0);
+	}
+
+	public String getSearchUsersByUsernameJSON(String friendUsername) throws JSONException {
+		List<User> users = signupRepo.searchByUsername(friendUsername);
+		return convertFriendsToJSON(users);
 	}
 
 }
