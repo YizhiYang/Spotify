@@ -29,8 +29,9 @@ public class AdRepoImpl implements AdRepo {
 	}
 	
 	public List<Advertisement> getAllAds(){
+		System.out.println("Hellooooooooooooo");
 		Session ses = em.unwrap(Session.class);
-		List<Advertisement> list = ses.createQuery("FROM advertisement").list();
+		List<Advertisement> list = ses.createQuery("FROM Advertisement").list();
 		return list;
 	}
 

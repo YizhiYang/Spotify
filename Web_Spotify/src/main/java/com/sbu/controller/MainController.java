@@ -442,10 +442,11 @@ public class MainController {
 		signupService.removeFriendToList(user, friendId);
 	}
 	
-	@RequestMapping(value="/getAds/", method = RequestMethod.GET)
-	public void removeFriend(HttpServletRequest request, HttpServletResponse response
+	@RequestMapping(value="/getAds", method = RequestMethod.GET)
+	public void getAds(HttpServletRequest request, HttpServletResponse response
 			) throws IOException, JSONException{
 		
+		System.out.println("Hellooooooooooooolalalalala");
 		List<Advertisement> list = adService.getAllAds();
 		String ret = adService.convertAdsToJSON(list);
 		
