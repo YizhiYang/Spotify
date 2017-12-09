@@ -69,6 +69,9 @@
                         </li>
                         <li class="sideBarMenuHeader">YOUR LIBRARY</li>
                         <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Artist-My-Albums-Button">My Albums</div>
+                        </li>
+                        <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-Library-Overview-Button">Overview</div>
                         </li>
                         <li class=userSongWrapperList>
@@ -132,18 +135,6 @@
                     <button id="findFriendsButton">Find And Add Friend</button>
                 </div>
                 <div id=rightBottomWrapper>
-                    <div class=FSContent>
-                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile1.jpg);"></div></div>
-                        <div class="FSFriendName">Matt Yang</div>
-                    </div>
-                    <div class=FSContent>
-                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile2.jpg);"></div></div>                        
-                        <div class="FSFriendName">Dan Choe</div>
-                    </div>
-                    <div class=FSContent>
-                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile3.jpg);"></div></div>
-                        <div class="FSFriendName">Limeng Ruan</div>
-                    </div>
                 </div>
     
             </div>

@@ -29,7 +29,24 @@ function goToArtistAlbums(artistID){
 		success : function(data) {
 			$('#centerSideContent').empty();
 			addAlbumsToCenterContent(data);
+			addArtistTitleToArtistPage(artistID);
+			
 			lastAjaxCallToRenderToCenter = "goToArtistAlbums(" + artistID + ")";
 		}
 	});
+}
+
+
+function addArtistTitleToArtistPage(artistID){
+	$('.album-table-title').html(selectedArtistName);
+	if(userType == "ADMIN" || loggedInArtistId == artistID){
+		$('.album-table-title').parent().append('<div id="addAlbumToArtistButton">Add Album To Artist</div>');
+		
+		$('#addAlbumToArtistButton').click(function(event){
+			$('#createAlbumArtistIDInput').prop('disabled', true);
+			$('#createAlbumArtistIDInput').val(artistID);
+			$('#createAlbumPopUp').modal('show');
+		});
+		return;
+	}
 }

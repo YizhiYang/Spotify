@@ -29,6 +29,9 @@ public class Album {
 	@Column(name="ALBUM_NAME")
 	private String albumName;
 	
+	@Column(name="ALBUM_IMAGE_URL")
+	private String albumImageUrl;
+	
 	@Column(name="ALBUM_TOTALCOUNT")
 	private int numOfSongs;
 	
@@ -89,6 +92,14 @@ public class Album {
 
 	public void setSongs(List<Song> songs) {
 		this.songs = songs;
+	}
+
+	public String getAlbumImageUrl() {
+		return albumImageUrl;
+	}
+
+	public void setAlbumImageUrl(String albumImageUrl) {
+		this.albumImageUrl = albumImageUrl;
 	}
 	
 }

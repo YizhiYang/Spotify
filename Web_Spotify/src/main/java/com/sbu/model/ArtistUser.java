@@ -35,6 +35,8 @@ public class ArtistUser implements Serializable{
 	@Column(name="ARTIST_NAME")
 	private String artistName;
 	
+	@Column(name="ARTIST_IMAGE_URL")
+	private String artistImageUrl;
 	
 	@ManyToMany(cascade = { 
 	        CascadeType.PERSIST, 
@@ -103,5 +105,15 @@ public class ArtistUser implements Serializable{
 
 	public void setArtistName(String artistName) {
 		this.artistName = artistName;
+	}
+
+
+	public String getArtistImageUrl() {
+		return artistImageUrl;
+	}
+
+
+	public void setArtistImageUrl(String artistImageUrl) {
+		this.artistImageUrl = artistImageUrl;
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.User;
+import com.sbu.model.UserType;
 import com.sbu.repository.ArtistRepo;
 import com.sbu.repository.SignupRepo;
 
@@ -36,8 +37,11 @@ public class ArtistServiceImpl implements ArtistService {
 		if(userResult.isEmpty()){
 			return false;
 		}else{
+			User u = (User)(userResult.get(0));
 			ArtistUser artist = new ArtistUser();
-			artist.setUser((User)(userResult.get(0)));;
+			artist.setUser(u);;
+			u.setUserType(UserType.ARTIST);
+			signupRepo.saveUserToDB(u);
 			artist.setArtistName(artistName);
 			artistRepo.saveAristToDB(artist);
 			return true;
@@ -75,7 +79,17 @@ public class ArtistServiceImpl implements ArtistService {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("artistID", artist.getArtistID());
 			jsonObject.put("artistName", artist.getArtistName());
-			jsonObject.put("userName", artist.getUser().getUserName());
+			
+			//DETERMINE IF USE IMAGE FROM OTHER SOURCE OR FROM OWN SERVER
+			if(artist.getUser()!=null){
+				jsonObject.put("userName", artist.getUser().getUserName());
+				jsonObject.put("imageType", "file");
+			}else{
+				jsonObject.put("artistImageUrl", artist.getArtistImageUrl());
+				jsonObject.put("imageType", "url");
+			}
+			
+			
 			jsonObject.put("totalNumberOfSongs", totalNumberOfSongs);
 			
 			jsonArray.put(jsonObject);

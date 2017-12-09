@@ -16,7 +16,6 @@ function getAdvertisements(){
 		type : "GET",
 		url : "getAds.html",
 		success : function(data) {
-			console.log(data);
 			$('#advertisementWrapper').empty()
 			var jsonArray = jQuery.parseJSON(data);
 			for(i=0; i< jsonArray.length; i++){

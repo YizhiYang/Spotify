@@ -149,7 +149,7 @@ function addAlbumsToCenterContent(jsonData){
 	//APPEND ALBUM TITLE
     $("#centerSideContent").append('<div class=centerSideContentWrapper id=AlbumPageTop>\
                                         <div id="contentTitle">\
-                                            <div id="contentTitleWrapper" class="album-table-title" style="border-bottom:transparent; font-size:45px;">Album</div>\
+                                            <div id="contentTitleWrapper" class="album-table-title" style="border-bottom:transparent; font-size:45px;">Albums</div>\
                                         </div>\
                                    </div>');
     //LOOP TO APPEND EACH ALBUM
@@ -159,7 +159,7 @@ function addAlbumsToCenterContent(jsonData){
     	//ADD ALBUM IMAGE AND NAME
     	contentToBeAdded += '<div class="AlbumPageContent">\
                 							<div class=AlbumContentPicture id="album' + album.albumId 
-                								+ '" style="background-image: url(requestAlbumImage/' + album.albumId + '.html);"></div>\
+                								+ '" style="background-image: url(requestAlbumImage/' + album.albumId + '.html), url(' + album.albumImageUrl + ');"></div>\
                 								<div class=AlbumContentDescription>\
                     							<div class=AlbumContentName>' + album.albumName
                     							+ '</div>';
@@ -246,7 +246,15 @@ function addArtistsToCenterContent(jsonData){
     	//ADD ARTIST NAME, IMAGE, ETC
     	contentToBeAdded += '<div class=ArtistPageContent>\
             					<div class=ArtistContentPicture id="artist' + artist.artistID
-            						+ '" style="background-image: url(getProfileImageWithUsername/' + artist.userName + '.html);"></div>\
+            						+ '" style="background-image:';
+    	
+    	if(artist.imageType == "file"){
+    		contentToBeAdded += 'url(getProfileImageWithUsername/' + artist.userName + '.html)';
+    	}else{
+    		contentToBeAdded += 'url(' + artist.artistImageUrl + ')';
+    	}
+    	
+    	contentToBeAdded += ';"></div>\
             						<div class=ArtistContentDescription>\
     									<div class=ArtistContentName>'+ artist.artistName + '</div>\
                						<div class=ArtistContentListLength>' + artist.totalNumberOfSongs + ' Songs</div>\
@@ -276,6 +284,7 @@ function addArtistsToCenterContent(jsonData){
     $(".ArtistContentPicture").each(function(index) {
         $(this).on("click", function(event){
         	var artistID = $(this).attr("id");
+        	selectedArtistName = $(".ArtistContentName").eq(index).html();
         	goToArtistAlbums(artistID.substring(6, artistID.length));
         });
     });

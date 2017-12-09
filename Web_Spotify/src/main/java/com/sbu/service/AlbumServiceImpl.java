@@ -64,6 +64,7 @@ public class AlbumServiceImpl implements AlbumService {
 			jsonObject.put("albumId", album.getAlbumId());
 			jsonObject.put("albumName", album.getAlbumName());
 			jsonObject.put("artistNames", artistNames);
+			jsonObject.put("albumImageUrl", album.getAlbumImageUrl());
 			
 			jsonArray.put(jsonObject);
 		}
