@@ -462,7 +462,7 @@ public class MainController {
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
 	
-	@RequestMapping(value="removeAds", method=RequestMethod.POST)
+	@RequestMapping(value="/removeAds/{id}", method=RequestMethod.POST)
 	public void removeAds(HttpServletRequest request, HttpServletResponse response
 			,@PathVariable("id") String id) throws IOException{
 

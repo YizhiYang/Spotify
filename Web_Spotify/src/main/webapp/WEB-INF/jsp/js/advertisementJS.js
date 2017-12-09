@@ -5,6 +5,10 @@ $( document ).ready(function() {
 	$(".advertisement-close-button").click(function(event){
 		$("#advertisementBlock").hide();
 	});
+	
+	$("#submitAddNewAddButton").click(function(event){
+		addAdvertisement();
+	});
 });
 
 function getAdvertisements(){
@@ -17,9 +21,18 @@ function getAdvertisements(){
 			var jsonArray = jQuery.parseJSON(data);
 			for(i=0; i< jsonArray.length; i++){
 				var advertisement = jsonArray[i];
-				$('#advertisementWrapper').append('<div class="adImage" \
-						style="background-image:url(' + advertisement.ImageURL + ');"></div>');
+				var contentToBeAdded = '<div class="adImage" \
+						style="background-image:url(' + advertisement.ImageURL + ');">';
+				if(userType == "ADMIN"){
+					contentToBeAdded += '<i class="material-icons deleteAdButton" id="ad' + advertisement.Id + '">delete_forever</i>'
+				}
+				contentToBeAdded += '</div>';
 			}
+			
+			$(".deleteAdButton").click(function(event){
+				var adIdStr = $(this).attr("id");
+				deleteAdvertisement(adIdStr.substr(2, adIdStr.length));
+			});
 			
 			$('.autoplay').slick({
 				slidesToShow: 1,
@@ -29,6 +42,33 @@ function getAdvertisements(){
 				dots: false,
 				autoplaySpeed: 2000,
 			});
+		}
+	});
+}
+
+
+function addAdvertisement(){
+	var imageData = $("#addNewAdInput").serialize();;
+	
+	$.ajax({
+		type : "POST",
+		url : "addAds.html",
+		data: imageData,
+		success : function(data) {
+			$("#addNewAdPopUp").modal('hide');
+			$('.autoplay').slick('unslick');
+			getAdvertisements();
+		}
+	});
+}
+
+function deleteAdvertisement(adId){
+	$.ajax({
+		type : "POST",
+		url : "removeAds/" + adId + "/.html",
+		success : function(data) {
+			$('.autoplay').slick('unslick');
+			getAdvertisements();
 		}
 	});
 }
