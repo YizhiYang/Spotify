@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.sbu.model.Advertisement;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.CreditCard;
 import com.sbu.model.User;
 import com.sbu.model.UserType;
+import com.sbu.service.AdService;
 import com.sbu.service.AlbumService;
 import com.sbu.service.ArtistService;
 import com.sbu.service.ProfileService;
@@ -64,6 +67,9 @@ public class MainController {
 	private ArtistService artistService;
 	@Autowired
 	private ProfileService profileService;
+	@Autowired
+	private AdService adService;
+	
 	
 		
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -434,6 +440,16 @@ public class MainController {
 		User user = (User) request.getSession().getAttribute(("User"));
 		
 		signupService.removeFriendToList(user, friendId);
-		
 	}
+	
+	@RequestMapping(value="/getAds/", method = RequestMethod.GET)
+	public void removeFriend(HttpServletRequest request, HttpServletResponse response
+			) throws IOException, JSONException{
+		
+		List<Advertisement> list = adService.getAllAds();
+		String ret = adService.convertAdsToJSON(list);
+		
+		response.getWriter().write(ret);
+	}
+	
 }

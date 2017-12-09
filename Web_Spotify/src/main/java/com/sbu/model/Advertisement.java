@@ -16,14 +16,14 @@ public class Advertisement {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	
 	@Column(name="AD_ID")
 	private Long id;
 	
-	private Date created;
-	private int showCount;
-	private URL source;
+	@Column(name="IMAGEURL")
+	private String imageUrl;
 	
+	@Column(name="ADSURL")
+	private String adsUrl;
 	
 	public Long getId() {
 		return id;
@@ -31,30 +31,16 @@ public class Advertisement {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getCreated() {
-		return created;
+	public String getImageUrl() {
+		return imageUrl;
 	}
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
-	public int getShowCount() {
-		return showCount;
+	public String getAdsUrl() {
+		return adsUrl;
 	}
-	public void setShowCount(int showCount) {
-		this.showCount = showCount;
+	public void setAdsUrl(String adsUrl) {
+		this.adsUrl = adsUrl;
 	}
-	public URL getSource() {
-		return source;
-	}
-	public void setSource(URL source) {
-		this.source = source;
-	}
-	public int getDuraingSecs() {
-		return duraingSecs;
-	}
-	public void setDuraingSecs(int duraingSecs) {
-		this.duraingSecs = duraingSecs;
-	}
-	private int duraingSecs;
-	
 }
