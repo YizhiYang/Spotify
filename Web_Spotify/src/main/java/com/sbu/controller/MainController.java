@@ -446,11 +446,18 @@ public class MainController {
 	public void getAds(HttpServletRequest request, HttpServletResponse response
 			) throws IOException, JSONException{
 		
-		System.out.println("Hellooooooooooooolalalalala");
 		List<Advertisement> list = adService.getAllAds();
 		String ret = adService.convertAdsToJSON(list);
 		
 		response.getWriter().write(ret);
 	}
 	
+	@RequestMapping(value="/addAds/{imageURL}", method=RequestMethod.POST)
+	public void addAds(HttpServletRequest request, HttpServletResponse response 
+			,@PathVariable("imageURL") String imageURL) throws IOException{
+		
+		Advertisement ads = new Advertisement();
+		adService.addAds(ads);
+		response.getWriter().write(REQUEST_SUCCESS);
+	}
 }
