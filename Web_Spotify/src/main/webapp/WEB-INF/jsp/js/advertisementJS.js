@@ -24,9 +24,12 @@ function getAdvertisements(){
 				var contentToBeAdded = '<div class="adImage" \
 						style="background-image:url(' + advertisement.ImageURL + ');">';
 				if(userType == "ADMIN"){
-					contentToBeAdded += '<i class="material-icons deleteAdButton" id="ad' + advertisement.Id + '">delete_forever</i>'
+					contentToBeAdded += '<i class="material-icons deleteAdButton" style ="position: absolute;" id="ad' + advertisement.Id + '">delete_forever</i>'
 				}
-				contentToBeAdded += '</div>';
+				
+				contentToBeAdded += '</div';
+				
+				$('#advertisementWrapper').append(contentToBeAdded);
 			}
 			
 			$(".deleteAdButton").click(function(event){
@@ -65,7 +68,7 @@ function addAdvertisement(){
 function deleteAdvertisement(adId){
 	$.ajax({
 		type : "POST",
-		url : "removeAds/" + adId + "/.html",
+		url : "removeAds/" + adId + ".html",
 		success : function(data) {
 			$('.autoplay').slick('unslick');
 			getAdvertisements();
