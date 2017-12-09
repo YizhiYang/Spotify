@@ -273,6 +273,7 @@ function displayUserType(userType){
 
 
 function hideAdminGUI(){
+	$("#admin-menu-header").hide();
 	$("#Admin-UploadSong-Button").parent().hide();
 	$("#Admin-CreateAlbum-Button").parent().hide();
 	$("#Admin-MakeUserArtist-Button").parent().hide();
@@ -281,7 +282,9 @@ function hideAdminGUI(){
 }
 
 function hideArtistGUI(){
+	$("#artist-menu-header").hide();
 	$("#Artist-My-Albums-Button").parent().hide();
+	$("#Artist-My-Followers-Button").parent().hide();
 }
 
 function refreshCenterContent(){

@@ -1,3 +1,12 @@
+.centerFriendListItem{
+	float:left;
+}
+
+.centerFriendListItem .FSImageInner{
+	width: 100px;
+	height: 100px;
+}
+
 #unfriendButton{
 	width: 50px;
 	cursor:pointer;

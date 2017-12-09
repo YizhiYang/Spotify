@@ -69,9 +69,6 @@
                         </li>
                         <li class="sideBarMenuHeader">YOUR LIBRARY</li>
                         <li class=userSongWrapperList>
-                        	<div class='userSongWrapperItem' id="Artist-My-Albums-Button">My Albums</div>
-                        </li>
-                        <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-Library-Overview-Button">Overview</div>
                         </li>
                         <li class=userSongWrapperList>
@@ -93,6 +90,8 @@
                         		<li></li>
                         	</ul>
                         </li>
+                        
+                        <li class="sideBarMenuHeader" id="admin-menu-header">Admin Menu</li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' data-toggle="modal" id="Admin-UploadSong-Button" data-target="#uploadSongPopUp">Upload Song</div>
                         </li>
@@ -108,6 +107,14 @@
                         </li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Admin-AddAdvertisement-Button" data-toggle="modal" data-target="#addNewAdPopUp">Add Advertisement</div>
+                        </li>
+                        
+                        <li class="sideBarMenuHeader" id="artist-menu-header">Artist Menu</li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Artist-My-Albums-Button">My Albums</div>
+                        </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Artist-My-Followers-Button">My Followers</div>
                         </li>
                     </ul>
                 </div>

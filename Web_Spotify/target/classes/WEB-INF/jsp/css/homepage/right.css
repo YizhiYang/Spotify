@@ -107,7 +107,7 @@
     border: 2px solid grey;
     border-radius: 50%;
     top:20%;
-    background-size: 50px;
+    background-size: cover;
     background-repeat: no-repeat;
     margin-right: 10px;
 }
