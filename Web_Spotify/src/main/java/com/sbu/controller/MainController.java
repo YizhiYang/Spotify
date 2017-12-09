@@ -452,11 +452,12 @@ public class MainController {
 		response.getWriter().write(ret);
 	}
 	
-	@RequestMapping(value="/addAds/{imageURL}", method=RequestMethod.POST)
-	public void addAds(HttpServletRequest request, HttpServletResponse response 
-			,@PathVariable("imageURL") String imageURL) throws IOException{
-		
+	@RequestMapping(value="/addAds", method=RequestMethod.POST)
+	public void addAds(HttpServletRequest request, HttpServletResponse response
+			) throws IOException{
+		String url = request.getParameter("adName");
 		Advertisement ads = new Advertisement();
+		ads.setImageUrl(url);
 		adService.addAds(ads);
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
