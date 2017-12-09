@@ -23,8 +23,8 @@ public class AdServiceImpl implements AdService {
 		adRepo.addAds(ads);
 	}
 
-	public void removeAds(Advertisement ads) {
-		adRepo.removeAds(ads);
+	public void removeAds(String id) {
+		adRepo.removeAds(id);
 	}
 	
 	public List<Advertisement> getAllAds(){
