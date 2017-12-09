@@ -23,8 +23,11 @@ public class AdRepoImpl implements AdRepo {
 		em.persist(ads);
 	}
 
-	public void removeAds(Advertisement ads) {
+	public void removeAds(String adsId) {
+		
+		Long id = Long.parseLong(adsId);
 		Session ses = em.unwrap(Session.class);
+		Advertisement ads = (Advertisement) ses.get(Advertisement.class, id);
 		ses.delete(ads);
 	}
 	

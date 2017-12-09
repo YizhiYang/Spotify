@@ -10,7 +10,7 @@ public interface AdService {
 	
 	void addAds(Advertisement ads);
 	
-	void removeAds(Advertisement ads);
+	void removeAds(String id);
 	
 	List<Advertisement> getAllAds();
 	

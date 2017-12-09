@@ -8,7 +8,7 @@ public interface AdRepo {
 	
 	void addAds(Advertisement ads);
 	
-	void removeAds(Advertisement ads);
+	void removeAds(String adsId);
 	
 	List<Advertisement> getAllAds();
 }

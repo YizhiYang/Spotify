@@ -461,4 +461,12 @@ public class MainController {
 		adService.addAds(ads);
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
+	
+	@RequestMapping(value="removeAds", method=RequestMethod.POST)
+	public void removeAds(HttpServletRequest request, HttpServletResponse response
+			,@PathVariable("id") String id) throws IOException{
+
+		adService.removeAds(id);
+		response.getWriter().write(REQUEST_SUCCESS);
+	}
 }
