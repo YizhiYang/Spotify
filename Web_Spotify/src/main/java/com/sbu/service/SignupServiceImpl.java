@@ -28,6 +28,8 @@ public class SignupServiceImpl implements SignupService {
 	
 	@Autowired
 	private SignupRepo signupRepo;
+	@Autowired
+	private ContentFollowService contentFollowService;
 	
 	public User signupUser(User user, HttpServletRequest request) throws IOException {
 		signupRepo.signup(user);
@@ -164,6 +166,19 @@ public class SignupServiceImpl implements SignupService {
 	}
 	
 	public void removeAccount(String id){
+		User u = (User) signupRepo.getUserByID(id).get(0);
+		u.getFollowedSongs().clear();
+		u.getFollowedArtists().clear();
+		u.getFollowedAlbums().clear();
+		u.getPlayedSongsHistory().clear();
+		signupRepo.saveUserToDB(u);
+		List<User> friends = u.getFriends();
+		for(int i =0; i< friends.size(); i++){
+			removeFriendToList(friends.get(i), id);
+			u.getFriends().remove(friends.get(i));
+			signupRepo.saveUserToDB(u);
+			signupRepo.saveUserToDB(friends.get(i));
+		}
 		
 		signupRepo.removeAccount(id);
 	}

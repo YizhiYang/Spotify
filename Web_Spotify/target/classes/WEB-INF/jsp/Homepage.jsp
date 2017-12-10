@@ -465,6 +465,21 @@
     </div>
   </div>
 </div>
+
+<!-- Popup for Confirm user info -->
+<div class="modal fade" id="confirmationPopUp">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" id="confirmationMessage">
+			Place Holder
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-danger" id="confirm-button">Yes!</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
 	
 <!-- Popup for editing user info -->
 <div class="modal fade" id="editUserInfoPopUp">
@@ -492,6 +507,7 @@
 		</form>
       </div>
       <div class="modal-footer">
+      	<button type="button" class="btn btn-danger" id="remove-loggedin-user-button">Remove This Account</button>
         <button type="button" class="btn btn-primary" id="save-user-info-update-changes-button">Save changes</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>

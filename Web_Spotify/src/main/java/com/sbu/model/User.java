@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +46,7 @@ public class User {
 	
 	@Column(name="USERTYPE")
 	private UserType userType;
-
+	
 	@ManyToMany
     @JoinTable(
         name = "user_song", 
@@ -70,8 +71,6 @@ public class User {
     )
 	private List<ArtistUser> followedArtists = new ArrayList<ArtistUser>();
 	
-	
-	
 	@ManyToMany
     @JoinTable(
         name = "user_song_history", 
@@ -79,7 +78,6 @@ public class User {
         inverseJoinColumns = { @JoinColumn(name = "HISTORY_SONG_ID", nullable = false, updatable = false) }
     )
 	private List<Song> playedSongsHistory = new ArrayList<Song>();
-	
 	
 	@ManyToMany
     @JoinTable(
