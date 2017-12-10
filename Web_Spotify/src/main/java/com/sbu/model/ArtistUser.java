@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -35,6 +36,12 @@ public class ArtistUser implements Serializable{
 	@Column(name="ARTIST_NAME")
 	private String artistName;
 	
+	@Lob
+	@Column(name="BIO", length=5000)
+	private String bio;
+	
+	@Column(name="ARTIST_IMAGE_URL")
+	private String artistImageUrl;
 	
 	@ManyToMany(cascade = { 
 	        CascadeType.PERSIST, 
@@ -103,5 +110,25 @@ public class ArtistUser implements Serializable{
 
 	public void setArtistName(String artistName) {
 		this.artistName = artistName;
+	}
+
+
+	public String getArtistImageUrl() {
+		return artistImageUrl;
+	}
+
+
+	public void setArtistImageUrl(String artistImageUrl) {
+		this.artistImageUrl = artistImageUrl;
+	}
+
+
+	public String getBio() {
+		return bio;
+	}
+
+
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 }

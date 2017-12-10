@@ -69,6 +69,8 @@ public class MainController {
 	private ProfileService profileService;
 	@Autowired
 	private AdService adService;
+	@Autowired
+	private ContentFollowService contentFollowService;
 	
 	
 		
@@ -327,11 +329,6 @@ public class MainController {
         
         file = new File(classloader.getResource(PROFILE_IMAGE_PATH+profileFolderName+"/"+PROFILE_IMAGE_NAME).getFile());
         if(!file.exists()){
-            String errorMessage = FILE_NOT_FOUND_MESSAGE;
-            System.out.println(errorMessage);
-            OutputStream outputStream = response.getOutputStream();
-            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
-            outputStream.close();
             return;
         }
          
@@ -423,7 +420,7 @@ public class MainController {
 		}	
 	}
 	
-	@RequestMapping(value="/searchFriend/{friendUsername}", method = RequestMethod.POST)
+	@RequestMapping(value="/searchFriend/{friendUsername}", method = RequestMethod.GET)
 	public void searchFriend(HttpServletRequest request, HttpServletResponse response 
 			,@PathVariable("friendUsername") String friendusername) throws IOException, JSONException{
 		
@@ -440,6 +437,17 @@ public class MainController {
 		User user = (User) request.getSession().getAttribute(("User"));
 		
 		signupService.removeFriendToList(user, friendId);
+	}
+	
+	@RequestMapping(value="/getFollowers/{artistID}", method = RequestMethod.GET)
+	public void getFollowers(HttpServletRequest request, HttpServletResponse response 
+			,@PathVariable("artistID") String artistID) throws IOException, JSONException{
+		
+		User user = (User) request.getSession().getAttribute(("User"));
+		
+		ArtistUser artist = artistService.getArtistByArtistID(artistID);
+		String followersStr = signupService.convertFriendsToJSON(contentFollowService.getAllFollowersOfArtist(artistID));
+		response.getWriter().write(followersStr);
 	}
 	
 	@RequestMapping(value="/getAds", method = RequestMethod.GET)

@@ -90,6 +90,8 @@
                         		<li></li>
                         	</ul>
                         </li>
+                        
+                        <li class="sideBarMenuHeader" id="admin-menu-header">Admin Menu</li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' data-toggle="modal" id="Admin-UploadSong-Button" data-target="#uploadSongPopUp">Upload Song</div>
                         </li>
@@ -105,6 +107,14 @@
                         </li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Admin-AddAdvertisement-Button" data-toggle="modal" data-target="#addNewAdPopUp">Add Advertisement</div>
+                        </li>
+                        
+                        <li class="sideBarMenuHeader" id="artist-menu-header">Artist Menu</li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Artist-My-Albums-Button">My Albums</div>
+                        </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Artist-My-Followers-Button">My Followers</div>
                         </li>
                     </ul>
                 </div>
@@ -132,18 +142,6 @@
                     <button id="findFriendsButton">Find And Add Friend</button>
                 </div>
                 <div id=rightBottomWrapper>
-                    <div class=FSContent>
-                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile1.jpg);"></div></div>
-                        <div class="FSFriendName">Matt Yang</div>
-                    </div>
-                    <div class=FSContent>
-                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile2.jpg);"></div></div>                        
-                        <div class="FSFriendName">Dan Choe</div>
-                    </div>
-                    <div class=FSContent>
-                        <div class="FSImage"><div class=FSImageInner style="background-image: url(./images/FSProfile3.jpg);"></div></div>
-                        <div class="FSFriendName">Limeng Ruan</div>
-                    </div>
                 </div>
     
             </div>

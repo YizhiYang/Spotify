@@ -33,8 +33,12 @@ var lastAjaxCallToRenderToCenter;
 
 //FOR ALBUM PAGE
 var selectedAlbumName;
+//FOR ARTIST PAGE
+var selectedArtistName;
 //ARTIST OWNED ALBUMS
 var ownedAlbumIDs=[];
+//LOGGED IN ARTIST ID
+var loggedInArtistId = -1;
 
 
 //FRIENDS
@@ -48,6 +52,7 @@ $( document ).ready(function() {
 		reloadFollowedAlbums(false);
 		reloadFollowedArtists(false);
 		reloadOwnedAlbumIDs(false);
+		loadLoggedInArtistID();
 		getBrowsePageContent();
 		//REGISTER ACCOUNT RELATED EVENTS
 		$("#profile-image-chooser").change(function(event) {
@@ -227,6 +232,16 @@ function reloadOwnedAlbumIDs(isRefreshCall){
 	});
 }
 
+function loadLoggedInArtistID(){
+	$.ajax({
+		type : "GET",
+		url : "loadLoggedInArtistID.html",
+		success : function(data) {
+			loggedInArtistId = data;
+		}
+	});
+}
+
 function getUserTypeAndRerender(){
 	$.ajax({
 		type : "GET",
@@ -236,6 +251,9 @@ function getUserTypeAndRerender(){
 			displayUserType(userType);
 			if(userType != "ADMIN"){
 				hideAdminGUI();
+			}
+			if(userType != "ARTIST"){
+				hideArtistGUI();
 			}
 		}
 	});
@@ -255,10 +273,18 @@ function displayUserType(userType){
 
 
 function hideAdminGUI(){
+	$("#admin-menu-header").hide();
 	$("#Admin-UploadSong-Button").parent().hide();
 	$("#Admin-CreateAlbum-Button").parent().hide();
 	$("#Admin-MakeUserArtist-Button").parent().hide();
 	$("#Admin-PendingSongs-Button").parent().hide();
+	$("#Admin-AddAdvertisement-Button").parent().hide();
+}
+
+function hideArtistGUI(){
+	$("#artist-menu-header").hide();
+	$("#Artist-My-Albums-Button").parent().hide();
+	$("#Artist-My-Followers-Button").parent().hide();
 }
 
 function refreshCenterContent(){

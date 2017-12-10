@@ -1,3 +1,13 @@
+
+.centerFriendListItem{
+	float:left;
+}
+
+.centerFriendListItem .FSImageInner{
+	width: 100px;
+	height: 100px;
+}
+
 #unfriendButton{
 	width: 50px;
 	cursor:pointer;
@@ -73,18 +83,18 @@ i{
     position: relative;
 /*    border:2px solid green;*/
     height: calc(100% - 50px);
-    width: 100%;
+    width: calc(100% - 200px);
     background-color: #232222;
     color: white;
     float:left;
     
 }
-
+/*
 @media only screen and (min-width: 1420px) {
     #centerSideContent{
-        width: 70%;
+        width: calc(100% - 200px);
     }
-}
+}*/
 
 #centerSideContent{
 	overflow:scroll
@@ -99,7 +109,7 @@ i{
 #contentTitle{
     position: relative;
     width: 100%;
-    height: 30px;
+    /*height: 30px;*/
 }
 
 #contentTitleWrapper{

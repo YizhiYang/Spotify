@@ -3,6 +3,10 @@ $(document).ready(function() {
 		loadFollowedAlbums();
 		event.preventDefault();
 	});
+	
+	$("#Artist-My-Albums-Button").click(function(event){
+		goToArtistAlbums(loggedInArtistId);
+	});
 });
 
 function loadFollowedAlbums(){
@@ -38,9 +42,22 @@ function goToAlbumSongs(albumID){
 
 function addAlbumTitleToSongPage(albumID){
 	$('.song-table-title').html(selectedAlbumName);
+	if(userType == "ADMIN"){
+		$('.song-table-title').parent().append('<button id="addSongToAlbumButton" class="btn btn-warning">Add Song To Album</button>');
+		
+		$('#addSongToAlbumButton').click(function(event){
+			$('#formGroupAlbumIDInput').prop('disabled', true);
+			$('#formGroupAlbumIDInput').val(albumID);
+			$('#uploadSongPopUp').modal('show');
+		});
+		
+		return;
+	}
+	
+	//ELSE CHECK IF THIS USER OWNS THIS ALBUM
 	for(i=0; i< ownedAlbumIDs.length; i++){
 		if(albumID == ownedAlbumIDs[i]){
-			$('.song-table-title').parent().append('<div id="addSongToAlbumButton">Add Song To Album</div>');
+			$('.song-table-title').parent().append('<button id="addSongToAlbumButton" class="btn btn-warning">Add Song To Album</button>');
 			
 			$('#addSongToAlbumButton').click(function(event){
 				$('#formGroupAlbumIDInput').prop('disabled', true);

@@ -3,7 +3,11 @@ $( document ).ready(function() {
 	
 	$("#findFriendsButton").click(function(event){
 		searchAndAddFriend();
-	})
+	});
+	
+	$("#Artist-My-Followers-Button").click(function(event){
+		getArtistFollowers(loggedInArtistId);
+	});
 	
 });
 
@@ -45,9 +49,21 @@ function searchAndAddFriend(){
 		return;
 	}
 	$.ajax({
-		type : "POST",
+		type : "GET",
 		url : "searchFriend/"+ searchUsername + ".html",
         success: function (data) {
+        	$("#centerSideContent").empty();
+        	addFriendsToCenterContent(data);
+        }
+	});
+}
+
+function getArtistFollowers(artistID){
+	$.ajax({
+		type : "GET",
+		url : "getFollowers/"+ artistID + ".html",
+        success: function (data) {
+        	console.log(data);
         	$("#centerSideContent").empty();
         	addFriendsToCenterContent(data);
         }

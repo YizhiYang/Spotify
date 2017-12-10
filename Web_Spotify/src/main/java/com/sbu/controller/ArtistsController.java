@@ -53,4 +53,31 @@ public class ArtistsController {
  		response.setContentType("text/plain");
 	    response.getWriter().write(jsonString);
 	}
+	
+	@RequestMapping(value="/loadLoggedInArtistID", method = RequestMethod.GET)
+	public void loadLoggedInArtistID(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		ArtistUser artist = artistService.getArtistByUser(user);
+		if(artist == null){
+			response.getWriter().write("-1");
+		}else{
+			response.getWriter().write(artist.getArtistID()+"");
+		}
+	}
+	
+	@RequestMapping(value="/getArtistBio/{artistId}", method = RequestMethod.GET)
+	public void getArtistBio(Model model, HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("artistId") String artistId) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		ArtistUser artist = artistService.getArtistByArtistID(artistId);
+		response.getWriter().write(artist.getBio());
+	}
 }

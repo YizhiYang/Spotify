@@ -21,6 +21,7 @@ function createAlbum(){
 		data : formData,
         success: function (data) {
             $('#createAlbumPopUp').modal('hide');
+            reloadOwnedAlbumIDs(false);
             refreshCenterContent();
         },
         cache: false,
