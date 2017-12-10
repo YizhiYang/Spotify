@@ -70,6 +70,16 @@ $( document ).ready(function() {
 		$("#logout-button").click(function(event) {
 			logout();
 		});
+		
+		$("#remove-loggedin-user-button").click(function(event) {
+			$("#confirm-button").off("click");
+			$("#confirm-button").click(function(event){
+				removeThisAccount();
+			});
+			$("#editUserInfoPopUp").modal("hide");
+			$("#confirmationMessage").html("Are you sure you want to unregister your account?");
+			$("#confirmationPopUp").modal("show");
+		});
 	});
 
 
@@ -168,6 +178,16 @@ function logout(){
 	$.ajax({
 		type : "POST",
 		url : "logout.html",
+		success : function(data) {
+			window.location.replace("index.jsp");
+		}
+	});
+}
+
+function removeThisAccount(){
+	$.ajax({
+		type : "POST",
+		url : "removeAccount.html",
 		success : function(data) {
 			window.location.replace("index.jsp");
 		}
