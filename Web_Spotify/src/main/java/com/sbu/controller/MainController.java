@@ -569,8 +569,10 @@ public class MainController {
 		List<Album> albums = albumService.getAllAlbums();
 		List<Album> relatedAlbums = new ArrayList();
 		for(Album item: albums){
-			if(albumService.getMostOccur(item).equals(genre)){
-				relatedAlbums.add(item);
+			if(albumService.getMostOccur(item) !=null){
+				if(albumService.getMostOccur(item).equals(genre)&&!item.getAlbumId().toString().equals(id)){
+					relatedAlbums.add(item);
+				}
 			}
 		}
 		response.getWriter().write(albumService.convertAlbumsToJSON(relatedAlbums));

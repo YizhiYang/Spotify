@@ -15,7 +15,8 @@ function addSongsToCenterContent(jsonData){
                                                 <th>TITLE</th>\
                                                 <th>ARTIST</th>\
                                                 <th>ALBUM</th>\
-                                                <th>RELEASE</th>\
+                                                <th>GENRE</th>\
+    											<th>LISTEN COUNT</th>\
                                                 <th>DURATION</th>\
                                             </tr>');
     $('#centerSideContent').append('</table>\
@@ -76,8 +77,10 @@ function addSongsToCenterContent(jsonData){
     	contentToBeAdded += '</td>';
     	//ADD ALBUM NAME
     	contentToBeAdded += '<td>' + song.albumName + '</td>';
-    	//ADD RELEASE DATE
-    	contentToBeAdded += '<td>' + '</td>';
+    	//ADD GENRE
+    	contentToBeAdded += '<td>' + song.songGenre + '</td>';
+    	//ADD LISTEN COUNT
+    	contentToBeAdded += '<td>' + song.listenCount + '</td>';
     	//ADD DURATION
     	contentToBeAdded += '<td>' + song.duration;
     	//ADD BUTTON FOR ADMIN TO DELETE SONG
@@ -166,11 +169,17 @@ function addAlbumsToCenterContent(jsonData){
     	var album = jsonArray[i];
     	//ADD ALBUM IMAGE AND NAME
     	contentToBeAdded += '<div class="AlbumPageContent">\
-                							<div class=AlbumContentPicture id="album' + album.albumId 
-                								+ '" style="background-image: url(requestAlbumImage/' + album.albumId + '.html), url(' + album.albumImageUrl + ');"></div>\
-                								<div class=AlbumContentDescription>\
+                							<div class=AlbumContentPicture id="album' + album.albumId;
+                							
+        if(album.imageType == "file"){
+            contentToBeAdded += '" style="background-image: url(requestAlbumImage/' + album.albumId + '.html);"></div>';
+        }else{
+            contentToBeAdded += '" style="background-image: url(' + album.albumImageUrl + ');"></div>';
+        }							
+        contentToBeAdded += '<div class=AlbumContentDescription>\
                     							<div class=AlbumContentName>' + album.albumName
                     							+ '</div>';
+                					
     	//LOOP TO APPEND ALL ARTISTS NAMES
     	var albumArtistNames = album.artistNames;
     	for(j = 0; j<albumArtistNames.length; j++){
@@ -427,4 +436,54 @@ function addFriendsToCenterContent(jsonData){
 			$("#confirmationPopUp").modal("show");
 		});
 	});
+}
+
+
+function addGenreBoxesToCenter(){
+	console.log("lalala");
+	$('#centerSideContent').append('<div class=centerSideContentWrapper id=PlayListPrototypeTop>\
+            <div id="contentTitle">\
+                <div id="contentTitleWrapper" class="genre-table-title" style="border-bottom:transparent; font-size:45px;">Genres</div>\
+            </div>\
+        </div>\
+    </div>');
+	
+	console.log("lalalaaaaaaa");
+	
+    $("#centerSideContent").append('<div class="genre-box" id="Rock"\
+    		style="background-image:url(./images/Rock.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Indie-Rock"\
+			style="background-image:url(./images/Indie-Rock.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Audio-Collage"\
+			style="background-image:url(./images/Audio-Collage.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Electronic"\
+			style="background-image:url(./images/Electronic.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Folk"\
+			style="background-image:url(./images/Folk.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Industrial"\
+			style="background-image:url(./images/Industrial.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Garage"\
+			style="background-image:url(./images/Garage.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Punk"\
+			style="background-image:url(./images/Punk.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Avant-Garde"\
+			style="background-image:url(./images/Avant-Garde.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Noise"\
+			style="background-image:url(./images/Noise.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Noise-Rock"\
+			style="background-image:url(./images/Noise-Rock.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Field-Recordings"\
+			style="background-image:url(./images/Field-Recordings.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Drone"\
+			style="background-image:url(./images/Drone.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Psych-Rock"\
+			style="background-image:url(./images/Psych-Rock.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="International"\
+			style="background-image:url(./images/International.png);"></div>');
+    $("#centerSideContent").append('<div class="genre-box" id="Ambient-Electronic"\
+			style="background-image:url(./images/Ambient-Electronic.png);"></div>');
+    
+    $(".genre-box").click(function(event){
+    	getTopSongsOfGenre($(this).attr("id"));
+    });
 }

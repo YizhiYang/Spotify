@@ -1,5 +1,6 @@
 package com.sbu.service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sbu.controller.AlbumsController;
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.Song;
@@ -67,6 +69,18 @@ public class AlbumServiceImpl implements AlbumService {
 			jsonObject.put("albumName", album.getAlbumName());
 			jsonObject.put("artistNames", artistNames);
 			jsonObject.put("albumImageUrl", album.getAlbumImageUrl());
+			
+			File file = null;
+	        ClassLoader classloader = Thread.currentThread().getContextClassLoader(); 
+			String albumFileName = null;    
+			albumFileName = album.getAlbumId() + AlbumsController.ALBUMS_EXTENSION;
+	        String albumPath = classloader.getResource(AlbumsController.ALBUMS_FILE_PATH).getPath();      
+	        file = new File(albumPath+albumFileName);
+	        if(file.exists()){
+	        	jsonObject.put("imageType", "file");
+	        }else{
+	        	jsonObject.put("imageType", "url");
+	        }
 			
 			jsonArray.put(jsonObject);
 		}
@@ -144,6 +158,9 @@ public class AlbumServiceImpl implements AlbumService {
 		    {
 		        maxEntry = entry;
 		    }
+		}
+		if(maxEntry == null){
+			return null;
 		}
 		return maxEntry.getKey();	
 	}

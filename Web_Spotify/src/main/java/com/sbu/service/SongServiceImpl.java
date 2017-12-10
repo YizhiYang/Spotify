@@ -78,6 +78,8 @@ public class SongServiceImpl implements SongService {
 				jsonObject.put("albumName", album.getAlbumName());
 				jsonObject.put("artistNames", artistNames);
 				jsonObject.put("duration", song.getDuration());
+				jsonObject.put("songGenre", song.getSongGenre());
+				jsonObject.put("listenCount", song.getListenCount());
 			
 				jsonArray.put(jsonObject);
 			}

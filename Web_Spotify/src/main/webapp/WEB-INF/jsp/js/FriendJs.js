@@ -120,7 +120,7 @@ function removeFriend(friendId){
         success: function (data) {
         	$('#rightBottomWrapper').empty();
         	getFriendList();
-        	getBrowsePageContent();
+        	getRecommendedPage();
         }
 	});
 }

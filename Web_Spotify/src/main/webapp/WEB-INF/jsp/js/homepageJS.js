@@ -50,6 +50,9 @@ var recommendedSongs;
 var recommendedAlbums;
 var recommendedArtists;
 
+//FLAG
+var firstLoad = true;
+
 $( document ).ready(function() {
 		//GET INITIAL DATA NEEDED AND STORE THEM
 		getUserTypeAndRerender();
@@ -59,7 +62,7 @@ $( document ).ready(function() {
 		reloadFollowedArtists(false);
 		reloadOwnedAlbumIDs(false);
 		loadLoggedInArtistID();
-		getRecommendedPage();
+		getBrowsePageContent(true);
 		//REGISTER ACCOUNT RELATED EVENTS
 		$("#profile-image-chooser").change(function(event) {
 			uploadProfileImage();
