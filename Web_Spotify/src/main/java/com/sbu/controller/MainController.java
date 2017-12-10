@@ -547,9 +547,13 @@ public class MainController {
 	
 	@RequestMapping(value="/recommendedAlbums", method=RequestMethod.GET)
 	public void recommendedAlbums(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
-		
-		List<Album> albums = albumService.getRecommendAlbums();
-		
+		List<Album> albums = albumService.getRecommendAlbums();	
+		response.getWriter().write(albumService.convertAlbumsToJSON(albums));
+	}
+	
+	@RequestMapping(value="/recommendedArtist", method=RequestMethod.GET)
+	public void recommendedArtist(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		List<Album> albums = albumService.getRecommendAlbums();	
 		response.getWriter().write(albumService.convertAlbumsToJSON(albums));
 	}
 }
