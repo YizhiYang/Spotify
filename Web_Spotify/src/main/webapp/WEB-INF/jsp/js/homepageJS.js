@@ -44,6 +44,8 @@ var loggedInArtistId = -1;
 //FRIENDS
 var friendIds=[];
 
+
+
 $( document ).ready(function() {
 		//GET INITIAL DATA NEEDED AND STORE THEM
 		getUserTypeAndRerender();
@@ -190,6 +192,16 @@ function removeThisAccount(){
 		url : "removeAccount.html",
 		success : function(data) {
 			window.location.replace("index.jsp");
+		}
+	});
+}
+
+function adminRemoveAccount(userId){
+	$.ajax({
+		type : "POST",
+		url : "removeAccountByAdmin/" + userId + ".html",
+		success : function(data) {
+			getFriendList();
 		}
 	});
 }

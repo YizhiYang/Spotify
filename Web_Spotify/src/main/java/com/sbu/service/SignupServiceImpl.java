@@ -173,11 +173,8 @@ public class SignupServiceImpl implements SignupService {
 		u.getPlayedSongsHistory().clear();
 		signupRepo.saveUserToDB(u);
 		List<User> friends = u.getFriends();
-		for(int i =0; i< friends.size(); i++){
+		for(int i =friends.size()-1; i>=0; i--){
 			removeFriendToList(friends.get(i), id);
-			u.getFriends().remove(friends.get(i));
-			signupRepo.saveUserToDB(u);
-			signupRepo.saveUserToDB(friends.get(i));
 		}
 		
 		signupRepo.removeAccount(id);

@@ -364,6 +364,9 @@ function addFriendsToCenterContent(jsonData){
         if(!isfriend){
         	contentToBeAdded += '<div class="addFriendButton">Add Friend</div>';
         }
+        if(userType == "ADMIN"){
+        	contentToBeAdded += '<i class="material-icons adminDeleteUserButton" id="user' + friend.friendId + '">delete</i>';
+        }
         contentToBeAdded += '</div>';
 	}
 	contentToBeAdded += '</div>';
@@ -379,6 +382,20 @@ function addFriendsToCenterContent(jsonData){
 	$(".addFriendButton").each(function(index){
 		$(this).click(function(event){
 			addFriend($(".centerFriendListFriendName").eq(index).html());
+		});
+	});
+	
+	$(".adminDeleteUserButton").each(function(index){
+		$(this).click(function(event){
+			var friendIdStr= $(this).attr("id");
+			$("#confirm-button").off("click");
+			$("#confirm-button").click(function(event){
+				adminRemoveAccount(friendIdStr.substr(4, friendIdStr.length));
+				$("#confirmationPopUp").modal("hide");
+			});
+			$("#editUserInfoPopUp").modal("hide");
+			$("#confirmationMessage").html("Are you sure you want to unregister this user's account?");
+			$("#confirmationPopUp").modal("show");
 		});
 	});
 }
