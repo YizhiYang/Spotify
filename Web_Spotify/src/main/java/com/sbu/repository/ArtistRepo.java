@@ -23,4 +23,6 @@ public interface ArtistRepo {
 	List<User> getAllFollowers(String artistId);
 	
 	void removeArtist(String artistId);
+
+	List<ArtistUser> getRecommendArtist();
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.User;
 
@@ -30,5 +31,7 @@ public interface ArtistService {
 	List<ArtistUser> getArtistsOfAlbum(long albumId);
 	
 	void removeArtist(String artistId);
+
+	List<ArtistUser> getRecommendArtist();
 
 }

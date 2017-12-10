@@ -138,5 +138,11 @@ public class ArtistServiceImpl implements ArtistService {
 		}
 		artistRepo.removeArtist(artistId);
 	}
+	
+	public List<ArtistUser> getRecommendArtist(){
+		
+		return artistRepo.getRecommendArtist();
+		
+	}
 
 }

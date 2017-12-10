@@ -79,5 +79,10 @@ public class ArtistRepoImpl implements ArtistRepo {
 		em.createQuery("DELETE From ArtistUser a WHERE a.artistID = :artistId")
 		.setParameter("artistId", Long.valueOf(artistId)).executeUpdate();
 	}
+	
+	public List<ArtistUser> getRecommendArtist(){
+		List list = em.createQuery("SELECT a FROM Artist a ORDER BY RAND()").setMaxResults(20).getResultList();
+		return list;
+	}
 
 }
