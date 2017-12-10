@@ -36,4 +36,6 @@ public interface SignupService{
 		User getUserByID(String id);
 		
 		void removeAccount(String id);
+		
+		void banAccount(String id);
 }

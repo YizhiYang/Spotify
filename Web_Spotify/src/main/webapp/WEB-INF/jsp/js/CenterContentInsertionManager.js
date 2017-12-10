@@ -351,8 +351,8 @@ function addFriendsToCenterContent(jsonData){
 	var contentToBeAdded = '<div class=centerSideContentWrapper>';
 	for(i=0; i<jsonArray.length; i++){
 		var friend = jsonArray[i];
-		contentToBeAdded += '<div class="FSContent centerFriendListItem" id="friend'+ friend.friendId+'">\
-        <div class="FSImage"><div class=FSImageInner style="background-image: url(getProfileImageWithUsername/'+ friend.friendUserName +'.html);"></div></div>\
+		contentToBeAdded += '<div class="FSContent centerFriendListItem">\
+        <div class="FSImage"><div class=FSImageInner centerFriendImage id="friend'+ friend.friendId+'" style="background-image: url(getProfileImageWithUsername/'+ friend.friendUserName +'.html);"></div></div>\
         <div class="FSFriendName centerFriendListFriendName">'+friend.friendUserName+'</div>';
         
         var isfriend = false;
@@ -366,13 +366,14 @@ function addFriendsToCenterContent(jsonData){
         }
         if(userType == "ADMIN"){
         	contentToBeAdded += '<i class="material-icons adminDeleteUserButton" id="user' + friend.friendId + '">delete</i>';
+        	contentToBeAdded += '<i class="material-icons adminBanUserButton" id="user' + friend.friendId + '">not_interested</i>';
         }
         contentToBeAdded += '</div>';
 	}
 	contentToBeAdded += '</div>';
 	$("#centerSideContent").append(contentToBeAdded);
 	
-	$(".centerFriendListItem").each(function(index){
+	$(".centerFriendImage").each(function(index){
 		$(this).click(function(event){
 			var friendIdStr= $(this).attr("id");
 			goToFriendPage(friendIdStr.substr(6, friendIdStr.length), $(".centerFriendListFriendName").eq(index).html());
@@ -395,6 +396,20 @@ function addFriendsToCenterContent(jsonData){
 			});
 			$("#editUserInfoPopUp").modal("hide");
 			$("#confirmationMessage").html("Are you sure you want to unregister this user's account?");
+			$("#confirmationPopUp").modal("show");
+		});
+	});
+	
+	$(".adminBanUserButton").each(function(index){
+		$(this).click(function(event){
+			var friendIdStr= $(this).attr("id");
+			$("#confirm-button").off("click");
+			$("#confirm-button").click(function(event){
+				adminBanAccount(friendIdStr.substr(4, friendIdStr.length));
+				$("#confirmationPopUp").modal("hide");
+			});
+			$("#editUserInfoPopUp").modal("hide");
+			$("#confirmationMessage").html("Are you sure you want to ban this user's account?");
 			$("#confirmationPopUp").modal("show");
 		});
 	});

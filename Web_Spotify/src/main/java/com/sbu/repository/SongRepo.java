@@ -20,5 +20,7 @@ public interface SongRepo {
 	List<User> getAllUsersWhoPlayedSong(String songId);
 	
 	void removeSong(String songId);
+	
+	List<Song> getTopSongsByGenre(String genre);
 
 }

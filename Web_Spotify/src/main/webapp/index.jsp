@@ -26,6 +26,9 @@
               	<div id="feedback" style="display:none; color:red">
                   	Invalid Password and Username
                   	</div>
+                  	<div id="feedback-ban" style="display:none; color:red">
+                  	I'm sorry, your account is suspended, contact an administrator to resolve this issue
+                  	</div>
                     <form id="signInForm" method="post">
                       <input class="usernamePassword" type="text" name="username" placeholder="Username or email"><br>
                       <input class="usernamePassword" type="password" name="password" placeholder="Password">

@@ -184,6 +184,20 @@ public class SongServiceImpl implements SongService {
 		return songRepo.getAllUsersWhoPlayedSong(songId);
 	}
 
+	public String getTopSongsOfGenre(String genre) throws JSONException {
+		String genreReplaceSpace = genre.replaceAll(" ", "-");
+		String genreReplaceSpace2 = genre.replaceAll(" ", "");
+		String genreReplaceDash = genre.replaceAll("-", "");
+		String genreReplaceDash2 = genre.replaceAll("-", " ");
+		List<Song> songs = new ArrayList<Song>();
+		songs.addAll(songRepo.getTopSongsByGenre(genre));
+		songs.addAll(songRepo.getTopSongsByGenre(genreReplaceSpace));
+		songs.addAll(songRepo.getTopSongsByGenre(genreReplaceSpace2));
+		songs.addAll(songRepo.getTopSongsByGenre(genreReplaceDash));
+		songs.addAll(songRepo.getTopSongsByGenre(genreReplaceDash2));
+		return convertSongsToJSON(songs);
+	}
+
 
 
 }

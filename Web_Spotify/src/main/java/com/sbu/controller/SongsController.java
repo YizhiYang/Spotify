@@ -224,4 +224,17 @@ public class SongsController {
 		String jsonString = songService.getPlayHistoryInJSON(signupService.getUserByID(friendId));
 	    response.getWriter().write(jsonString);
 	}
+	
+	
+	@RequestMapping(value="/getSongsOfGenre/{genre}", method = RequestMethod.GET)
+	public void getSongsOfGenre(Model model, HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("genre") String genre) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		String jsonString = songService.getTopSongsOfGenre(genre);
+	    response.getWriter().write(jsonString);
+	}
 }

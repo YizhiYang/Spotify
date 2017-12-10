@@ -20,6 +20,7 @@
   	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   	<script type="application/javascript"><%@ include file="js/signInJS.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/signUpJS.js" %></script>
   	<script type="application/javascript"><%@ include file="js/homepageJS.js" %></script>
   	<script type="application/javascript"><%@ include file="js/jPlayer/jquery.jplayer.min.js" %></script>
   	<script type="application/javascript"><%@ include file="js/musicPlayerJS.js" %></script>
@@ -37,6 +38,7 @@
   	<script type="application/javascript"><%@ include file="js/FriendJs.js" %></script>
   	<script type="application/javascript"><%@ include file="js/slick/slick.min.js" %></script>
   	<script type="application/javascript"><%@ include file="js/advertisementJS.js" %></script>
+  	<script type="application/javascript"><%@ include file="js/GenreJS.js" %></script>
 </head>
 <body>
 	<div id="main">
@@ -108,6 +110,9 @@
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Admin-AddAdvertisement-Button" data-toggle="modal" data-target="#addNewAdPopUp">Add Advertisement</div>
                         </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Admin-AddAccount-Button" data-toggle="modal" data-target="#adminAddAccountPopUp">Add Account</div>
+                        </li>
                         
                         <li class="sideBarMenuHeader" id="artist-menu-header">Artist Menu</li>
                         <li class=userSongWrapperList>
@@ -128,7 +133,7 @@
                     <i class="material-icons centerTopBarContent" id="searchButton">search</i>
                     <div class="centerTopBarContent">Overview</div>
                     <div class="centerTopBarContent">Charts</div>
-                    <div class="centerTopBarContent">Genre</div>
+                    <div class="centerTopBarContent" id="genre-button">Genre</div>
                     <div class="centerTopBarContent">More</div>
                 </div>
                 <div id="logout-button" style="float: right; margin-top: 13px; margin-right: 30px;"><i class="material-icons">power_settings_new</i></div>
@@ -223,8 +228,40 @@
 		</div>
 	</div>
 
-	
-	
+
+<!-- Popup for admin add account -->
+<div class="modal fade" id="adminAddAccountPopUp">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      Add An Account
+      </div>
+      <div class="modal-body">
+		<form id="signUpForm">
+    			<input type="text" class="form-control" type="text" name="email" placeholder="Email">
+                <input type="text" class="form-control" id="signupUsername" type="text" name="username" placeholder="Username">
+                <div id="feedback" style="display:none; color:red">
+                 Username is alraedy taken.
+                 </div>
+                 <div id="feedback-success" style="display:none; color:#000">
+                  Username is available.
+                  </div>
+                  <input type="text" class="form-control" id="signupPassword" type="password" name="password" placeholder="Password">                      
+                  <input type="text" class="form-control" id="signupPasswordRepeat" type="password" name="confirm-password" placeholder="Confirm Password">
+                  <div id="password-feedback" style="display:none; color:red">
+                  Passwords do not match.
+                  </div>
+    		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="admin-add-account-button">Add This Account</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 	
 <!-- Pop up for Lyrics -->
 <div class="modal fade" id="lyricsPopup">
@@ -514,5 +551,6 @@
     </div>
   </div>
 </div>
+
 </body>
 </html>

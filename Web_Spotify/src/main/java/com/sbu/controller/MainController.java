@@ -83,8 +83,11 @@ public class MainController {
 		tempUser.setPassword(password);
 		
 		if(loginService.loginUser(tempUser)) {
-			
 			User user = this.initNewUser(username);
+			if(user.isBanned()){
+				response.getWriter().write("BAN");
+				return;
+			}
 			request.getSession().setAttribute("User", user);
 			response.getWriter().write(username);
 		}else {
@@ -493,6 +496,14 @@ public class MainController {
 			,@PathVariable("id") String id) throws IOException{
 
 		signupService.removeAccount(id);
+		response.getWriter().write(REQUEST_SUCCESS);
+	}
+	
+	@RequestMapping(value="/banAccountByAdmin/{id}", method=RequestMethod.POST)
+	public void banAccountByAdmin(HttpServletRequest request, HttpServletResponse response
+			,@PathVariable("id") String id) throws IOException{
+
+		signupService.banAccount(id);
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
 }

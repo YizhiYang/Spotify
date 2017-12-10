@@ -179,4 +179,10 @@ public class SignupServiceImpl implements SignupService {
 		
 		signupRepo.removeAccount(id);
 	}
+
+	public void banAccount(String id) {
+		User u = (User) signupRepo.getUserByID(id).get(0);
+		u.setBanned(true);
+		signupRepo.saveUserToDB(u);
+	}
 }

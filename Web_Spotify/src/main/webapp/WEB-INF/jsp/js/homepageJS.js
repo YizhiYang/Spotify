@@ -82,8 +82,33 @@ $( document ).ready(function() {
 			$("#confirmationMessage").html("Are you sure you want to unregister your account?");
 			$("#confirmationPopUp").modal("show");
 		});
+		
+		$("#admin-add-account-button").click(function(event){
+			adminAddAccountAjax();
+		});
 	});
 
+function adminAddAccountAjax() {
+	var password = $("#signupPassword").val();
+	var passwordRepeat = $("#signupPasswordRepeat").val();
+	if(!(password === passwordRepeat)){
+		displayPasswordErrorMessage();
+		return;
+	}	
+	var data2 = $('#signUpForm').serialize();		
+	$.ajax({
+		type : "POST",
+		url : "signup.html",
+		data : data2,
+		success : function(data) {
+			if(data === "false"){
+				displayErrorMessage();
+			}else{
+				$("#adminAddAccountPopUp").modal("hide");
+			}
+		}
+	});
+}
 
 function getUserName(){
 	$.ajax({
@@ -200,6 +225,16 @@ function adminRemoveAccount(userId){
 	$.ajax({
 		type : "POST",
 		url : "removeAccountByAdmin/" + userId + ".html",
+		success : function(data) {
+			getFriendList();
+		}
+	});
+}
+
+function adminBanAccount(userId){
+	$.ajax({
+		type : "POST",
+		url : "banAccountByAdmin/" + userId + ".html",
 		success : function(data) {
 			getFriendList();
 		}

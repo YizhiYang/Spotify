@@ -47,6 +47,9 @@ public class User {
 	@Column(name="USERTYPE")
 	private UserType userType;
 	
+	@Column(name="IS_BANNED")
+	private boolean isBanned;
+	
 	@ManyToMany
     @JoinTable(
         name = "user_song", 
@@ -152,6 +155,12 @@ public class User {
 	}
 	public void setFriends(List<User> friends) {
 		this.friends = friends;
+	}
+	public boolean isBanned() {
+		return isBanned;
+	}
+	public void setBanned(boolean isBanned) {
+		this.isBanned = isBanned;
 	}
 	
 	

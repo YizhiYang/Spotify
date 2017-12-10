@@ -34,4 +34,6 @@ public interface SongService {
 	String getPlayHistoryInJSON(User user) throws JSONException;
 	
 	List<User> getAllUsersPlayedSong(String songId);
+	
+	String getTopSongsOfGenre(String genre) throws JSONException;
 }

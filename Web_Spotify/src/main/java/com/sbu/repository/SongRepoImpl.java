@@ -62,5 +62,12 @@ public class SongRepoImpl implements SongRepo {
 				.setParameter("songId", Long.valueOf(songId)).getResultList();
 		return results;
 	}
+
+
+	public List<Song> getTopSongsByGenre(String genre) {
+		List<Song> results = em.createQuery("SELECT s FROM Song s WHERE s.songGenre LIKE :genre")
+				.setParameter("genre", genre).getResultList();
+		return results;
+	}
 	
 }
