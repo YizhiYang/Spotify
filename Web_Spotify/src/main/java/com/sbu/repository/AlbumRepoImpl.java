@@ -58,7 +58,7 @@ public class AlbumRepoImpl implements AlbumRepo {
 
 	public List<Album> getRecommendAlbums() {
 		
-		List list = em.createQuery("SELECT *FROM Album ORDER BY RAND() LIMIT 20").getResultList();
+		List list = em.createQuery("SELECT a FROM Album a ORDER BY RAND()").setMaxResults(20).getResultList();
 		return list;
 	}
 
