@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 	$("#Home-Browse-Button").click(function(event) {
-		getRecommendedPage();
+		getBrowsePageContent(true);
 		event.preventDefault();
 	});
 	
@@ -10,7 +10,7 @@ $( document ).ready(function() {
 	});
 	
 	$("#recommended-button").click(function(event){
-		getRecommendedPage();
+		getRecommendedPage(false);
 	});
 });
 
@@ -29,24 +29,21 @@ function loadLibraryOverview(){
 	lastAjaxCallToRenderToCenter = "loadLibraryOverview()";
 }
 
-function getBrowsePageContent(){
-	$.ajax({
-		type : "GET",
-		url : "getBrowsePageContent.html",
-        success: function (data) {
-        	$('#centerSideContent').empty();
-        	renderResults(data);
-        	lastAjaxCallToRenderToCenter = "getBrowsePageContent()";
-        }
-	});
+function getBrowsePageContent(withGenre){
+	getRecommendedPage(withGenre);
+	
 }
 
-function getRecommendedPage(){
-	getRecommendedSongsContent();
-	lastAjaxCallToRenderToCenter = "getRecommendedPage()";
+function getRecommendedPage(withGenre){
+	getRecommendedSongsContent(withGenre);
+	if(firstLoad == true){
+		firstLoad = false;
+	}else{
+		lastAjaxCallToRenderToCenter = "getRecommendedPage()";
+	}
 }
 
-function getRecommendedSongsContent(){
+function getRecommendedSongsContent(withGenre){
 	$.ajax({
 		type : "GET",
 		url : "recommendedSongs.html",
@@ -54,31 +51,37 @@ function getRecommendedSongsContent(){
         	recommendedSongs = data;
         	$('#centerSideContent').empty();
         	addSongsToCenterContent(data);
-        	getRecommendedAlbumsContent();
+        	$(".song-table-title").html("Songs You Might Like");
+        	getRecommendedAlbumsContent(withGenre);
         }
 	});
 }
 
-function getRecommendedAlbumsContent(){
+function getRecommendedAlbumsContent(withGenre){
 	$.ajax({
 		type : "GET",
 		url : "recommendedAlbums.html",
         success: function (data) {
         	recommendedAlbums = data;
         	addAlbumsToCenterContent(data);
-        	getRecommendedArtistsContent();
+        	$(".album-table-title").html("Albums You Might Like");
+        	getRecommendedArtistsContent(withGenre);
         }
 	});
 }
 
-function getRecommendedArtistsContent(){
+function getRecommendedArtistsContent(withGenre){
 	$.ajax({
 		type : "GET",
 		url : "recommendedArtist.html",
         success: function (data) {
         	recommendedArtists = data;
         	addArtistsToCenterContent(data);
-        	changeTableTitlesForRecommended();
+        	$(".artist-table-title").html("Artists You Might Like");
+        	
+        	if(withGenre){
+        		addGenreBoxesToCenter();
+        	}
         }
 	});
 }

@@ -34,7 +34,7 @@ function goToAlbumSongs(albumID){
 			addSongsToCenterContent(data);
 			//CHANGE SONG TABLE TITLE
 			addAlbumTitleToSongPage(albumID);
-			
+			getRelatedAlbums(albumID);
 			lastAjaxCallToRenderToCenter = "goToAlbumSongs(" + albumID + ")";
 		}
 	});
@@ -66,4 +66,16 @@ function addAlbumTitleToSongPage(albumID){
 			});
 		}
 	}
+}
+
+function getRelatedAlbums(albumID){
+	$.ajax({
+		type : "GET",
+		url : "getRelatedAlbum/" + albumID + ".html",
+		success : function(data) {
+			addAlbumsToCenterContent(data);
+			$('.album-table-title').html("Related/Similar Albums");
+
+		}
+	});
 }
