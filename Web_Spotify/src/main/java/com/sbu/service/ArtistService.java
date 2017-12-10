@@ -33,5 +33,7 @@ public interface ArtistService {
 	void removeArtist(String artistId);
 
 	List<ArtistUser> getRecommendArtist();
+	
+	List<ArtistUser> getRelatedArtist(String gen, String selfId);
 
 }

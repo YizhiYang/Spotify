@@ -1,5 +1,6 @@
 package com.sbu.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
+import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.model.UserType;
 import com.sbu.repository.ArtistRepo;
@@ -21,6 +23,8 @@ public class ArtistServiceImpl implements ArtistService {
 
 	@Autowired
 	private ArtistRepo artistRepo;
+	@Autowired
+	private SongService songService;
 	@Autowired
 	private SignupRepo signupRepo;
 	@Autowired
@@ -143,6 +147,30 @@ public class ArtistServiceImpl implements ArtistService {
 		
 		return artistRepo.getRecommendArtist();
 		
+	}
+	
+	public List<ArtistUser> getRelatedArtist(String gen, String selfId){
+		
+		List<ArtistUser> allArtists = this.getAllArtists();
+		List<ArtistUser> relatedArtists = new ArrayList();
+		
+		for(ArtistUser artist: allArtists){
+			
+			List<Album> albums = artist.getAlbum();
+		
+			List<Song> allSongs = new ArrayList();
+		
+			for(Album album: albums){
+				List<Song> songs = album.getSongs();
+				allSongs.addAll(songs);
+			}
+			String genre = songService.getMostOccur(allSongs);
+			if(genre.equals(gen) && !selfId.equals(String.valueOf(artist.getArtistID()))){
+				relatedArtists.add(artist);
+			}
+		}
+		
+		return relatedArtists;
 	}
 
 }

@@ -36,4 +36,6 @@ public interface SongService {
 	List<User> getAllUsersPlayedSong(String songId);
 	
 	String getTopSongsOfGenre(String genre) throws JSONException;
+
+	String getMostOccur(List<Song> allSongs);
 }

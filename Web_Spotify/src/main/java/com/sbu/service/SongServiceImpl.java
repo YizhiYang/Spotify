@@ -1,7 +1,9 @@
 package com.sbu.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -198,7 +200,25 @@ public class SongServiceImpl implements SongService {
 
 		return convertSongsToJSON(songs);
 	}
-
-
-
+	
+	public String getMostOccur(List<Song> allSongs){
+		HashMap<String, Integer> map = new HashMap();
+		for(Song song: allSongs){
+			if(!map.containsKey(song.getSongGenre())){
+				map.put(song.getSongGenre(), 1);
+			}
+			else{
+				map.put(song.getSongGenre(), map.get(song.getSongGenre())+1);
+			}
+		}
+		Map.Entry<String, Integer> maxEntry = null;
+		for (Map.Entry<String, Integer> entry : map.entrySet())
+		{
+		    if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0)
+		    {
+		        maxEntry = entry;
+		    }
+		}
+		return maxEntry.getKey();	
+	}
 }

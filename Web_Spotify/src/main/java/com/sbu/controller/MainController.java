@@ -576,4 +576,23 @@ public class MainController {
 		response.getWriter().write(albumService.convertAlbumsToJSON(relatedAlbums));
 	}
 	
+	@RequestMapping(value="/getRelatedArtists/{id}", method=RequestMethod.GET)
+	public void getRelatedArtists(HttpServletRequest request, HttpServletResponse response
+			,@PathVariable("id") String id) throws IOException, JSONException{
+		
+		ArtistUser artist = artistService.getArtistByArtistID(id);
+		List<Album> albums = artist.getAlbum();
+		
+		List<Song> allSongs = new ArrayList();
+		
+		for(Album album: albums){
+			List<Song> songs = album.getSongs();
+			allSongs.addAll(songs);
+		}
+		String genre = songService.getMostOccur(allSongs);
+		List<ArtistUser> allArtists = artistService.getRelatedArtist(genre, id);
+		
+		response.getWriter().write(artistService.convertArtistsToJSON(allArtists));
+	}
+	
 }
