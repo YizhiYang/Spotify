@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sbu.model.Advertisement;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.CreditCard;
+import com.sbu.model.Song;
 import com.sbu.model.User;
 import com.sbu.model.UserType;
 import com.sbu.service.AdService;
@@ -32,6 +33,7 @@ import com.sbu.service.PlaylistService;
 import com.sbu.service.SignupService;
 import com.sbu.service.SongService;
 
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,7 +42,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -505,5 +510,39 @@ public class MainController {
 
 		signupService.banAccount(id);
 		response.getWriter().write(REQUEST_SUCCESS);
+	}
+	
+	@RequestMapping(value="/recommendedSongs/", method=RequestMethod.POST)
+	public void recommendedSongs(HttpServletRequest request, HttpServletResponse response
+			) throws IOException, JSONException{
+
+		List<Song> history = ((User)request.getSession().getAttribute("User")).getPlayedSongsHistory();
+		HashMap<String, Integer> map = new HashMap();
+		
+		for(Song song: history){
+			if(!map.containsKey(song.getSongGenre())){
+				map.put(song.getSongGenre(), 1);
+			}
+			else{
+				map.put(song.getSongGenre(), map.get(song.getSongGenre())+1);
+			}
+		}
+		
+		Map.Entry<String, Integer> maxEntry = null;
+
+		for (Map.Entry<String, Integer> entry : map.entrySet())
+		{
+		    if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0)
+		    {
+		        maxEntry = entry;
+		    }
+		}
+		
+		String key = maxEntry.getKey();
+		
+		System.out.println(key);
+		
+		
+		response.getWriter().write(songService.getTopSongsOfGenre(key));
 	}
 }

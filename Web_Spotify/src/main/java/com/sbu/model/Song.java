@@ -120,6 +120,14 @@ public class Song {
 	public void setApproved(boolean approved) {
 		this.approved = approved;
 	}
+
+	public String getSongGenre() {
+		return songGenre;
+	}
+
+	public void setSongGenre(String songGenre) {
+		this.songGenre = songGenre;
+	}
 	
 	
 	
