@@ -28,7 +28,11 @@ function addSongsToCenterContent(jsonData){
     	jsonUserFollowedSongs = jQuery.parseJSON(userFollowedSongs);
     }
     //LOOP TO APPEND EACH SONG
-    for(var i=0; i<jsonArray.length; i++){
+    var loopNumber = jsonArray.length;
+    if(jsonArray.length > 20){
+    	loopNumber = 20;
+    }
+    for(var i=0; i<loopNumber; i++){
     	var song = jsonArray[i];
     	//APPEND THE BUTTONS ON THE LEFT SIDE OF SONG ITEM
     	var contentToBeAdded = '<tr class="songPageListContent" id="song' + song.songId + '">\
@@ -85,10 +89,10 @@ function addSongsToCenterContent(jsonData){
     
     //ADD THE SONGS TO THE MUSIC PLAYER PLAYLIST
     myPlaylist = [];
-    for(i=0; i<jsonArray.length; i++){
+    for(i=0; i<loopNumber; i++){
     	myPlaylist.push({mp3:"requestSongFile/" + jsonArray[i].songId +".html"});
     }
-    playlistLength = jsonArray.length;
+    playlistLength = loopNumber;
 	
     //REGISTER PLAY BUTTON CLICK
 	$(".song-content-play-button").each(function(index){
@@ -154,7 +158,11 @@ function addAlbumsToCenterContent(jsonData){
                                    </div>');
     //LOOP TO APPEND EACH ALBUM
     var contentToBeAdded = '<div class=centerSideContentWrapper>';
-    for(i = 0; i<jsonArray.length; i++){
+    var loopNumber = jsonArray.length;
+    if(jsonArray.length > 10){
+    	loopNumber = 10;
+    }
+    for(i = 0; i<loopNumber; i++){
     	var album = jsonArray[i];
     	//ADD ALBUM IMAGE AND NAME
     	contentToBeAdded += '<div class="AlbumPageContent">\
@@ -240,8 +248,14 @@ function addArtistsToCenterContent(jsonData){
                                         </div>\
                                     </div>');
     //LOOP TO ADD EACH ARTIST
+    
     var contentToBeAdded = '<div class=centerSideContentWrapper>';
-    for(i=0; i<jsonArray.length; i++){
+    
+    var loopNumber = jsonArray.length;
+    if(jsonArray.length > 10){
+    	loopNumber = 10;
+    }
+    for(i=0; i<loopNumber; i++){
     	var artist = jsonArray[i];
     	//ADD ARTIST NAME, IMAGE, ETC
     	contentToBeAdded += '<div class=ArtistPageContent>\

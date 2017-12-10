@@ -45,6 +45,10 @@ var loggedInArtistId = -1;
 var friendIds=[];
 
 
+//RECOMMENDED
+var recommendedSongs;
+var recommendedAlbums;
+var recommendedArtists;
 
 $( document ).ready(function() {
 		//GET INITIAL DATA NEEDED AND STORE THEM
@@ -55,7 +59,7 @@ $( document ).ready(function() {
 		reloadFollowedArtists(false);
 		reloadOwnedAlbumIDs(false);
 		loadLoggedInArtistID();
-		getBrowsePageContent();
+		getRecommendedPage();
 		//REGISTER ACCOUNT RELATED EVENTS
 		$("#profile-image-chooser").change(function(event) {
 			uploadProfileImage();

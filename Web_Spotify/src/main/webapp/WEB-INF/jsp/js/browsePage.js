@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 	$("#Home-Browse-Button").click(function(event) {
-		getBrowsePageContent();
+		getRecommendedPage();
 		event.preventDefault();
 	});
 	
@@ -51,6 +51,7 @@ function getRecommendedSongsContent(){
 		type : "GET",
 		url : "recommendedSongs.html",
         success: function (data) {
+        	recommendedSongs = data;
         	$('#centerSideContent').empty();
         	addSongsToCenterContent(data);
         	getRecommendedAlbumsContent();
@@ -63,6 +64,7 @@ function getRecommendedAlbumsContent(){
 		type : "GET",
 		url : "recommendedAlbums.html",
         success: function (data) {
+        	recommendedAlbums = data;
         	addAlbumsToCenterContent(data);
         	getRecommendedArtistsContent();
         }
@@ -72,9 +74,11 @@ function getRecommendedAlbumsContent(){
 function getRecommendedArtistsContent(){
 	$.ajax({
 		type : "GET",
-		url : "recommendedArtists.html",
+		url : "recommendedArtist.html",
         success: function (data) {
+        	recommendedArtists = data;
         	addArtistsToCenterContent(data);
+        	changeTableTitlesForRecommended();
         }
 	});
 }

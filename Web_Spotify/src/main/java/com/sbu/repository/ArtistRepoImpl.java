@@ -81,7 +81,7 @@ public class ArtistRepoImpl implements ArtistRepo {
 	}
 	
 	public List<ArtistUser> getRecommendArtist(){
-		List list = em.createQuery("SELECT a FROM Artist a ORDER BY RAND()").setMaxResults(20).getResultList();
+		List list = em.createQuery("SELECT a FROM ArtistUser a ORDER BY RAND()").setMaxResults(20).getResultList();
 		return list;
 	}
 
