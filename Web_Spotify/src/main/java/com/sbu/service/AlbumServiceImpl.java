@@ -1,6 +1,8 @@
 package com.sbu.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -121,8 +123,29 @@ public class AlbumServiceImpl implements AlbumService {
 	}
 	
 	public List<Album> getRecommendAlbums(){
-		
 		return albumRepo.getRecommendAlbums();
+	}
+	
+	public String getMostOccur(Album album){
+		List<Song> songs = album.getSongs();
+		HashMap<String, Integer> map = new HashMap();
+		for(Song song: songs){
+			if(!map.containsKey(song.getSongGenre())){
+				map.put(song.getSongGenre(), 1);
+			}
+			else{
+				map.put(song.getSongGenre(), map.get(song.getSongGenre())+1);
+			}
+		}
+		Map.Entry<String, Integer> maxEntry = null;
+		for (Map.Entry<String, Integer> entry : map.entrySet())
+		{
+		    if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0)
+		    {
+		        maxEntry = entry;
+		    }
+		}
+		return maxEntry.getKey();	
 	}
 
 }

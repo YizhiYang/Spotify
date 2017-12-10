@@ -43,6 +43,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -542,6 +543,7 @@ public class MainController {
 		    }
 		}
 		String key = maxEntry.getKey();	
+		
 		response.getWriter().write(songService.getTopSongsOfGenre(key));
 	}
 	
@@ -556,4 +558,22 @@ public class MainController {
 		List<ArtistUser> artists = artistService.getRecommendArtist();	
 		response.getWriter().write(artistService.convertArtistsToJSON(artists));
 	}
+	
+	@RequestMapping(value="/getRelatedAlbum/{id}", method=RequestMethod.GET)
+	public void recommendedArtist(HttpServletRequest request, HttpServletResponse response
+			,@PathVariable("id") String id) throws IOException, JSONException{
+		
+		Album album = albumService.getAlbumByID(id);
+		String genre = albumService.getMostOccur(album);
+		
+		List<Album> albums = albumService.getAllAlbums();
+		List<Album> relatedAlbums = new ArrayList();
+		for(Album item: albums){
+			if(albumService.getMostOccur(item).equals(genre)){
+				relatedAlbums.add(item);
+			}
+		}
+		response.getWriter().write(albumService.convertAlbumsToJSON(relatedAlbums));
+	}
+	
 }

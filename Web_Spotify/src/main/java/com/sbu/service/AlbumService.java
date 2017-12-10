@@ -27,4 +27,6 @@ public interface AlbumService {
 	String getOwnedAlbumIds(User user);
 	
 	List<Album> getRecommendAlbums();
+	
+	String getMostOccur(Album album);
 }
