@@ -487,4 +487,12 @@ public class MainController {
 		signupService.removeAccount(id);
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
+	
+	@RequestMapping(value="/removeAccountByAdmin/{id}", method=RequestMethod.POST)
+	public void removeAccountByAdmin(HttpServletRequest request, HttpServletResponse response
+			,@PathVariable("id") String id) throws IOException{
+
+		signupService.removeAccount(id);
+		response.getWriter().write(REQUEST_SUCCESS);
+	}
 }
