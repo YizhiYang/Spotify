@@ -119,5 +119,10 @@ public class AlbumServiceImpl implements AlbumService {
 		}
 		
 	}
+	
+	public List<Album> getRecommendAlbums(){
+		
+		return albumRepo.getRecommendAlbums();
+	}
 
 }

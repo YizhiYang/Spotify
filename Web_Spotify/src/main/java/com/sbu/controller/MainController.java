@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sbu.model.Advertisement;
+import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.CreditCard;
 import com.sbu.model.Song;
@@ -517,6 +518,11 @@ public class MainController {
 			) throws IOException, JSONException{
 		User user = signupService.getUserByID(((User)request.getSession().getAttribute("User")).getId().toString());
 		List<Song> history = user.getPlayedSongsHistory();
+		if(history.isEmpty()){
+			response.getWriter().write(songService.getAllSongsInJSON());
+			return;
+		}
+		
 		HashMap<String, Integer> map = new HashMap();
 		
 		for(Song song: history){
@@ -527,9 +533,7 @@ public class MainController {
 				map.put(song.getSongGenre(), map.get(song.getSongGenre())+1);
 			}
 		}
-		
 		Map.Entry<String, Integer> maxEntry = null;
-
 		for (Map.Entry<String, Integer> entry : map.entrySet())
 		{
 		    if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0)
@@ -537,12 +541,15 @@ public class MainController {
 		        maxEntry = entry;
 		    }
 		}
-		
-		String key = maxEntry.getKey();
-		
-		System.out.println(key);
-		
-		
+		String key = maxEntry.getKey();	
 		response.getWriter().write(songService.getTopSongsOfGenre(key));
+	}
+	
+	@RequestMapping(value="/recommendedAlbums", method=RequestMethod.GET)
+	public void recommendedAlbums(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		
+		List<Album> albums = albumService.getRecommendAlbums();
+		
+		response.getWriter().write(albumService.convertAlbumsToJSON(albums));
 	}
 }

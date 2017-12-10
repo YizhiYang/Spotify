@@ -25,4 +25,6 @@ public interface AlbumService {
 	boolean removeAlbum(String albumID);
 	
 	String getOwnedAlbumIds(User user);
+	
+	List<Album> getRecommendAlbums();
 }

@@ -17,4 +17,6 @@ public interface AlbumRepo {
 	boolean saveAlbumToDB(Album album);
 	
 	List<User> getAllFollowers(String albumId);
+
+	List<Album> getRecommendAlbums();
 }
