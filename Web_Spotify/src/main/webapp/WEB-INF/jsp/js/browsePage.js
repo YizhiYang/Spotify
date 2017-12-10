@@ -8,6 +8,10 @@ $( document ).ready(function() {
 		loadLibraryOverview();
 		event.preventDefault();
 	});
+	
+	$("#recommended-button").click(function(event){
+		getRecommendedPage();
+	});
 });
 
 function loadLibraryOverview(){
@@ -37,6 +41,44 @@ function getBrowsePageContent(){
 	});
 }
 
+function getRecommendedPage(){
+	getRecommendedSongsContent();
+	lastAjaxCallToRenderToCenter = "getRecommendedPage()";
+}
+
+function getRecommendedSongsContent(){
+	$.ajax({
+		type : "GET",
+		url : "recommendedSongs.html",
+        success: function (data) {
+        	$('#centerSideContent').empty();
+        	addSongsToCenterContent(data);
+        	getRecommendedAlbumsContent();
+        }
+	});
+}
+
+function getRecommendedAlbumsContent(){
+	$.ajax({
+		type : "GET",
+		url : "recommendedAlbums.html",
+        success: function (data) {
+        	addAlbumsToCenterContent(data);
+        	getRecommendedArtistsContent();
+        }
+	});
+}
+
+function getRecommendedArtistsContent(){
+	$.ajax({
+		type : "GET",
+		url : "recommendedArtists.html",
+        success: function (data) {
+        	addArtistsToCenterContent(data);
+        }
+	});
+}
+
 function renderResults(jsonString){
 	var jsonObject = jQuery.parseJSON(jsonString);
 	var songsJson = jsonObject.songsJson;
@@ -46,4 +88,10 @@ function renderResults(jsonString){
 	addSongsToCenterContent(songsJson);
 	addArtistsToCenterContent(artistsJson);
 	addAlbumsToCenterContent(albumsJson);
+}
+
+function changeTableTitlesForRecommended(){
+	$(".song-table-title").html("Songs You Might Like");
+	$(".artist-table-title").html("Artists You Might Like");
+	$(".album-table-title").html("Albums You Might Like");
 }

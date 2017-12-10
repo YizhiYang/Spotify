@@ -512,11 +512,11 @@ public class MainController {
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
 	
-	@RequestMapping(value="/recommendedSongs/", method=RequestMethod.POST)
+	@RequestMapping(value="/recommendedSongs", method=RequestMethod.GET)
 	public void recommendedSongs(HttpServletRequest request, HttpServletResponse response
 			) throws IOException, JSONException{
-
-		List<Song> history = ((User)request.getSession().getAttribute("User")).getPlayedSongsHistory();
+		User user = signupService.getUserByID(((User)request.getSession().getAttribute("User")).getId().toString());
+		List<Song> history = user.getPlayedSongsHistory();
 		HashMap<String, Integer> map = new HashMap();
 		
 		for(Song song: history){

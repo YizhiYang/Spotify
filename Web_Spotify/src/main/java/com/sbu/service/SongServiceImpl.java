@@ -195,6 +195,7 @@ public class SongServiceImpl implements SongService {
 		songs.addAll(songRepo.getTopSongsByGenre(genreReplaceSpace2));
 		songs.addAll(songRepo.getTopSongsByGenre(genreReplaceDash));
 		songs.addAll(songRepo.getTopSongsByGenre(genreReplaceDash2));
+
 		return convertSongsToJSON(songs);
 	}
 

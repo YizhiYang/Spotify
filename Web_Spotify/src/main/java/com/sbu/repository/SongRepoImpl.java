@@ -65,7 +65,7 @@ public class SongRepoImpl implements SongRepo {
 
 
 	public List<Song> getTopSongsByGenre(String genre) {
-		List<Song> results = em.createQuery("SELECT s FROM Song s WHERE s.songGenre LIKE :genre")
+		List<Song> results = em.createQuery("SELECT s FROM Song s WHERE s.songGenre LIKE :genre ORDER BY s.listenCount DESC")
 				.setParameter("genre", genre).getResultList();
 		return results;
 	}

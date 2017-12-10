@@ -132,7 +132,7 @@
                     <input class="centerTopBarContent" id="searchInput" type="text" name="searchContent">
                     <i class="material-icons centerTopBarContent" id="searchButton">search</i>
                     <div class="centerTopBarContent">Overview</div>
-                    <div class="centerTopBarContent">Charts</div>
+                    <div class="centerTopBarContent" id="recommended-button">Recommended</div>
                     <div class="centerTopBarContent" id="genre-button">Genre</div>
                     <div class="centerTopBarContent">More</div>
                 </div>
