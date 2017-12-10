@@ -18,4 +18,6 @@ public interface SignupRepo {
 		void storeCreditCard(CreditCard creditCard);
 		
 		List<User> searchByUsername(String username);
+		
+		void removeAccount(String id);
 }

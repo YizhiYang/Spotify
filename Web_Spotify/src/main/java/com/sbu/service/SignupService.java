@@ -34,4 +34,6 @@ public interface SignupService{
 		String getSearchUsersByUsernameJSON(String friendUsername) throws JSONException;
 		
 		User getUserByID(String id);
+		
+		void removeAccount(String id);
 }

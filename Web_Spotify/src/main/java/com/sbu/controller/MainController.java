@@ -477,4 +477,14 @@ public class MainController {
 		adService.removeAds(id);
 		response.getWriter().write(REQUEST_SUCCESS);
 	}
+	
+	@RequestMapping(value="/removeAccount", method=RequestMethod.POST)
+	public void removeAccount(HttpServletRequest request, HttpServletResponse response
+			) throws IOException{
+
+		User user = (User) request.getSession().getAttribute("User");
+		String id = user.getId().toString();
+		signupService.removeAccount(id);
+		response.getWriter().write(REQUEST_SUCCESS);
+	}
 }

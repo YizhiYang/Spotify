@@ -162,5 +162,9 @@ public class SignupServiceImpl implements SignupService {
 		List<User> users = signupRepo.searchByUsername(friendUsername);
 		return convertFriendsToJSON(users);
 	}
-
+	
+	public void removeAccount(String id){
+		
+		signupRepo.removeAccount(id);
+	}
 }

@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: MATT
 Build-Jdk: 1.8.0_91
-=======
-Built-By: Limeng
-Build-Jdk: 1.8.0_144
->>>>>>> ef4d0b6917bbfb644b5cfc7f7c414ab308f5519d
 Created-By: Maven Integration for Eclipse
 

@@ -5,9 +5,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sbu.model.Advertisement;
 import com.sbu.model.CreditCard;
 import com.sbu.model.User;
 
@@ -56,6 +58,14 @@ public class SignupRepoImpl implements SignupRepo {
 		List<User> results = em.createQuery("SELECT e FROM User e WHERE e.userName LIKE :uname")
 				.setParameter("uname", "%"+username+"%").getResultList();
 		return results;
+	}
+	
+	public void removeAccount(String id){
+		
+		Long idLong = Long.parseLong(id);
+		Session ses = em.unwrap(Session.class);
+		User user = (User) ses.get(User.class, idLong);
+		ses.delete(user);
 	}
 
 }
