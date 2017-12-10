@@ -68,4 +68,16 @@ public class ArtistsController {
 			response.getWriter().write(artist.getArtistID()+"");
 		}
 	}
+	
+	@RequestMapping(value="/getArtistBio/{artistId}", method = RequestMethod.GET)
+	public void getArtistBio(Model model, HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("artistId") String artistId) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		ArtistUser artist = artistService.getArtistByArtistID(artistId);
+		response.getWriter().write(artist.getBio());
+	}
 }

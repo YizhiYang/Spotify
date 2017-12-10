@@ -29,18 +29,28 @@ function goToArtistAlbums(artistID){
 		success : function(data) {
 			$('#centerSideContent').empty();
 			addAlbumsToCenterContent(data);
-			addArtistTitleToArtistPage(artistID);
+			getArtistBio(artistID);
 			
 			lastAjaxCallToRenderToCenter = "goToArtistAlbums(" + artistID + ")";
 		}
 	});
 }
 
+function getArtistBio(artistID){
+	$.ajax({
+		type : "GET",
+		url : "getArtistBio/" + artistID + ".html",
+		success : function(data) {
+			$('.album-table-title').parent().append('<div>' + data + '</div>');
+			addArtistTitleToArtistPage(artistID);
+		}
+	});
+}
 
 function addArtistTitleToArtistPage(artistID){
 	$('.album-table-title').html(selectedArtistName);
 	if(userType == "ADMIN" || loggedInArtistId == artistID){
-		$('.album-table-title').parent().append('<div id="addAlbumToArtistButton">Add Album To Artist</div>');
+		$('.album-table-title').parent().append('<button id="addAlbumToArtistButton" class="btn btn-warning">Add Album To Artist</button>');
 		
 		$('#addAlbumToArtistButton').click(function(event){
 			$('#createAlbumArtistIDInput').prop('disabled', true);
@@ -50,3 +60,4 @@ function addArtistTitleToArtistPage(artistID){
 		return;
 	}
 }
+

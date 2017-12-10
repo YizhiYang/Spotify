@@ -27,6 +27,12 @@ public class Song {
 	@Column(name="SONG_NAME")
 	private String songName;
 	
+	@Column(name="SONG_GENRE")
+	private String songGenre;
+	
+	@Column(name="SONG_DATE")
+	private String date;
+	
 	@Column(name="DURATION")
 	private String duration;
 	
