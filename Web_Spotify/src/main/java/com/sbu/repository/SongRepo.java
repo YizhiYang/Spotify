@@ -23,4 +23,6 @@ public interface SongRepo {
 	
 	List<Song> getTopSongsByGenre(String genre);
 
+	List<Song> getEditorSongs();
+
 }

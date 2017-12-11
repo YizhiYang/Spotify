@@ -271,4 +271,9 @@ public class SongServiceImpl implements SongService {
 		}
 		return maxEntry.getKey();	
 	}
+	
+	public List<Song> getEditorSongs(){
+		
+		return songRepo.getEditorSongs();
+	}
 }

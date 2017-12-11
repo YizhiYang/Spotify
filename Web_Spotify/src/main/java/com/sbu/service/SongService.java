@@ -38,4 +38,6 @@ public interface SongService {
 	String getTopSongsOfGenre(String genre) throws JSONException;
 
 	String getMostOccur(List<Song> allSongs);
+	
+	List<Song> getEditorSongs();
 }

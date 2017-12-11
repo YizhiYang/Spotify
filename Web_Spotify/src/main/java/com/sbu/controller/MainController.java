@@ -600,4 +600,10 @@ public class MainController {
 		response.getWriter().write(artistService.convertArtistsToJSON(allArtists));
 	}
 	
+	@RequestMapping(value="/editorChoices", method=RequestMethod.GET)
+	public void editorChoices(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		List<Song> songs = songService.getEditorSongs();	
+		response.getWriter().write(songService.convertSongsToJSON(songs));
+	}
+	
 }

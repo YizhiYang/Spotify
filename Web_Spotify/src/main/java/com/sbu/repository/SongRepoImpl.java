@@ -69,5 +69,11 @@ public class SongRepoImpl implements SongRepo {
 				.setParameter("genre", genre).getResultList();
 		return results;
 	}
+
+
+	public List<Song> getEditorSongs() {
+		List<Song> result = em.createQuery("SELECT a FROM SONG a WHERE a.songId <= 36").getResultList();
+		return result;
+	}
 	
 }
