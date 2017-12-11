@@ -92,6 +92,9 @@ function addSongsToCenterContent(jsonData){
     
     //ADD THE SONGS TO THE MUSIC PLAYER PLAYLIST
     myPlaylist = [];
+    songAlbumImageUrls = [];
+    songAlbumName=[];
+    songArtistName=[];
     for(i=0; i<loopNumber; i++){
     	myPlaylist.push({mp3:"requestSongFile/" + jsonArray[i].songId +".html"});
     	console.log(jsonArray[i].imageType + ", " + i);
@@ -100,6 +103,12 @@ function addSongsToCenterContent(jsonData){
     	}else{
     		songAlbumImageUrls.push(jsonArray[i].albumImageUrl);
     	}
+    	songAlbumName.push(jsonArray[i].albumName);
+    	var artistNames = "";
+    	for(j=0; j<jsonArray[i].artistNames.length; j++){
+    		artistNames += jsonArray[i].artistNames[j] + ' ';
+    	}
+    	songArtistName.push(artistNames);
     }
     playlistLength = loopNumber;
 	
@@ -218,6 +227,7 @@ function addAlbumsToCenterContent(jsonData){
         $(this).on("click", function(event){
         	var albumID = $(this).attr("id");
         	selectedAlbumName = $(".AlbumContentName").eq(index).html();
+        	selectedAlbumImageURL = $(".AlbumContentPicture").eq(index).css("background-image");
         	goToAlbumSongs(albumID.substring(5, albumID.length));
         });
     });
@@ -257,7 +267,7 @@ function addArtistsToCenterContent(jsonData){
 		jsonUserFollowedArtists = jQuery.parseJSON(userFollowedArtists);
 	}
 	//ADD ARIST PAGE TITLE
-    $("#centerSideContent").append('<div class=centerSideContentWrapper id=AlbumPageTop>\
+    $("#centerSideContent").append('<div class=centerSideContentWrapper id=ArtistPageTop>\
                                         <div id="contentTitle">\
                                             <div id="contentTitleWrapper" class="artist-table-title" style="border-bottom:transparent; font-size:45px;">Artist</div>\
                                         </div>\
@@ -314,6 +324,7 @@ function addArtistsToCenterContent(jsonData){
         $(this).on("click", function(event){
         	var artistID = $(this).attr("id");
         	selectedArtistName = $(".ArtistContentName").eq(index).html();
+        	selectedArtistImageURL = $(".ArtistContentPicture").eq(index).css("background-image");
         	goToArtistAlbums(artistID.substring(6, artistID.length));
         });
     });

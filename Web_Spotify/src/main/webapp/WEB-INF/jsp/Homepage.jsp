@@ -135,7 +135,7 @@
                     <div class="centerTopBarContent">Overview</div>
                     <div class="centerTopBarContent" id="recommended-button">Recommended</div>
                     <div class="centerTopBarContent" id="genre-button">Genre</div>
-                    <div class="centerTopBarContent">More</div>
+                    <div class="centerTopBarContent" id="editor-choice-button">Editor Choice</div>
                 </div>
                 <div id="logout-button" style="float: right; margin-top: 13px; margin-right: 30px;"><i class="material-icons">power_settings_new</i></div>
             </div>
@@ -177,8 +177,8 @@
                     	<i class="material-icons icons" style="font-size:35px;">playlist_add</i>
                 	</div>
             	</div>
-            	<div id=albumName>Immortalized</div>
-            	<div id="artistName">Disturbed</div>
+            	<div id="playBarAlbumName">Immortalized</div>
+            	<div id="playBarArtistName">Disturbed</div>
 
         	</div>
         	<div id="playBarCenter">
@@ -191,7 +191,8 @@
                 	<i class="material-icons icons playBarFunctionalityButton" id="next-button" style="font-size:35px;">skip_next</i>
                 	<i class="material-icons icons playBarFunctionalityButton">thumb_up</i>
                 	<i class="material-icons icons playBarFunctionalityButton" id="repeat-toggle-button">arrow_forward</i>
-                	<i class="material-icons icons playBarFunctionalityButton" data-toggle="modal" data-target="#lyricsPopup" id="lyrics-button">receipt</i>
+                	<i class="material-icons icons playBarFunctionalityButton" 
+                	href="#" title="Lyrics" data-toggle="popover" data-placement="top" data-content="No Lyrics Available" id="lyrics-button">receipt</i>
             	</div>
 			
             	<div id="progressBar">

@@ -12,6 +12,10 @@ $( document ).ready(function() {
 	$("#recommended-button").click(function(event){
 		getRecommendedPage(false);
 	});
+	
+	$("#editor-choice-button").click(function(event){
+		goToEditorChoiceSongs();
+	});
 });
 
 function loadLibraryOverview(){
@@ -101,4 +105,18 @@ function changeTableTitlesForRecommended(){
 	$(".song-table-title").html("Songs You Might Like");
 	$(".artist-table-title").html("Artists You Might Like");
 	$(".album-table-title").html("Albums You Might Like");
+}
+
+
+function goToEditorChoiceSongs(){
+	$.ajax({
+		type : "GET",
+		url : "editorChoices.html",
+        success: function (data) {
+        	$('#centerSideContent').empty();
+        	addSongsToCenterContent(data);
+        	$(".song-table-title").html("Songs Of Editors' Choice");
+        	lastAjaxCallToRenderToCenter = "goToEditorChoiceSongs()";
+        }
+	});
 }

@@ -105,9 +105,6 @@
 #volumeController{
     position: relative;
     width: 185px;
-    top:25px;
-    left:50%;
-    transform: translateX(-50%);
 
 }
 
@@ -190,6 +187,5 @@ Added 10/31 by Limeng
 }
 
 .jp-volume-controls{
-	padding-left: 50px;
-	padding-top: 25px;
+
 }

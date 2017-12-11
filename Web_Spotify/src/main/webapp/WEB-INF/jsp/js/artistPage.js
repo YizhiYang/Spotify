@@ -50,6 +50,12 @@ function getArtistBio(artistID){
 
 function addArtistTitleToArtistPage(artistID){
 	$('.album-table-title').html(selectedArtistName);
+	$('#AlbumPageTop').css("background-image", selectedArtistImageURL);
+	$('#AlbumPageTop').css("background-size", "cover");
+	$('#AlbumPageTop').css("min-height","500px");
+	$('#AlbumPageTop').children().eq(0).css("background-color", "rgba(0, 0, 0, 0.6)");
+	$('#AlbumPageTop').children().eq(0).css("min-height", "500px");
+
 	if(userType == "ADMIN" || loggedInArtistId == artistID){
 		$('.album-table-title').parent().append('<button id="addAlbumToArtistButton" class="btn btn-warning">Add Album To Artist</button>');
 		
@@ -69,7 +75,6 @@ function getRelatedArtists(artistID){
 		success : function(data) {
 			addArtistsToCenterContent(data);
 			$('.artist-table-title').html("Related/Similar Artists");
-
 		}
 	});
 }

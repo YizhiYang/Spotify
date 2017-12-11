@@ -42,6 +42,13 @@ function goToAlbumSongs(albumID){
 
 function addAlbumTitleToSongPage(albumID){
 	$('.song-table-title').html(selectedAlbumName);
+	
+	$('#PlayListPrototypeTop').css("background-image", selectedAlbumImageURL);
+	$('#PlayListPrototypeTop').css("background-size", "cover");
+	$('#PlayListPrototypeTop').css("min-height","500px");
+	$('#PlayListPrototypeTop').children().eq(0).css("background-color", "rgba(0, 0, 0, 0.6)");
+	$('#PlayListPrototypeTop').children().eq(0).css("min-height", "500px");
+	
 	if(userType == "ADMIN"){
 		$('.song-table-title').parent().append('<button id="addSongToAlbumButton" class="btn btn-warning">Add Song To Album</button>');
 		

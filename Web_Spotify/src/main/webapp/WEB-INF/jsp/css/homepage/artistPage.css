@@ -1,3 +1,13 @@
+/*#AlbumPageTop{
+	background-size: cover;
+	min-height: 500px;
+}
+
+#AlbumPageTop > div{
+	background-color: rgba(0, 0, 0, 0.6);
+	min-height: 500px;
+}*/
+
 #ArtistPageTop{
     height: 125px;
     border-bottom: 1px solid silver;

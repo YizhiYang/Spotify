@@ -38,16 +38,18 @@ $( document ).ready(function() {
 		var tempArr = myPlaylist[currentPlayingIndex].mp3.split("/");
 		var songId = tempArr[tempArr.length-1].substring(0,tempArr[tempArr.length-1].length-5);
 		$(".song-content-play-button").eq(currentPlayingIndex).html("pause");
-		console.log("yoyuoyooyoyoo")
-		console.log(songAlbumImageUrls[currentPlayingIndex]);
 		$("#playBarImage").css("background-image", "url(" + songAlbumImageUrls[currentPlayingIndex] +")");
+		$("#playBarAlbumName").html(songAlbumName[currentPlayingIndex]);
+		$("#playBarArtistName").html(songArtistName[currentPlayingIndex]);
 		$(".song-content-play-button").each(function(index){
 			if(index != currentPlayingIndex){
+				console.log(index +","+ currentPlayingIndex);
 				$(this).html("play_circle_outline");
 			}
 		});
 		getLyrics(songId);
 		addSongToPlayHistory(songId);
+		e.preventDefault();
 	});
 	player.on($.jPlayer.event.pause, function(e){
 		$(".song-content-play-button").eq(currentPlayingIndex).html("play_circle_outline");
@@ -55,11 +57,13 @@ $( document ).ready(function() {
 		$("#pause-button").hide();
 	});
 	player.on($.jPlayer.event.stop, function(e){
+
 		$(".song-content-play-button").eq(currentPlayingIndex).html("play_circle_outline");
 		$("#play-button").show();
 		$("#pause-button").hide();
 	});
 	player.on($.jPlayer.event.ended, function(e){
+
 		$(".song-content-play-button").eq(currentPlayingIndex).html("play_circle_outline");
 		if(currentRepeatType == 0){
 			if(currentPlayingIndex != playlistLength - 1){
@@ -121,8 +125,6 @@ function getLyrics(songId){
 					currentLyricsLine.push(timeAndLine[1]);
 				}
 			}
-			console.log(currentLyricsLine);
-			console.log(currentLyricsTime);
 		}
 	});
 }
@@ -158,6 +160,7 @@ function renderLyrics(currentTime){
 	totalLyricsToDisplay += '<p>' + currentLyricsLine[indexOfNextLyricsLine] + '</p>';
 	
 	$(".lyrics-body").html(totalLyricsToDisplay);
+	$("#lyrics-button").attr("data-content", totalLyricsToDisplay);
 }
 
 function addSongToPlayHistory(songId){
@@ -165,7 +168,7 @@ function addSongToPlayHistory(songId){
 		type : "POST",
 		url : "addSongToPlayHistory/" + songId + ".html",
 		success : function(data) {
-			refreshCenterContent();
+			
 		}
 	});
 }

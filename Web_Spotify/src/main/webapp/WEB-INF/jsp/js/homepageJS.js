@@ -4,6 +4,11 @@ var player;
 var myPlaylist=[];
 //THE SONGS CORRESPONDING IMAGES
 var songAlbumImageUrls=[];
+//SONGS ALBUM NAME AND ARTIST
+var songAlbumName=[];
+var songArtistName=[];
+
+
 //THE LENGTH OF PLAYLIST LOADED IN PLAYER
 var playlistLength;
 //THE INDEX OF THE SONG BEING PLAYED BY PLAYER
@@ -33,10 +38,18 @@ var lastAjaxCallToRenderToCenter;
 
 
 
-//FOR ALBUM PAGE
-var selectedAlbumName;
+
 //FOR ARTIST PAGE
 var selectedArtistName;
+//SELECTED ARTIST IMAGE URL
+var selectedArtistImageURL;
+
+
+//FOR ALBUM PAGE
+var selectedAlbumName;
+//SELECTED ALBUM IMAGE URL
+var selectedAlbumImageURL;
+
 //ARTIST OWNED ALBUMS
 var ownedAlbumIDs=[];
 //LOGGED IN ARTIST ID
