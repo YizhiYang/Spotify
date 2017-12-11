@@ -175,4 +175,13 @@ public class ArtistServiceImpl implements ArtistService {
 		return relatedArtists;
 	}
 
+	public void addArtist(String imageURL, String artistName, String artistBio) {
+		ArtistUser artist = new ArtistUser();
+		artist.setArtistImageUrl(imageURL);
+		artist.setArtistName(artistName);
+		artist.setBio(artistBio);
+		artistRepo.saveAristToDB(artist);
+		
+	}
+
 }

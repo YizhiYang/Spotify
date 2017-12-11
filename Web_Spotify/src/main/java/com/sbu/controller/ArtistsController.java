@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -79,5 +80,19 @@ public class ArtistsController {
 		}
 		ArtistUser artist = artistService.getArtistByArtistID(artistId);
 		response.getWriter().write(artist.getBio());
+	}
+	
+	@PostMapping(value = "/addArist")
+	public void addArist(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		
+		String imageURL = request.getParameter("imageURL");
+		String artistName = request.getParameter("artistName");
+		String artistBio = request.getParameter("artistBio");
+		
+		artistService.addArtist(imageURL, artistName, artistBio);
 	}
 }

@@ -114,6 +114,9 @@
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Admin-AddAccount-Button" data-toggle="modal" data-target="#adminAddAccountPopUp">Add Account</div>
                         </li>
+                        <li class=userSongWrapperList>
+                        	<div class='userSongWrapperItem' id="Admin-AddArtist-Button" data-toggle="modal" data-target="#adminAddArtistPopUp">Add Artist</div>
+                        </li>
                         
                         <li class="sideBarMenuHeader" id="artist-menu-header">Artist Menu</li>
                         <li class=userSongWrapperList>
@@ -191,8 +194,7 @@
                 	<i class="material-icons icons playBarFunctionalityButton" id="next-button" style="font-size:35px;">skip_next</i>
                 	<i class="material-icons icons playBarFunctionalityButton">thumb_up</i>
                 	<i class="material-icons icons playBarFunctionalityButton" id="repeat-toggle-button">arrow_forward</i>
-                	<i class="material-icons icons playBarFunctionalityButton" 
-                	href="#" title="Lyrics" data-toggle="popover" data-placement="top" data-content="No Lyrics Available" id="lyrics-button">receipt</i>
+                	<i class="material-icons icons playBarFunctionalityButton" data-toggle="modal" data-target="#lyricsPopup" id="lyrics-button">receipt</i>
             	</div>
 			
             	<div id="progressBar">
@@ -227,6 +229,36 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Pop up for add artist -->
+<div class="modal fade" id="adminAddArtistPopUp">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Artist</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="add-artist-form" method="post">
+  			<div class="form-group">
+    			<label class="col-form-label" for="addArtistImageURLInput">Image to be added for Artist</label>
+    			<input type="text" class="form-control" id="addArtistImageURLInput" name="imageURL" placeholder="Image URL">
+    			<label class="col-form-label" for="addArtistArtistNameInput">Artist Name</label>
+    			<input type="text" class="form-control" id="addArtistArtistNameInput" name="artistName" placeholder="Artist Name">
+    			<label class="col-form-label" for="addArtistArtistNameInput">Artist Bio</label>
+    			<input type="text" class="form-control" id="addArtistArtistBioInput" name="artistBio" placeholder="Artist Bio">
+  			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="submitAddArtistButton">Add Artist</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Popup for admin add account -->
@@ -267,11 +299,8 @@
 <div class="modal fade" id="lyricsPopup">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header"></div>
       <div class="modal-body lyrics-body">
       	No Lyrics Found
-      </div>
-      <div class="modal-footer">
       </div>
     </div>
   </div>

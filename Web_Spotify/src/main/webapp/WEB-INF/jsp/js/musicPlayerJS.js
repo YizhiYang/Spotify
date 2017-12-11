@@ -142,25 +142,24 @@ function renderLyrics(currentTime){
 		//END OF SONG
 		//RENDER LAST THREE LINES
 		indexOfNextLyricsLine = currentLyricsLine.length;
-		totalLyricsToDisplay += '<p>' + currentLyricsLine[indexOfNextLyricsLine - 3] + '</p>';
-		totalLyricsToDisplay += '<p>' + currentLyricsLine[indexOfNextLyricsLine - 2] + '</p>';
+		totalLyricsToDisplay += '<p style="color:#fff;">' + currentLyricsLine[indexOfNextLyricsLine - 3] + '</p>';
+		totalLyricsToDisplay += '<p style="color:#fff;">' + currentLyricsLine[indexOfNextLyricsLine - 2] + '</p>';
 		totalLyricsToDisplay += '<p style="color:red;">' + currentLyricsLine[indexOfNextLyricsLine - 1] + '</p>';
 		$(".lyrics-body").html(totalLyricsToDisplay);
 		return;
 	}
 	//RENDER PREVIOUS LINE
 	if(indexOfNextLyricsLine - 2 >= 0){
-		totalLyricsToDisplay += '<p>' + currentLyricsLine[indexOfNextLyricsLine - 2] + '</p>';
+		totalLyricsToDisplay += '<p style="color:#fff;">' + currentLyricsLine[indexOfNextLyricsLine - 2] + '</p>';
 	}
 	//RENDER CURRENT LINE
 	if(indexOfNextLyricsLine - 1 >= 0){
 		totalLyricsToDisplay += '<p style="color:red;">' + currentLyricsLine[indexOfNextLyricsLine - 1] + '</p>';
 	}
 	//RENDER NEXT LINE
-	totalLyricsToDisplay += '<p>' + currentLyricsLine[indexOfNextLyricsLine] + '</p>';
+	totalLyricsToDisplay += '<p style="color:#fff;">' + currentLyricsLine[indexOfNextLyricsLine] + '</p>';
 	
 	$(".lyrics-body").html(totalLyricsToDisplay);
-	$("#lyrics-button").attr("data-content", totalLyricsToDisplay);
 }
 
 function addSongToPlayHistory(songId){

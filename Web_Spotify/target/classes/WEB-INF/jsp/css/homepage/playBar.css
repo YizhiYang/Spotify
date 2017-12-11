@@ -1,3 +1,20 @@
+#lyricsPopup{
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+#lyricsPopup>div{
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+#lyricsPopup>div>div{
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+#lyricsPopup>div>div>div{
+	background-color: rgba(0, 0, 0, 0.6);
+	font-size: 30px !important;
+}
+
 #playBarLeft{
     position: relative;
     width: 25%;

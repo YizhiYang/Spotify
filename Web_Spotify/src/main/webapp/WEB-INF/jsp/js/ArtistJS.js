@@ -3,6 +3,11 @@ $( document ).ready(function() {
 		makeUserArtist();
 		event.preventDefault();
 	});
+	
+	$("#submitAddArtistButton").click(function(event) {
+		addArtist();
+		event.preventDefault();
+	});
 });
 
 function makeUserArtist(){
@@ -13,6 +18,19 @@ function makeUserArtist(){
 		data : UserArtistData,
         success: function (data) {
             $('#makeUserArtistPopUp').modal('hide');
+            refreshCenterContent();
+        },
+	});
+}
+
+function addArtist(){
+	var artistData = $('#add-artist-form').serialize();
+	$.ajax({
+		type : "POST",
+		url : "addArist.html",
+		data : artistData,
+        success: function (data) {
+            $('#adminAddArtistPopUp').modal('hide');
             refreshCenterContent();
         },
 	});

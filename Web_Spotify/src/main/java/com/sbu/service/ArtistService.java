@@ -35,5 +35,6 @@ public interface ArtistService {
 	List<ArtistUser> getRecommendArtist();
 	
 	List<ArtistUser> getRelatedArtist(String gen, String selfId);
-
+	
+	void addArtist(String imageURL, String artistName, String artistBio);
 }

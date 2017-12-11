@@ -69,6 +69,7 @@ var recommendedArtists;
 var firstLoad = true;
 
 $( document ).ready(function() {
+	$("[data-toggle=popover]").popover();
 		//GET INITIAL DATA NEEDED AND STORE THEM
 		getUserTypeAndRerender();
 		getUserName();
