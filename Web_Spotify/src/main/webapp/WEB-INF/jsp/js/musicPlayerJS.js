@@ -43,7 +43,6 @@ $( document ).ready(function() {
 		$("#playBarArtistName").html(songArtistName[currentPlayingIndex]);
 		$(".song-content-play-button").each(function(index){
 			if(index != currentPlayingIndex){
-				console.log(index +","+ currentPlayingIndex);
 				$(this).html("play_circle_outline");
 			}
 		});

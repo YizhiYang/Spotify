@@ -41,10 +41,23 @@ td {
     height: 30px;
     text-align: left;
     padding: 8px;
+    margin: 8px;
        overflow: hidden;
    white-space: nowrap;
     word-wrap: break-word;
     animation-duration: 1s;
+}
+
+td >div{
+	min-width: 100px;
+	max-width: 250px;
+	padding: 8px;
+    margin: 8px;
+}
+
+.dropdown{
+	padding:0px !important;
+	margin:0px !important;
 }
 
 .songPageListContent:hover{

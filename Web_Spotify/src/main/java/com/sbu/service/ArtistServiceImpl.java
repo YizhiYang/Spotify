@@ -77,12 +77,13 @@ public class ArtistServiceImpl implements ArtistService {
 			List<Album> albums = artist.getAlbum();
 			System.out.println(albums.size());
 			for(int j=0; j<albums.size(); j++){
-				totalNumberOfSongs += albums.get(j).getNumOfSongs();
+				totalNumberOfSongs += albums.get(j).getSongs().size();
 			}
 			
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("artistID", artist.getArtistID());
 			jsonObject.put("artistName", artist.getArtistName());
+			
 			
 			//DETERMINE IF USE IMAGE FROM OTHER SOURCE OR FROM OWN SERVER
 			if(artist.getUser()!=null){

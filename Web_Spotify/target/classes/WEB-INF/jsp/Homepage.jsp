@@ -135,7 +135,6 @@
                 <div id="centerTopWrapper">
                     <input class="centerTopBarContent" id="searchInput" type="text" name="searchContent">
                     <i class="material-icons centerTopBarContent" id="searchButton">search</i>
-                    <div class="centerTopBarContent">Overview</div>
                     <div class="centerTopBarContent" id="recommended-button">Recommended</div>
                     <div class="centerTopBarContent" id="genre-button">Genre</div>
                     <div class="centerTopBarContent" id="editor-choice-button">Editor Choice</div>
@@ -148,7 +147,7 @@
                 <div id=rightTopWrapper>
                     <p id="friend-list-title">Friends</p>
                     <input id="searchFriendInput" type="text" name="friendUsername">
-                    <button id="findFriendsButton">Find And Add Friend</button>
+                    <i class="material-icons" id="findFriendsButton">search</i>
                 </div>
                 <div id=rightBottomWrapper>
                 </div>
@@ -174,14 +173,14 @@
     	<div id="playBar">
 			<div id="jquery_jplayer_1" class="jp-jplayer"></div>
         	<div id="playBarLeft">
-            	<div id=playBarImage style="background-image: url(./images/albumCover1.jpg);"></div>
+            	<div id=playBarImage style="background-image: url(./images/175x175bb.jpg);"></div>
             	<div id=playBarLeftAddSong>
                 	<div id=playBarLeftAddSongWrapper>
                     	<i class="material-icons icons" style="font-size:35px;">playlist_add</i>
                 	</div>
             	</div>
-            	<div id="playBarAlbumName">Immortalized</div>
-            	<div id="playBarArtistName">Disturbed</div>
+            	<div id="playBarAlbumName"></div>
+            	<div id="playBarArtistName"></div>
 
         	</div>
         	<div id="playBarCenter">

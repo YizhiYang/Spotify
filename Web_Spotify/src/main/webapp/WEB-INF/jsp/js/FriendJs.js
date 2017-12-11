@@ -38,6 +38,7 @@ function renderFriendList(jsonData){
 	$(".rightFriendListItem").each(function(index){
 		$(this).click(function(event){
 			var friendIdStr= $(this).attr("id");
+			selectedUserImageURL = 'url(getProfileImageWithUsername/'+ jsonArray[index].friendUserName +'.html)';
 			goToFriendPage(friendIdStr.substr(6, friendIdStr.length), $(".rightFriendListFriendName").eq(index).html());
 		});
 	});
@@ -91,7 +92,13 @@ function goToFriendPage(friendId, friendName){
         	$("#centerSideContent").empty();
         	addPlaylistsToCenterContent(data);
         	$(".playlist-table-title").html(friendName);
-        	$('.playlist-table-title').parent().append('<div id="unfriendButton">Unfriend</div>'); 	
+        	$('.playlist-table-title').parent().append('<button type="button" class="btn btn-warning" id="unfriendButton">Unfriend</button>\
+        			<div style="border-bottom:transparent; font-size:45px; position: absolute; bottom: 0;">His/Her Playlists</div>');
+        	$('#AlbumPageTop').css("background-image", selectedUserImageURL);
+        	$('#AlbumPageTop').css("background-size", "cover");
+        	$('#AlbumPageTop').css("min-height","500px");
+        	$('#AlbumPageTop').children().eq(0).css("background-color", "rgba(0, 0, 0, 0.6)");
+        	$('#AlbumPageTop').children().eq(0).css("min-height", "500px");
         	$('#unfriendButton').click(function(event){
         		removeFriend(friendId);
         	});

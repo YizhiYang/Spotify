@@ -37,7 +37,7 @@ function addSongsToCenterContent(jsonData){
     	var song = jsonArray[i];
     	//APPEND THE BUTTONS ON THE LEFT SIDE OF SONG ITEM
     	var contentToBeAdded = '<tr class="songPageListContent" id="song' + song.songId + '">\
-			<td><i class="material-icons song-content-play-button">play_circle_outline</i>';
+			<td><div><i class="material-icons song-content-play-button">play_circle_outline</i>';
     	//RENDER FOLLOW/UNFOLLOW BUTTON BASED ON IF FOLLOWED
     	var isSongFollowed = false;
     	for(j=0; j<jsonUserFollowedSongs.length; j++){
@@ -63,24 +63,24 @@ function addSongsToCenterContent(jsonData){
     			contentToBeAdded += '<div class="dropdown-item add-to-playlist-item" id="' + $(this).attr('id') + ',song' + song.songId
     			+ '" style="color:#000;">' + $(this).html() + '</div>';
     	});
-    	contentToBeAdded += '</div>\
+    	contentToBeAdded += '</div></div>\
             			</div>'
     	contentToBeAdded += '</td>';
     	//ADD SONG NAME
-    	contentToBeAdded += '<td>' + song.songName + '</td>';
+    	contentToBeAdded += '<td><div>' + song.songName + '</div></td>';
     	//ADD ARTISTS' NAMES
     	var artistNames = song.artistNames;
-    	contentToBeAdded += '<td>';
+    	contentToBeAdded += '<td><div>';
     	for(j=0; j<artistNames.length; j++){
     		contentToBeAdded += artistNames[j] + ' ';
     	}
-    	contentToBeAdded += '</td>';
+    	contentToBeAdded += '</div></td>';
     	//ADD ALBUM NAME
-    	contentToBeAdded += '<td>' + song.albumName + '</td>';
+    	contentToBeAdded += '<td><div>' + song.albumName + '</div></td>';
     	//ADD GENRE
-    	contentToBeAdded += '<td>' + song.songGenre + '</td>';
+    	contentToBeAdded += '<td><div>' + song.songGenre + '</div></td>';
     	//ADD LISTEN COUNT
-    	contentToBeAdded += '<td>' + song.listenCount + '</td>';
+    	contentToBeAdded += '<td><div>' + song.listenCount + '</div></td>';
     	//ADD DURATION
     	contentToBeAdded += '<td>' + song.duration;
     	//ADD BUTTON FOR ADMIN TO DELETE SONG
@@ -416,6 +416,7 @@ function addFriendsToCenterContent(jsonData){
 	$(".centerFriendImage").each(function(index){
 		$(this).click(function(event){
 			var friendIdStr= $(this).attr("id");
+			selectedUserImageURL = 'url(getProfileImageWithUsername/'+ jsonArray[index].friendUserName +'.html)';
 			goToFriendPage(friendIdStr.substr(6, friendIdStr.length), $(".centerFriendListFriendName").eq(index).html());
 		});
 	});

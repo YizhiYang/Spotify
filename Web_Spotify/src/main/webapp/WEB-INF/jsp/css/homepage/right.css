@@ -56,26 +56,22 @@
 #rightTopWrapper{
     position: relative;
     width: 100%;
-    height: 150px;
+    height: 100px;
     background-color: black;
 }
 
 #searchFriendInput{
-	margin-left:25px;
 	color: #990000;
+	margin-left: 10px;
 }
 
 #findFriendsButton{
-    background-color: transparent;
-    color: white;
-    height: 40px;
-    border-radius: 25px;
-        transition-duration: 0.5s;
+	position: relative;
+	top: 8px;
 }
 
 #findFriendsButton:hover{
-    background-color: darkred;
-    cursor: pointer;
+	color: darkred;
 }
 
 #friend-list-title{

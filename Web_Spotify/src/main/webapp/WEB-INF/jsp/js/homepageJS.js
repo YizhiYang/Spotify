@@ -58,6 +58,8 @@ var loggedInArtistId = -1;
 
 //FRIENDS
 var friendIds=[];
+//SELECTE USER IMAGE URL
+var selectedUserImageURL;
 
 
 //RECOMMENDED
