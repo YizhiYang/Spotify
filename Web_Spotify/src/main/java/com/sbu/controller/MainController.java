@@ -592,6 +592,9 @@ public class MainController {
 			allSongs.addAll(songs);
 		}
 		String genre = songService.getMostOccur(allSongs);
+		if(genre == null){
+			return;
+		}
 		List<ArtistUser> allArtists = artistService.getRelatedArtist(genre, id);
 		
 		response.getWriter().write(artistService.convertArtistsToJSON(allArtists));

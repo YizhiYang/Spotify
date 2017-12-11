@@ -1,5 +1,6 @@
 package com.sbu.service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sbu.controller.AlbumsController;
 import com.sbu.model.Album;
 import com.sbu.model.ArtistUser;
 import com.sbu.model.Playlist;
@@ -82,6 +84,21 @@ public class SongServiceImpl implements SongService {
 				jsonObject.put("duration", song.getDuration());
 				jsonObject.put("songGenre", song.getSongGenre());
 				jsonObject.put("listenCount", song.getListenCount());
+				
+				jsonObject.put("albumId", album.getAlbumId());
+				jsonObject.put("albumImageUrl", album.getAlbumImageUrl());
+				
+				File file = null;
+		        ClassLoader classloader = Thread.currentThread().getContextClassLoader(); 
+				String albumFileName = null;    
+				albumFileName = album.getAlbumId() + AlbumsController.ALBUMS_EXTENSION;
+		        String albumPath = classloader.getResource(AlbumsController.ALBUMS_FILE_PATH).getPath();      
+		        file = new File(albumPath+albumFileName);
+		        if(file.exists()){
+		        	jsonObject.put("imageType", "file");
+		        }else{
+		        	jsonObject.put("imageType", "url");
+		        }
 			
 				jsonArray.put(jsonObject);
 			}
@@ -142,6 +159,21 @@ public class SongServiceImpl implements SongService {
 				jsonObject.put("albumName", album.getAlbumName());
 				jsonObject.put("artistNames", artistNames);
 				jsonObject.put("duration", song.getDuration());
+				
+				jsonObject.put("albumId", album.getAlbumId());
+				jsonObject.put("albumImageUrl", album.getAlbumImageUrl());
+				
+				File file = null;
+		        ClassLoader classloader = Thread.currentThread().getContextClassLoader(); 
+				String albumFileName = null;    
+				albumFileName = album.getAlbumId() + AlbumsController.ALBUMS_EXTENSION;
+		        String albumPath = classloader.getResource(AlbumsController.ALBUMS_FILE_PATH).getPath();      
+		        file = new File(albumPath+albumFileName);
+		        if(file.exists()){
+		        	jsonObject.put("imageType", "file");
+		        }else{
+		        	jsonObject.put("imageType", "url");
+		        }
 			
 				jsonArray.put(jsonObject);
 			}
@@ -189,16 +221,29 @@ public class SongServiceImpl implements SongService {
 	}
 
 	public String getTopSongsOfGenre(String genre) throws JSONException {
-		String genreReplaceSpace = genre.replaceAll(" ", "-");
-		String genreReplaceSpace2 = genre.replaceAll(" ", "");
-		String genreReplaceDash = genre.replaceAll("-", "");
-		String genreReplaceDash2 = genre.replaceAll("-", " ");
+		String genreReplaceSpace = null;
+		String genreReplaceSpace2 = null;
+		String genreReplaceDash = null;
+		String genreReplaceDash2 = null;
+		if(genre.contains(" ")){
+			genreReplaceSpace = genre.replaceAll(" ", "-");
+			genreReplaceSpace2 = genre.replaceAll(" ", "");
+		}
+		if(genre.contains("-")){
+			genreReplaceDash = genre.replaceAll("-", "");
+			genreReplaceDash2 = genre.replaceAll("-", " ");
+		}
+
 		List<Song> songs = new ArrayList<Song>();
 		songs.addAll(songRepo.getTopSongsByGenre(genre));
-		songs.addAll(songRepo.getTopSongsByGenre(genreReplaceSpace));
-		songs.addAll(songRepo.getTopSongsByGenre(genreReplaceSpace2));
-		songs.addAll(songRepo.getTopSongsByGenre(genreReplaceDash));
-		songs.addAll(songRepo.getTopSongsByGenre(genreReplaceDash2));
+		if(genreReplaceSpace != null){
+			songs.addAll(songRepo.getTopSongsByGenre(genreReplaceSpace));
+			songs.addAll(songRepo.getTopSongsByGenre(genreReplaceSpace2));
+		}
+		if(genreReplaceDash != null){
+			songs.addAll(songRepo.getTopSongsByGenre(genreReplaceDash));
+			songs.addAll(songRepo.getTopSongsByGenre(genreReplaceDash2));
+		}
 
 		return convertSongsToJSON(songs);
 	}
@@ -220,6 +265,9 @@ public class SongServiceImpl implements SongService {
 		    {
 		        maxEntry = entry;
 		    }
+		}
+		if(maxEntry == null){
+			return null;
 		}
 		return maxEntry.getKey();	
 	}

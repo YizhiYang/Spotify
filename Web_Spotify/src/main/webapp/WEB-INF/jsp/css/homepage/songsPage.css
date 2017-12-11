@@ -1,3 +1,5 @@
+
+
 #SongsPlayButton{
     top:15px;
     left:10px;
@@ -47,5 +49,4 @@ td {
 
 .songPageListContent:hover{
     background-color:grey;
-    cursor: pointer;
 }

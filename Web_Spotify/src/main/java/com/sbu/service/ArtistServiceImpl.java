@@ -165,8 +165,10 @@ public class ArtistServiceImpl implements ArtistService {
 				allSongs.addAll(songs);
 			}
 			String genre = songService.getMostOccur(allSongs);
-			if(genre.equals(gen) && !selfId.equals(String.valueOf(artist.getArtistID()))){
-				relatedArtists.add(artist);
+			if(genre != null){
+				if(genre.equals(gen) && !selfId.equals(String.valueOf(artist.getArtistID()))){
+					relatedArtists.add(artist);
+				}
 			}
 		}
 		

@@ -12,6 +12,7 @@
 	<style type="text/css"><%@ include file="css/homepage/playListPrototypePage.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/albumPage.css" %> </style>
 	<style type="text/css"><%@ include file="css/homepage/artistPage.css" %> </style>
+	<style type="text/css"><%@ include file="css/homepage/songsPage.css" %> </style>
 	<style type="text/css"><%@ include file="js/slick/slick.css" %> </style>
  	<link href="https://fonts.googleapis.com/css?family=Raleway | Asap | Work+Sans | Ubuntu | Oxygen | Archivo+Black | Rokkitt | Passion+One" rel="stylesheet">
  	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -158,8 +159,6 @@
     <div id="advertisementBlock">
     <i class="material-icons advertisement-close-button">close</i>
     	<div id = "advertisementWrapper" class="autoplay">
-    		<div class="adImage" style="background-image:url(http://blog.visme.co/wp-content/uploads/2015/10/color1.jpg);"></div>
-    		<div class="adImage" style="background-image:url(https://cdn.inquisitr.com/wp-content/uploads/2015/12/Nesquik-Hot-Chocolate.jpg);"></div>
     	</div>
     </div>
     

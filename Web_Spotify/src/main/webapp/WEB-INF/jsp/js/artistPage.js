@@ -43,6 +43,7 @@ function getArtistBio(artistID){
 		success : function(data) {
 			$('.album-table-title').parent().append('<div>' + data + '</div>');
 			addArtistTitleToArtistPage(artistID);
+			getRelatedArtists(artistID);
 		}
 	});
 }
@@ -61,3 +62,14 @@ function addArtistTitleToArtistPage(artistID){
 	}
 }
 
+function getRelatedArtists(artistID){
+	$.ajax({
+		type : "GET",
+		url : "getRelatedArtists/" + artistID + ".html",
+		success : function(data) {
+			addArtistsToCenterContent(data);
+			$('.artist-table-title').html("Related/Similar Artists");
+
+		}
+	});
+}

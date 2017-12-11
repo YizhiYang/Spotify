@@ -94,6 +94,12 @@ function addSongsToCenterContent(jsonData){
     myPlaylist = [];
     for(i=0; i<loopNumber; i++){
     	myPlaylist.push({mp3:"requestSongFile/" + jsonArray[i].songId +".html"});
+    	console.log(jsonArray[i].imageType + ", " + i);
+    	if(jsonArray[i].imageType == "file"){
+    		songAlbumImageUrls.push('requestAlbumImage/' + jsonArray[i].albumId + '.html');
+    	}else{
+    		songAlbumImageUrls.push(jsonArray[i].albumImageUrl);
+    	}
     }
     playlistLength = loopNumber;
 	
@@ -385,7 +391,7 @@ function addFriendsToCenterContent(jsonData){
         	}
         }
         if(!isfriend){
-        	contentToBeAdded += '<div class="addFriendButton">Add Friend</div>';
+        	contentToBeAdded += '<button class="addFriendButton btn btn-primary" id="addFriend'+ friend.friendUserName+'">Add Friend</button>';
         }
         if(userType == "ADMIN"){
         	contentToBeAdded += '<i class="material-icons adminDeleteUserButton" id="user' + friend.friendId + '">delete</i>';
@@ -405,7 +411,8 @@ function addFriendsToCenterContent(jsonData){
 	
 	$(".addFriendButton").each(function(index){
 		$(this).click(function(event){
-			addFriend($(".centerFriendListFriendName").eq(index).html());
+			var friendIdStr= $(this).attr("id");
+			addFriend(friendIdStr.substr(9, friendIdStr.length));
 		});
 	});
 	

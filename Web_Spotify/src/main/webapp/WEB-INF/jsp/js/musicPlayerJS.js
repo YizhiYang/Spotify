@@ -37,18 +37,30 @@ $( document ).ready(function() {
 		$("#pause-button").show();
 		var tempArr = myPlaylist[currentPlayingIndex].mp3.split("/");
 		var songId = tempArr[tempArr.length-1].substring(0,tempArr[tempArr.length-1].length-5);
+		$(".song-content-play-button").eq(currentPlayingIndex).html("pause");
+		console.log("yoyuoyooyoyoo")
+		console.log(songAlbumImageUrls[currentPlayingIndex]);
+		$("#playBarImage").css("background-image", "url(" + songAlbumImageUrls[currentPlayingIndex] +")");
+		$(".song-content-play-button").each(function(index){
+			if(index != currentPlayingIndex){
+				$(this).html("play_circle_outline");
+			}
+		});
 		getLyrics(songId);
 		addSongToPlayHistory(songId);
 	});
 	player.on($.jPlayer.event.pause, function(e){
+		$(".song-content-play-button").eq(currentPlayingIndex).html("play_circle_outline");
 		$("#play-button").show();
 		$("#pause-button").hide();
 	});
 	player.on($.jPlayer.event.stop, function(e){
+		$(".song-content-play-button").eq(currentPlayingIndex).html("play_circle_outline");
 		$("#play-button").show();
 		$("#pause-button").hide();
 	});
 	player.on($.jPlayer.event.ended, function(e){
+		$(".song-content-play-button").eq(currentPlayingIndex).html("play_circle_outline");
 		if(currentRepeatType == 0){
 			if(currentPlayingIndex != playlistLength - 1){
 				playNextSong();
