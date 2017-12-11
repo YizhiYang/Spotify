@@ -40,4 +40,7 @@ public interface SongService {
 	String getMostOccur(List<Song> allSongs);
 	
 	List<Song> getEditorSongs();
+	
+	
+	String getOwnedSongIds(User user);
 }

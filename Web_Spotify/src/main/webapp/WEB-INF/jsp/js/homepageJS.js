@@ -52,6 +52,9 @@ var selectedAlbumImageURL;
 
 //ARTIST OWNED ALBUMS
 var ownedAlbumIDs=[];
+//ARTIST OWNED SONGS
+var ownedSongIDs=[];
+
 //LOGGED IN ARTIST ID
 var loggedInArtistId = -1;
 
@@ -79,6 +82,7 @@ $( document ).ready(function() {
 		reloadFollowedAlbums(false);
 		reloadFollowedArtists(false);
 		reloadOwnedAlbumIDs(false);
+		reloadOwnedSongIDs(false);
 		loadLoggedInArtistID();
 		getBrowsePageContent(true);
 		//REGISTER ACCOUNT RELATED EVENTS
@@ -324,6 +328,22 @@ function reloadOwnedAlbumIDs(isRefreshCall){
 	});
 }
 
+function reloadOwnedSongIDs(isRefreshCall){
+	$.ajax({
+		type : "GET",
+		url : "loadOwnedSongs.html",
+		success : function(data) {
+			ownedSongIDs = [];
+			if(data!=""){
+				ownedSongIDs = data.split(",");
+			}
+			if(isRefreshCall){
+	        	refreshCenterContent();
+			}
+		}
+	});
+}
+
 function loadLoggedInArtistID(){
 	$.ajax({
 		type : "GET",
@@ -371,6 +391,8 @@ function hideAdminGUI(){
 	$("#Admin-MakeUserArtist-Button").parent().hide();
 	$("#Admin-PendingSongs-Button").parent().hide();
 	$("#Admin-AddAdvertisement-Button").parent().hide();
+	$("#Admin-AddAccount-Button").parent().hide();
+	$("#Admin-AddArtist-Button").parent().hide();
 }
 
 function hideArtistGUI(){

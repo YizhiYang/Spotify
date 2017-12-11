@@ -86,8 +86,7 @@
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-Artist-Button">Artists</div>
                         </li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Stations</div></li>
-                        <li class=userSongWrapperList><div class='userSongWrapperItem'>Local Files</div></li>
+
                         <li class="sideBarMenuHeader">MY PLAYLISTS <i class="material-icons" data-toggle="modal" data-target="#addNewPlaylistPopUp">library_add</i>
                         	<ul id="My-Playlist-List-Wrapper">
                         		<li></li>
@@ -185,15 +184,13 @@
         	</div>
         	<div id="playBarCenter">
             	<div id=playBarFunctionality>
-                	<i class="material-icons icons playBarFunctionalityButton">thumb_down</i>
                 	<i class="material-icons icons playBarFunctionalityButton" id="prev-button" style="font-size:35px;">skip_previous</i>
 					<i class="material-icons icons playBarFunctionalityButton jp-play" id="play-button" style="font-size:35px;">play_circle_outline</i>
 					<i class="material-icons icons playBarFunctionalityButton jp-pause" id="pause-button" style="font-size:35px;" style="display:none;">pause</i>
-					<i class="material-icons icons playBarFunctionalityButton jp-stop" id="stop-button">stop</i>
+					<i class="material-icons icons playBarFunctionalityButton jp-stop" id="stop-button" style="font-size:35px;">stop</i>
                 	<i class="material-icons icons playBarFunctionalityButton" id="next-button" style="font-size:35px;">skip_next</i>
-                	<i class="material-icons icons playBarFunctionalityButton">thumb_up</i>
-                	<i class="material-icons icons playBarFunctionalityButton" id="repeat-toggle-button">arrow_forward</i>
-                	<i class="material-icons icons playBarFunctionalityButton" data-toggle="modal" data-target="#lyricsPopup" id="lyrics-button">receipt</i>
+                	<i class="material-icons icons playBarFunctionalityButton" id="repeat-toggle-button" style="font-size:35px;">arrow_forward</i>
+                	<i class="material-icons icons playBarFunctionalityButton" data-toggle="modal" data-target="#lyricsPopup" id="lyrics-button" style="font-size:35px;">receipt</i>
             	</div>
 			
             	<div id="progressBar">

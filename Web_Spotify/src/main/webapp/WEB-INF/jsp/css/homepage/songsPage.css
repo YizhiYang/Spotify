@@ -49,8 +49,8 @@ td {
 }
 
 td >div{
-	min-width: 100px;
-	max-width: 250px;
+	min-width: 80px;
+	max-width: 200px;
 	padding: 8px;
     margin: 8px;
 }

@@ -113,7 +113,13 @@ function goToPlaylistSongs(playlistIndex){
 			$('#changePlaylistNameInput').val(userPlaylists[playlistIndex].playlistName);
 			selectedPlaylistId = userPlaylists[playlistIndex].playlistID;
 			$('#removePlaylistButton').click(function(event){
-				removePlaylist(userPlaylists[playlistIndex].playlistID);
+				$("#confirm-button").off("click");
+				$("#confirm-button").click(function(event){
+					removePlaylist(userPlaylists[playlistIndex].playlistID);
+				});
+				$("#editUserInfoPopUp").modal("hide");
+				$("#confirmationMessage").html("Are you sure you want to remove this playlist?");
+				$("#confirmationPopUp").modal("show");
 			});
 			lastAjaxCallToRenderToCenter = "goToPlaylistSongs(" + playlistIndex + ")";
 			console.log(lastAjaxCallToRenderToCenter);

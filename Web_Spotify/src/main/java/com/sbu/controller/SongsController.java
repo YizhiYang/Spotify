@@ -237,4 +237,20 @@ public class SongsController {
 		String jsonString = songService.getTopSongsOfGenre(genre);
 	    response.getWriter().write(jsonString);
 	}
+	
+	
+	
+	
+	
+	@RequestMapping(value="/loadOwnedSongs", method = RequestMethod.GET)
+	public void loadOwnedSongs(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
+		
+		User user = (User)request.getSession().getAttribute("User");
+		if(user==null){
+			return;
+		}
+		String songIds = songService.getOwnedSongIds(user);
+ 		response.setContentType("text/plain");		
+	    response.getWriter().write(songIds);
+	}
 }

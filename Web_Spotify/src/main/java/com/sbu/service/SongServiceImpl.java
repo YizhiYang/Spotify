@@ -37,6 +37,9 @@ public class SongServiceImpl implements SongService {
 	@Autowired
 	private PlaylistService playlistService;
 	
+	@Autowired
+	private ArtistService artistService;
+	
 	
 
 	public boolean addSongToDatabase(Song song) {
@@ -275,5 +278,20 @@ public class SongServiceImpl implements SongService {
 	public List<Song> getEditorSongs(){
 		
 		return songRepo.getEditorSongs();
+	}
+
+	public String getOwnedSongIds(User user) {
+		ArtistUser artist = artistService.getArtistByUser(user);
+		if(artist!=null){
+			String songIds = "";
+			for(Album album: artist.getAlbum()){
+				for(Song song: album.getSongs()){
+					songIds += song.getSongId() + ",";
+				}
+			}
+			return songIds.substring(0, songIds.length()-1);
+		}else{
+			return "";
+		}
 	}
 }

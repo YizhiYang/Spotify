@@ -149,11 +149,38 @@ function addSongsToCenterContent(jsonData){
 	$(".adminDeleteSongButton").each(function(index){
 		if(userType == "ADMIN"){
 			$(this).click(function(event){
+				$("#confirm-button").off("click");
 				var songIdStr = $(this).attr("id");
-				sendRemoveSongsRequestToServer(songIdStr.substring(4, songIdStr.length));
+				$("#confirm-button").click(function(event){
+					sendRemoveSongsRequestToServer(songIdStr.substring(4, songIdStr.length));
+					$("#confirmationPopUp").modal("hide");
+				});
+				$("#editUserInfoPopUp").modal("hide");
+				$("#confirmationMessage").html("Are you sure you want to remove this song?");
+				$("#confirmationPopUp").modal("show");
 			});
 		}else{
-			$(this).hide();
+			var ownsSong = false;
+    		for(i=0; i< ownedSongIDs.length; i++){
+    			if(jsonArray[index].songId == ownedSongIDs[i]){
+    				ownsSong = true;
+    			}
+    		}
+    		if(ownsSong){
+    			$(this).click(function(event){
+    				$("#confirm-button").off("click");
+    				var songIdStr = $(this).attr("id");
+    				$("#confirm-button").click(function(event){
+    					sendRemoveSongsRequestToServer(songIdStr.substring(4, songIdStr.length));
+    					$("#confirmationPopUp").modal("hide");
+    				});
+    				$("#editUserInfoPopUp").modal("hide");
+    				$("#confirmationMessage").html("Are you sure you want to remove this song?");
+    				$("#confirmationPopUp").modal("show");
+    			});
+    		}else{
+    			$(this).hide();
+    		}
 		}
 	});
 	
@@ -250,10 +277,36 @@ function addAlbumsToCenterContent(jsonData){
     $(".removeAlbumButton").each(function(index){
     	if(userType == "ADMIN"){
     		$(this).click(function(event){
-    			removeAlbum(jsonArray[index].albumId);
+    			$("#confirm-button").off("click");
+				$("#confirm-button").click(function(event){
+					removeAlbum(jsonArray[index].albumId);
+					$("#confirmationPopUp").modal("hide");
+				});
+				$("#editUserInfoPopUp").modal("hide");
+				$("#confirmationMessage").html("Are you sure you want to remove this Album?");
+				$("#confirmationPopUp").modal("show");
     		});
     	}else{
-    		$(this).hide();
+    		var ownsAlbum = false;
+    		for(i=0; i< ownedAlbumIDs.length; i++){
+    			if(jsonArray[index].albumId == ownedAlbumIDs[i]){
+    				ownsAlbum = true;
+    			}
+    		}
+    		if(ownsAlbum){
+    			$(this).click(function(event){
+        			$("#confirm-button").off("click");
+    				$("#confirm-button").click(function(event){
+    					removeAlbum(jsonArray[index].albumId);
+    					$("#confirmationPopUp").modal("hide");
+    				});
+    				$("#editUserInfoPopUp").modal("hide");
+    				$("#confirmationMessage").html("Are you sure you want to remove this Album?");
+    				$("#confirmationPopUp").modal("show");
+        		});
+    		}else{	
+    			$(this).hide();
+    		}
     	}
 	});
 }
@@ -347,7 +400,14 @@ function addArtistsToCenterContent(jsonData){
     $(".removeArtistButton").each(function(index){
     	if(userType == "ADMIN"){
     		$(this).click(function(event){
-    			removeArtist(jsonArray[index].artistID);
+    			$("#confirm-button").off("click");
+				$("#confirm-button").click(function(event){
+					removeArtist(jsonArray[index].artistID);
+					$("#confirmationPopUp").modal("hide");
+				});
+				$("#editUserInfoPopUp").modal("hide");
+				$("#confirmationMessage").html("Are you sure you want to remove this Artist?");
+				$("#confirmationPopUp").modal("show");
     		});
     	}else{
     		$(this).hide();

@@ -29,7 +29,15 @@
     background-size: cover;
     border: 2px solid silver;
     border-radius: 50% 50%;
+    -webkit-transition: -webkit-transform 2s ease-in-out;
+          transition:         transform 2s ease-in-out;
 
+}
+
+.ArtistContentPicture:hover{
+	border: 2px solid red;
+	-webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
 }
 
 .ArtistContentDescription{

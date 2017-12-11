@@ -48,9 +48,17 @@ function addAlbumTitleToSongPage(albumID){
 	$('#PlayListPrototypeTop').css("min-height","500px");
 	$('#PlayListPrototypeTop').children().eq(0).css("background-color", "rgba(0, 0, 0, 0.6)");
 	$('#PlayListPrototypeTop').children().eq(0).css("min-height", "500px");
+	$('.song-table-title').parent().append('<div id="album-top-buttons" style="position: absolute; bottom: 0; padding: 10px;"></div>');
+	
+	$('#album-top-buttons').append('<button id="playAlbumButton" class="btn btn-success" style="margin: 5px;">Play Album</button>');
+	$("#playAlbumButton").click(function(event){
+		player.jPlayer("setMedia", myPlaylist[0]);
+		currentPlayingIndex = 0;
+		player.jPlayer("play");
+	});
 	
 	if(userType == "ADMIN"){
-		$('.song-table-title').parent().append('<button id="addSongToAlbumButton" class="btn btn-warning">Add Song To Album</button>');
+		$('#album-top-buttons').append('<button id="addSongToAlbumButton" class="btn btn-warning" style="margin: 5px;">Add Song To Album</button>');
 		
 		$('#addSongToAlbumButton').click(function(event){
 			$('#formGroupAlbumIDInput').prop('disabled', true);
@@ -64,7 +72,7 @@ function addAlbumTitleToSongPage(albumID){
 	//ELSE CHECK IF THIS USER OWNS THIS ALBUM
 	for(i=0; i< ownedAlbumIDs.length; i++){
 		if(albumID == ownedAlbumIDs[i]){
-			$('.song-table-title').parent().append('<button id="addSongToAlbumButton" class="btn btn-warning">Add Song To Album</button>');
+			$('#album-top-buttons').append('<button id="addSongToAlbumButton" class="btn btn-warning" style="margin: 5px;">Add Song To Album</button>');
 			
 			$('#addSongToAlbumButton').click(function(event){
 				$('#formGroupAlbumIDInput').prop('disabled', true);
@@ -73,6 +81,7 @@ function addAlbumTitleToSongPage(albumID){
 			});
 		}
 	}
+	
 }
 
 function getRelatedAlbums(albumID){

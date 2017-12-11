@@ -1,4 +1,6 @@
-
+i:hover{
+	color: red;
+}
 
 .centerPlaylistItem{
 	font-size: 30px;
@@ -214,14 +216,13 @@ i{
     height: 100px;
     width: 150px;
     background-size: 150px 100px;
-    background-repeat: no-repeat;  
+    background-repeat: no-repeat;
 }
 
 .GMContentLabel{
     height: 50px;
     width: 150px;
     background-color: black;
-    
 }
 .GMContentLabelWrapper{
     position: relative;

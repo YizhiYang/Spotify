@@ -110,10 +110,13 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 		Album albumToUnfollow = null;
 		
 		for(Album album: u.getFollowedAlbums()){
-			if(album.getAlbumId() == Long.valueOf(albumId)){
+			if(album.getAlbumId().equals(Long.valueOf(albumId))){
 				albumToUnfollow = album;
+			}else{
+				System.out.println(album.getAlbumId()+", "+Long.valueOf(albumId));
 			}
 		}
+		System.out.println(albumToUnfollow);
 		u.getFollowedAlbums().remove(albumToUnfollow);
 		signupRepo.saveUserToDB(u);
 		return true;

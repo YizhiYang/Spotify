@@ -51,6 +51,7 @@ function uploadSong(){
 		data : formData,
         success: function (data) {
             $('#uploadSongPopUp').modal('hide');
+            reloadOwnedSongIDs(false);
             refreshCenterContent();
         },
         cache: false,
