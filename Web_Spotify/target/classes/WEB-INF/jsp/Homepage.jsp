@@ -45,24 +45,7 @@
 	<div id="main">
         <div id=left>
             <div id="leftWrapper">
-                <div id=userInfoWrapper>
-                    <div id="userInfoInnerWrapper">
-                    	<div id=profilePic>
-    						<img width="60" height="60" class ="profile-image-home" src="Profile-Image.html"></img>
-						</div>
-                        <div id=userInfo>
-                            <div id="username">Jay Bird</div>
-                            <div id="usertype">Basic User</div>
-                           	<div class="dropdown" id="accoun-info-menu">
-    		    				<i class="material-icons dropdown-toggle" data-toggle="dropdown">more_horiz</i>
-    		  					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width:0px;background-color:transparent;">
-    		  						<div class="dropdown-item"><a onclick="upOrDowngradeAccountPopUp()"><i class="material-icons">info</i></a></div>
-    		  						<div class="dropdown-item"><a onclick="editPopUp()"><i class="material-icons">settings</i></a></div>
-    		  					</div>
-    		  				</div>
-                        </div>
-                    </div>
-                </div>
+               
                 <br/>
                 <br/>
                 <div id="userSongWrapper">
@@ -126,6 +109,27 @@
                         </li>
                     </ul>
                 </div>
+                 <div id=userInfoWrapper>
+                    <div id="userInfoInnerWrapper">
+                    	<div id=profilePic>
+    						<img width="60" height="60" class ="profile-image-home" src="Profile-Image.html"></img>
+						</div>
+                        <div id=userInfo>
+                            <div id="username">Jay Bird</div>
+                            <div id="usertype">Basic User</div>
+                           	<div class="dropdown" id="accoun-info-menu">
+    		    				<i class="material-icons dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"   style="position:absolute;display:inline-block;">more_horiz</i>
+    		  					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width:0px;background-color:transparent;">
+    		  						<div class="dropdown-item"><a onclick="upOrDowngradeAccountPopUp()"><i class="material-icons" >info</i></a></div>
+    		  						<div class="dropdown-item"><a onclick="editPopUp()"><i class="material-icons" >settings</i></a></div>
+    		  						<div class="dropdown-item"><i class="material-icons">card_membership</i></a></div>
+    		  						<div class="dropdown-item"><i class="material-icons" >dashboard</i></a></div>
+    		  					</div>
+    		  				</div>
+                        </div>
+                    </div>
+                </div>
+                <div id=playBarImage style="background-image: url(./images/175x175bb.jpg);"></div>
             </div>
         
         </div>
@@ -172,12 +176,6 @@
     	<div id="playBar">
 			<div id="jquery_jplayer_1" class="jp-jplayer"></div>
         	<div id="playBarLeft">
-            	<div id=playBarImage style="background-image: url(./images/175x175bb.jpg);"></div>
-            	<div id=playBarLeftAddSong>
-                	<div id=playBarLeftAddSongWrapper>
-                    	<i class="material-icons icons" style="font-size:35px;">playlist_add</i>
-                	</div>
-            	</div>
             	<div id="playBarAlbumName"></div>
             	<div id="playBarArtistName"></div>
 
@@ -409,6 +407,7 @@
   			<div class="form-group">
     			<label class="col-form-label" for="addNewPlaylistNameInput">Name of Playlist to be added</label>
     			<input type="text" class="form-control" id="addNewPlaylistNameInput" name="playlistName" placeholder="Playlist Name">
+    			<input type="checkbox" id="addNewPlaylistPrivacyInput" name="private" value="YES" >Private
   			</div>
 		</form>
       </div>

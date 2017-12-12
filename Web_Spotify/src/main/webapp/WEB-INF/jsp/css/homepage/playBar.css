@@ -26,9 +26,9 @@
 #playBarImage{
     position: relative;
     float:left;
-    width: 75px;
-    height: 75px;
-    background-size: 75px 75px;
+    width:300px;
+    height: 300px;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -155,23 +155,26 @@ Added 10/31 by Limeng
 .jp-seek-bar{
     position: relative;
     /*width: 80% !important;*/
-	height: 5px;
+	height: 20px;
 	background-color: green;
-    bottom: 5px;
+    bottom: 15px;
     left:50%;
-    top:5px;
     transform: translateX(-50%);
 }
 
 .jp-play-bar{
 	background-color: #ff5050;
-	height: 5px;
+	height: 20px;
 }
 .jp-current-time{
+	position: relative;
+	bottom: 20px;
 	float: left;
 	color: #fff;
 }
 .jp-duration{
+	position: relative;
+	bottom: 20px;
 	float: right;
 	color: #fff;
 }

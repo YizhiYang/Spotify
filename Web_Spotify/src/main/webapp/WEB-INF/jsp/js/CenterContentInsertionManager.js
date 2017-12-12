@@ -426,8 +426,10 @@ function addPlaylistsToCenterContent(jsonData){
 	var contentToBeAdded = '<div class=centerSideContentWrapper>';
 	for(i=0; i<jsonArray.length; i++){
 		var pl = jsonArray[i];
-		contentToBeAdded += '<div class="centerPlaylistItem" id="playlist'+ pl.playlistID+'">'
-		+ pl.playlistName + '</div>';
+		if(!pl.private){
+			contentToBeAdded += '<div class="centerPlaylistItem" id="playlist'+ pl.playlistID+'">'
+				+ pl.playlistName + '</div>';
+		}
 	}
 	contentToBeAdded += '</div>';
 	$("#centerSideContent").append(contentToBeAdded);
