@@ -112,6 +112,7 @@ public class SignupServiceImpl implements SignupService {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("friendId", friend.getId());
 			jsonObject.put("friendUserName", friend.getUserName());
+			jsonObject.put("friendBanned", friend.isBanned());
 			
 			jsonArray.put(jsonObject);
 		}

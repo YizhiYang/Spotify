@@ -256,6 +256,7 @@ function adminRemoveAccount(userId){
 		url : "removeAccountByAdmin/" + userId + ".html",
 		success : function(data) {
 			getFriendList();
+			refreshCenterContent();
 		}
 	});
 }
@@ -266,6 +267,7 @@ function adminBanAccount(userId){
 		url : "banAccountByAdmin/" + userId + ".html",
 		success : function(data) {
 			getFriendList();
+			refreshCenterContent();
 		}
 	});
 }

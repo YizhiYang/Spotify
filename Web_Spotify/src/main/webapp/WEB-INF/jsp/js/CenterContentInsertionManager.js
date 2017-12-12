@@ -462,11 +462,13 @@ function addFriendsToCenterContent(jsonData){
         	}
         }
         if(!isfriend){
-        	contentToBeAdded += '<button class="addFriendButton btn btn-primary" id="addFriend'+ friend.friendUserName+'">Add Friend</button>';
+        	contentToBeAdded += '<button class="addFriendButton btn btn-primary" id="addFriend'+ friend.friendUserName+'">Add</button>';
         }
         if(userType == "ADMIN"){
         	contentToBeAdded += '<i class="material-icons adminDeleteUserButton" id="user' + friend.friendId + '">delete</i>';
-        	contentToBeAdded += '<i class="material-icons adminBanUserButton" id="user' + friend.friendId + '">not_interested</i>';
+        	if(!friend.friendBanned){
+        		contentToBeAdded += '<i class="material-icons adminBanUserButton" id="user' + friend.friendId + '">not_interested</i>';
+        	}
         }
         contentToBeAdded += '</div>';
 	}
