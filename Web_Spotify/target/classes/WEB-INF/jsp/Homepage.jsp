@@ -142,7 +142,10 @@
                     <div class="centerTopBarContent" id="genre-button">Genre</div>
                     <div class="centerTopBarContent" id="editor-choice-button">Editor Choice</div>
                 </div>
-                <div id="logout-button" style="float: right; margin-top: 13px; margin-right: 30px;"><i class="material-icons">power_settings_new</i></div>
+                <div style="float: right; margin-top: 13px; margin-right: 30px;">
+                <div id="private-mode-text" style="position:relative; right: 100px; cursor: pointer;">Private Mode Off</div>
+            
+                <i id="logout-button" class="material-icons" style="position: relative; left: 150px; bottom: 26px;">power_settings_new</i></div>
             </div>
             <div id="centerSideContent">                                   
             </div>

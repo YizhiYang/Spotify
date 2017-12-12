@@ -116,6 +116,14 @@ $( document ).ready(function() {
 		$("#admin-add-account-button").click(function(event){
 			adminAddAccountAjax();
 		});
+		
+		$("#private-mode-text").click(function(event){
+			if($(this).html() == "Private Mode Off"){
+				$(this).html("Private Mode On");
+			}else{
+				$(this).html("Private Mode Off");
+			}
+		})
 	});
 
 function adminAddAccountAjax() {
