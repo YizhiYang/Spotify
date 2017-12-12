@@ -45,20 +45,22 @@
 	 margin-left: 10px;
     text-align: right;
     right: 5px;
-    width: 60%;
+    width: 80%;
     color:white;
     font-size: 40px;
     font-family: 'Oxygen', sans-serif;
+    over-flow: hidden;
 }
 
 #playBarArtistName{
     text-align: right;
     margin-left: 10px;
-    width: 60%;
+    width: 80%;
     font-size: 30px;
     top: 4px;
     color:grey;
     font-family: 'Oxygen', sans-serif;
+    over-flow: hidden;
 }
 
 #albumName{

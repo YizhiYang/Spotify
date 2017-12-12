@@ -118,10 +118,10 @@ $( document ).ready(function() {
 		});
 		
 		$("#private-mode-text").click(function(event){
-			if($(this).html() == "Private Mode Off"){
-				$(this).html("Private Mode On");
+			if($(this).html() == "Private Off"){
+				$(this).html("Private On");
 			}else{
-				$(this).html("Private Mode Off");
+				$(this).html("Private Off");
 			}
 		})
 	});

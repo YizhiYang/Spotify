@@ -143,9 +143,9 @@
                     <div class="centerTopBarContent" id="editor-choice-button">Editor Choice</div>
                 </div>
                 <div style="float: right; margin-top: 13px; margin-right: 30px;">
-                <div id="private-mode-text" style="position:relative; right: 100px; cursor: pointer;">Private Mode Off</div>
+                <div id="private-mode-text" style="position:relative; right: 100px; cursor: pointer;">Private Off</div>
             
-                <i id="logout-button" class="material-icons" style="position: relative; left: 150px; bottom: 26px;">power_settings_new</i></div>
+                <i id="logout-button" class="material-icons" style="position: relative; left: 50px; bottom: 26px;">power_settings_new</i></div>
             </div>
             <div id="centerSideContent">                                   
             </div>

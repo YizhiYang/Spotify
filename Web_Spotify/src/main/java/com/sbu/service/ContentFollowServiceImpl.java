@@ -95,7 +95,7 @@ public class ContentFollowServiceImpl implements ContentFollowService {
 		User u = (User) signupRepo.getUserByID(user.getId().toString()).get(0);
 		Song songToUnfollow = null;
 		for(Song song: u.getFollowedSongs()){
-			if(song.getSongId() == Long.valueOf(songId)){
+			if(song.getSongId().equals(Long.valueOf(songId))){
 				songToUnfollow = song;
 			}
 		}

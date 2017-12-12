@@ -47,7 +47,7 @@ $( document ).ready(function() {
 			}
 		});
 		getLyrics(songId);
-		if($(this).html("Private Mode Off")){
+		if($("#private-mode-text").html() == "Private Off"){
 			addSongToPlayHistory(songId);
 		}
 		e.preventDefault();

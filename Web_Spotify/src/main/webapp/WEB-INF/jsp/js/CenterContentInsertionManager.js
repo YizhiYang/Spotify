@@ -540,10 +540,10 @@ function addGenreBoxesToCenter(){
 			style="background-image:url(./images/Indie-Rock.png);"></div>');
     
     $("#centerSideContent").append('<div class="genre-box" id="Asia"\
-	style="background-image:url(./images/Asia.png);"></div>');
+	style="background-image:url(./images/Asia.PNG);"></div>');
     
-    $("#centerSideContent").append('<div class="genre-box" id="Audio-Collage"\
-			style="background-image:url(./images/Audio-Collage.PNG);"></div>');
+//    $("#centerSideContent").append('<div class="genre-box" id="Audio-Collage"\
+//			style="background-image:url(./images/Audio-Collage.png);"></div>');
     
     $("#centerSideContent").append('<div class="genre-box" id="Black-Metal"\
 	style="background-image:url(./images/Black-Metal.PNG);"></div>');
@@ -557,8 +557,8 @@ function addGenreBoxesToCenter(){
     $("#centerSideContent").append('<div class="genre-box" id="Disco"\
 	style="background-image:url(./images/Disco.PNG);"></div>');
     
-    $("#centerSideContent").append('<div class="genre-box" id="Drone"\
-	style="background-image:url(./images/Drone.PNG);"></div>');
+//    $("#centerSideContent").append('<div class="genre-box" id="Drone"\
+//	style="background-image:url(./images/Drone.PNG);"></div>');
 
     $("#centerSideContent").append('<div class="genre-box" id="Electroacoustic"\
 	style="background-image:url(./images/Electroacoustic.PNG);"></div>');
@@ -572,8 +572,8 @@ function addGenreBoxesToCenter(){
     $("#centerSideContent").append('<div class="genre-box" id="Folk-Music"\
 	style="background-image:url(./images/Folk-Music.PNG);"></div>');
     
-    $("#centerSideContent").append('<div class="genre-box" id="Garage"\
-	style="background-image:url(./images/Garage.PNG);"></div>');
+//    $("#centerSideContent").append('<div class="genre-box" id="Garage"\
+//	style="background-image:url(./images/Garage.PNG);"></div>');
     
     $("#centerSideContent").append('<div class="genre-box" id="Hip-Hop"\
 	style="background-image:url(./images/Hip-Hop.PNG);"></div>');
@@ -642,25 +642,25 @@ function addGenreBoxesToCenter(){
 //			style="background-image:url(./images/Electronic.PNG);"></div>');
 //    $("#centerSideContent").append('<div class="genre-box" id="Folk"\
 //			style="background-image:url(./images/Folk.PNG);"></div>');
-    $("#centerSideContent").append('<div class="genre-box" id="Industrial"\
-			style="background-image:url(./images/Industrial.PNG);"></div>');
-    $("#centerSideContent").append('<div class="genre-box" id="Garage"\
-			style="background-image:url(./images/Garage.PNG);"></div>');
+//    $("#centerSideContent").append('<div class="genre-box" id="Industrial"\
+//			style="background-image:url(./images/Industrial.PNG);"></div>');
+//    $("#centerSideContent").append('<div class="genre-box" id="Garage"\
+//			style="background-image:url(./images/Garage.PNG);"></div>');
 //    $("#centerSideContent").append('<div class="genre-box" id="Punk"\
 //			style="background-image:url(./images/Punk.PNG);"></div>');
-    $("#centerSideContent").append('<div class="genre-box" id="Avant-Garde"\
-			style="background-image:url(./images/Avant-Garde.PNG);"></div>');
-    $("#centerSideContent").append('<div class="genre-box" id="Noise"\
-			style="background-image:url(./images/Noise.PNG);"></div>');
+//    $("#centerSideContent").append('<div class="genre-box" id="Avant-Garde"\
+//			style="background-image:url(./images/Avant-Garde.PNG);"></div>');
+//    $("#centerSideContent").append('<div class="genre-box" id="Noise"\
+//			style="background-image:url(./images/Noise.PNG);"></div>');
 //    $("#centerSideContent").append('<div class="genre-box" id="Noise-Rock"\
 //			style="background-image:url(./images/Noise-Rock.PNG);"></div>');
-    $("#centerSideContent").append('<div class="genre-box" id="Field-Recordings"\
-			style="background-image:url(./images/Field-Recordings.PNG);"></div>');
+//    $("#centerSideContent").append('<div class="genre-box" id="Field-Recordings"\
+//			style="background-image:url(./images/Field-Recordings.PNG);"></div>');
 
 //    $("#centerSideContent").append('<div class="genre-box" id="Psych-Rock"\
 //			style="background-image:url(./images/Psych-Rock.PNG);"></div>');
-    $("#centerSideContent").append('<div class="genre-box" id="International"\
-			style="background-image:url(./images/International.PNG);"></div>');
+//    $("#centerSideContent").append('<div class="genre-box" id="International"\
+//			style="background-image:url(./images/International.PNG);"></div>');
 //    $("#centerSideContent").append('<div class="genre-box" id="Ambient-Electronic"\
 //			style="background-image:url(./images/Ambient-Electronic.PNG);"></div>');
     
