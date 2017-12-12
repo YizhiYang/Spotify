@@ -5,6 +5,8 @@ $(document).ready(function() {
 	});
 	
 	$("#Artist-My-Albums-Button").click(function(event){
+		selectedArtistName = $("#username").html();
+		selectedArtistImageURL = "url(" + $(".profile-image-home").attr("src") +")";
 		goToArtistAlbums(loggedInArtistId);
 	});
 });

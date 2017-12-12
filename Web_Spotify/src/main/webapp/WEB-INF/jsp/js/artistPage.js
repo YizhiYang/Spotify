@@ -52,13 +52,18 @@ function addArtistTitleToArtistPage(artistID){
 	$('.album-table-title').html(selectedArtistName);
 	$('#AlbumPageTop').css("background-image", selectedArtistImageURL);
 	$('#AlbumPageTop').css("background-size", "cover");
-	$('#AlbumPageTop').css("min-height","500px");
+	$('#AlbumPageTop').css("height","500px");
 	$('#AlbumPageTop').children().eq(0).css("background-color", "rgba(0, 0, 0, 0.6)");
-	$('#AlbumPageTop').children().eq(0).css("min-height", "500px");
+	$('#AlbumPageTop').children().eq(0).css("height", "500px");
+	$('#AlbumPageTop').children().eq(0).css("overflow", "hidden");
+	//$('#AlbumPageTop').children().eq(0).css("height", "30px");
+	
+	$('.album-table-title').parent().append('<div id="artist-top-buttons" style="position: absolute; bottom: 0; padding: 10px;"></div>');
 
 	if(userType == "ADMIN" || loggedInArtistId == artistID){
-		$('.album-table-title').parent().append('<button id="addAlbumToArtistButton" class="btn btn-warning">Add Album To Artist</button>');
-		
+		console.log("yoyoyo");
+		$('#artist-top-buttons').append('<button id="addAlbumToArtistButton" class="btn btn-warning" style="margin: 5px;">Add Album To Artist</button>');
+		console.log("button added");
 		$('#addAlbumToArtistButton').click(function(event){
 			$('#createAlbumArtistIDInput').prop('disabled', true);
 			$('#createAlbumArtistIDInput').val(artistID);
