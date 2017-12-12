@@ -23,10 +23,15 @@ public class PlaylistServiceImpl implements PlaylistService {
 	SongService songService;
 	
 	
-	public boolean makeNewPlaylist(User user, String playlistName) {
+	public boolean makeNewPlaylist(User user, String playlistName, String privateList) {
+		int privateInt = 0;
+		if(privateList.equals("YES")){
+			privateInt = 1;
+		}
 		Playlist playlist = new Playlist();
 		playlist.setName(playlistName);
 		playlist.setOwner(user);
+		playlist.setPrivacy(1);
 		playlistRepo.saveNewPlaylist(playlist);
 		return true;
 	}
@@ -45,7 +50,8 @@ public class PlaylistServiceImpl implements PlaylistService {
 			
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("playlistID", playlist.getId());
-			jsonObject.put("playlistName", playlist.getName());		
+			jsonObject.put("playlistName", playlist.getName());
+			jsonObject.put("private", playlist.getPrivacy());
 			jsonArray.put(jsonObject);
 		}
 		return jsonArray.toString();

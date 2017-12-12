@@ -21,6 +21,7 @@ $( document ).ready(function() {
 			ClearPasswordErrorMessage();
 		});
 		$("#Premium-Account-Button").click(function(event) {
+			clearMessage();
 			$("#cardNumber").show();
 			$("#cardName").show();
 			$("#billingAddress").show();
@@ -30,6 +31,7 @@ $( document ).ready(function() {
 			$("#Basic-Account-Button").css('background-color', '#337ab7');
 		});
 		$("#Basic-Account-Button").click(function(event) {
+			clearMessage();
 			$("#cardNumber").hide();
 			$("#cardName").hide();
 			$("#billingAddress").hide();

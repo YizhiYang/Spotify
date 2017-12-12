@@ -9,7 +9,7 @@ import com.sbu.model.User;
 
 public interface PlaylistService {
 	
-	boolean makeNewPlaylist(User user, String playlistName);
+	boolean makeNewPlaylist(User user, String playlistName, String privateList);
 	
 	String getUserPlaylists(User user) throws JSONException;
 	

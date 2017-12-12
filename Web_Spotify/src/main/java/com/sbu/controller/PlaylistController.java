@@ -72,7 +72,9 @@ public class PlaylistController {
 			return;
 		}	
 		String playlistName = request.getParameter("playlistName");
-		if(playlistService.makeNewPlaylist(user, playlistName)){
+		String privateList = request.getParameter("private");
+		
+		if(playlistService.makeNewPlaylist(user, playlistName, privateList)){
 			response.getWriter().write(REQUEST_SUCCESS);
 		}else{
 			response.getWriter().write(REQUEST_FAILURE);
