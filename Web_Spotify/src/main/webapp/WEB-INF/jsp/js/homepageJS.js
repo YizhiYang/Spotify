@@ -73,6 +73,7 @@ var recommendedArtists;
 //FLAG
 var firstLoad = true;
 
+
 $( document ).ready(function() {
 	$("[data-toggle=popover]").popover();
 		//GET INITIAL DATA NEEDED AND STORE THEM

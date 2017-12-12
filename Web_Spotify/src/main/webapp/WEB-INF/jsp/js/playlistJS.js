@@ -106,8 +106,8 @@ function goToPlaylistSongs(playlistIndex){
 			
 			//CHANGE "Songs" TO PLAYLIST NAME,AND REGISTER RENAME AND DELETE FUNCTIONS
 			$('.song-table-title').html("");
-			$('.song-table-title').append('<div id="playlist-page-name-title">' + userPlaylists[playlistIndex].playlistName + '</div>');
-			$('.song-table-title').append('<i class="material-icons" id="removePlaylistButton">delete</i>');
+			$('.song-table-title').append('<div id="playlist-page-name-title" style="font-size: 45px; !important">' + userPlaylists[playlistIndex].playlistName + '</div>');
+			$('.song-table-title').append('<i class="material-icons" id="removePlaylistButton" style="margin-left: 100px;">delete</i>');
 			$('#playlist-page-name-title').attr("data-toggle", "modal");
 			$('#playlist-page-name-title').attr("data-target", "#changePlaylistNamePopUp");
 			$('#changePlaylistNameInput').val(userPlaylists[playlistIndex].playlistName);

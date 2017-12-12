@@ -28,7 +28,7 @@ function loadLibraryOverview(){
 	$('.album-table-title').html("Albums I Like");
 	
 	addArtistsToCenterContent(userFollowedArtists);
-	$('.artist-table-title').html("Artists I Follows");
+	$('.artist-table-title').html("Artists I Follow");
 	
 	lastAjaxCallToRenderToCenter = "loadLibraryOverview()";
 }

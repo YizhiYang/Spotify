@@ -45,14 +45,31 @@
 	<div id="main">
         <div id=left>
             <div id="leftWrapper">
-               
-                <br/>
-                <br/>
+                             <div id=userInfoWrapper>
+                    <div id="userInfoInnerWrapper">
+                    	<div id=profilePic>
+    						<img width="80" height="80" class ="profile-image-home" src="Profile-Image.html"></img>
+						</div>
+                        <div id=userInfo>
+                        	<div class="dropdown" id="accoun-info-menu" >
+    		    				<i class="material-icons dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="font-size: 30px;">more_horiz</i>
+    		  					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width:0px;background-color:transparent;">
+    		  						<div class="dropdown-item"><a onclick="upOrDowngradeAccountPopUp()"><i class="material-icons" style="font-size: 30px;" >info</i></a></div>
+    		  						<div class="dropdown-item"><a onclick="editPopUp()"><i class="material-icons" style="font-size: 30px;" >settings</i></a></div>
+    		  					</div>
+    		  				</div>
+                            <div id="username">Jay Bird</div>
+                            <div id="usertype">Basic User</div>
+                           
+                        </div>
+                    </div>
+                </div>
                 <div id="userSongWrapper">
                     <ul>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-Browse-Button">Browse</div>
                         </li>
+                        <li></li>
                         <li class="sideBarMenuHeader">YOUR LIBRARY</li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-Library-Overview-Button">Overview</div>
@@ -69,13 +86,13 @@
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' id="Home-Artist-Button">Artists</div>
                         </li>
-
+						<li></li>
                         <li class="sideBarMenuHeader">MY PLAYLISTS <i class="material-icons" data-toggle="modal" data-target="#addNewPlaylistPopUp">library_add</i>
                         	<ul id="My-Playlist-List-Wrapper">
                         		<li></li>
                         	</ul>
                         </li>
-                        
+                        <li></li>
                         <li class="sideBarMenuHeader" id="admin-menu-header">Admin Menu</li>
                         <li class=userSongWrapperList>
                         	<div class='userSongWrapperItem' data-toggle="modal" id="Admin-UploadSong-Button" data-target="#uploadSongPopUp">Upload Song</div>
@@ -109,26 +126,9 @@
                         </li>
                     </ul>
                 </div>
-                 <div id=userInfoWrapper>
-                    <div id="userInfoInnerWrapper">
-                    	<div id=profilePic>
-    						<img width="60" height="60" class ="profile-image-home" src="Profile-Image.html"></img>
-						</div>
-                        <div id=userInfo>
-                            <div id="username">Jay Bird</div>
-                            <div id="usertype">Basic User</div>
-                           	<div class="dropdown" id="accoun-info-menu">
-    		    				<i class="material-icons dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"   style="position:absolute;display:inline-block;">more_horiz</i>
-    		  					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width:0px;background-color:transparent;">
-    		  						<div class="dropdown-item"><a onclick="upOrDowngradeAccountPopUp()"><i class="material-icons" >info</i></a></div>
-    		  						<div class="dropdown-item"><a onclick="editPopUp()"><i class="material-icons" >settings</i></a></div>
-    		  						<div class="dropdown-item"><i class="material-icons">card_membership</i></a></div>
-    		  						<div class="dropdown-item"><i class="material-icons" >dashboard</i></a></div>
-    		  					</div>
-    		  				</div>
-                        </div>
-                    </div>
-                </div>
+                <br>
+                <br>
+
                 <div id=playBarImage style="background-image: url(./images/175x175bb.jpg);"></div>
             </div>
         

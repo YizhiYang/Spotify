@@ -29,7 +29,7 @@ function renderFriendList(jsonData){
 		var friend = jsonArray[i];
 		var contentToBeAdded = '<div class="FSContent rightFriendListItem" id="friend'+ friend.friendId+'">\
             <div class="FSImage"><div class=FSImageInner style="background-image: url(getProfileImageWithUsername/'+ friend.friendUserName +'.html);"></div></div>\
-            <div class="FSFriendName rightFriendListFriendName">'+friend.friendUserName+'</div>\
+            <div class="FSFriendName rightFriendListFriendName" style="font-size:12px">'+friend.friendUserName+'</div>\
         </div>';
 		$('#rightBottomWrapper').append(contentToBeAdded);
 		

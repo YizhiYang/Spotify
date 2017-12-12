@@ -76,7 +76,7 @@ i{
     position: relative;
     width: 100%;
     height: 50px;
-    border-bottom: 1px solid red;
+    border-bottom: 5px solid chocolate;
     background-color: #282828;
     color: white;
     font-family: 'Asap', sans-serif;
@@ -84,7 +84,7 @@ i{
 #centerTopWrapper{
     position: absolute;
     height: 20px;
-    width: 600px;
+    width: 800px;
     left:50%;
     top:5px;
     transform: translateX(-70%);
@@ -95,7 +95,7 @@ i{
 .centerTopBarContent{
     float:left;
     height: 20px;
-    width: 88px;
+    min-width: 88px;
     text-align: center;
     transition-duration: 0.5s;
     color: grey;

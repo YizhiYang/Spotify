@@ -26,10 +26,11 @@
 #playBarImage{
     position: relative;
     float:left;
-    width:300px;
-    height: 300px;
+    width:295px;
+    height: 295px;
     background-size: cover;
     background-repeat: no-repeat;
+    margin-right: 0px !important;
 }
 
 #playBarLeftAddSong{
@@ -38,6 +39,26 @@
     width: 60%;
     height: 35px;
     
+}
+
+#playBarAlbumName{
+	 margin-left: 10px;
+    text-align: right;
+    right: 5px;
+    width: 60%;
+    color:white;
+    font-size: 40px;
+    font-family: 'Oxygen', sans-serif;
+}
+
+#playBarArtistName{
+    text-align: right;
+    margin-left: 10px;
+    width: 60%;
+    font-size: 30px;
+    top: 4px;
+    color:grey;
+    font-family: 'Oxygen', sans-serif;
 }
 
 #albumName{
@@ -156,7 +177,7 @@ Added 10/31 by Limeng
     position: relative;
     /*width: 80% !important;*/
 	height: 20px;
-	background-color: green;
+	background-color: white;
     bottom: 15px;
     left:50%;
     transform: translateX(-50%);

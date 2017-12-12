@@ -12,12 +12,12 @@ function addSongsToCenterContent(jsonData){
                                         <table id=PlayListPrototypeTable>\
                                             <tr>\
                                                 <th></th>\
-                                                <th>TITLE</th>\
-                                                <th>ARTIST</th>\
-                                                <th>ALBUM</th>\
-                                                <th>GENRE</th>\
-    											<th>LISTEN COUNT</th>\
-                                                <th>DURATION</th>\
+                                                <th><div style="margin: 15px;">TITLE</div></th>\
+                                                <th><div style="margin: 15px;">ARTIST</div></th>\
+                                                <th><div style="margin: 15px;">ALBUM</div></th>\
+                                                <th><div style="margin: 15px;">GENRE</div></th>\
+    											<th><div style="margin: 15px;">LISTEN COUNT</div></th>\
+                                                <th><div style="margin: 15px;">DURATION</div></th>\
                                             </tr>');
     $('#centerSideContent').append('</table>\
 	</div>');
@@ -420,7 +420,7 @@ function addPlaylistsToCenterContent(jsonData){
 	var jsonArray = jQuery.parseJSON(jsonData);
 	$("#centerSideContent").append('<div class=centerSideContentWrapper id=AlbumPageTop>\
             <div id="contentTitle">\
-                <div id="contentTitleWrapper" class="playlist-table-title" style="border-bottom:transparent; font-size:45px;">Playlists</div>\
+                <div id="contentTitleWrapper" class="playlist-table-title" style="border-bottom:transparent; font-size:45px">Playlists</div>\
             </div>\
         </div>');
 	var contentToBeAdded = '<div class=centerSideContentWrapper>';
