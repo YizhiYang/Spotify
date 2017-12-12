@@ -2,7 +2,7 @@ $( document ).ready(function() {
 	getFriendList();
 	
 	$("#findFriendsButton").click(function(event){
-		searchAndAddFriend();
+		searchAndAddFriend($("#searchFriendInput").val());
 	});
 	
 	$("#Artist-My-Followers-Button").click(function(event){
@@ -44,8 +44,7 @@ function renderFriendList(jsonData){
 	});
 }
 
-function searchAndAddFriend(){
-	var searchUsername = $("#searchFriendInput").val();
+function searchAndAddFriend(searchUsername){
 	if(searchUsername == ""){
 		return;
 	}
@@ -55,6 +54,7 @@ function searchAndAddFriend(){
         success: function (data) {
         	$("#centerSideContent").empty();
         	addFriendsToCenterContent(data);
+        	lastAjaxCallToRenderToCenter = "searchAndAddFriend(" + "'" + searchUsername + "'" + ")";
         }
 	});
 }
@@ -79,6 +79,7 @@ function addFriend(friendUsername){
         	if(data == "success"){
         		$('#rightBottomWrapper').empty();
         		getFriendList();
+        		refreshCenterContent();
         	}
         }
 	});

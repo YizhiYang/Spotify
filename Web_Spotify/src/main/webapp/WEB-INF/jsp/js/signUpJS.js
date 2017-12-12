@@ -21,7 +21,11 @@ $( document ).ready(function() {
 			ClearPasswordErrorMessage();
 		});
 		$("#Premium-Account-Button").click(function(event) {
+<<<<<<< HEAD
 			clearMessage();
+=======
+			clearMessage()
+>>>>>>> 72965995761c3540fafdc09f3136312c87ef4f8c
 			$("#cardNumber").show();
 			$("#cardName").show();
 			$("#billingAddress").show();
@@ -31,7 +35,11 @@ $( document ).ready(function() {
 			$("#Basic-Account-Button").css('background-color', '#337ab7');
 		});
 		$("#Basic-Account-Button").click(function(event) {
+<<<<<<< HEAD
 			clearMessage();
+=======
+			clearMessage()
+>>>>>>> 72965995761c3540fafdc09f3136312c87ef4f8c
 			$("#cardNumber").hide();
 			$("#cardName").hide();
 			$("#billingAddress").hide();

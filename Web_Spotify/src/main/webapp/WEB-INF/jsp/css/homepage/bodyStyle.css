@@ -17,7 +17,7 @@ html {
 
 #main{
     position: relative;
-    height: 90vh;
+    height: 95vh;
     width: 825px;
 /*    border: 2px solid*/
 }
@@ -35,6 +35,11 @@ html {
     height: 100%;
     width: calc(825px - 300px);
     border-left: 2px solid #332e1f;
+}
+
+#jp_container_1{
+	position: absolute;
+	bottom: 0;
 }
 
 #playBar{

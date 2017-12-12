@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: MATT
 Build-Jdk: 1.8.0_91
+=======
+Built-By: danna
+Build-Jdk: 1.8.0_151
+>>>>>>> 72965995761c3540fafdc09f3136312c87ef4f8c
 Created-By: Maven Integration for Eclipse
 
